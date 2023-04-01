@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "MadWorld.Backend.API.Anonymous": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7063",
+      "launchBrowser": false
+    }
+  }
+}

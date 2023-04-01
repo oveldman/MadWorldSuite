@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Documentation", "{AAF1B62A-A030-4975-B59C-E43EC58F3D21}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\README.md = ..\README.md
+		..\LICENSE = ..\LICENSE
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{BD60157B-62B3-467F-991D-E7718A7D78E8}"
 EndProject
@@ -10,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{2B0902
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Shared.Contracts", "MadWorld.Shared.Contracts\MadWorld.Shared.Contracts.csproj", "{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI", "MadWorld.Frontend.UI\MadWorld.Frontend.UI.csproj", "{5F9DAA01-4FDB-45AE-A673-4B7F3F2F760A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.API.Anonymous", "MadWorld.Backend.API.Anonymous\MadWorld.Backend.API.Anonymous.csproj", "{B9A4985F-7064-4F37-88BA-463E76BC5901}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,11 +26,21 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C} = {2B090297-6027-4453-93F7-68ED12453651}
+		{5F9DAA01-4FDB-45AE-A673-4B7F3F2F760A} = {BD60157B-62B3-467F-991D-E7718A7D78E8}
+		{B9A4985F-7064-4F37-88BA-463E76BC5901} = {8A0A692F-5E52-4E58-AC90-CDEDF44220DE}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F9DAA01-4FDB-45AE-A673-4B7F3F2F760A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F9DAA01-4FDB-45AE-A673-4B7F3F2F760A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F9DAA01-4FDB-45AE-A673-4B7F3F2F760A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F9DAA01-4FDB-45AE-A673-4B7F3F2F760A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9A4985F-7064-4F37-88BA-463E76BC5901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9A4985F-7064-4F37-88BA-463E76BC5901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9A4985F-7064-4F37-88BA-463E76BC5901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9A4985F-7064-4F37-88BA-463E76BC5901}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
