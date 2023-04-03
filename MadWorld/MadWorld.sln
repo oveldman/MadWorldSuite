@@ -35,6 +35,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{5470C4F1-9CEA-4F86-8041-64C444941FDA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Release", "_Release", "{FFF8F55E-B978-4609-AB68-7F5D69B090B7}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\azure-frontend-ui.yml = ..\.github\workflows\azure-frontend-ui.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
