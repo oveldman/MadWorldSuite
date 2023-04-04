@@ -1,8 +1,7 @@
-param blazorUIName string = 'UI'
 param location string = resourceGroup().location
 
 resource blazorUI 'Microsoft.Web/staticSites@2022-03-01'= {
-  name: blazorUIName
+  name: 'UI'
   location: location
   sku: {
     name: 'Free'
@@ -19,7 +18,7 @@ resource blazorUI 'Microsoft.Web/staticSites@2022-03-01'= {
 }
 
 resource blazorUICustomerDomain 'Microsoft.Web/staticSites/customDomains@2022-03-01' = {
-  name: '${blazorUIName}-www.mad-world.nl'
+  name: 'www.mad-world.nl'
   parent: blazorUI
-  properties: { }
+  properties: {}
 }
