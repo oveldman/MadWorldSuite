@@ -36,8 +36,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{5470C4F1-9CEA-4F86-8041-64C444941FDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Release", "_Release", "{FFF8F55E-B978-4609-AB68-7F5D69B090B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipeline", "Pipeline", "{EA3FF6D8-DF02-4F51-81A4-283266B9A3C8}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\azure-frontend-ui.yml = ..\.github\workflows\azure-frontend-ui.yml
+		..\.github\workflows\azure-resources.yml = ..\.github\workflows\azure-resources.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource", "Resource", "{05E8DF98-37BA-4B69-A551-27C04A507138}"
+	ProjectSection(SolutionItems) = preProject
+		..\Resources\main.bicep = ..\Resources\main.bicep
 	EndProjectSection
 EndProject
 Global
@@ -56,6 +64,8 @@ Global
 		{977956BF-EB39-4441-BDCA-B01EE7752EE0} = {BD60157B-62B3-467F-991D-E7718A7D78E8}
 		{7ACDDB0E-3A47-42AF-A3B8-089F65A628D2} = {BD60157B-62B3-467F-991D-E7718A7D78E8}
 		{97EB07E4-1EBD-4B46-8854-82B79E3A2C35} = {BD60157B-62B3-467F-991D-E7718A7D78E8}
+		{EA3FF6D8-DF02-4F51-81A4-283266B9A3C8} = {FFF8F55E-B978-4609-AB68-7F5D69B090B7}
+		{05E8DF98-37BA-4B69-A551-27C04A507138} = {FFF8F55E-B978-4609-AB68-7F5D69B090B7}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
