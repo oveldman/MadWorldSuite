@@ -37,8 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Release", "_Release", "{FF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipeline", "Pipeline", "{EA3FF6D8-DF02-4F51-81A4-283266B9A3C8}"
 	ProjectSection(SolutionItems) = preProject
-		..\.github\workflows\azure-frontend-ui.yml = ..\.github\workflows\azure-frontend-ui.yml
 		..\.github\workflows\azure-resources.yml = ..\.github\workflows\azure-resources.yml
+		..\.github\workflows\azure-frontend-suite-ui.yml = ..\.github\workflows\azure-frontend-suite-ui.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource", "Resource", "{05E8DF98-37BA-4B69-A551-27C04A507138}"

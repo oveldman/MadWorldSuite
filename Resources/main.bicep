@@ -1,7 +1,7 @@
 param location string = resourceGroup().location
 
 resource blazorUI 'Microsoft.Web/staticSites@2022-03-01'= {
-  name: 'UI'
+  name: 'SuiteUI'
   location: location
   sku: {
     name: 'Free'
