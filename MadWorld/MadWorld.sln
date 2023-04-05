@@ -44,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipeline", "Pipeline", "{EA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource", "Resource", "{05E8DF98-37BA-4B69-A551-27C04A507138}"
 	ProjectSection(SolutionItems) = preProject
+		..\Resources\static-site.bicep = ..\Resources\static-site.bicep
+		..\Resources\suite-uis.bicep = ..\Resources\suite-uis.bicep
 		..\Resources\main.bicep = ..\Resources\main.bicep
 	EndProjectSection
 EndProject
