@@ -79,6 +79,7 @@ resource apiAnonymous 'Microsoft.Web/sites@2022-09-01' = {
 resource credentialsPoliciesFtp 'Microsoft.Web/sites/basicPublishingCredentialsPolicies@2022-09-01' = {
   name: 'ftp'
   parent: apiAnonymous
+  location: location
   properties: {
     allow: true
   }
@@ -87,6 +88,7 @@ resource credentialsPoliciesFtp 'Microsoft.Web/sites/basicPublishingCredentialsP
 resource credentialsPoliciesScm 'Microsoft.Web/sites/basicPublishingCredentialsPolicies@2022-09-01' = {
   name: 'scm'
   parent: apiAnonymous
+  location: location
   properties: {
     allow: true
   }
