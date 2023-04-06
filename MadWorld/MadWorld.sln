@@ -40,6 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipeline", "Pipeline", "{EA
 		..\.github\workflows\azure-resources.yml = ..\.github\workflows\azure-resources.yml
 		..\.github\workflows\azure-frontend-suite-ui.yml = ..\.github\workflows\azure-frontend-suite-ui.yml
 		..\.github\workflows\azure-frontend-admin-ui.yml = ..\.github\workflows\azure-frontend-admin-ui.yml
+		..\.github\workflows\azure-api-anonymous.yml = ..\.github\workflows\azure-api-anonymous.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource", "Resource", "{05E8DF98-37BA-4B69-A551-27C04A507138}"
