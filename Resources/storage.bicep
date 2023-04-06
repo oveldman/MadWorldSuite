@@ -77,12 +77,6 @@ resource fileService 'Microsoft.Storage/storageAccounts/fileServices@2022-09-01'
   name: 'default'
   parent: storageAccount
   properties: {
-    protocolSettings: {
-      smb: {}
-    }
-    cors: {
-      corsRules: []
-    }
     shareDeleteRetentionPolicy: {
       enabled: true
       days: 7
@@ -93,19 +87,9 @@ resource fileService 'Microsoft.Storage/storageAccounts/fileServices@2022-09-01'
 resource queueServices 'Microsoft.Storage/storageAccounts/queueServices@2022-09-01' = {
   name: 'default'
   parent: storageAccount
-  properties: {
-    cors: {
-      corsRules: []
-    }
-  }
 }
 
 resource tableServices 'Microsoft.Storage/storageAccounts/tableServices@2022-09-01' = {
   name: 'default'
   parent: storageAccount
-  properties: {
-    cors: {
-      corsRules: []
-    }
-  }
 }
