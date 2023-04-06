@@ -7,6 +7,13 @@ module blazorUIs './suite-uis.bicep' = {
   }
 }
 
+module functionsAPIs './suite-apis.bicep' = {
+  name: 'functionsAPIs'
+  params: {
+    location: location
+  }
+}
+
 module storage './storage.bicep' = {
   name: 'storage'
   params: {

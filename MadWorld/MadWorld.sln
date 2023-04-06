@@ -48,6 +48,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource", "Resource", "{05
 		..\Resources\static-site.bicep = ..\Resources\static-site.bicep
 		..\Resources\suite-uis.bicep = ..\Resources\suite-uis.bicep
 		..\Resources\main.bicep = ..\Resources\main.bicep
+		..\Resources\storage.bicep = ..\Resources\storage.bicep
+		..\Resources\suite-apis.bicep = ..\Resources\suite-apis.bicep
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI.Admin", "MadWorld.Frontend.UI.Admin\MadWorld.Frontend.UI.Admin.csproj", "{E2D9CC7C-986D-492C-9895-176AE998CCE2}"
