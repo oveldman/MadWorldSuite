@@ -47,7 +47,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
 }
 
-resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' {
+resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
   name: 'default'
   parent: storageAccount
   properties: {
@@ -73,7 +73,7 @@ resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01'
   }
 }
 
-resource fileService 'Microsoft.Storage/storageAccounts/fileServices@2022-09-01' {
+resource fileService 'Microsoft.Storage/storageAccounts/fileServices@2022-09-01' = {
   name: 'default'
   parent: storageAccount
   properties: {
