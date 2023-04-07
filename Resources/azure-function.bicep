@@ -71,7 +71,7 @@ resource api 'Microsoft.Web/sites@2022-09-01' = {
     dailyMemoryTimeQuota: 0
     httpsOnly: true
     redundancyMode: 'None'
-    publicNetworkAccess: 'Disabled'
+    publicNetworkAccess: 'Enabled'
     storageAccountRequired: false
     keyVaultReferenceIdentity: 'SystemAssigned'
   }
@@ -138,7 +138,7 @@ resource webConfig 'Microsoft.Web/sites/config@2022-09-01' = {
     autoHealEnabled: false
     vnetRouteAllEnabled: false
     vnetPrivatePortsCount: 0
-    publicNetworkAccess: 'Disabled'
+    publicNetworkAccess: 'Enabled'
     cors: {
       allowedOrigins: [
         'https://portal.azure.com'
