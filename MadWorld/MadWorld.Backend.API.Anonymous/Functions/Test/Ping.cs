@@ -9,7 +9,7 @@ namespace MadWorld.Backend.API.Anonymous.Functions.Test;
 public static class Ping
 {
     [Function("Ping")]
-    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
+    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
         FunctionContext executionContext)
     {
         var logger = executionContext.GetLogger("Ping");
