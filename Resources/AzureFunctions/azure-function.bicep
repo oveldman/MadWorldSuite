@@ -1,12 +1,13 @@
 param location string = resourceGroup().location
 param azureFunctionName string = 'madworld-api-anonymous'
-param serverFarmName string = 'ASP-MadWorldSuite-a900'
+param serverFarmName string = 'ASP-MadWorldSuite-8a87'
+param projectNamespace string = 'MadWorld.Backend.API.Anonymous'
 
 resource serverFarm 'Microsoft.Web/serverfarms@2022-09-01' = {
   name: serverFarmName
   location: location
   sku: {
-    name: 'S1'
+    name: 'Y1'
     tier: 'Dynamic'
     size: 'Y1'
     family: 'Y'
@@ -27,9 +28,24 @@ resource serverFarm 'Microsoft.Web/serverfarms@2022-09-01' = {
   }
 }
 
+module applicationInsight '../ApplicationInsight/application-insight.bicep' = {
+  name: 'applicationInsight'
+  params: {
+    insightName: azureFunctionName
+    location: location
+  }
+}
+
+resource applicationInsightResource 'Microsoft.Insights/components@2020-02-02' existing = {
+  name: azureFunctionName
+}
+
 resource api 'Microsoft.Web/sites@2022-09-01' = {
   name: azureFunctionName
   location: location
+  tags: {
+    'hidden-link:${applicationInsightResource.id}': 'Resource'
+  }
   kind: 'functionapp,linux'
   properties: {
     enabled: true
@@ -81,6 +97,9 @@ resource credentialsPoliciesFtp 'Microsoft.Web/sites/basicPublishingCredentialsP
   name: 'ftp'
   parent: api
   location: location
+  tags: {
+    'hidden-link:${applicationInsightResource.id}': 'Resource'
+  }
   properties: {
     allow: true
   }
@@ -90,6 +109,9 @@ resource credentialsPoliciesScm 'Microsoft.Web/sites/basicPublishingCredentialsP
   name: 'scm'
   parent: api
   location: location
+  tags: {
+    'hidden-link:${applicationInsightResource.id}': 'Resource'
+  }
   properties: {
     allow: true
   }
@@ -98,6 +120,10 @@ resource credentialsPoliciesScm 'Microsoft.Web/sites/basicPublishingCredentialsP
 resource webConfig 'Microsoft.Web/sites/config@2022-09-01' = {
   name: 'web'
   parent: api
+  location: location
+  tags: {
+    'hidden-link:${applicationInsightResource.id}': 'Resource'
+  }
   properties: {
     numberOfWorkers: 1
     defaultDocuments: [
@@ -119,8 +145,8 @@ resource webConfig 'Microsoft.Web/sites/config@2022-09-01' = {
     logsDirectorySizeLimit: 35
     detailedErrorLoggingEnabled: false
     publishingUsername: '$${azureFunctionName}'
-    scmType: 'GithubAction'
-    use32BitWorkerProcess: false
+    scmType: 'None'
+    use32BitWorkerProcess: true
     webSocketsEnabled: false
     alwaysOn: false
     managedPipelineMode: 'Integrated'
@@ -173,8 +199,18 @@ resource webConfig 'Microsoft.Web/sites/config@2022-09-01' = {
     functionAppScaleLimit: 200
     functionsRuntimeScaleMonitoringEnabled: false
     minimumElasticInstanceCount: 0
+    azureStorageAccounts: {}
   }
 } 
+
+module pingTrigger './function-trigger.bicep' = {
+  name: 'pingTrigger'
+  params: {
+    parentName: azureFunctionName
+    triggerName: 'Ping'
+    projectNamespace: projectNamespace
+  }
+}
 
 resource hostBindings 'Microsoft.Web/sites/hostNameBindings@2022-09-01' = {
   name: '${azureFunctionName}.azurewebsites.net'
