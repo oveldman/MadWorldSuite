@@ -3,6 +3,7 @@ param insightName string = 'madworld-api-anonymous'
 
 resource workspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' existing = {
   name: 'DefaultWorkspace-5ca43083-11a2-4ba3-b1cc-26869661f2e6-WEU'
+  scope: resourceGroup('DefaultResourceGroup-WEU')
 }
 
 resource applicationInsight 'Microsoft.Insights/components@2020-02-02' = {

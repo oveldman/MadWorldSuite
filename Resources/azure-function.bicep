@@ -1,7 +1,6 @@
 param location string = resourceGroup().location
 param azureFunctionName string = 'madworld-api-anonymous'
 param serverFarmName string = 'ASP-MadWorldSuite-8a87'
-param projectNamespace string = 'MadWorld.Backend.API.Anonymous'
 
 resource serverFarm 'Microsoft.Web/serverfarms@2022-09-01' = {
   name: serverFarmName
@@ -28,7 +27,7 @@ resource serverFarm 'Microsoft.Web/serverfarms@2022-09-01' = {
   }
 }
 
-module applicationInsight '../ApplicationInsight/application-insight.bicep' = {
+module applicationInsight './ApplicationInsight/application-insight.bicep' = {
   name: 'applicationInsight'
   params: {
     insightName: azureFunctionName
@@ -202,15 +201,6 @@ resource webConfig 'Microsoft.Web/sites/config@2022-09-01' = {
     azureStorageAccounts: {}
   }
 } 
-
-module pingTrigger './function-trigger.bicep' = {
-  name: 'pingTrigger'
-  params: {
-    parentName: azureFunctionName
-    triggerName: 'Ping'
-    projectNamespace: projectNamespace
-  }
-}
 
 resource hostBindings 'Microsoft.Web/sites/hostNameBindings@2022-09-01' = {
   name: '${azureFunctionName}.azurewebsites.net'
