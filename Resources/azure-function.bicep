@@ -69,7 +69,7 @@ resource api 'Microsoft.Web/sites@2022-09-01' = {
     vnetContentShareEnabled: false
     siteConfig: {
       numberOfWorkers: 1
-      linuxFxVersion: 'DDOTNET-ISOLATED|7.0'
+      linuxFxVersion: 'DOTNET-ISOLATED|7.0'
       acrUseManagedIdentityCreds: false
       alwaysOn: false
       http20Enabled: false
@@ -136,7 +136,7 @@ resource webConfig 'Microsoft.Web/sites/config@2022-09-01' = {
       'index.php'
     ]
     netFrameworkVersion: 'v4.0'
-    linuxFxVersion: 'DDOTNET-ISOLATED|7.0'
+    linuxFxVersion: 'DOTNET-ISOLATED|7.0'
     requestTracingEnabled: false
     remoteDebuggingEnabled: false
     httpLoggingEnabled: false
