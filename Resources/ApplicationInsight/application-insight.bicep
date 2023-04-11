@@ -23,7 +23,7 @@ resource applicationInsight 'Microsoft.Insights/components@2020-02-02' = {
 }
 
 module degradationIndependencyDuration './proactive-detection-configs.bicep' = {
-  name: 'degradationIndependencyDuration'
+  name: 'degradationIndependencyDuration-${insightName}'
   params: {
     insightName: insightName
     configName: 'degradationindependencyduration'
@@ -38,7 +38,7 @@ module degradationIndependencyDuration './proactive-detection-configs.bicep' = {
 }
 
 module degradationInserverResponsetime './proactive-detection-configs.bicep' = {
-  name: 'degradationInserverResponsetime'
+  name: 'degradationInserverResponsetime-${insightName}'
   params: {
     insightName: insightName
     configName: 'degradationInserverResponsetime'
@@ -53,7 +53,7 @@ module degradationInserverResponsetime './proactive-detection-configs.bicep' = {
 }
 
 module digestMailConfiguration './proactive-detection-configs.bicep' = {
-  name: 'digestMailConfiguration'
+  name: 'digestMailConfiguration-${insightName}'
   params: {
     insightName: insightName
     configName: 'digestMailConfiguration'
@@ -68,7 +68,7 @@ module digestMailConfiguration './proactive-detection-configs.bicep' = {
 }
 
 module extensionBillingDataVolumeDailySpikeExtension './proactive-detection-configs.bicep' = {
-  name: 'extensionBillingDataVolumeDailySpikeExtension'
+  name: 'extensionBillingDataVolumeDailySpikeExtension-${insightName}'
   params: {
     insightName: insightName
     configName: 'extension_billingdatavolumedailyspikeextension'
@@ -83,7 +83,7 @@ module extensionBillingDataVolumeDailySpikeExtension './proactive-detection-conf
 }
 
 module extensionCanaryExtension './proactive-detection-configs.bicep' = {
-  name: 'extensionCanaryExtension'
+  name: 'extensionCanaryExtension-${insightName}'
   params: {
     insightName: insightName
     configName: 'extension_canaryextension'
@@ -98,7 +98,7 @@ module extensionCanaryExtension './proactive-detection-configs.bicep' = {
 }
 
 module extensionExceptionChangeExtension './proactive-detection-configs.bicep' = {
-  name: 'extensionExceptionChangeExtension'
+  name: 'extensionExceptionChangeExtension-${insightName}'
   params: {
     insightName: insightName
     configName: 'extension_exceptionchangeextension'
@@ -113,7 +113,7 @@ module extensionExceptionChangeExtension './proactive-detection-configs.bicep' =
 }
 
 module extensionMemoryLeakExtension './proactive-detection-configs.bicep' = {
-  name: 'extensionMemoryLeakExtension'
+  name: 'extensionMemoryLeakExtension-${insightName}'
   params: {
     insightName: insightName
     configName: 'extension_memoryleakextension'
@@ -128,7 +128,7 @@ module extensionMemoryLeakExtension './proactive-detection-configs.bicep' = {
 }
 
 module extensionSecurityExtensionsPackage './proactive-detection-configs.bicep' = {
-  name: 'extensionSecurityExtensionsPackage'
+  name: 'extensionSecurityExtensionsPackage-${insightName}'
   params: {
     insightName: insightName
     configName: 'extension_securityextensionspackage'
@@ -143,7 +143,7 @@ module extensionSecurityExtensionsPackage './proactive-detection-configs.bicep' 
 }
 
 module extensionTracesEverityDetector './proactive-detection-configs.bicep' = {
-  name: 'extensionTracesEverityDetector'
+  name: 'extensionTracesEverityDetector-${insightName}'
   params: {
     insightName: insightName
     configName: 'extension_traceseveritydetector'
@@ -158,7 +158,7 @@ module extensionTracesEverityDetector './proactive-detection-configs.bicep' = {
 }
 
 module longDependencyDuration './proactive-detection-configs.bicep' = {
-  name: 'longDependencyDuration'
+  name: 'longDependencyDuration-${insightName}'
   params: {
     insightName: insightName
     configName: 'longdependencyduration'
@@ -173,7 +173,7 @@ module longDependencyDuration './proactive-detection-configs.bicep' = {
 }
 
 module migrationToAlertRulesCompleted './proactive-detection-configs.bicep' = {
-  name: 'migrationToAlertRulesCompleted'
+  name: 'migrationToAlertRulesCompleted-${insightName}'
   params: {
     insightName: insightName
     configName: 'migrationToAlertRulesCompleted'
@@ -188,7 +188,7 @@ module migrationToAlertRulesCompleted './proactive-detection-configs.bicep' = {
 }
 
 module slowPageLoadTime './proactive-detection-configs.bicep' = {
-  name: 'slowPageLoadTime'
+  name: 'slowPageLoadTime-${insightName}'
   params: {
     insightName: insightName
     configName: 'slowpageloadtime'
@@ -203,7 +203,7 @@ module slowPageLoadTime './proactive-detection-configs.bicep' = {
 }
 
 module slowServerResponseTime './proactive-detection-configs.bicep' = {
-  name: 'slowServerResponseTime'
+  name: 'slowServerResponseTime-${insightName}'
   params: {
     insightName: insightName
     configName: 'slowserverresponsetime'
