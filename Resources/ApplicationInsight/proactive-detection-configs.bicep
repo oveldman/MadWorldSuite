@@ -13,7 +13,7 @@ resource applicationInsightResource 'Microsoft.Insights/components@2020-02-02' e
 }
 
 resource proactiveDetectionConfigs 'Microsoft.Insights/components/ProactiveDetectionConfigs@2018-05-01-preview' = {
-  name: configName
+  name: '${configName}-${insightName}'
   parent: applicationInsightResource
   properties: {
     RuleDefinitions: {
