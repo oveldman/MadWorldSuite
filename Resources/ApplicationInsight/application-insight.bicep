@@ -68,7 +68,7 @@ module digestMailConfiguration './proactive-detection-configs.bicep' = {
 }
 
 module extensionBillingDataVolumeDailySpikeExtension './proactive-detection-configs.bicep' = {
-  name: 'extensionBillingDataVolumeDailySpikeExtension-${insightName}'
+  name: 'billingDataVolumeDailySpikeExtension-${insightName}'
   params: {
     insightName: insightName
     configName: 'extension_billingdatavolumedailyspikeextension'
