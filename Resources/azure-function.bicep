@@ -116,6 +116,10 @@ resource credentialsPoliciesScm 'Microsoft.Web/sites/basicPublishingCredentialsP
   }
 }
 
+resource apiManagement 'Microsoft.ApiManagement/service@2022-08-01' existing = {
+  name: 'madworld-api-management'
+}
+
 resource webConfig 'Microsoft.Web/sites/config@2022-09-01' = {
   name: 'web'
   parent: api
@@ -169,6 +173,9 @@ resource webConfig 'Microsoft.Web/sites/config@2022-09-01' = {
         'https://portal.azure.com'
       ]
       supportCredentials: false
+    }
+    apiManagementConfig: {
+      id: '${apiManagement.id}/apis/${azureFunctionName}'
     }
     localMySqlEnabled: false
     ipSecurityRestrictions: [
