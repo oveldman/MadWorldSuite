@@ -26,5 +26,5 @@ jobs:
           resourceGroupName: ${{ secrets.AZURE_RG }}
           template: ./Resources/main.bicep
           deploymentMode: Incremental
-          parameters: ''
+          parameters: 'anonymousApiKey=${{ secrets.BICEP_ANONYMOUS_API_KEY }} authorizedApiKey=${{ secrets.BICEP_AUTHORIZED_API_KEY }}'
           failOnStdErr: false
