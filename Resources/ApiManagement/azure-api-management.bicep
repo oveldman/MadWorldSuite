@@ -135,14 +135,16 @@ resource apiManagementPolicy 'Microsoft.ApiManagement/service/policies@2022-08-0
   }
 }
 
-resource subscription 'Microsoft.ApiManagement/service/subscriptions@2022-08-01' = {
-  name: 'master'
+resource anonumousProperty 'Microsoft.ApiManagement/service/properties@2019-01-01' = {
+  name: 'madworld-api-anonymous-key'
   parent: apiManagement
   properties: {
-    scope: '${apiManagement.id}${apiManagementName}/'
-    displayName: 'Built-in all-access subscription'
-    state: 'active'
-    allowTracing: false
+    displayName: 'madworld-api-anonymous-key'
+    value: anonymousApiKey
+    tags: [
+      'key', 'function', 'auto' 
+    ]
+    secret: true
   }
 }
 
