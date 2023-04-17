@@ -25,7 +25,7 @@ resource getPingPolicy 'Microsoft.ApiManagement/service/apis/operations/policies
   name: 'policy'
   parent: getPingOperation
   properties: {
-    value: '<policies>\r\n  <inbound>\r\n    <base />\r\n    <set-backend-service id="apim-generated-policy" backend-id="madworld-api-anonymous" />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n  <on-error>\r\n    <base />\r\n  </on-error>\r\n</policies>'
+    value: '<policies>\r\n  <inbound>\r\n    <base />\r\n    <set-backend-service id=\\"apim-generated-policy\\" backend-id=\\"madworld-api-anonymous\\" />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n  <on-error>\r\n    <base />\r\n  </on-error>\r\n</policies>'
     format: 'xml'
   }
 }
@@ -46,7 +46,7 @@ resource postPingPolicy 'Microsoft.ApiManagement/service/apis/operations/policie
   name: 'policy'
   parent: postPingOperation
   properties: {
-    value: '<policies>\r\n  <inbound>\r\n    <base />\r\n    <set-backend-service id=\"apim-generated-policy\" backend-id=\"madworld-api-anonymous\" />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n  <on-error>\r\n    <base />\r\n  </on-error>\r\n</policies>'
+    value: '<policies>\r\n  <inbound>\r\n    <base />\r\n    <set-backend-service id=\\"apim-generated-policy\\" backend-id=\\"madworld-api-anonymous\\" />\r\n  </inbound>\r\n  <backend>\r\n    <base />\r\n  </backend>\r\n  <outbound>\r\n    <base />\r\n  </outbound>\r\n  <on-error>\r\n    <base />\r\n  </on-error>\r\n</policies>'
     format: 'xml'
   }
 }
