@@ -54,6 +54,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource", "Resource", "{05
 		..\Resources\ApplicationInsight\application-insight.bicep = ..\Resources\ApplicationInsight\application-insight.bicep
 		..\Resources\ApplicationInsight\proactive-detection-configs.bicep = ..\Resources\ApplicationInsight\proactive-detection-configs.bicep
 		..\Resources\azure-function.bicep = ..\Resources\azure-function.bicep
+		..\Resources\ApiManagement\azure-api-management.bicep = ..\Resources\ApiManagement\azure-api-management.bicep
+		..\Resources\ApiManagement\api-endpoints-anonymous.bicep = ..\Resources\ApiManagement\api-endpoints-anonymous.bicep
+		..\Resources\ApiManagement\api-endpoints-authorized.bicep = ..\Resources\ApiManagement\api-endpoints-authorized.bicep
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI.Admin", "MadWorld.Frontend.UI.Admin\MadWorld.Frontend.UI.Admin.csproj", "{E2D9CC7C-986D-492C-9895-176AE998CCE2}"

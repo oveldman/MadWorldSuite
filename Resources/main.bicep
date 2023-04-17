@@ -1,4 +1,8 @@
 param location string = resourceGroup().location
+@secure()
+param anonymousApiKey string
+@secure()
+param authorizedApiKey string
 
 module blazorUIs './suite-uis.bicep' = {
   name: 'blazorUIs'
@@ -11,6 +15,8 @@ module functionsAPIs './suite-apis.bicep' = {
   name: 'functionsAPIs'
   params: {
     location: location
+    anonymousApiKey: anonymousApiKey
+    authorizedApiKey: authorizedApiKey
   }
 }
 
