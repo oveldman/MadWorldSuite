@@ -22,7 +22,6 @@ resource apiManagement 'Microsoft.ApiManagement/service@2019-01-01' = {
         hostName: '${apiManagementName}.azure-api.net'
         negotiateClientCertificate: false
         defaultSslBinding: true
-        certificateSource: 'BuiltIn'
       }
     ]
     customProperties: {
@@ -34,10 +33,6 @@ resource apiManagement 'Microsoft.ApiManagement/service@2019-01-01' = {
         'Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2': 'false'
     }
     virtualNetworkType: 'None'
-    disableGateway: false
-    natGatewayState: 'Disabled'
-    apiVersionConstraint: {}
-    publicNetworkAccess: 'Enabled'
   }
 }
 
