@@ -63,6 +63,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI.Admin"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI.Suite", "MadWorld.Frontend.UI.Suite\MadWorld.Frontend.UI.Suite.csproj", "{5E7F586B-9663-45F8-A738-E70770C15039}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Policy", "Policy", "{94EEDFAB-C57F-428E-9D93-B969DF43CD64}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Anonymous", "Anonymous", "{9728C46C-6BA4-464C-854D-35DF4AB8DD82}"
+	ProjectSection(SolutionItems) = preProject
+		..\Resources\ApiManagement\Policy\Anonymous\GetPing.xml = ..\Resources\ApiManagement\Policy\Anonymous\GetPing.xml
+		..\Resources\ApiManagement\Policy\Anonymous\PostPing.xml = ..\Resources\ApiManagement\Policy\Anonymous\PostPing.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authorized", "Authorized", "{34F6120D-D799-4AAA-9413-A2011E639622}"
+	ProjectSection(SolutionItems) = preProject
+		..\Resources\ApiManagement\Policy\Authorized\GetPing.xml = ..\Resources\ApiManagement\Policy\Authorized\GetPing.xml
+		..\Resources\ApiManagement\Policy\Authorized\PostPing.xml = ..\Resources\ApiManagement\Policy\Authorized\PostPing.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +96,9 @@ Global
 		{05E8DF98-37BA-4B69-A551-27C04A507138} = {FFF8F55E-B978-4609-AB68-7F5D69B090B7}
 		{E2D9CC7C-986D-492C-9895-176AE998CCE2} = {BD60157B-62B3-467F-991D-E7718A7D78E8}
 		{5E7F586B-9663-45F8-A738-E70770C15039} = {BD60157B-62B3-467F-991D-E7718A7D78E8}
+		{94EEDFAB-C57F-428E-9D93-B969DF43CD64} = {05E8DF98-37BA-4B69-A551-27C04A507138}
+		{9728C46C-6BA4-464C-854D-35DF4AB8DD82} = {94EEDFAB-C57F-428E-9D93-B969DF43CD64}
+		{34F6120D-D799-4AAA-9413-A2011E639622} = {94EEDFAB-C57F-428E-9D93-B969DF43CD64}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
