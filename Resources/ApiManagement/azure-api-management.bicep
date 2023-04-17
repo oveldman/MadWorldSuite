@@ -135,32 +135,6 @@ resource apiManagementPolicy 'Microsoft.ApiManagement/service/policies@2022-08-0
   }
 }
 
-resource anonumousProperty 'Microsoft.ApiManagement/service/properties@2019-01-01' = {
-  name: 'madworld-api-anonymous-key'
-  parent: apiManagement
-  properties: {
-    displayName: 'madworld-api-anonymous-key'
-    value: anonymousApiKey
-    tags: [
-      'key', 'function', 'auto' 
-    ]
-    secret: true
-  }
-}
-
-resource authorizedProperty 'Microsoft.ApiManagement/service/properties@2019-01-01' = {
-  name: 'madworld-api-authorized-key'
-  parent: apiManagement
-  properties: {
-    displayName: 'madworld-api-authorized-key'
-    value: authorizedApiKey
-    tags: [
-      'key', 'function', 'auto' 
-    ]
-    secret: true
-  }
-}
-
 resource subscription 'Microsoft.ApiManagement/service/subscriptions@2022-08-01' = {
   name: 'master'
   parent: apiManagement
