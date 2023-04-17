@@ -83,3 +83,67 @@ resource authorizedApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
     isCurrent: true
   }
 }
+
+resource anonymousAzureFunctions 'Microsoft.Web/sites@2022-09-01' = {
+  name: 'madworld-api-anonymous'
+  location: location
+}
+
+resource anonymousBackend 'Microsoft.ApiManagement/service/backends@2022-08-01' = {
+  name: 'madworld-api-anonymous'
+  parent: apiManagement
+  properties: {
+    description: 'madworld-api-anonymous'
+    url: 'https://madworld-api-anonymous.azurewebsites.net/api'
+    protocol: 'http'
+    resourceId: anonymousAzureFunctions.id
+    credentials: {
+      header: {
+        'x-functions-key': [ '{{madworld-api-anonymous-key}}' ]
+      }
+    }
+  }
+}
+
+resource authorizedAzureFunctions 'Microsoft.Web/sites@2022-09-01' = {
+  name: 'madworld-api-authorized'
+  location: location
+}
+
+resource authorizedBackend 'Microsoft.ApiManagement/service/backends@2022-08-01' = {
+  name: 'madworld-api-authorized'
+  parent: apiManagement
+  properties: {
+    description: 'madworld-api-authorized'
+    url: 'https://madworld-api-authorized.azurewebsites.net/api'
+    protocol: 'http'
+    resourceId: authorizedAzureFunctions.id
+    credentials: {
+      header: {
+        'x-functions-key': [ '{{madworld-api-authorized-key}}' ]
+      }
+    }
+  }
+}
+
+resource anonymousNameValues 'Microsoft.ApiManagement/service/namedValues@2022-08-01' = {
+  name: 'madworld-api-anonymous-key'
+  parent: apiManagement
+  properties: {
+    displayName: 'madworld-api-anonymous-key'
+    tags: [
+      'key', 'function', 'auto'
+    ]
+  }
+}
+
+resource authorizedNameValues 'Microsoft.ApiManagement/service/namedValues@2022-08-01' = {
+  name: 'madworld-api-authorized-key'
+  parent: apiManagement
+  properties: {
+    displayName: 'madworld-api-authorized-key'
+    tags: [
+      'key', 'function', 'auto'
+    ]
+  }
+}
