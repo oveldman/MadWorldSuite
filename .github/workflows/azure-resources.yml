@@ -27,5 +27,4 @@ jobs:
           template: ./Resources/main.bicep
           deploymentMode: Incremental
           parameters: 'anonymousApiKey="${{ secrets.BICEP_ANONYMOUS_API_KEY }}" authorizedApiKey="${{ secrets.BICEP_AUTHORIZED_API_KEY }}"'
-          additionalArguments: '--what-if --rollback-on-error'
           failOnStdErr: false
