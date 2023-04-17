@@ -126,24 +126,62 @@ resource authorizedBackend 'Microsoft.ApiManagement/service/backends@2022-08-01'
   }
 }
 
-resource anonymousNameValues 'Microsoft.ApiManagement/service/namedValues@2022-08-01' = {
+resource apiManagementPolicy 'Microsoft.ApiManagement/service/policies@2022-08-01' = {
+  name: 'policy'
+  parent: apiManagement
+  properties: {
+    value: loadTextContent('./Policy/GeneralApi.xml')
+    format: 'rawxml'
+  }
+}
+
+resource anonumousProperty 'Microsoft.ApiManagement/service/properties@2019-01-01' = {
   name: 'madworld-api-anonymous-key'
   parent: apiManagement
   properties: {
     displayName: 'madworld-api-anonymous-key'
+    value: anonymousApiKey
     tags: [
-      'key', 'function', 'auto'
+      'key', 'function', 'auto' 
     ]
+    secret: true
   }
 }
 
-resource authorizedNameValues 'Microsoft.ApiManagement/service/namedValues@2022-08-01' = {
+resource authorizedProperty 'Microsoft.ApiManagement/service/properties@2019-01-01' = {
   name: 'madworld-api-authorized-key'
   parent: apiManagement
   properties: {
     displayName: 'madworld-api-authorized-key'
+    value: authorizedApiKey
     tags: [
-      'key', 'function', 'auto'
+      'key', 'function', 'auto' 
     ]
+    secret: true
+  }
+}
+
+resource subscription 'Microsoft.ApiManagement/service/subscriptions@2022-08-01' = {
+  name: 'master'
+  parent: apiManagement
+  properties: {
+    scope: '${apiManagement.id}${apiManagementName}/'
+    displayName: 'Built-in all-access subscription'
+    state: 'active'
+    allowTracing: false
+  }
+}
+
+module anonymousEndpoints 'api-endpoints-anonymous.bicep' = {
+  name: 'anonymousEndpoints'
+  params: {
+    apiManagementName: apiManagementName
+  }
+}
+
+module authorizedEndpoints 'api-endpoints-authorized.bicep' = {
+  name: 'authorizedEndpoints'
+  params: {
+    apiManagementName: apiManagementName
   }
 }
