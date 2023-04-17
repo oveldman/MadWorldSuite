@@ -64,6 +64,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI.Suite", "MadWorld.Frontend.UI.Suite\MadWorld.Frontend.UI.Suite.csproj", "{5E7F586B-9663-45F8-A738-E70770C15039}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Policy", "Policy", "{94EEDFAB-C57F-428E-9D93-B969DF43CD64}"
+	ProjectSection(SolutionItems) = preProject
+		..\Resources\ApiManagement\Policy\GeneralApi.xml = ..\Resources\ApiManagement\Policy\GeneralApi.xml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Anonymous", "Anonymous", "{9728C46C-6BA4-464C-854D-35DF4AB8DD82}"
 	ProjectSection(SolutionItems) = preProject
