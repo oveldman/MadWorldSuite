@@ -35,3 +35,51 @@ resource apiManagement 'Microsoft.ApiManagement/service@2019-01-01' = {
     virtualNetworkType: 'None'
   }
 }
+
+resource anonymousApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
+  name: 'madworld-api-anonymous'
+  parent: apiManagement
+  properties: {
+    displayName: 'madworld-api-anonymous'
+    apiRevision: '1'
+    description: 'Import from "madworld-api-anonymous" Function App'
+    subscriptionRequired: false
+    path: 'anonymous'
+    protocols: [
+      'https'
+    ]
+    authenticationSettings: {
+      oAuth2AuthenticationSettings: []
+      openidAuthenticationSettings: []
+    }
+    subscriptionKeyParameterNames: {
+      header: 'Ocp-Apim-Subscription-Key'
+      query: 'subscription-key'
+    }
+    isCurrent: true
+  }
+}
+
+resource authorizedApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
+  name: 'madworld-api-authorized'
+  parent: apiManagement
+  properties: {
+    displayName: 'madworld-api-authorized'
+    apiRevision: '1'
+    description: 'Import from "madworld-api-authorized" Function App'
+    subscriptionRequired: false
+    path: 'authorized'
+    protocols: [
+      'https'
+    ]
+    authenticationSettings: {
+      oAuth2AuthenticationSettings: []
+      openidAuthenticationSettings: []
+    }
+    subscriptionKeyParameterNames: {
+      header: 'Ocp-Apim-Subscription-Key'
+      query: 'subscription-key'
+    }
+    isCurrent: true
+  }
+}
