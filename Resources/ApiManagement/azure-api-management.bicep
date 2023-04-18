@@ -178,17 +178,6 @@ resource authorizedProperty 'Microsoft.ApiManagement/service/properties@2019-01-
   }
 }
 
-resource subscription 'Microsoft.ApiManagement/service/subscriptions@2022-08-01' = {
-  name: 'master'
-  parent: apiManagement
-  properties: {
-    scope: '${apiManagement.id}/apis'
-    displayName: 'Built-in all-access subscription'
-    state: 'active'
-    allowTracing: false
-  }
-}
-
 module anonymousEndpoints 'api-endpoints-anonymous.bicep' = {
   name: 'anonymousEndpoints'
   params: {
