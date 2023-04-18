@@ -1,4 +1,5 @@
 param location string = resourceGroup().location
+param resourceManager string = environment().resourceManager
 param apiManagementName string = 'madworld-api-management'
 param anonymousApiName string
 @secure()
@@ -86,11 +87,6 @@ resource authorizedApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
   }
 }
 
-resource anonymousAzureFunctions 'Microsoft.Web/sites@2022-09-01' = {
-  name: anonymousApiName
-  location: location
-}
-
 resource anonymousBackend 'Microsoft.ApiManagement/service/backends@2022-08-01' = {
   name: anonymousApiName
   parent: apiManagement
@@ -98,18 +94,13 @@ resource anonymousBackend 'Microsoft.ApiManagement/service/backends@2022-08-01' 
     description: anonymousApiName
     url: 'https://${anonymousApiName}.azurewebsites.net/api'
     protocol: 'http'
-    resourceId: '${environment()}/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${anonymousApiName}'
+    resourceId: '${resourceManager}subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${anonymousApiName}'
     credentials: {
       header: {
         'x-functions-key': [ '{{${anonymousApiName}-key}}' ]
       }
     }
   }
-}
-
-resource authorizedAzureFunctions 'Microsoft.Web/sites@2022-09-01' = {
-  name: authorizedApiName
-  location: location
 }
 
 resource authorizedBackend 'Microsoft.ApiManagement/service/backends@2022-08-01' = {
@@ -119,7 +110,7 @@ resource authorizedBackend 'Microsoft.ApiManagement/service/backends@2022-08-01'
     description: authorizedApiName
     url: 'https://${authorizedApiName}.azurewebsites.net/api'
     protocol: 'http'
-    resourceId: '${environment()}/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${authorizedApiName}'
+    resourceId: '${resourceManager}subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${authorizedApiName}'
     credentials: {
       header: {
         'x-functions-key': [ '{{${authorizedApiName}-key}}' ]
