@@ -84,8 +84,6 @@ resource authorizedApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
   }
 }
 
-/*
-
 resource anonymousAzureFunctions 'Microsoft.Web/sites@2022-09-01' = {
   name: 'madworld-api-anonymous'
   location: location
@@ -127,6 +125,8 @@ resource authorizedBackend 'Microsoft.ApiManagement/service/backends@2022-08-01'
     }
   }
 }
+
+/*
 
 resource anonymousNameValues 'Microsoft.ApiManagement/service/namedValues@2022-08-01' = {
   name: 'madworld-api-anonymous-key'
