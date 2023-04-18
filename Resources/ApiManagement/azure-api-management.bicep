@@ -182,7 +182,7 @@ resource subscription 'Microsoft.ApiManagement/service/subscriptions@2022-08-01'
   name: 'master'
   parent: apiManagement
   properties: {
-    scope: '${apiManagement.id}/'
+    scope: '/apis'
     displayName: 'Built-in all-access subscription'
     state: 'active'
     allowTracing: false
