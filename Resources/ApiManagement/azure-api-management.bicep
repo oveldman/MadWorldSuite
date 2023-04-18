@@ -36,6 +36,7 @@ resource apiManagement 'Microsoft.ApiManagement/service@2019-01-01' = {
   }
 }
 
+/*
 resource anonymousApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
   name: 'madworld-api-anonymous'
   parent: apiManagement
@@ -126,8 +127,6 @@ resource authorizedBackend 'Microsoft.ApiManagement/service/backends@2022-08-01'
   }
 }
 
-/*
-
 resource anonymousNameValues 'Microsoft.ApiManagement/service/namedValues@2022-08-01' = {
   name: 'madworld-api-anonymous-key'
   parent: apiManagement
@@ -150,8 +149,6 @@ resource authorizedNameValues 'Microsoft.ApiManagement/service/namedValues@2022-
   }
 }
 
-*/
-
 resource apiManagementPolicy 'Microsoft.ApiManagement/service/policies@2022-08-01' = {
   name: 'policy'
   parent: apiManagement
@@ -160,8 +157,6 @@ resource apiManagementPolicy 'Microsoft.ApiManagement/service/policies@2022-08-0
     format: 'rawxml'
   }
 }
-
-/*
 
 resource anonumousProperty 'Microsoft.ApiManagement/service/properties@2019-01-01' = {
   name: 'madworld-api-anonymous-key'
@@ -200,8 +195,6 @@ resource subscription 'Microsoft.ApiManagement/service/subscriptions@2022-08-01'
   }
 }
 
-*/
-
 module anonymousEndpoints 'api-endpoints-anonymous.bicep' = {
   name: 'anonymousEndpoints'
   params: {
@@ -215,3 +208,5 @@ module authorizedEndpoints 'api-endpoints-authorized.bicep' = {
     apiManagementName: apiManagementName
   }
 }
+
+*/
