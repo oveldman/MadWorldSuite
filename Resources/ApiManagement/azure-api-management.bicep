@@ -136,7 +136,7 @@ resource authorizedNameValues 'Microsoft.ApiManagement/service/namedValues@2022-
   parent: apiManagement
   properties: {
     displayName: 'madworld-api-authorized-key'
-    value: authorizedApiKey
+    value: anonymousApiKey
     tags: [
       'key', 'function', 'auto'
     ]
@@ -182,7 +182,7 @@ resource subscription 'Microsoft.ApiManagement/service/subscriptions@2022-08-01'
   name: 'master'
   parent: apiManagement
   properties: {
-    scope: '/apis'
+    scope: '${apiManagement.id}/'
     displayName: 'Built-in all-access subscription'
     state: 'active'
     allowTracing: false
