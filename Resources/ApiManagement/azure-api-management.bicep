@@ -119,9 +119,6 @@ resource authorizedBackend 'Microsoft.ApiManagement/service/backends@2022-08-01'
   }
 }
 
-
-/*
-
 resource anonymousNameValues 'Microsoft.ApiManagement/service/namedValues@2022-08-01' = {
   name: 'madworld-api-anonymous-key'
   parent: apiManagement
@@ -203,5 +200,3 @@ module authorizedEndpoints 'api-endpoints-authorized.bicep' = {
     apiManagementName: apiManagementName
   }
 }
-
-*/
