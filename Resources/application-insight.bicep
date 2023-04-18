@@ -22,37 +22,47 @@ resource applicationInsight 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-module degradationIndependencyDuration './proactive-detection-configs.bicep' = {
-  name: 'degradationIndependencyDuration-${insightName}'
-  params: {
-    insightName: insightName
-    configName: 'degradationindependencyduration'
-    displayName: 'Degradation in Dependency Duration'
-    description: 'Smart Detection rules notify you of performance anomaly issues.'
-    helpUrl: 'https://docs.microsoft.com/en-us/azure/application-insights/app-insights-proactive-performance-diagnostics'
-    isHidden: false
-    isInPreview: false
-    supportsEmailNotifications: true
-    isEnabled: true
+resource degradationIndependencyDuration 'Microsoft.Insights/components/ProactiveDetectionConfigs@2018-05-01-preview' = {
+  name: 'degradationindependencyduration'
+  parent: applicationInsight
+  properties: {
+    RuleDefinitions: {
+      Name: 'degradationindependencyduration'
+      DisplayName: 'Degradation in Dependency Duration'
+      Description: 'Smart Detection rules notify you of performance anomaly issues.'
+      HelpUrl: 'https://docs.microsoft.com/en-us/azure/application-insights/app-insights-proactive-performance-diagnostics'
+      IsHidden: false
+      IsEnabledByDefault: true
+      IsInPreview: false
+      SupportsEmailNotifications: true
+    }
+    Enabled: true
+    SendEmailsToSubscriptionOwners: true
+    CustomEmails: []
   }
 }
 
-module degradationInserverResponsetime './proactive-detection-configs.bicep' = {
-  name: 'degradationInserverResponsetime-${insightName}'
-  params: {
-    insightName: insightName
-    configName: 'degradationInserverResponsetime'
-    displayName: 'Degradation in server response time'
-    description: 'Smart Detection rules notify you of performance anomaly issues.'
-    helpUrl: 'https://docs.microsoft.com/en-us/azure/application-insights/app-insights-proactive-performance-diagnostics'
-    isHidden: false
-    isInPreview: false
-    supportsEmailNotifications: true
-    isEnabled: true
+resource degradationInserverResponsetime 'Microsoft.Insights/components/ProactiveDetectionConfigs@2018-05-01-preview' = {
+  name: 'degradationInserverResponsetime'
+  parent: applicationInsight
+  properties: {
+    RuleDefinitions: {
+      Name: 'degradationInserverResponsetime'
+      DisplayName: 'Degradation in server response time'
+      Description: 'Smart Detection rules notify you of performance anomaly issues.'
+      HelpUrl: 'https://docs.microsoft.com/en-us/azure/application-insights/app-insights-proactive-performance-diagnostics'
+      IsHidden: false
+      IsEnabledByDefault: true
+      IsInPreview: false
+      SupportsEmailNotifications: true
+    }
+    Enabled: true
+    SendEmailsToSubscriptionOwners: true
+    CustomEmails: []
   }
 }
 
-module digestMailConfiguration './proactive-detection-configs.bicep' = {
+module digestMailConfiguration './ApplicationInsight/proactive-detection-configs.bicep' = {
   name: 'digestMailConfiguration-${insightName}'
   params: {
     insightName: insightName
@@ -67,7 +77,7 @@ module digestMailConfiguration './proactive-detection-configs.bicep' = {
   }
 }
 
-module extensionBillingDataVolumeDailySpikeExtension './proactive-detection-configs.bicep' = {
+module extensionBillingDataVolumeDailySpikeExtension './ApplicationInsight/proactive-detection-configs.bicep' = {
   name: 'billingDataVolumeDailySpikeExtension-${insightName}'
   params: {
     insightName: insightName
@@ -82,7 +92,7 @@ module extensionBillingDataVolumeDailySpikeExtension './proactive-detection-conf
   }
 }
 
-module extensionCanaryExtension './proactive-detection-configs.bicep' = {
+module extensionCanaryExtension './ApplicationInsight/proactive-detection-configs.bicep' = {
   name: 'extensionCanaryExtension-${insightName}'
   params: {
     insightName: insightName
@@ -97,7 +107,7 @@ module extensionCanaryExtension './proactive-detection-configs.bicep' = {
   }
 }
 
-module extensionExceptionChangeExtension './proactive-detection-configs.bicep' = {
+module extensionExceptionChangeExtension './ApplicationInsight/proactive-detection-configs.bicep' = {
   name: 'extensionExceptionChangeExtension-${insightName}'
   params: {
     insightName: insightName
@@ -112,7 +122,7 @@ module extensionExceptionChangeExtension './proactive-detection-configs.bicep' =
   }
 }
 
-module extensionMemoryLeakExtension './proactive-detection-configs.bicep' = {
+module extensionMemoryLeakExtension './ApplicationInsight/proactive-detection-configs.bicep' = {
   name: 'extensionMemoryLeakExtension-${insightName}'
   params: {
     insightName: insightName
@@ -127,7 +137,7 @@ module extensionMemoryLeakExtension './proactive-detection-configs.bicep' = {
   }
 }
 
-module extensionSecurityExtensionsPackage './proactive-detection-configs.bicep' = {
+module extensionSecurityExtensionsPackage './ApplicationInsight/proactive-detection-configs.bicep' = {
   name: 'extensionSecurityExtensionsPackage-${insightName}'
   params: {
     insightName: insightName
@@ -142,7 +152,7 @@ module extensionSecurityExtensionsPackage './proactive-detection-configs.bicep' 
   }
 }
 
-module extensionTracesEverityDetector './proactive-detection-configs.bicep' = {
+module extensionTracesEverityDetector './ApplicationInsight/proactive-detection-configs.bicep' = {
   name: 'extensionTracesEverityDetector-${insightName}'
   params: {
     insightName: insightName
@@ -157,7 +167,7 @@ module extensionTracesEverityDetector './proactive-detection-configs.bicep' = {
   }
 }
 
-module longDependencyDuration './proactive-detection-configs.bicep' = {
+module longDependencyDuration './ApplicationInsight/proactive-detection-configs.bicep' = {
   name: 'longDependencyDuration-${insightName}'
   params: {
     insightName: insightName
@@ -172,7 +182,7 @@ module longDependencyDuration './proactive-detection-configs.bicep' = {
   }
 }
 
-module migrationToAlertRulesCompleted './proactive-detection-configs.bicep' = {
+module migrationToAlertRulesCompleted './ApplicationInsight/proactive-detection-configs.bicep' = {
   name: 'migrationToAlertRulesCompleted-${insightName}'
   params: {
     insightName: insightName
@@ -187,7 +197,7 @@ module migrationToAlertRulesCompleted './proactive-detection-configs.bicep' = {
   }
 }
 
-module slowPageLoadTime './proactive-detection-configs.bicep' = {
+module slowPageLoadTime './ApplicationInsight/proactive-detection-configs.bicep' = {
   name: 'slowPageLoadTime-${insightName}'
   params: {
     insightName: insightName
@@ -202,7 +212,7 @@ module slowPageLoadTime './proactive-detection-configs.bicep' = {
   }
 }
 
-module slowServerResponseTime './proactive-detection-configs.bicep' = {
+module slowServerResponseTime './ApplicationInsight/proactive-detection-configs.bicep' = {
   name: 'slowServerResponseTime-${insightName}'
   params: {
     insightName: insightName
