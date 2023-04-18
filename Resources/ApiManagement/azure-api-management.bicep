@@ -1,7 +1,9 @@
 param location string = resourceGroup().location
 param apiManagementName string = 'madworld-api-management'
+param anonymousApiName string
 @secure()
 param anonymousApiKey string
+param authorizedApiName string
 @secure()
 param authorizedApiKey string
 
@@ -37,12 +39,12 @@ resource apiManagement 'Microsoft.ApiManagement/service@2019-01-01' = {
 }
 
 resource anonymousApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
-  name: 'madworld-api-anonymous'
+  name: anonymousApiName
   parent: apiManagement
   properties: {
-    displayName: 'madworld-api-anonymous'
+    displayName: anonymousApiName
     apiRevision: '1'
-    description: 'Import from "madworld-api-anonymous" Function App'
+    description: 'Import from "${anonymousApiName}" Function App'
     subscriptionRequired: false
     path: 'anonymous'
     protocols: [
@@ -61,12 +63,12 @@ resource anonymousApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
 }
 
 resource authorizedApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
-  name: 'madworld-api-authorized'
+  name: authorizedApiName
   parent: apiManagement
   properties: {
-    displayName: 'madworld-api-authorized'
+    displayName: authorizedApiName
     apiRevision: '1'
-    description: 'Import from "madworld-api-authorized" Function App'
+    description: 'Import from "${authorizedApiName}" Function App'
     subscriptionRequired: false
     path: 'authorized'
     protocols: [
@@ -85,42 +87,42 @@ resource authorizedApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
 }
 
 resource anonymousAzureFunctions 'Microsoft.Web/sites@2022-09-01' = {
-  name: 'madworld-api-anonymous'
+  name: anonymousApiName
   location: location
 }
 
 resource anonymousBackend 'Microsoft.ApiManagement/service/backends@2022-08-01' = {
-  name: 'madworld-api-anonymous'
+  name: anonymousApiName
   parent: apiManagement
   properties: {
-    description: 'madworld-api-anonymous'
-    url: 'https://madworld-api-anonymous.azurewebsites.net/api'
+    description: anonymousApiName
+    url: 'https://${anonymousApiName}.azurewebsites.net/api'
     protocol: 'http'
-    resourceId: anonymousAzureFunctions.id
+    resourceId: '${environment()}/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${anonymousApiName}'
     credentials: {
       header: {
-        'x-functions-key': [ '{{madworld-api-anonymous-key}}' ]
+        'x-functions-key': [ '{{${anonymousApiName}-key}}' ]
       }
     }
   }
 }
 
 resource authorizedAzureFunctions 'Microsoft.Web/sites@2022-09-01' = {
-  name: 'madworld-api-authorized'
+  name: authorizedApiName
   location: location
 }
 
 resource authorizedBackend 'Microsoft.ApiManagement/service/backends@2022-08-01' = {
-  name: 'madworld-api-authorized'
+  name: authorizedApiName
   parent: apiManagement
   properties: {
-    description: 'madworld-api-authorized'
-    url: 'https://madworld-api-authorized.azurewebsites.net/api'
+    description: authorizedApiName
+    url: 'https://${authorizedApiName}.azurewebsites.net/api'
     protocol: 'http'
-    resourceId: authorizedAzureFunctions.id
+    resourceId: '${environment()}/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${authorizedApiName}'
     credentials: {
       header: {
-        'x-functions-key': [ '{{madworld-api-authorized-key}}' ]
+        'x-functions-key': [ '{{${authorizedApiName}-key}}' ]
       }
     }
   }

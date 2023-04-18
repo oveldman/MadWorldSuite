@@ -1,6 +1,8 @@
 param location string = resourceGroup().location
+param anonymousApiName string
 @secure()
 param anonymousApiKey string
+param authorizedApiName string
 @secure()
 param authorizedApiKey string
 
@@ -8,7 +10,7 @@ module apiAnonymous './azure-function.bicep' = {
   name: 'apiAnonymous'
   params: {
     location: location
-    azureFunctionName: 'madworld-api-anonymous'
+    azureFunctionName: anonymousApiName
     serverFarmName: 'ASP-MadWorldSuite-8a87'
   }
 }
@@ -17,7 +19,7 @@ module apiAuthorized './azure-function.bicep' = {
   name: 'apiAuthorized'
   params: {
     location: location
-    azureFunctionName: 'madworld-api-authorized'
+    azureFunctionName: authorizedApiName
     serverFarmName: 'ASP-MadWorldSuite-a137'
   }
 }
@@ -27,7 +29,9 @@ module apiManagement './ApiManagement/azure-api-management.bicep' =  {
   params: {
     location: location
     apiManagementName: 'madworld-api-management'
+    anonymousApiName: anonymousApiName
     anonymousApiKey: anonymousApiKey
+    authorizedApiName: authorizedApiName
     authorizedApiKey: authorizedApiKey
   }
 }

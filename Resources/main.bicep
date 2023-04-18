@@ -1,6 +1,6 @@
 param location string = resourceGroup().location
 @secure()
-param anonymousApiKey string
+param anonymousApiKey string 
 @secure()
 param authorizedApiKey string
 
@@ -15,7 +15,9 @@ module functionsAPIs './suite-apis.bicep' = {
   name: 'functionsAPIs'
   params: {
     location: location
+    anonymousApiName: 'madworld-api-anonymous'
     anonymousApiKey: anonymousApiKey
+    authorizedApiName: 'madworld-api-authorized'
     authorizedApiKey: authorizedApiKey
   }
 }
