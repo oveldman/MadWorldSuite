@@ -94,7 +94,7 @@ resource anonymousBackend 'Microsoft.ApiManagement/service/backends@2022-08-01' 
     description: anonymousApiName
     url: 'https://${anonymousApiName}.azurewebsites.net/api'
     protocol: 'http'
-    resourceId: '${resourceManager}subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${anonymousApiName}'
+    resourceId: '${resourceManager}subscriptions/${az.subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${anonymousApiName}'
     credentials: {
       header: {
         'x-functions-key': [ '{{${anonymousApiName}-key}}' ]
@@ -110,7 +110,7 @@ resource authorizedBackend 'Microsoft.ApiManagement/service/backends@2022-08-01'
     description: authorizedApiName
     url: 'https://${authorizedApiName}.azurewebsites.net/api'
     protocol: 'http'
-    resourceId: '${resourceManager}subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${authorizedApiName}'
+    resourceId: '${resourceManager}subscriptions/${az.subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Web/sites/${authorizedApiName}'
     credentials: {
       header: {
         'x-functions-key': [ '{{${authorizedApiName}-key}}' ]
