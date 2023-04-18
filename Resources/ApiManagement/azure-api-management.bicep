@@ -36,7 +36,6 @@ resource apiManagement 'Microsoft.ApiManagement/service@2019-01-01' = {
   }
 }
 
-/*
 resource anonymousApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
   name: 'madworld-api-anonymous'
   parent: apiManagement
@@ -84,6 +83,8 @@ resource authorizedApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
     isCurrent: true
   }
 }
+
+/*
 
 resource anonymousAzureFunctions 'Microsoft.Web/sites@2022-09-01' = {
   name: 'madworld-api-anonymous'
