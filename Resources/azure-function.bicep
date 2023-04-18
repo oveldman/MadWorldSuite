@@ -27,7 +27,7 @@ resource serverFarm 'Microsoft.Web/serverfarms@2022-09-01' = {
   }
 }
 
-module applicationInsight './ApplicationInsight/application-insight.bicep' = {
+module applicationInsight './application-insight.bicep' = {
   name: 'applicationInsight-${azureFunctionName}'
   params: {
     insightName: azureFunctionName
