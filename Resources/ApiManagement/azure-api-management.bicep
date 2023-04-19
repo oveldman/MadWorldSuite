@@ -26,6 +26,17 @@ resource apiManagement 'Microsoft.ApiManagement/service@2019-01-01' = {
         negotiateClientCertificate: false
         defaultSslBinding: true
       }
+      {
+        type: 'Proxy'
+        hostName: 'api.mad-world.nl'
+        negotiateClientCertificate: false
+        certificate: {
+          expiry: '2023-10-19T23:59:59+00:00'
+          thumbprint: '5D47BFCCACEA890677EC61E0C2917E3B1520DDDC'
+          subject: 'CN=api.mad-world.nl'
+        }
+        defaultSslBinding: true
+      }
     ]
     customProperties: {
         'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11': 'false'
