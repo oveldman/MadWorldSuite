@@ -102,48 +102,63 @@ resource extensionBillingDataVolumeDailySpikeExtension 'Microsoft.Insights/compo
   }
 }
 
-module extensionCanaryExtension './ApplicationInsight/proactive-detection-configs.bicep' = {
-  name: 'extensionCanaryExtension-${insightName}'
-  params: {
-    insightName: insightName
-    configName: 'extension_canaryextension'
-    displayName: 'Canary extension'
-    description: 'Canary extension'
-    helpUrl: 'https://github.com/Microsoft/ApplicationInsights-Home/blob/master/SmartDetection/'
-    isHidden: true
-    isInPreview: true
-    supportsEmailNotifications: false
-    isEnabled: true
+resource extensionCanaryExtension 'Microsoft.Insights/components/ProactiveDetectionConfigs@2018-05-01-preview' = {
+  name: 'extension_canaryextension'
+  parent: applicationInsight
+  properties: {
+    RuleDefinitions: {
+      Name: 'extension_canaryextension'
+      DisplayName: 'Canary extension'
+      Description: 'Canary extension'
+      HelpUrl: 'https://github.com/Microsoft/ApplicationInsights-Home/blob/master/SmartDetection/'
+      IsHidden: true
+      IsEnabledByDefault: true
+      IsInPreview: true
+      SupportsEmailNotifications: false
+    }
+    Enabled: true
+    SendEmailsToSubscriptionOwners: true
+    CustomEmails: []
   }
 }
 
-module extensionExceptionChangeExtension './ApplicationInsight/proactive-detection-configs.bicep' = {
-  name: 'extensionExceptionChangeExtension-${insightName}'
-  params: {
-    insightName: insightName
-    configName: 'extension_exceptionchangeextension'
-    displayName: 'Abnormal rise in exception volume (preview)'
-    description: 'This detection rule automatically analyzes the exceptions thrown in your application, and can warn you about unusual patterns in your exception telemetry.'
-    helpUrl: 'https://github.com/Microsoft/ApplicationInsights-Home/blob/master/SmartDetection/abnormal-rise-in-exception-volume.md'
-    isHidden: false
-    isInPreview: true
-    supportsEmailNotifications: false
-    isEnabled: true
+resource extensionExceptionChangeExtension 'Microsoft.Insights/components/ProactiveDetectionConfigs@2018-05-01-preview' = {
+  name: 'extension_exceptionchangeextension'
+  parent: applicationInsight
+  properties: {
+    RuleDefinitions: {
+      Name: 'extension_exceptionchangeextension'
+      DisplayName: 'Abnormal rise in exception volume (preview)'
+      Description: 'This detection rule automatically analyzes the exceptions thrown in your application, and can warn you about unusual patterns in your exception telemetry.'
+      HelpUrl: 'https://github.com/Microsoft/ApplicationInsights-Home/blob/master/SmartDetection/abnormal-rise-in-exception-volume.md'
+      IsHidden: false
+      IsEnabledByDefault: true
+      IsInPreview: true
+      SupportsEmailNotifications: false
+    }
+    Enabled: true
+    SendEmailsToSubscriptionOwners: true
+    CustomEmails: []
   }
 }
 
-module extensionMemoryLeakExtension './ApplicationInsight/proactive-detection-configs.bicep' = {
-  name: 'extensionMemoryLeakExtension-${insightName}'
-  params: {
-    insightName: insightName
-    configName: 'extension_memoryleakextension'
-    displayName: 'Potential memory leak detected (preview)'
-    description: 'This detection rule automatically analyzes the memory consumption of each process in your application, and can warn you about potential memory leaks or increased memory consumption.'
-    helpUrl: 'https://github.com/Microsoft/ApplicationInsights-Home/tree/master/SmartDetection/memory-leak.md'
-    isHidden: false
-    isInPreview: true
-    supportsEmailNotifications: false
-    isEnabled: true
+resource extensionMemoryLeakExtension 'Microsoft.Insights/components/ProactiveDetectionConfigs@2018-05-01-preview' = {
+  name: 'extension_memoryleakextension'
+  parent: applicationInsight
+  properties: {
+    RuleDefinitions: {
+      Name: 'extension_memoryleakextension'
+      DisplayName: 'Potential memory leak detected (preview)'
+      Description: 'This detection rule automatically analyzes the memory consumption of each process in your application, and can warn you about potential memory leaks or increased memory consumption.'
+      HelpUrl: 'https://github.com/Microsoft/ApplicationInsights-Home/tree/master/SmartDetection/memory-leak.md'
+      IsHidden: false
+      IsEnabledByDefault: true
+      IsInPreview: true
+      SupportsEmailNotifications: false
+    }
+    Enabled: true
+    SendEmailsToSubscriptionOwners: true
+    CustomEmails: []
   }
 }
 
