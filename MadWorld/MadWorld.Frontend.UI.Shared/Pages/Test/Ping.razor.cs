@@ -1,7 +1,7 @@
 using MadWorld.Frontend.Application.Test;
 using Microsoft.AspNetCore.Components;
 
-namespace MadWorld.Frontend.UI.Suite.Pages.Test;
+namespace MadWorld.Frontend.UI.Shared.Pages.Test;
 
 public partial class Ping
 {

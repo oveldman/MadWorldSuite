@@ -14,6 +14,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Frontend.Infrastructure\MadWorld.Frontend.Infrastructure.csproj" />
+      <ProjectReference Include="..\MadWorld.Frontend.UI.Shared\MadWorld.Frontend.UI.Shared.csproj" />
     </ItemGroup>
 
 </Project>

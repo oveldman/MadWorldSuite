@@ -80,6 +80,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authorized", "Authorized", 
 		..\Resources\ApiManagement\Policy\Authorized\PostPing.xml = ..\Resources\ApiManagement\Policy\Authorized\PostPing.xml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI.Shared", "MadWorld.Frontend.UI.Shared\MadWorld.Frontend.UI.Shared.csproj", "{A9C4BA2D-8725-4842-A30B-8133BB9471E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,7 @@ Global
 		{94EEDFAB-C57F-428E-9D93-B969DF43CD64} = {05E8DF98-37BA-4B69-A551-27C04A507138}
 		{9728C46C-6BA4-464C-854D-35DF4AB8DD82} = {94EEDFAB-C57F-428E-9D93-B969DF43CD64}
 		{34F6120D-D799-4AAA-9413-A2011E639622} = {94EEDFAB-C57F-428E-9D93-B969DF43CD64}
+		{A9C4BA2D-8725-4842-A30B-8133BB9471E1} = {BD60157B-62B3-467F-991D-E7718A7D78E8}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -148,5 +151,9 @@ Global
 		{5E7F586B-9663-45F8-A738-E70770C15039}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E7F586B-9663-45F8-A738-E70770C15039}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E7F586B-9663-45F8-A738-E70770C15039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9C4BA2D-8725-4842-A30B-8133BB9471E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9C4BA2D-8725-4842-A30B-8133BB9471E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9C4BA2D-8725-4842-A30B-8133BB9471E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9C4BA2D-8725-4842-A30B-8133BB9471E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
