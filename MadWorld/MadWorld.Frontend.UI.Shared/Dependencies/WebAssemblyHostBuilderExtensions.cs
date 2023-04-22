@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MadWorld.Frontend.Infrastructure.Dependencies;
+namespace MadWorld.Frontend.UI.Shared.Dependencies;
 
 public static class WebAssemblyHostBuilderExtensions
 {

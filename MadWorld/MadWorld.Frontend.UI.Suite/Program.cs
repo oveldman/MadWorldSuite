@@ -1,4 +1,5 @@
 using MadWorld.Frontend.Infrastructure.Dependencies;
+using MadWorld.Frontend.UI.Shared.Dependencies;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MadWorld.Frontend.UI.Suite;
