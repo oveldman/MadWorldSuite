@@ -88,6 +88,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution", "_Solution", "{
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.API.Shared", "MadWorld.Backend.API.Shared\MadWorld.Backend.API.Shared.csproj", "{30EFFBF7-A070-4184-A36E-CB47FDDB5E6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,7 @@ Global
 		{9728C46C-6BA4-464C-854D-35DF4AB8DD82} = {94EEDFAB-C57F-428E-9D93-B969DF43CD64}
 		{34F6120D-D799-4AAA-9413-A2011E639622} = {94EEDFAB-C57F-428E-9D93-B969DF43CD64}
 		{A9C4BA2D-8725-4842-A30B-8133BB9471E1} = {BD60157B-62B3-467F-991D-E7718A7D78E8}
+		{30EFFBF7-A070-4184-A36E-CB47FDDB5E6E} = {8A0A692F-5E52-4E58-AC90-CDEDF44220DE}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -161,5 +164,9 @@ Global
 		{A9C4BA2D-8725-4842-A30B-8133BB9471E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9C4BA2D-8725-4842-A30B-8133BB9471E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9C4BA2D-8725-4842-A30B-8133BB9471E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30EFFBF7-A070-4184-A36E-CB47FDDB5E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30EFFBF7-A070-4184-A36E-CB47FDDB5E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30EFFBF7-A070-4184-A36E-CB47FDDB5E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30EFFBF7-A070-4184-A36E-CB47FDDB5E6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

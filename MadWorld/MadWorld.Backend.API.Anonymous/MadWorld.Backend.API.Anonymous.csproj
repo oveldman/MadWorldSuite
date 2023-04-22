@@ -6,6 +6,7 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.Azure.Functions.Worker" />
         <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" />
+        <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.OpenApi" />
         <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" />
     </ItemGroup>
     <ItemGroup>
@@ -19,5 +20,8 @@
     </ItemGroup>
     <ItemGroup>
         <Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\MadWorld.Backend.API.Shared\MadWorld.Backend.API.Shared.csproj" />
     </ItemGroup>
 </Project>
