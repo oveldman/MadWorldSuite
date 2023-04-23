@@ -29,6 +29,25 @@
 	<backend>
 		<forward-request />
 	</backend>
-	<outbound />
+	<outbound>
+        <set-header name="X-Frame-Options" exists-action="append">
+            <value>SAMEORIGIN</value>
+        </set-header>
+        <set-header name="X-Content-Type-Options" exists-action="override">
+            <value>nosniff</value>
+        </set-header>
+        <set-header name="Strict-Transport-Security" exists-action="override">
+            <value>max-age=31536000; includeSubDomains</value>
+        </set-header>
+        <set-header name="Referrer-Policy" exists-action="override">
+            <value>same-origin</value>
+        </set-header>
+        <set-header name="Permissions-Policy" exists-action="append">
+            <value>accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(), gamepad=(), speaker-selection=(), conversion-measurement=(), focus-without-user-activation=(), hid=(), idle-detection=(), interest-cohort=(), serial=(), sync-script=(), trust-token-redemption=(), vertical-scroll=()</value>
+        </set-header>
+        <set-header name="content-security-policy" exists-action="override">
+            <value>default-src 'self'</value>
+        </set-header>
+    </outbound>
 	<on-error />
 </policies>
