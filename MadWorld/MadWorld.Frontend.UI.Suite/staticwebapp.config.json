@@ -7,5 +7,10 @@
       "/.well-known/*",
       "/robot.txt"
     ]
+  },
+  "globalHeaders": {
+    "X-Frame-Options": "SAMEORIGIN",
+    "content-security-policy": "default-src 'self' https://api.mad-world.nl https://js.monitor.azure.com; img-src 'self' data: ; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.monitor.azure.com https://dc.services.visualstudio.com; connect-src 'self' https://api.mad-world.nl https://nlMadWorld.b2clogin.com https://js.monitor.azure.com https://dc.services.visualstudio.com; upgrade-insecure-requests; frame-ancestors 'self'",
+    "Permissions-Policy": "accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), execution-while-not-rendered=(), execution-while-out-of-viewport=(), fullscreen=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), navigation-override=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(), xr-spatial-tracking=(), clipboard-read=(), clipboard-write=(), gamepad=(), speaker-selection=(), conversion-measurement=(), focus-without-user-activation=(), hid=(), idle-detection=(), interest-cohort=(), serial=(), sync-script=(), trust-token-redemption=(), vertical-scroll=()"
   }
 }
