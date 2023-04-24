@@ -15,4 +15,10 @@
       <ProjectReference Include="..\MadWorld.Frontend.UI.Shared\MadWorld.Frontend.UI.Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <Content Include="..\MadWorld.Frontend.UI.Shared\wwwroot\.well-known\security.txt" Link="wwwroot\.well-known\security.txt">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
 </Project>
