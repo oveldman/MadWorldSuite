@@ -16,10 +16,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="..\MadWorld.Frontend.UI.Shared\wwwroot\.well-known\security.txt" Link="wwwroot\.well-known\security.txt">
+        <None Include="../MadWorld.Frontend.UI.Shared/wwwroot/.well-known/*" LinkBase="wwwroot/.well-known">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-        </Content>
+        </None>
     </ItemGroup>
 
 </Project>
