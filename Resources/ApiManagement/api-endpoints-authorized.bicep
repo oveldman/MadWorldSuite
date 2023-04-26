@@ -9,6 +9,15 @@ resource authorizedApi 'Microsoft.ApiManagement/service/apis@2022-08-01' existin
   parent: service
 }
 
+resource authorziedPolicy 'Microsoft.ApiManagement/service/apis/policies@2022-08-01' = {
+  name: 'policy'
+  parent: authorizedApi
+  properties: {
+    value: loadTextContent('./Policy/Authorized/AuthorizedApi.xml')
+    format: 'rawxml'
+  }
+}
+
 resource getPingOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'get-ping'
   parent: authorizedApi
