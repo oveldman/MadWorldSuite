@@ -20,9 +20,9 @@
         <None Include="../MadWorld.Frontend.UI.Shared/wwwroot/.well-known/*" LinkBase="wwwroot/.well-known">
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         </None>
-        <None Update="wwwroot/.well-known" CopyToPublishDirectory="Never" />
+        <None Update="wwwroot/.well-known" CopyToPublishDirectory="Never"/>
     </ItemGroup>
     <Target Name="CopyLinkedFiles" BeforeTargets="Build">
-        <Copy SourceFiles="%(None.Identity)" DestinationFiles="wwwroot/.well-known/%(Filename)%(Extension)" Condition="'%(None.Link)' != ''" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" />
+        <Copy SourceFiles="%(None.Identity)" DestinationFiles="wwwroot/.well-known/%(Filename)%(Extension)" Condition="'%(None.Link)' != ''" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true"/>
     </Target>
 </Project>
