@@ -14,11 +14,15 @@
       <ProjectReference Include="..\MadWorld.Frontend.Infrastructure\MadWorld.Frontend.Infrastructure.csproj" />
       <ProjectReference Include="..\MadWorld.Frontend.UI.Shared\MadWorld.Frontend.UI.Shared.csproj" />
     </ItemGroup>
-    
+
+    <!-- Explain fix: https://github.com/dotnet/aspnetcore/issues/22715#issuecomment-643505248 -->
     <ItemGroup>
         <None Include="../MadWorld.Frontend.UI.Shared/wwwroot/.well-known/*" LinkBase="wwwroot/.well-known">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         </None>
+        <None Update="wwwroot/.well-known" CopyToPublishDirectory="Never"/>
     </ItemGroup>
+    <Target Name="CopyLinkedFiles" BeforeTargets="Build">
+        <Copy SourceFiles="%(None.Identity)" DestinationFiles="wwwroot/.well-known/%(Filename)%(Extension)" Condition="'%(None.Link)' != ''" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true"/>
+    </Target>
 </Project>
