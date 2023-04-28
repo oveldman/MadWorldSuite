@@ -19,18 +19,16 @@ public class Ping
     public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
         FunctionContext executionContext)
     {
-        var claimsPrincipal = executionContext.Features.Get<ClaimsPrincipal>();
+        var user = executionContext.GetUser();
         
         var logger = executionContext.GetLogger("Ping");
         logger.LogInformation("C# HTTP trigger function processed a request.");
 
         var response = req.CreateResponse(HttpStatusCode.OK);
         response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-
-        var userId = claimsPrincipal?.Identity?.Name ?? "Unknown";
-        response.WriteString($"Authorized: Welcome to Azure Functions, {userId}!");
+        
+        response.WriteString($"Authorized: Welcome to Azure Functions, {user.Name}!");
 
         return response;
-        
     }
 }
