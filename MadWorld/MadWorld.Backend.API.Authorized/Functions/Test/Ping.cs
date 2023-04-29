@@ -5,6 +5,7 @@ using MadWorld.Backend.API.Shared.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
@@ -14,9 +15,10 @@ namespace MadWorld.Backend.API.Authorized.Functions.Test;
 public class Ping
 {
     [Function("Ping")]
+    [FixedDelayRetry(5, "00:00:01")]
     [OpenApiOperation(operationId: "Ping", tags: new[] { "Test" })]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
-    public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
+    public HttpResponseData Run([Microsoft.Azure.Functions.Worker.HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
         FunctionContext executionContext)
     {
         var user = executionContext.GetUser();
