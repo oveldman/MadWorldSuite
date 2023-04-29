@@ -171,6 +171,7 @@ resource webConfig 'Microsoft.Web/sites/config@2022-09-01' = {
     cors: {
       allowedOrigins: [
         'https://portal.azure.com'
+        'https://functions.azure.com'
       ]
       supportCredentials: false
     }

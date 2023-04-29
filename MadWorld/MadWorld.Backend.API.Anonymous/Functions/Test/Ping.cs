@@ -10,7 +10,6 @@ namespace MadWorld.Backend.API.Anonymous.Functions.Test;
 public static class Ping
 {
     [Function("Ping")]
-    [FixedDelayRetry(5, "00:00:01")]
     [OpenApiOperation(operationId: "Ping", tags: new[] { "Test" })]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")] 
     public static HttpResponseData Run([Microsoft.Azure.Functions.Worker.HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
