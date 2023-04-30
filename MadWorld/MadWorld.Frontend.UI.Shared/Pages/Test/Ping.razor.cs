@@ -26,8 +26,18 @@ public partial class Ping
 
     private async Task GetPing()
     {
-        AnonymousMessage = await PingService.GetAnonymousAsync();
+        var anonymousPingTask = GetAnonymousPing();
+        var authorizedPingTask = GetAuthorizedPing();
+        await Task.WhenAll(anonymousPingTask, authorizedPingTask);
+    }
 
+    private async Task GetAnonymousPing()
+    {
+        AnonymousMessage = await PingService.GetAnonymousAsync();
+    }
+    
+    private async Task GetAuthorizedPing()
+    {
         if (Authenticated)
         {
             AuthorizedMessage = await PingService.GetAuthorizedAsync();   
