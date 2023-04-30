@@ -8,9 +8,10 @@ public partial class Ping
 {
     public string AnonymousMessage { get; private set; } = string.Empty;
     public string AuthorizedMessage { get; private set; } = string.Empty;
+    public bool IsDisabled { get; set; }
     
     private bool Authenticated { get; set; }
-    
+
     [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
     [Inject] private IPingService PingService { get; set; } = null!;
 
@@ -26,9 +27,15 @@ public partial class Ping
 
     private async Task GetPing()
     {
+        IsDisabled = true;
+        StateHasChanged();
+        
         var anonymousPingTask = GetAnonymousPing();
         var authorizedPingTask = GetAuthorizedPing();
         await Task.WhenAll(anonymousPingTask, authorizedPingTask);
+
+        IsDisabled = false;
+        StateHasChanged();
     }
 
     private async Task GetAnonymousPing()
