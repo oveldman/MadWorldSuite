@@ -22,20 +22,22 @@ public static class WebAssemblyHostBuilderExtensions
     private static void AddAnonymousHttpClient(this WebAssemblyHostBuilder builder)
     {
         builder.Services.AddHttpClient(ApiTypes.MadWorldApiAnonymous, (serviceProvider, client) =>
-        {
-            var apiUrls = serviceProvider.GetService<ApiUrls>()!;
-            client.BaseAddress = new Uri(apiUrls.Anonymous);
-        }).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+            {
+                var apiUrls = serviceProvider.GetService<ApiUrls>()!;
+                client.BaseAddress = new Uri(apiUrls.Anonymous);
+            }).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>()
+            .AddPolicyHandler(RetryPolicies.GetBadGateWayPolicy());
     }
     
     private static void AddAuthorizedHttpClient(this WebAssemblyHostBuilder builder)
     {
         builder.Services.AddScoped<SuiteAuthorizedMessageHandler>();
         builder.Services.AddHttpClient(ApiTypes.MadWorldApiAuthorized, (serviceProvider, client) =>
-        {
-            var apiUrls = serviceProvider.GetService<ApiUrls>()!;
-            client.BaseAddress = new Uri(apiUrls.Authorized);
-        }).AddHttpMessageHandler<SuiteAuthorizedMessageHandler>();
+            {
+                var apiUrls = serviceProvider.GetService<ApiUrls>()!;
+                client.BaseAddress = new Uri(apiUrls.Authorized);
+            }).AddHttpMessageHandler<SuiteAuthorizedMessageHandler>()
+            .AddPolicyHandler(RetryPolicies.GetBadGateWayPolicy());
     }
     
     private static void AddConfigurationSettings(this WebAssemblyHostBuilder builder)
