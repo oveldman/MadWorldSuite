@@ -2,7 +2,9 @@ namespace MadWorld.Frontend.Domain.Api;
 
 public class ApiUrls
 {
-    public string Anonymous { get; set; } = string.Empty;
-    public string Authorized { get; set; } = string.Empty;
-    public string BaseUrlAuthorized { get; set; } = string.Empty;
+    public const string SectionName = "ApiUrls";
+    
+    public string Anonymous { get; init; } = string.Empty;
+    public string Authorized { get; init; } = string.Empty;
+    public string BaseUrlAuthorized { get; init; } = string.Empty;
 }

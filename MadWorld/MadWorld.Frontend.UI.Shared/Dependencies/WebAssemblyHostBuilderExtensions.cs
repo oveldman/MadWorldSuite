@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace MadWorld.Frontend.UI.Shared.Dependencies;
 
@@ -23,8 +24,8 @@ public static class WebAssemblyHostBuilderExtensions
     {
         builder.Services.AddHttpClient(ApiTypes.MadWorldApiAnonymous, (serviceProvider, client) =>
             {
-                var apiUrls = serviceProvider.GetService<ApiUrls>()!;
-                client.BaseAddress = new Uri(apiUrls.Anonymous);
+                var apiUrlsOption = serviceProvider.GetService<IOptions<ApiUrls>>()!;
+                client.BaseAddress = new Uri(apiUrlsOption.Value.Anonymous);
             }).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>()
             .AddPolicyHandler(RetryPolicies.GetBadGateWayPolicy());
     }
@@ -34,19 +35,16 @@ public static class WebAssemblyHostBuilderExtensions
         builder.Services.AddScoped<SuiteAuthorizedMessageHandler>();
         builder.Services.AddHttpClient(ApiTypes.MadWorldApiAuthorized, (serviceProvider, client) =>
             {
-                var apiUrls = serviceProvider.GetService<ApiUrls>()!;
-                client.BaseAddress = new Uri(apiUrls.Authorized);
+                var apiUrlsOption = serviceProvider.GetService<IOptions<ApiUrls>>()!;
+                client.BaseAddress = new Uri(apiUrlsOption.Value.Authorized);
             }).AddHttpMessageHandler<SuiteAuthorizedMessageHandler>()
             .AddPolicyHandler(RetryPolicies.GetBadGateWayPolicy());
     }
     
     private static void AddConfigurationSettings(this WebAssemblyHostBuilder builder)
     {
-        var apiUrls = builder
-            .Configuration
-            .GetSection("ApiUrls")
-            .Get<ApiUrls>()!;
-        
-        builder.Services.AddSingleton(apiUrls);
+        builder.Services
+            .AddOptions<ApiUrls>()
+            .Configure(builder.Configuration.GetSection(ApiUrls.SectionName).Bind);
     }
 }
