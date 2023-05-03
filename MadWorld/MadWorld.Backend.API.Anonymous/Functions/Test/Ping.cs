@@ -24,6 +24,5 @@ public static class Ping
         response.WriteString("Anonymous: Welcome to Azure Functions!");
 
         return response;
-        
     }
 }

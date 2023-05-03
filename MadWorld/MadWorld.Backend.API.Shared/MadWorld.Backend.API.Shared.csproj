@@ -13,4 +13,8 @@
         <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MadWorld.Backend.Application\MadWorld.Backend.Application.csproj" />
+    </ItemGroup>
+
 </Project>

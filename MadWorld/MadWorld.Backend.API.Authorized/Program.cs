@@ -1,5 +1,6 @@
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.OpenAPI;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 var host = new HostBuilder()
@@ -11,6 +12,7 @@ var host = new HostBuilder()
     {
         const string openApiTitle = "Mad World API Authorized";
         services.AddOpenApi(openApiTitle);
+        services.AddHealthChecks();
     })
     .Build();
 
