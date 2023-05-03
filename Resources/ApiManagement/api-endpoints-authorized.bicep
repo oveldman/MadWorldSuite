@@ -19,7 +19,7 @@ resource authorziedPolicy 'Microsoft.ApiManagement/service/apis/policies@2022-08
 }
 
 resource getHealthCheckOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
-  name: 'get-heatlh-check'
+  name: 'get-health-check'
   parent: authorizedApi
   properties: {
     displayName: 'HealthCheck'
