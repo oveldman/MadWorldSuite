@@ -9,6 +9,27 @@ resource anonymousApi 'Microsoft.ApiManagement/service/apis@2022-08-01' existing
   parent: service
 }
 
+resource getHealthCheckOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-heatlh-check'
+  parent: anonymousApi
+  properties: {
+    displayName: 'HealthCheck'
+    method: 'GET'
+    urlTemplate: '/HealthCheck'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getHealthCheckPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getHealthCheckOperation
+  properties: {
+    value: loadTextContent('./Policy/Anonymous/GetPing.xml')
+    format: 'rawxml'
+  }
+}
+
 resource getPingOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'get-ping'
   parent: anonymousApi

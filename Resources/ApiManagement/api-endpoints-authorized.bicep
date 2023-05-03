@@ -18,6 +18,27 @@ resource authorziedPolicy 'Microsoft.ApiManagement/service/apis/policies@2022-08
   }
 }
 
+resource getHealthCheckOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-heatlh-check'
+  parent: authorizedApi
+  properties: {
+    displayName: 'HealthCheck'
+    method: 'GET'
+    urlTemplate: '/HealthCheck'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getHealthCheckPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getHealthCheckOperation
+  properties: {
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
 resource getPingOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'get-ping'
   parent: authorizedApi
