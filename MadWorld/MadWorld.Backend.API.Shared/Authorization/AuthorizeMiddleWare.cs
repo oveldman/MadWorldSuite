@@ -25,7 +25,7 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
         }
 
         var request = await context.GetHttpRequestDataAsync();
-        if (request?.Url.IsLocalHost() ?? false)
+        if (context.IsEndpointAnonymous() || (request?.Url.IsLocalHost() ?? false))
         {
             await next(context);
             return;
