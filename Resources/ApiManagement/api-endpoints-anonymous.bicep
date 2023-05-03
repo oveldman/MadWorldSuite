@@ -25,7 +25,7 @@ resource getHealthCheckPolicy 'Microsoft.ApiManagement/service/apis/operations/p
   name: 'policy'
   parent: getHealthCheckOperation
   properties: {
-    value: loadTextContent('./Policy/Anonymous/GetPing.xml')
+    value: loadTextContent('./Policy/Anonymous/StandardEndpoint.xml')
     format: 'rawxml'
   }
 }
