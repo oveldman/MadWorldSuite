@@ -19,7 +19,7 @@ public class HealthCheck
     [Function(nameof(HealthCheck))]
     [OpenApiOperation(operationId: nameof(HealthCheck), tags: new[] { "Status" })]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")] 
-    public async Task<string> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
+    public async Task<string> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req,
         FunctionContext executionContext)
     {
         var logger = executionContext.GetLogger(nameof(HealthCheck));
