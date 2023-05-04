@@ -2,6 +2,7 @@
     <PropertyGroup>
         <AzureFunctionsVersion>V4</AzureFunctionsVersion>
         <OutputType>Exe</OutputType>
+        <!-- https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/azure-functions/dotnet-isolated-process-guide.md#readytorun -->
         <PublishReadyToRun>true</PublishReadyToRun>
     </PropertyGroup>
     <ItemGroup>
