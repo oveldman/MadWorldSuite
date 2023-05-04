@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Backend.Application\MadWorld.Backend.Application.csproj" />
+      <ProjectReference Include="..\MadWorld.Backend.Domain\MadWorld.Backend.Domain.csproj" />
     </ItemGroup>
 
 </Project>

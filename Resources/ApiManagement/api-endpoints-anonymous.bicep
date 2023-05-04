@@ -99,7 +99,7 @@ resource getRenderOpenApiDocumentOperation 'Microsoft.ApiManagement/service/apis
   properties: {
     displayName: 'RenderSwaggerDocument'
     method: 'GET'
-    urlTemplate: '/openapi/V2.json'
+    urlTemplate: '/openapi/V3.json'
     templateParameters: []
     responses: []
   }

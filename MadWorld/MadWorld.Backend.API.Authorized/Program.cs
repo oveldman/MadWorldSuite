@@ -10,8 +10,7 @@ var host = new HostBuilder()
     })
     .ConfigureServices((hostBuilder, services) =>
     {
-        const string openApiTitle = "Mad World API Authorized";
-        services.AddOpenApi(openApiTitle);
+        services.AddOpenApi(hostBuilder.HostingEnvironment.IsDevelopment());
         services.AddHealthChecks();
     })
     .Build();

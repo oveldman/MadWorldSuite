@@ -10,8 +10,10 @@ namespace MadWorld.Backend.API.Shared.OpenAPI;
 
 public static class OpenApiConfigurationOptionsExtensions
 {
-    public static void AddOpenApi(this IServiceCollection services, string title)
+    public static void AddOpenApi(this IServiceCollection services, bool isDevelopment)
     {
+        var configuration = OpenApiConfigurationManager.Get();
+        
         services.AddSingleton<IOpenApiConfigurationOptions>(_ =>
         {
             var options = new OpenApiConfigurationOptions()
@@ -19,7 +21,7 @@ public static class OpenApiConfigurationOptionsExtensions
                 Info = new OpenApiInfo()
                 {
                     Version = "1.0.0",
-                    Title = title,
+                    Title = configuration.Title,
                     Description =
                         "This is a API for the Mad World projects.",
                     TermsOfService = new Uri("https://github.com/oveldman/MadWorldSuite/blob/main/README.md"),
@@ -35,11 +37,17 @@ public static class OpenApiConfigurationOptionsExtensions
                         Url = new Uri("https://github.com/oveldman/MadWorldSuite/blob/main/LICENSE"),
                     }
                 },
-                Servers = DefaultOpenApiConfigurationOptions.GetHostNames(),
-                OpenApiVersion = OpenApiVersionType.V2,
-                IncludeRequestingHostName = true,
+                Servers = new List<OpenApiServer>()
+                {
+                    new()
+                    {
+                        Url = configuration.BaseUrl
+                    }
+                },
+                OpenApiVersion = OpenApiVersionType.V3,
+                IncludeRequestingHostName = isDevelopment,
                 ForceHttps = false,
-                ForceHttp = false,
+                ForceHttp = false
             };
 
             return options;
