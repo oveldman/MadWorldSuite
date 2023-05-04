@@ -24,17 +24,17 @@ public static class OpenApiConfigurationOptionsExtensions
                     Title = configuration.Title,
                     Description =
                         "This is a API for the Mad World projects.",
-                    TermsOfService = new Uri("https://github.com/oveldman/MadWorldSuite/blob/main/README.md"),
+                    TermsOfService = new Uri($"{configuration.GitUrl}/MadWorldSuite/blob/main/README.md"),
                     Contact = new OpenApiContact()
                     {
                         Name = "Oscar Veldman",
                         Email = "oveldman@gmail.com",
-                        Url = new Uri("https://github.com/oveldman/MadWorldSuite/issues"),
+                        Url = new Uri($"{configuration.GitUrl}/MadWorldSuite/issues"),
                     },
                     License = new OpenApiLicense()
                     {
                         Name = "MIT",
-                        Url = new Uri("https://github.com/oveldman/MadWorldSuite/blob/main/LICENSE"),
+                        Url = new Uri($"{configuration.GitUrl}/MadWorldSuite/blob/main/LICENSE"),
                     }
                 },
                 Servers = new List<OpenApiServer>()

@@ -9,6 +9,7 @@ public static class OpenApiConfigurationManager
         return new OpenApiConfigurations()
         {
             BaseUrl = Environment.GetEnvironmentVariable("OpenApi__BaseUrl") ?? string.Empty,
+            GitUrl = Environment.GetEnvironmentVariable("OpenApi__GitUrl") ?? string.Empty,
             Title = Environment.GetEnvironmentVariable("OpenApi__DocumentName") ?? string.Empty
         };
     }
