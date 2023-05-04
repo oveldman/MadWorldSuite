@@ -80,3 +80,87 @@ resource postPingPolicy 'Microsoft.ApiManagement/service/apis/operations/policie
     format: 'rawxml'
   }
 }
+
+resource getRenderOAuth2RedirectOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-render-oAuth-2-Redirect'
+  parent: authorizedApi
+  properties: {
+    displayName: 'RenderOAuth2Redirect'
+    method: 'GET'
+    urlTemplate: '/oauth2-redirect.html'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getRenderOAuth2RedirectPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getRenderOAuth2RedirectOperation
+  properties: {
+    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
+resource getRenderOpenApiDocumentOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-render-open-api-document'
+  parent: authorizedApi
+  properties: {
+    displayName: 'RenderSwaggerDocument'
+    method: 'GET'
+    urlTemplate: '/openapi/{version}.{extension}'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getRenderOpenApiDocumentPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getRenderOpenApiDocumentOperation
+  properties: {
+    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
+resource getRenderSwaggerDocumentOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-render-swagger-Document'
+  parent: authorizedApi
+  properties: {
+    displayName: 'RenderSwaggerDocument'
+    method: 'GET'
+    urlTemplate: '/swagger.{extension}'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getRenderSwaggerDocumentPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getRenderSwaggerDocumentOperation
+  properties: {
+    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
+resource getRenderSwaggerUIOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-render-swagger-ui'
+  parent: authorizedApi
+  properties: {
+    displayName: 'RenderSwaggerUI'
+    method: 'GET'
+    urlTemplate: '/swagger/ui'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getRenderSwaggerUIPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getRenderSwaggerUIOperation
+  properties: {
+    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    format: 'rawxml'
+  }
+}
