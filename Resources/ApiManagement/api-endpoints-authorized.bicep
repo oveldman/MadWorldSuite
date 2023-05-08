@@ -60,6 +60,27 @@ resource getPingPolicy 'Microsoft.ApiManagement/service/apis/operations/policies
   }
 }
 
+resource getStatusOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-status'
+  parent: authorizedApi
+  properties: {
+    displayName: 'GetStatus'
+    method: 'GET'
+    urlTemplate: '/GetStatus'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getStatusPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getStatusOperation
+  properties: {
+    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
 resource postPingOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'post-ping'
   parent: authorizedApi

@@ -72,6 +72,27 @@ resource postPingPolicy 'Microsoft.ApiManagement/service/apis/operations/policie
   }
 }
 
+resource getStatusOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-status'
+  parent: anonymousApi
+  properties: {
+    displayName: 'GetStatus'
+    method: 'GET'
+    urlTemplate: '/GetStatus'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getStatusPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getStatusOperation
+  properties: {
+    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
 resource getRenderOAuth2RedirectOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'get-render-oAuth-2-Redirect'
   parent: anonymousApi
