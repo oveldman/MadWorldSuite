@@ -1,6 +1,6 @@
 using System.Security.Authentication;
 using System.Security.Claims;
-using MadWorld.Backend.API.Shared.Functions;
+using MadWorld.Backend.API.Shared.Functions.Status;
 using Microsoft.Azure.Functions.Worker;
 
 namespace MadWorld.Backend.API.Shared.Authorization;
@@ -10,6 +10,7 @@ public static class FunctionContextExtensions
     private static readonly IReadOnlyCollection<string> AnonymousEndpoints = new List<string>()
     {
         nameof(HealthCheck),
+        nameof(GetStatus),
         "RenderOAuth2Redirect",
         "RenderOpenApiDocument",
         "RenderSwaggerDocument",

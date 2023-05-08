@@ -1,12 +1,11 @@
 using System.Net;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 
-namespace MadWorld.Backend.API.Shared.Functions;
+namespace MadWorld.Backend.API.Shared.Functions.Status;
 
 public class HealthCheck
 {
