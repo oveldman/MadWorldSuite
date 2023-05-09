@@ -76,7 +76,7 @@ resource getPingWithUsernamePolicy 'Microsoft.ApiManagement/service/apis/operati
   name: 'policy'
   parent: getPingWithUsernameOperation
   properties: {
-    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
     format: 'rawxml'
   }
 }
