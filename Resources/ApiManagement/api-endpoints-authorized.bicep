@@ -55,7 +55,7 @@ resource getPingPolicy 'Microsoft.ApiManagement/service/apis/operations/policies
   name: 'policy'
   parent: getPingOperation
   properties: {
-    value: loadTextContent('./Policy/Authorized/GetPing.xml')
+    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
     format: 'rawxml'
   }
 }
@@ -97,7 +97,7 @@ resource postPingPolicy 'Microsoft.ApiManagement/service/apis/operations/policie
   name: 'policy'
   parent: postPingOperation
   properties: {
-    value: loadTextContent('./Policy/Authorized/PostPing.xml')
+    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
     format: 'rawxml'
   }
 }
