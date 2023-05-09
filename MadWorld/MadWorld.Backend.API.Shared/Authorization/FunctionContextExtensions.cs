@@ -11,6 +11,7 @@ public static class FunctionContextExtensions
     {
         nameof(HealthCheck),
         nameof(GetStatus),
+        "Ping",
         "RenderOAuth2Redirect",
         "RenderOpenApiDocument",
         "RenderSwaggerDocument",
