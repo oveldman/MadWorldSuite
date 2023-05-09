@@ -21,6 +21,6 @@ public class PingService : IPingService
 
     public async Task<string>  GetAuthorizedAsync()
     {
-        return await _authorizedClient.GetStringAsync("Ping");
+        return await _authorizedClient.GetStringAsync("PingWithUsername");
     }
 }
