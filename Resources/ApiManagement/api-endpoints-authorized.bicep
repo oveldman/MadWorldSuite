@@ -66,7 +66,7 @@ resource getPingWithUsernameOperation 'Microsoft.ApiManagement/service/apis/oper
   properties: {
     displayName: 'Ping'
     method: 'GET'
-    urlTemplate: '/Ping'
+    urlTemplate: '/PingWithUsername'
     templateParameters: []
     responses: []
   }
