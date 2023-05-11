@@ -1,1 +1,39 @@
 @page "/Status"
+
+<div class="row">
+    <div class="col">
+        <h1>Status Page</h1>
+    </div>
+</div>
+@if (IsReady)
+{
+    <div class="row">
+        <div class="col col-6">
+            <div class="card">
+                <div class="card-header">
+                    Anonymous API
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">API <span class="@GetOnlineClass(AnonymousStatus.IsApiOnline)">●</span></li>
+                    <li class="list-group-item">Blobs <span class="@GetOnlineClass(AnonymousStatus.IsBlobsOnline)">●</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col col-6">
+            <div class="card">
+                <div class="card-header">
+                    Authorized API
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">API <span class="@GetOnlineClass(AuthorizedStatus.IsApiOnline)">●</span></li>
+                    <li class="list-group-item">Blobs <span class="@GetOnlineClass(AuthorizedStatus.IsBlobsOnline)">●</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="spinner-border text-success" role="status">
+    </div>
+}

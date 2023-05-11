@@ -16,6 +16,7 @@ public static class WebAssemblyHostBuilderExtensions
         builder.AddConfigurationSettings();
         builder.AddAnonymousHttpClient();
         builder.AddAuthorizedHttpClient();
+        builder.AddAuthorizedHttpClientWithoutToken();
         
         return builder;
     }
@@ -38,6 +39,16 @@ public static class WebAssemblyHostBuilderExtensions
                 var apiUrlsOption = serviceProvider.GetService<IOptions<ApiUrls>>()!;
                 client.BaseAddress = new Uri(apiUrlsOption.Value.Authorized);
             }).AddHttpMessageHandler<SuiteAuthorizedMessageHandler>()
+            .AddPolicyHandler(RetryPolicies.GetBadGateWayPolicy());
+    }
+    
+    private static void AddAuthorizedHttpClientWithoutToken(this WebAssemblyHostBuilder builder)
+    {
+        builder.Services.AddHttpClient(ApiTypes.MadWorldApiAuthorizedWithoutToken, (serviceProvider, client) =>
+            {
+                var apiUrlsOption = serviceProvider.GetService<IOptions<ApiUrls>>()!;
+                client.BaseAddress = new Uri(apiUrlsOption.Value.Authorized);
+            }).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>()
             .AddPolicyHandler(RetryPolicies.GetBadGateWayPolicy());
     }
     

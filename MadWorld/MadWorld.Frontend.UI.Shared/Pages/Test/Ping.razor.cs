@@ -6,11 +6,10 @@ namespace MadWorld.Frontend.UI.Shared.Pages.Test;
 
 public partial class Ping
 {
-    public string AnonymousMessage { get; private set; } = string.Empty;
-    public string AuthorizedMessage { get; private set; } = string.Empty;
-    public bool IsDisabled { get; set; }
-    
-    private bool Authenticated { get; set; }
+    private string AnonymousMessage { get; set; } = string.Empty;
+    private string AuthorizedMessage { get; set; } = string.Empty;
+    private bool IsAuthenticated { get; set; }
+    private bool IsDisabled { get; set; }
 
     [Inject] public AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
     [Inject] private IPingService PingService { get; set; } = null!;
@@ -18,7 +17,7 @@ public partial class Ping
     protected override async Task OnInitializedAsync()
     {
         var authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        Authenticated = authenticationState.User.Identity?.IsAuthenticated ?? false;
+        IsAuthenticated = authenticationState.User.Identity?.IsAuthenticated ?? false;
 
         ResetPing();
         
@@ -45,7 +44,7 @@ public partial class Ping
     
     private async Task GetAuthorizedPing()
     {
-        if (Authenticated)
+        if (IsAuthenticated)
         {
             AuthorizedMessage = await PingService.GetAuthorizedAsync();   
         }
