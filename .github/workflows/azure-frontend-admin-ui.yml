@@ -3,8 +3,7 @@ name: Azure Admin UI CI/CD
 on:
   workflow_run:
     workflows: ['Deploy_Azure_ARM']
-    types:
-      - completed
+    types: [completed]
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
