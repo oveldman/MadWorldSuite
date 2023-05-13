@@ -88,7 +88,7 @@ resource getStatusPolicy 'Microsoft.ApiManagement/service/apis/operations/polici
   name: 'policy'
   parent: getStatusOperation
   properties: {
-    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    value: loadTextContent('./Policy/Anonymous/StandardEndpoint.xml')
     format: 'rawxml'
   }
 }
