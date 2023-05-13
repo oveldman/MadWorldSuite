@@ -1,9 +1,10 @@
 name: Azure Suite UI CI/CD
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ['Deploy_Azure_ARM']
+    types:
+      - completed
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
