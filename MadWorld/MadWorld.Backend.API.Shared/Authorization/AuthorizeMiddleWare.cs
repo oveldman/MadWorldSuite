@@ -55,7 +55,7 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
         if (request == null) throw new ArgumentNullException(nameof(request));
 
         var res = request.CreateResponse();
-        res.StatusCode = HttpStatusCode.Unauthorized;
+        res.StatusCode = HttpStatusCode.Conflict;
         await res.WriteStringAsync("401 - Unauthorized!!!");
         context.GetInvocationResult().Value = res;
     }
