@@ -15,6 +15,6 @@ public static class PingWithUsername
     {
         var user = executionContext.GetUser();
         
-        return $"Authorized: Welcome to Azure Functions, {user.Name}!";
+        return $"Authorized: Welcome to Azure Functions, {user.Name}!!";
     }
 }
