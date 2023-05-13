@@ -56,7 +56,7 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
 
         var res = request.CreateResponse();
         res.StatusCode = HttpStatusCode.Unauthorized;
-        await res.WriteStringAsync("401 - Unauthorized");
+        await res.WriteStringAsync("401 - Unauthorized!!!");
         context.GetInvocationResult().Value = res;
     }
 }
