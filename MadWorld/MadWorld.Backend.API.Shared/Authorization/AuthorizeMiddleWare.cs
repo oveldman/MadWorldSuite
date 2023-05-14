@@ -1,8 +1,10 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
+using System.Reflection;
 using System.Security.Claims;
 using JetBrains.Annotations;
 using MadWorld.Backend.Application.Extensions;
+using MadWorld.Shared.Contracts.Shared.Authorization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.Functions.Worker.Middleware;
@@ -20,8 +22,15 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
         if (!string.IsNullOrEmpty(bearerToken))
         {
             GetPrincipalFromToken(context, bearerToken);
-            await next(context);
-            return;
+            
+            var requiredRole = context.GetRequiredRole();
+            var user = context.GetUser();
+
+            if (user.IsInRole(requiredRole))
+            {
+                await next(context);
+                return;   
+            }
         }
 
         var request = await context.GetHttpRequestDataAsync();
@@ -30,7 +39,7 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
             await next(context);
             return;
         }
-        
+
         await SetUnauthorized(context, request);
     }
 

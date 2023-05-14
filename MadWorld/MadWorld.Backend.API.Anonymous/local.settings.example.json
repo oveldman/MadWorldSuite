@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "OpenApi__BaseUrl": "https://api.mad-world.nl/anonymous/",
+    "OpenApi__GitUrl": "https/www.github.com/oveldman/MadWorldSuite/",
+    "OpenApi__DocumentName": "Mad World API Anonymous"
+  }
+}
