@@ -1,10 +1,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
-using System.Reflection;
 using System.Security.Claims;
 using JetBrains.Annotations;
 using MadWorld.Backend.Application.Extensions;
-using MadWorld.Shared.Contracts.Shared.Authorization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.Functions.Worker.Middleware;

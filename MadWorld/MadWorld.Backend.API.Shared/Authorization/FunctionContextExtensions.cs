@@ -29,27 +29,12 @@ public static class FunctionContextExtensions
     public static RoleTypes GetRequiredRole(this FunctionContext context)
     {
         var method = context.GetTargetFunctionMethod();
-        var authorizeAttribute = method.GetCustomAttributes()
+        var authorizeAttribute = method?.GetCustomAttributes()
             .FirstOrDefault(a => a.GetType() == typeof(AuthorizeAttribute)) as AuthorizeAttribute;
 
         return authorizeAttribute?.Role ?? RoleTypes.None;
     }
-    
-    private static MethodInfo GetTargetFunctionMethod(this FunctionContext context)
-    {
-        // This contains the fully qualified name of the method
-        // E.g. IsolatedFunctionAuth.TestFunctions.ScopesAndAppRoles
-        var entryPoint = context.FunctionDefinition.EntryPoint;
 
-        var assemblyPath = context.FunctionDefinition.PathToAssembly;
-        var assembly = Assembly.LoadFrom(assemblyPath);
-        var typeName = entryPoint.Substring(0, entryPoint.LastIndexOf('.'));
-        var type = assembly.GetType(typeName);
-        var methodName = entryPoint.Substring(entryPoint.LastIndexOf('.') + 1);
-        var method = type.GetMethod(methodName);
-        return method;
-    }
-    
     public static User GetUser(this FunctionContext context)
     {
         var claimsPrincipal = context.Features.Get<ClaimsPrincipal>();
@@ -64,7 +49,21 @@ public static class FunctionContextExtensions
             Id = claimsPrincipal.GetClaimValue("oid"),
             Name = claimsPrincipal.GetClaimValue("name"),
             Email = claimsPrincipal.GetClaimValue("emails"),
-            Roles = claimsPrincipal.GetClaimValue("extension_Roles")
+            Roles = claimsPrincipal.GetClaimValue(ClaimNames.Role)
         };
+    }
+    
+    private static MethodInfo? GetTargetFunctionMethod(this FunctionContext context)
+    {
+        // This contains the fully qualified name of the method
+        // E.g. IsolatedFunctionAuth.TestFunctions.ScopesAndAppRoles
+        var entryPoint = context.FunctionDefinition.EntryPoint;
+
+        var assemblyPath = context.FunctionDefinition.PathToAssembly;
+        var assembly = Assembly.LoadFrom(assemblyPath);
+        var typeName = entryPoint.Substring(0, entryPoint.LastIndexOf('.'));
+        var type = assembly.GetType(typeName);
+        var methodName = entryPoint.Substring(entryPoint.LastIndexOf('.') + 1);
+        return type?.GetMethod(methodName);
     }
 }
