@@ -7,6 +7,7 @@ var host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
     .ConfigureServices((hostBuilder, services) =>
     {
+        services.AddLogging();
         services.AddApplication();
         services.AddOpenApi(hostBuilder.HostingEnvironment.IsDevelopment());
         services.AddHealthChecks();

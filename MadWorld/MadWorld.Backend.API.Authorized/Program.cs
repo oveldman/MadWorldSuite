@@ -11,6 +11,7 @@ var host = new HostBuilder()
     })
     .ConfigureServices((hostBuilder, services) =>
     {
+        services.AddLogging();
         services.AddApplication();
         services.AddOpenApi(hostBuilder.HostingEnvironment.IsDevelopment());
         services.AddHealthChecks();
