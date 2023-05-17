@@ -1,0 +1,8 @@
+using MadWorld.Backend.Domain.Accounts;
+
+namespace MadWorld.Backend.Domain.Configuration;
+
+public interface IGraphExplorerClient
+{
+    Task<IReadOnlyList<Account>> GetUserAsync();
+}

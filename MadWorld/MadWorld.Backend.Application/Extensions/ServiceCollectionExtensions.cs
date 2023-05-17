@@ -1,4 +1,6 @@
+using MadWorld.Backend.Application.Account;
 using MadWorld.Backend.Application.Status;
+using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Backend.Domain.Status;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,6 +10,7 @@ public static class ServiceCollectionExtensions
 {
     public static void AddApplication(this IServiceCollection services)
     {
+        services.AddScoped<IGetAccountsUseCase, GetAccountsUseCase>();
         services.AddScoped<IGetStatusUseCase, GetStatusUseCase>();
     }
 }

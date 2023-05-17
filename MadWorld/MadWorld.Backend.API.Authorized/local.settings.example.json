@@ -3,6 +3,10 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "AzureAD__ApplicationId": "<TEMP>",
+    "AzureAD__TenantId": "<TEMP>",
+    "AzureAD__ClientId": "<TEMP>",
+    "AzureAD__ClientSecret": "<TEMP>",
     "OpenApi__BaseUrl": "https://api.mad-world.nl/authorized/",
     "OpenApi__GitUrl": "https/www.github.com/oveldman/MadWorldSuite/",
     "OpenApi__DocumentName": "Mad World API Authorized"

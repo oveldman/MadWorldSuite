@@ -24,5 +24,6 @@
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Backend.API.Shared\MadWorld.Backend.API.Shared.csproj" />
       <ProjectReference Include="..\MadWorld.Backend.Domain\MadWorld.Backend.Domain.csproj" />
+      <ProjectReference Include="..\MadWorld.Backend.Infrastructure\MadWorld.Backend.Infrastructure.csproj" />
     </ItemGroup>
 </Project>
