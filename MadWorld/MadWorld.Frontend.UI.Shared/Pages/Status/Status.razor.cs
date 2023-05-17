@@ -21,7 +21,7 @@ public partial class Status
         await base.OnInitializedAsync();
     }
 
-    private string GetOnlineClass(bool isOnline)
+    private static string GetOnlineClass(bool isOnline)
     {
         return isOnline ? "is-online" : "is-offline";
     }
