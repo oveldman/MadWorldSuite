@@ -12,7 +12,6 @@ var host = new HostBuilder()
     })
     .ConfigureServices((hostBuilder, services) =>
     {
-        services.AddLogging();
         services.AddApplication();
         services.AddInfrastructure();
         services.AddOpenApi(hostBuilder.HostingEnvironment.IsDevelopment());
@@ -20,4 +19,4 @@ var host = new HostBuilder()
     })
     .Build();
 
-host.Run();
+await host.RunAsync();

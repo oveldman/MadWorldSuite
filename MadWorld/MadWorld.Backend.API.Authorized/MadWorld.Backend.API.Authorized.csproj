@@ -3,6 +3,10 @@
         <AzureFunctionsVersion>V4</AzureFunctionsVersion>
         <OutputType>Exe</OutputType>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(BuildType)' == 'publish'">
+        <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+        <PublishReadyToRun>true</PublishReadyToRun>
+    </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.Azure.Functions.Worker" />
         <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" />
