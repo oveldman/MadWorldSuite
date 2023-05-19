@@ -8,6 +8,7 @@
         <PublishReadyToRun>true</PublishReadyToRun>
     </PropertyGroup>
     <ItemGroup>
+        <PackageReference Include="LanguageExt.Core" />
         <PackageReference Include="Microsoft.Azure.Functions.Worker" />
         <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" />
         <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.OpenApi" />
