@@ -11,6 +11,7 @@ public static class ServiceCollectionExtensions
     public static void AddApplication(this IServiceCollection services)
     {
         services.AddScoped<IGetAccountsUseCase, GetAccountsUseCase>();
+        services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
         services.AddScoped<IGetStatusUseCase, GetStatusUseCase>();
     }
 }

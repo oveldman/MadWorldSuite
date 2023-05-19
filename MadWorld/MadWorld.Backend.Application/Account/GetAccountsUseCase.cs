@@ -15,7 +15,7 @@ public class GetAccountsUseCase : IGetAccountsUseCase
 
     public async Task<GetAccountsResponse> GetAccounts()
     {
-        var accounts = await _graphExplorerClient.GetUserAsync();
+        var accounts = await _graphExplorerClient.GetUsersAsync();
         var accountContracts = accounts.Select(a => a.ToContract()).ToList();
         return new GetAccountsResponse(accountContracts);
     }

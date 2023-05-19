@@ -1,3 +1,4 @@
+using LanguageExt;
 using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Backend.Domain.Configuration;
 using MadWorld.Shared.Contracts.Shared.Authorization;
@@ -18,13 +19,25 @@ public class GraphExplorerClient : IGraphExplorerClient
         _extensionApplicationId = configurations.ApplicationId.Replace("-", "");
     }
     
-    public async Task<IReadOnlyList<Account>> GetUserAsync()
+    public async Task<Option<Account>> GetUserAsync(string id)
+    {
+        var userResponse = await _graphServiceClient
+            .Users[id]
+            .GetAsync(request =>
+            {
+                request.QueryParameters.Select = new string[] { "Id", "DisplayName", RoleName, "mailNickname" };
+            });
+
+        return userResponse.HasFound() ? CreateAccount(userResponse!) : Option<Account>.None;
+    }
+    
+    public async Task<IReadOnlyList<Account>> GetUsersAsync()
     {
         var usersResponse = await _graphServiceClient
                                     .Users
                                     .GetAsync(request =>
                                     {
-                                        request.QueryParameters.Select = new string[] { "Id", "DisplayName", RoleName, "mailNickname" };
+                                        request.QueryParameters.Select = new string[] { "Id", "DisplayName", "mailNickname" };
                                     });
         
         return usersResponse?.Value?
