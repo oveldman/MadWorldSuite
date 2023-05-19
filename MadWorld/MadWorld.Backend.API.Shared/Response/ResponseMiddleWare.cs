@@ -1,8 +1,10 @@
 using System.Net;
+using System.Text.Json;
 using JetBrains.Annotations;
-using LanguageExt;
 using LanguageExt.ClassInstances;
 using LanguageExt.Common;
+using MadWorld.Backend.Domain.Exceptions;
+using MadWorld.Shared.Contracts.Shared.Error;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.Functions.Worker.Middleware;
@@ -29,8 +31,20 @@ public class ResponseMiddleWare : IFunctionsWorkerMiddleware
     {
         var request = await context.GetHttpRequestDataAsync();
         var newResponse = request!.CreateResponse();
-        newResponse.StatusCode = HttpStatusCode.InternalServerError;
-        await newResponse.WriteStringAsync(exception.Message);
+        var errorResponse = new ErrorResponse();
+
+        if (exception is ValidationException validationException)
+        {
+            newResponse.StatusCode = HttpStatusCode.BadRequest;
+            errorResponse.Message = validationException.Message;
+        }
+        else
+        {
+            newResponse.StatusCode = HttpStatusCode.InternalServerError;
+            errorResponse.Message = "There went something wrong. Please try again later.";
+        }
+        
+        await newResponse.WriteStringAsync(JsonSerializer.Serialize(errorResponse));
         context.GetInvocationResult().Value = newResponse;
     }
 }
