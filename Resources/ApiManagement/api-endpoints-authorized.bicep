@@ -18,6 +18,55 @@ resource authorziedPolicy 'Microsoft.ApiManagement/service/apis/policies@2022-08
   }
 }
 
+resource getAccounts 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-accounts'
+  parent: authorizedApi
+  properties: {
+    displayName: 'GetAccounts'
+    method: 'GET'
+    urlTemplate: '/Account/GetAll'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getAccountsPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getAccounts
+  properties: {
+    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
+resource getAccount 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-account'
+  parent: authorizedApi
+  properties: {
+    displayName: 'GetAccounts'
+    method: 'GET'
+    urlTemplate: '/Account/Get/{id}'
+    templateParameters: [
+      {
+        name: 'id'
+        required: true
+        values: []
+        type: 'SecureString'
+      }
+    ]
+    responses: []
+  }
+}
+
+resource getAccountPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getAccount
+  properties: {
+    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
 resource getHealthCheckOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'get-health-check'
   parent: authorizedApi
