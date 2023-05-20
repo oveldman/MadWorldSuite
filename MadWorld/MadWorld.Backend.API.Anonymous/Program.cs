@@ -1,3 +1,4 @@
+using MadWorld.Backend.API.Shared.Dependencies;
 using MadWorld.Backend.API.Shared.OpenAPI;
 using MadWorld.Backend.API.Shared.Response;
 using MadWorld.Backend.Application.Extensions;
@@ -13,6 +14,7 @@ var host = new HostBuilder()
     .ConfigureServices((hostBuilder, services) =>
     {
         services.AddLogging();
+        services.AddShared();
         services.AddApplication();
         services.AddInfrastructure();
         services.AddOpenApi(hostBuilder.HostingEnvironment.IsDevelopment());

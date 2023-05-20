@@ -1,8 +1,10 @@
 using MadWorld.Backend.API.Shared.Authorization;
+using MadWorld.Backend.API.Shared.Dependencies;
 using MadWorld.Backend.API.Shared.OpenAPI;
 using MadWorld.Backend.API.Shared.Response;
 using MadWorld.Backend.Application.Extensions;
 using MadWorld.Backend.Infrastructure.Dependencies;
+using MadWorld.Shared.Contracts.Shared.Functions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -14,6 +16,8 @@ var host = new HostBuilder()
     })
     .ConfigureServices((hostBuilder, services) =>
     {
+        services.AddLogging();
+        services.AddShared();
         services.AddApplication();
         services.AddInfrastructure();
         services.AddOpenApi(hostBuilder.HostingEnvironment.IsDevelopment());

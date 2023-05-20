@@ -1,4 +1,7 @@
 using System.Net;
+using LanguageExt;
+using LanguageExt.Common;
+using LanguageExt.SomeHelp;
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Shared.Contracts.Authorized.Account;
@@ -23,14 +26,14 @@ public class GetAccount
     [OpenApiOperation(operationId: "GetAccount", tags: new[] { "Account" })]
     [OpenApiParameter("id")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountResponse), Description = "The OK response")]
-    public GetAccountResponse Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Account/Get/{id}")] HttpRequestData req,
+    public Result<Option<GetAccountResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Account/Get/{id}")] HttpRequestData req,
         FunctionContext executionContext, string id)
     {
         var request = new GetAccountRequest()
         {
             Id = id
         };
-        
+
         return _useCase.GetAccount(request);
     }
 }

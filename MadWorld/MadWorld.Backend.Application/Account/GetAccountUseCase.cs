@@ -1,3 +1,5 @@
+using LanguageExt;
+using LanguageExt.Common;
 using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Backend.Domain.Configuration;
 using MadWorld.Shared.Contracts.Authorized.Account;
@@ -13,8 +15,8 @@ public class GetAccountUseCase : IGetAccountUseCase
         _client = client;
     }
 
-    public GetAccountResponse GetAccount(GetAccountRequest request)
+    public Result<Option<GetAccountResponse>> GetAccount(GetAccountRequest request)
     {
-        return new GetAccountResponse();
+        return Option<GetAccountResponse>.Some(new GetAccountResponse());
     }
 }
