@@ -15,7 +15,7 @@ env:
 
 jobs:
   build-and-deploy:
-    needs: ['Deploy_Azure_ARM']
+    needs: [Deploy_Azure_ARM]
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout GitHub Action'
