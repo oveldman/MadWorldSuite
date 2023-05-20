@@ -1,9 +1,9 @@
 name: Azure Admin UI CI/CD
 
 on:
-  workflow_run:
-    workflows: ['Deploy_Azure_ARM']
-    types: [completed]
+  push:
+    branches:
+      - main
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -11,6 +11,7 @@ on:
 
 jobs:
   build_and_deploy_job:
+    needs: ['Deploy_Azure_ARM']
     if: github.event.workflow_run.conclusion == 'success' || github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job

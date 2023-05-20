@@ -4,10 +4,10 @@
 name: Azure API Authorized CI/CD
 
 on:
-  workflow_run:
-    workflows: ['Deploy_Azure_ARM']
-    types:
-      - completed
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'MadWorld/MadWorld.Backend.API.Authorized' # set this to the path to your web app project, defaults to the repository root
@@ -15,6 +15,7 @@ env:
 
 jobs:
   build-and-deploy:
+    needs: ['Deploy_Azure_ARM']
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout GitHub Action'
