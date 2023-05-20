@@ -1,3 +1,4 @@
+using LanguageExt;
 using LanguageExt.Common;
 using MadWorld.Backend.API.Shared.Functions.Expansions;
 using MadWorld.Backend.API.Shared.Response;
@@ -37,6 +38,31 @@ public class ResponseMiddleWareTests
         // Arrange
         const string finalResponse = "test";
         var response = new Result<string>(finalResponse);
+
+        var invocationResult = new Mock<InvocationResult>();
+        var context = new Mock<FunctionContext>();
+        var contextWrapper = new Mock<IFunctionContextWrapper>();
+        contextWrapper
+            .Setup(c =>
+                c.GetInvocationResult(It.IsAny<FunctionContext>()))
+            .Returns(invocationResult.Object);
+        
+        var middleware = new ResponseMiddleWare(contextWrapper.Object);
+        invocationResult.Setup(i => i.Value).Returns(response);
+
+        // Act
+        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+
+        // Assert
+        invocationResult.VerifySet(x => x.Value = finalResponse, Times.Once);
+    }
+    
+    [Fact]
+    public async Task Invoke_WithOptionResponse_ShouldReturnInnerResult()
+    {
+        // Arrange
+        const string finalResponse = "test";
+        var response = Option<string>.Some(finalResponse);
 
         var invocationResult = new Mock<InvocationResult>();
         var context = new Mock<FunctionContext>();
