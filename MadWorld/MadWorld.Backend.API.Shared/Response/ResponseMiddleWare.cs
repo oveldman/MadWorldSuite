@@ -52,9 +52,9 @@ public class ResponseMiddleWare : IFunctionsWorkerMiddleware
     {
         var resultType = resultProcessed!.GetType();
         var valueType = resultType.GetGenericArguments().FirstOrDefault();
-        var unwrapMethod = GetType().GetMethod(unwrapMethodName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+        var unwrapMethod = GetType().GetMethod(unwrapMethodName, BindingFlags.NonPublic | BindingFlags.Instance);
         var genericUnwrapMethod = unwrapMethod?.MakeGenericMethod(valueType!);
-        genericUnwrapMethod?.Invoke(unwrapMethod!.IsStatic ? null : this, new object[] { context, resultProcessed });
+        genericUnwrapMethod?.Invoke(this, new object[] { context, resultProcessed });
     }
 
     private void UnwrapResult<T>(FunctionContext context, Result<T> result)
