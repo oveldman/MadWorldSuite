@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Net;
 using MadWorld.Backend.API.Shared.Authorization;
+using MadWorld.Backend.API.Shared.OpenAPI;
 using MadWorld.Shared.Contracts.Shared.Authorization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -15,7 +16,7 @@ public static class PatchAccount
 {
     [Authorize(RoleTypes.Admin)]
     [Function("PatchAccount")]
-    [OpenApiSecurity("Bearer", SecuritySchemeType.ApiKey, Name = "authorization", In = OpenApiSecurityLocationType.Header)]
+    [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "PatchAccount", tags: new[] { "Account" })]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
     public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route="Account/Patch/{id}")] HttpRequestData req,

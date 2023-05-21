@@ -1,5 +1,6 @@
 using Azure.Identity;
 using MadWorld.Backend.Domain.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Graph;
 
 namespace MadWorld.Backend.Infrastructure.GraphExplorer;
@@ -7,9 +8,11 @@ namespace MadWorld.Backend.Infrastructure.GraphExplorer;
 internal class GraphExplorerFactory
 {
     private readonly string[] _scopes;
+    private ILoggerFactory _loggerFactory;
 
-    internal GraphExplorerFactory()
+    public GraphExplorerFactory(ILoggerFactory loggerFactory)
     {
+        _loggerFactory = loggerFactory;
         _scopes = new[] { "https://graph.microsoft.com/.default" };
     }
 
@@ -17,7 +20,7 @@ internal class GraphExplorerFactory
     {
         var graphServiceClient = CreateGraphServiceClient(configurations);
         
-        return new GraphExplorerClient(graphServiceClient, configurations);
+        return new GraphExplorerClient(graphServiceClient, configurations, _loggerFactory.CreateLogger<GraphExplorerClient>());
     }
     
     private GraphServiceClient CreateGraphServiceClient(GraphExplorerConfigurations configurations)

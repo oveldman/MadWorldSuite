@@ -16,7 +16,8 @@ public static class ServiceCollectionExtensions
     private static void AddGraphExplorer(this IServiceCollection services)
     {
         var configuration = GraphExplorerConfigurationsManager.Get();
+        services.AddSingleton<GraphExplorerFactory>();
         
-        services.AddScoped<IGraphExplorerClient>(_ => new GraphExplorerFactory().CreateClient(configuration));
+        services.AddScoped<IGraphExplorerClient>(s => s.GetRequiredService<GraphExplorerFactory>().CreateClient(configuration));
     }
 }

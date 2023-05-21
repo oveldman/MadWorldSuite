@@ -4,5 +4,5 @@ namespace MadWorld.Shared.Contracts.Authorized.Account;
 
 public class GetAccountResponse : IResponse
 {
-    public AccountContract Account { get; set; } = new();
+    public AccountDetailContract Account { get; set; } = new();
 }

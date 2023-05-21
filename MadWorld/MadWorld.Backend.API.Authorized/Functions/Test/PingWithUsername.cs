@@ -1,5 +1,6 @@
 using System.Net;
 using MadWorld.Backend.API.Shared.Authorization;
+using MadWorld.Backend.API.Shared.OpenAPI;
 using MadWorld.Shared.Contracts.Shared.Authorization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -13,7 +14,7 @@ public static class PingWithUsername
 {
     [Authorize(RoleTypes.None)]
     [Function("PingWithUsername")]
-    [OpenApiSecurity("Bearer", SecuritySchemeType.ApiKey, Name = "authorization", In = OpenApiSecurityLocationType.Header)]
+    [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "PingWithUsername", tags: new[] { "Test" })]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
     public static string Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req,

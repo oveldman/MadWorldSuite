@@ -15,6 +15,16 @@ public class Account
         {
             Id = Id,
             Name = Name,
+            IsResourceOwner = IsResourceOwner
+        };
+    }
+    
+    public AccountDetailContract ToDetailContract()
+    {
+        return new AccountDetailContract()
+        {
+            Id = Id,
+            Name = Name,
             Roles = Roles.Split(';').ToList().AsReadOnly(),
             IsResourceOwner = IsResourceOwner
         };

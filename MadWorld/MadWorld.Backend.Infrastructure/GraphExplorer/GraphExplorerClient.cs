@@ -1,9 +1,12 @@
 using LanguageExt;
 using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Backend.Domain.Configuration;
+using MadWorld.Backend.Domain.General;
 using MadWorld.Shared.Contracts.Shared.Authorization;
+using Microsoft.Extensions.Logging;
 using Microsoft.Graph;
 using Microsoft.Graph.Models;
+using Microsoft.Graph.Models.ODataErrors;
 
 namespace MadWorld.Backend.Infrastructure.GraphExplorer;
 
@@ -13,22 +16,33 @@ public class GraphExplorerClient : IGraphExplorerClient
     private readonly string _extensionApplicationId;
     private string RoleName => $"extension_{_extensionApplicationId}_Roles";
 
-    internal GraphExplorerClient(GraphServiceClient graphServiceClient, GraphExplorerConfigurations configurations)
+    private ILogger<GraphExplorerClient> _logger;
+
+    internal GraphExplorerClient(GraphServiceClient graphServiceClient, GraphExplorerConfigurations configurations, ILogger<GraphExplorerClient> logger)
     {
         _graphServiceClient = graphServiceClient;
+        _logger = logger;
         _extensionApplicationId = configurations.ApplicationId.Replace("-", "");
     }
     
-    public async Task<Option<Account>> GetUserAsync(string id)
+    public async Task<Option<Account>> GetUserAsync(GuidId id)
     {
-        var userResponse = await _graphServiceClient
-            .Users[id]
-            .GetAsync(request =>
-            {
-                request.QueryParameters.Select = new string[] { "Id", "DisplayName", RoleName, "mailNickname" };
-            });
+        try
+        {
+            var userResponse = await _graphServiceClient
+                .Users[id]
+                .GetAsync(request =>
+                {
+                    request.QueryParameters.Select = new string[] { "Id", "DisplayName", RoleName, "mailNickname" };
+                });
 
-        return userResponse.HasFound() ? CreateAccount(userResponse!) : Option<Account>.None;
+            return userResponse.HasFound() ? CreateAccount(userResponse!) : Option<Account>.None;
+        }
+        catch (ODataError exception)
+        {
+            _logger.LogInformation(exception, "User with {UserId} not found", id.ToString());
+            return Option<Account>.None;
+        }
     }
     
     public async Task<IReadOnlyList<Account>> GetUsersAsync()

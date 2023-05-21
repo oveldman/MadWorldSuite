@@ -2,7 +2,7 @@ using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Backend.Domain.Configuration;
 using MadWorld.Shared.Contracts.Authorized.Account;
 
-namespace MadWorld.Backend.Application.Account;
+namespace MadWorld.Backend.Application.Accounts;
 
 public class GetAccountsUseCase : IGetAccountsUseCase
 {

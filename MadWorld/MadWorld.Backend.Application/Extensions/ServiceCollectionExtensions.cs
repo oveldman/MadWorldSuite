@@ -1,4 +1,4 @@
-using MadWorld.Backend.Application.Account;
+using MadWorld.Backend.Application.Accounts;
 using MadWorld.Backend.Application.Status;
 using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Backend.Domain.Status;
