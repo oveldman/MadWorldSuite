@@ -17,6 +17,8 @@ public class GetAccountUseCase : IGetAccountUseCase
 
     public Result<Option<GetAccountResponse>> GetAccount(GetAccountRequest request)
     {
+        return new Result<Option<GetAccountResponse>>(new Exception("test"));
+        
         return Option<GetAccountResponse>.Some(new GetAccountResponse());
     }
 }

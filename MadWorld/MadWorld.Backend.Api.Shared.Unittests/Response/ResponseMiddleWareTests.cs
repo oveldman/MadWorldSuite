@@ -1,8 +1,12 @@
+using System.Net;
+using System.Text;
 using LanguageExt;
 using LanguageExt.Common;
 using MadWorld.Backend.API.Shared.Functions.Expansions;
 using MadWorld.Backend.API.Shared.Response;
+using MadWorld.Backend.Domain.Exceptions;
 using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 
 namespace MadWorld.Backend.Api.Shared.Unittests.Response;
 
@@ -33,6 +37,31 @@ public class ResponseMiddleWareTests
     }
     
     [Fact]
+    public async Task Invoke_WithOptionResponse_ShouldReturnInnerResult()
+    {
+        // Arrange
+        const string finalResponse = "test";
+        var response = Option<string>.Some(finalResponse);
+
+        var invocationResult = new Mock<InvocationResult>();
+        var context = new Mock<FunctionContext>();
+        var contextWrapper = new Mock<IFunctionContextWrapper>();
+        contextWrapper
+            .Setup(c =>
+                c.GetInvocationResult(It.IsAny<FunctionContext>()))
+            .Returns(invocationResult.Object);
+        
+        var middleware = new ResponseMiddleWare(contextWrapper.Object);
+        invocationResult.Setup(i => i.Value).Returns(response);
+
+        // Act
+        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+
+        // Assert
+        invocationResult.VerifySet(x => x.Value = finalResponse, Times.Once);
+    }
+    
+    [Fact]
     public async Task Invoke_WithResultResponse_ShouldReturnInnerResult()
     {
         // Arrange
@@ -58,20 +87,32 @@ public class ResponseMiddleWareTests
     }
     
     [Fact]
-    public async Task Invoke_WithOptionResponse_ShouldReturnInnerResult()
+    public async Task Invoke_WithArgumentExceptionResponse_ShouldReturnErrorResponse500()
     {
         // Arrange
-        const string finalResponse = "test";
-        var response = Option<string>.Some(finalResponse);
+        var exception = new ArgumentException("Test");
+        var response = new Result<string>(exception);
 
         var invocationResult = new Mock<InvocationResult>();
         var context = new Mock<FunctionContext>();
+        var stream = new Mock<Stream>();
+        var httpRequestData = new Mock<HttpRequestData>(context.Object);
+        var httpResponseData = new Mock<HttpResponseData>(context.Object);
         var contextWrapper = new Mock<IFunctionContextWrapper>();
         contextWrapper
             .Setup(c =>
                 c.GetInvocationResult(It.IsAny<FunctionContext>()))
             .Returns(invocationResult.Object);
-        
+        contextWrapper
+            .Setup(c =>
+                c.GetHttpRequestDataAsync(It.IsAny<FunctionContext>()))
+            .ReturnsAsync(httpRequestData.Object);
+        httpRequestData
+            .Setup(hrd =>
+                hrd.CreateResponse())
+            .Returns(httpResponseData.Object);
+        httpResponseData.Setup(hrd => hrd.Body).Returns(stream.Object);
+
         var middleware = new ResponseMiddleWare(contextWrapper.Object);
         invocationResult.Setup(i => i.Value).Returns(response);
 
@@ -79,6 +120,93 @@ public class ResponseMiddleWareTests
         await middleware.Invoke(context.Object, _ => Task.CompletedTask);
 
         // Assert
-        invocationResult.VerifySet(x => x.Value = finalResponse, Times.Once);
+        invocationResult.VerifySet(x => x.Value = httpResponseData.Object, Times.Once);
+        httpResponseData.VerifySet(x => x.StatusCode = HttpStatusCode.InternalServerError, Times.Once);
+
+        var bytes = "{\"Message\":\"There went something wrong. Please try again later.\"}"u8.ToArray();
+        stream.Verify(x => x.WriteAsync(bytes, 0, bytes.Length, CancellationToken.None), Times.Once);
+    }
+    
+    [Fact]
+    public async Task Invoke_WithValidationExceptionResponse_ShouldReturnErrorResponse400()
+    {
+        // Arrange
+        const string errorMessage = "test";
+        var exception = new ValidationException(errorMessage);
+        var response = new Result<string>(exception);
+
+        var invocationResult = new Mock<InvocationResult>();
+        var context = new Mock<FunctionContext>();
+        var stream = new Mock<Stream>();
+        var httpRequestData = new Mock<HttpRequestData>(context.Object);
+        var httpResponseData = new Mock<HttpResponseData>(context.Object);
+        var contextWrapper = new Mock<IFunctionContextWrapper>();
+        contextWrapper
+            .Setup(c =>
+                c.GetInvocationResult(It.IsAny<FunctionContext>()))
+            .Returns(invocationResult.Object);
+        contextWrapper
+            .Setup(c =>
+                c.GetHttpRequestDataAsync(It.IsAny<FunctionContext>()))
+            .ReturnsAsync(httpRequestData.Object);
+        httpRequestData
+            .Setup(hrd =>
+                hrd.CreateResponse())
+            .Returns(httpResponseData.Object);
+        httpResponseData.Setup(hrd => hrd.Body).Returns(stream.Object);
+
+        var middleware = new ResponseMiddleWare(contextWrapper.Object);
+        invocationResult.Setup(i => i.Value).Returns(response);
+
+        // Act
+        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+
+        // Assert
+        invocationResult.VerifySet(x => x.Value = httpResponseData.Object, Times.Once);
+        httpResponseData.VerifySet(x => x.StatusCode = HttpStatusCode.BadRequest, Times.Once);
+
+        const string errorResponse = "{\"Message\":\"" + errorMessage + "\"}";
+        var bytes = Encoding.UTF8.GetBytes(errorResponse);
+        stream.Verify(x => x.WriteAsync(bytes, 0, bytes.Length, CancellationToken.None), Times.Once);
+    }
+    
+    [Fact]
+    public async Task Invoke_WithOptionNoneResponse_ShouldReturnErrorResponse404()
+    {
+        // Arrange
+        var response = Option<string>.None;
+
+        var invocationResult = new Mock<InvocationResult>();
+        var context = new Mock<FunctionContext>();
+        var stream = new Mock<Stream>();
+        var httpRequestData = new Mock<HttpRequestData>(context.Object);
+        var httpResponseData = new Mock<HttpResponseData>(context.Object);
+        var contextWrapper = new Mock<IFunctionContextWrapper>();
+        contextWrapper
+            .Setup(c =>
+                c.GetInvocationResult(It.IsAny<FunctionContext>()))
+            .Returns(invocationResult.Object);
+        contextWrapper
+            .Setup(c =>
+                c.GetHttpRequestDataAsync(It.IsAny<FunctionContext>()))
+            .ReturnsAsync(httpRequestData.Object);
+        httpRequestData
+            .Setup(hrd =>
+                hrd.CreateResponse())
+            .Returns(httpResponseData.Object);
+        httpResponseData.Setup(hrd => hrd.Body).Returns(stream.Object);
+
+        var middleware = new ResponseMiddleWare(contextWrapper.Object);
+        invocationResult.Setup(i => i.Value).Returns(response);
+
+        // Act
+        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+
+        // Assert
+        invocationResult.VerifySet(x => x.Value = httpResponseData.Object, Times.Once);
+        httpResponseData.VerifySet(x => x.StatusCode = HttpStatusCode.NotFound, Times.Once);
+
+        var bytes = "{\"Message\":\"Not found\"}"u8.ToArray();
+        stream.Verify(x => x.WriteAsync(bytes, 0, bytes.Length, CancellationToken.None), Times.Once);
     }
 }

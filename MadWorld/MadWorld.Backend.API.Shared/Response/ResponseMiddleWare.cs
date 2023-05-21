@@ -116,7 +116,7 @@ public class ResponseMiddleWare : IFunctionsWorkerMiddleware
 
     private async Task SetResponse<T>(FunctionContext context, T response, HttpStatusCode statusCode)
     {
-        var request = await context.GetHttpRequestDataAsync();
+        var request = await _functionContextWrapper.GetHttpRequestDataAsync(context);
         var newResponse = request!.CreateResponse();
         newResponse.StatusCode = statusCode;
         await newResponse.WriteStringAsync(JsonSerializer.Serialize(response));
