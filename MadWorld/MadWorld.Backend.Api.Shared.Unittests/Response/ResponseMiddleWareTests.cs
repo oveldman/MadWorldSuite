@@ -40,7 +40,7 @@ public class ResponseMiddleWareTests
     public async Task Invoke_WithNull_ShouldReturnSameObject()
     {
         // Arrange
-        const string response = null;
+        const string response = null!;
 
         var invocationResult = new Mock<InvocationResult>();
         var context = new Mock<FunctionContext>();
