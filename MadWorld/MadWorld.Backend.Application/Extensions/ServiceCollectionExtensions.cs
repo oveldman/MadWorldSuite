@@ -2,6 +2,7 @@ using MadWorld.Backend.Application.Accounts;
 using MadWorld.Backend.Application.Status;
 using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Backend.Domain.Status;
+using MadWorld.Shared.Contracts.Authorized.Account;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MadWorld.Backend.Application.Extensions;
@@ -12,6 +13,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IGetAccountsUseCase, GetAccountsUseCase>();
         services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
+        services.AddScoped<IPatchAccountUseCase, PatchAccountUseCase>();
         services.AddScoped<IGetStatusUseCase, GetStatusUseCase>();
     }
 }

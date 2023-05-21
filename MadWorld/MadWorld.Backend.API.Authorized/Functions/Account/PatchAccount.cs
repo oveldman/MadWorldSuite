@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Net;
+using LanguageExt.Common;
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.OpenAPI;
+using MadWorld.Backend.Domain.Accounts;
+using MadWorld.Shared.Contracts.Authorized.Account;
 using MadWorld.Shared.Contracts.Shared.Authorization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -12,25 +15,25 @@ using Microsoft.OpenApi.Models;
 
 namespace MadWorld.Backend.API.Authorized.Functions.Account;
 
-public static class PatchAccount
+public class PatchAccount
 {
+    private readonly IPatchAccountUseCase _useCase;
+    
+    public PatchAccount(IPatchAccountUseCase useCase)
+    {
+        _useCase = useCase;
+    }
+    
     [Authorize(RoleTypes.Admin)]
     [Function("PatchAccount")]
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "PatchAccount", tags: new[] { "Account" })]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
-    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route="Account")] HttpRequestData req,
+    [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(PatchAccountRequest), Required = true)]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(PatchAccountResponse), Description = "The OK response")]
+    public async Task<Result<PatchAccountResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route="Account")] HttpRequestData req,
         FunctionContext executionContext)
     {
-        var logger = executionContext.GetLogger("PatchAccount");
-        logger.LogInformation("C# HTTP trigger function processed a request.");
-
-        var response = req.CreateResponse(HttpStatusCode.OK);
-        response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-
-        response.WriteString("Welcome to Azure Functions!");
-
-        return response;
-        
+        var request = await req.ReadFromJsonAsync<PatchAccountRequest>();
+        return await _useCase.PatchAccount(request);
     }
 }

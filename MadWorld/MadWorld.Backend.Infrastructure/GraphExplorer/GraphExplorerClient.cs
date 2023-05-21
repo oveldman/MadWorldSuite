@@ -1,7 +1,9 @@
 using LanguageExt;
+using LanguageExt.Common;
 using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Backend.Domain.Configuration;
 using MadWorld.Backend.Domain.General;
+using MadWorld.Backend.Domain.LanguageExt;
 using MadWorld.Shared.Contracts.Shared.Authorization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Graph;
@@ -16,7 +18,7 @@ public class GraphExplorerClient : IGraphExplorerClient
     private readonly string _extensionApplicationId;
     private string RoleName => $"extension_{_extensionApplicationId}_Roles";
 
-    private ILogger<GraphExplorerClient> _logger;
+    private readonly ILogger<GraphExplorerClient> _logger;
 
     internal GraphExplorerClient(GraphServiceClient graphServiceClient, GraphExplorerConfigurations configurations, ILogger<GraphExplorerClient> logger)
     {
@@ -33,7 +35,7 @@ public class GraphExplorerClient : IGraphExplorerClient
                 .Users[id]
                 .GetAsync(request =>
                 {
-                    request.QueryParameters.Select = new string[] { "Id", "DisplayName", RoleName, "mailNickname" };
+                    request.QueryParameters.Select = new [] { "Id", "DisplayName", RoleName, "mailNickname" };
                 });
 
             return userResponse.HasFound() ? CreateAccount(userResponse!) : Option<Account>.None;
@@ -51,24 +53,50 @@ public class GraphExplorerClient : IGraphExplorerClient
                                     .Users
                                     .GetAsync(request =>
                                     {
-                                        request.QueryParameters.Select = new string[] { "Id", "DisplayName", "mailNickname" };
+                                        request.QueryParameters.Select = new [] { "Id", "DisplayName", "mailNickname" };
                                     });
         
         return usersResponse?.Value?
             .Select(CreateAccount)
             .ToList() ?? new List<Account>();
     }
+
+    public async Task<Result<bool>> UpdateUser(Account account)
+    {
+        var user = CreateUser(account);
+
+        try
+        {
+            await _graphServiceClient.Users[account.Id].PatchAsync(user);
+        }
+        catch (ODataError exception)
+        {
+            _logger.LogInformation(exception, "Couldn't update user {UserId}", account.Id.ToString());
+            return new Result<bool>(exception);
+        }
+        
+        return true;
+    }
     
     private Account CreateAccount(User user)
     {
         user.AdditionalData.TryGetValue(RoleName, out var roles);
+        var id = user.Id ?? string.Empty;
+        var name = user.DisplayName ?? string.Empty;
+        var rolesParsed = roles?.ToString() ?? RoleTypes.None.ToString();
+        var isResourceOwner = user.MailNickname?.Contains("#EXT#") ?? false;
         
-        return new Account()
+        return Account.Parse(id, name, rolesParsed, isResourceOwner).GetValue();
+    }
+
+    private User CreateUser(Account account)
+    {
+        return new User()
         {
-            Id = user.Id ?? string.Empty,
-            Name = user.DisplayName ?? string.Empty,
-            Roles = roles?.ToString() ?? RoleTypes.None.ToString(),
-            IsResourceOwner = user.MailNickname?.Contains("#EXT#") ?? false
+            AdditionalData = new Dictionary<string, object>()
+            {
+                { RoleName, account.Roles }
+            }
         };
     }
 }
