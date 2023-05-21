@@ -27,7 +27,7 @@ public class GetAccount
     [Function("GetAccount")]
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "GetAccount", tags: new[] { "Account" })]
-    [OpenApiParameter("id")]
+    [OpenApiParameter("id", Required = true)]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountResponse), Description = "The OK response")]
     public Result<Option<GetAccountResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Account/{id}")] HttpRequestData req,
         FunctionContext executionContext, string id)
