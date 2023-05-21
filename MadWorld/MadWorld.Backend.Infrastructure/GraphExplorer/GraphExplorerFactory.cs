@@ -8,7 +8,7 @@ namespace MadWorld.Backend.Infrastructure.GraphExplorer;
 internal class GraphExplorerFactory
 {
     private readonly string[] _scopes;
-    private ILoggerFactory _loggerFactory;
+    private readonly ILoggerFactory _loggerFactory;
 
     public GraphExplorerFactory(ILoggerFactory loggerFactory)
     {
