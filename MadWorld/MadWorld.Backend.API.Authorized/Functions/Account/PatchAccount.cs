@@ -5,7 +5,9 @@ using MadWorld.Shared.Contracts.Shared.Authorization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace MadWorld.Backend.API.Authorized.Functions.Account;
 
@@ -13,6 +15,7 @@ public static class PatchAccount
 {
     [Authorize(RoleTypes.Admin)]
     [Function("PatchAccount")]
+    [OpenApiSecurity("Bearer", SecuritySchemeType.ApiKey, Name = "authorization", In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "PatchAccount", tags: new[] { "Account" })]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
     public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "patch", Route="Account/{id}")] HttpRequestData req,

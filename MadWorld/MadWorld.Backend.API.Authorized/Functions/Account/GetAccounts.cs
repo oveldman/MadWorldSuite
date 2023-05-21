@@ -6,6 +6,8 @@ using MadWorld.Shared.Contracts.Shared.Authorization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
+using Microsoft.OpenApi.Models;
 
 namespace MadWorld.Backend.API.Authorized.Functions.Account;
 
@@ -20,6 +22,7 @@ public class GetAccounts
     
     [Authorize(RoleTypes.Admin)]
     [Function("GetAccounts")]
+    [OpenApiSecurity("Bearer", SecuritySchemeType.ApiKey, Name = "authorization", In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "GetAccounts", tags: new[] { "Account" })]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountsResponse), Description = "The OK response")]
     public async Task<GetAccountsResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Account/GetAll")] HttpRequestData req,

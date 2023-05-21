@@ -9,6 +9,8 @@ using MadWorld.Shared.Contracts.Shared.Authorization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
+using Microsoft.OpenApi.Models;
 
 namespace MadWorld.Backend.API.Authorized.Functions.Account;
 
@@ -23,6 +25,7 @@ public class GetAccount
     
     [Authorize(RoleTypes.Admin)]
     [Function("GetAccount")]
+    [OpenApiSecurity("Bearer", SecuritySchemeType.ApiKey, Name = "authorization", In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "GetAccount", tags: new[] { "Account" })]
     [OpenApiParameter("id")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountResponse), Description = "The OK response")]
