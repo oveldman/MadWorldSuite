@@ -29,7 +29,7 @@ public class GetAccount
     [OpenApiOperation(operationId: "GetAccount", tags: new[] { "Account" })]
     [OpenApiParameter("id")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountResponse), Description = "The OK response")]
-    public Result<Option<GetAccountResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Account/Get/{id}")] HttpRequestData req,
+    public Result<Option<GetAccountResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Account/{id}")] HttpRequestData req,
         FunctionContext executionContext, string id)
     {
         var request = new GetAccountRequest()

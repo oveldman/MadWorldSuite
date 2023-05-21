@@ -26,7 +26,7 @@ public class GetAccounts
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "GetAccounts", tags: new[] { "Account" })]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountsResponse), Description = "The OK response")]
-    public async Task<GetAccountsResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Account/GetAll")] HttpRequestData req,
+    public async Task<GetAccountsResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Account")] HttpRequestData req,
         FunctionContext executionContext)
     {
         return await _useCase.GetAccounts();

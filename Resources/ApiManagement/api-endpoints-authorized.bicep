@@ -24,7 +24,7 @@ resource getAccounts 'Microsoft.ApiManagement/service/apis/operations@2022-08-01
   properties: {
     displayName: 'GetAccounts'
     method: 'GET'
-    urlTemplate: '/Account/GetAll'
+    urlTemplate: '/Account'
     templateParameters: []
     responses: []
   }
@@ -45,7 +45,7 @@ resource getAccount 'Microsoft.ApiManagement/service/apis/operations@2022-08-01'
   properties: {
     displayName: 'GetAccounts'
     method: 'GET'
-    urlTemplate: '/Account/Get/{id}'
+    urlTemplate: '/Account/{id}'
     templateParameters: [
       {
         name: 'id'
