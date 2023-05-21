@@ -53,7 +53,7 @@ public class ResponseMiddleWare : IFunctionsWorkerMiddleware
         var resultType = resultProcessed!.GetType();
         var valueType = resultType.GetGenericArguments().FirstOrDefault();
         var unwrapMethod = GetType().GetMethod(unwrapMethodName, BindingFlags.NonPublic | BindingFlags.Instance);
-        var genericUnwrapMethod = unwrapMethod?.MakeGenericMethod(valueType!);
+        var genericUnwrapMethod = unwrapMethod!.MakeGenericMethod(valueType!);
         genericUnwrapMethod?.Invoke(this, new object[] { context, resultProcessed });
     }
 

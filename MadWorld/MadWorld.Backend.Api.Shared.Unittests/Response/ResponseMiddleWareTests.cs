@@ -37,11 +37,60 @@ public class ResponseMiddleWareTests
     }
     
     [Fact]
+    public async Task Invoke_WithNull_ShouldReturnSameObject()
+    {
+        // Arrange
+        const string response = null;
+
+        var invocationResult = new Mock<InvocationResult>();
+        var context = new Mock<FunctionContext>();
+        var contextWrapper = new Mock<IFunctionContextWrapper>();
+        contextWrapper
+            .Setup(c =>
+                c.GetInvocationResult(It.IsAny<FunctionContext>()))
+            .Returns(invocationResult.Object);
+        
+        var middleware = new ResponseMiddleWare(contextWrapper.Object);
+        invocationResult.Setup(i => i.Value).Returns(response);
+
+        // Act
+        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+
+        // Assert
+        invocationResult.VerifySet(x => x.Value = It.IsAny<object>(), Times.Never());
+    }
+    
+    [Fact]
     public async Task Invoke_WithOptionResponse_ShouldReturnInnerResult()
     {
         // Arrange
         const string finalResponse = "test";
         var response = Option<string>.Some(finalResponse);
+
+        var invocationResult = new Mock<InvocationResult>();
+        var context = new Mock<FunctionContext>();
+        var contextWrapper = new Mock<IFunctionContextWrapper>();
+        contextWrapper
+            .Setup(c =>
+                c.GetInvocationResult(It.IsAny<FunctionContext>()))
+            .Returns(invocationResult.Object);
+        
+        var middleware = new ResponseMiddleWare(contextWrapper.Object);
+        invocationResult.Setup(i => i.Value).Returns(response);
+
+        // Act
+        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+
+        // Assert
+        invocationResult.VerifySet(x => x.Value = finalResponse, Times.Once);
+    }
+    
+    [Fact]
+    public async Task Invoke_WithResultOptionResponse_ShouldReturnInnerResult()
+    {
+        // Arrange
+        const string finalResponse = "test";
+        var response = new Result<Option<string>>(Option<string>.Some(finalResponse));
 
         var invocationResult = new Mock<InvocationResult>();
         var context = new Mock<FunctionContext>();
