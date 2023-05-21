@@ -18,7 +18,7 @@ public static class PatchAccount
     [OpenApiSecurity("Bearer", SecuritySchemeType.ApiKey, Name = "authorization", In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "PatchAccount", tags: new[] { "Account" })]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The OK response")]
-    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "patch", Route="Account/{id}")] HttpRequestData req,
+    public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "patch", Route="Account/Patch/{id}")] HttpRequestData req,
         FunctionContext executionContext)
     {
         var logger = executionContext.GetLogger("PatchAccount");

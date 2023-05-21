@@ -60,7 +60,7 @@ public static class FunctionContextExtensions
         var entryPoint = context.FunctionDefinition.EntryPoint;
 
         var assemblyPath = context.FunctionDefinition.PathToAssembly;
-        var assembly = Assembly.Load(assemblyPath);
+        var assembly = Assembly.LoadFrom(assemblyPath);
         var typeName = entryPoint[..entryPoint.LastIndexOf('.')];
         var type = assembly.GetType(typeName);
         var methodName = entryPoint[(entryPoint.LastIndexOf('.') + 1)..];
