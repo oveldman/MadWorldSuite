@@ -19,10 +19,10 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
         
         if (!string.IsNullOrEmpty(bearerToken))
         {
-            GetPrincipalFromToken(context, bearerToken);
+            var claimsPrincipal = GetPrincipalFromToken(context, bearerToken);
             
             var requiredRole = context.GetRequiredRole();
-            var user = context.GetUser();
+            var user = claimsPrincipal.GetUser();
 
             if (user.IsInRole(requiredRole))
             {
@@ -48,13 +48,14 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
         return headers.Authorization.Replace("Bearer ", string.Empty);
     }
     
-    private static void GetPrincipalFromToken(FunctionContext context, string bearerToken)
+    private static ClaimsPrincipal GetPrincipalFromToken(FunctionContext context, string bearerToken)
     {
         var tokenDecoder = new JwtSecurityTokenHandler();
         var jwtSecurityToken = (JwtSecurityToken)tokenDecoder.ReadToken(bearerToken);
         var principal = new ClaimsPrincipal(new ClaimsIdentity(jwtSecurityToken.Claims, "Bearer", "name", "role"));
 
         context.Features.Set(principal);
+        return principal;
     }
 
     private static async Task SetUnauthorized(FunctionContext context, HttpRequestData? request)

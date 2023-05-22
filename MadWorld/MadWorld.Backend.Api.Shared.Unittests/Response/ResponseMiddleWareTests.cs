@@ -25,9 +25,8 @@ public class ResponseMiddleWareTests
             .Setup(c =>
                 c.GetInvocationResult(It.IsAny<FunctionContext>()))
             .Returns(invocationResult.Object);
-        
-        var middleware = new ResponseMiddleWare(contextWrapper.Object);
         invocationResult.Setup(i => i.Value).Returns(response);
+        var middleware = new ResponseMiddleWare(contextWrapper.Object);
 
         // Act
         await middleware.Invoke(context.Object, _ => Task.CompletedTask);
