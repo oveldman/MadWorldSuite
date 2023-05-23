@@ -1,0 +1,46 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=B0F20323E5A6BF4094DD5E1C0322386C/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=B0F20323E5A6BF4094DD5E1C0322386C/EntryName/@EntryValue">HTTP Trigger Mad World</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=B0F20323E5A6BF4094DD5E1C0322386C/Position/@EntryValue">33</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/CustomProperties/=FileName/@EntryIndexedValue">HttpTrigger</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Description/@EntryValue">HTTP Trigger Mad World</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=CLASS/Expression/@EntryValue">getAlphaNumericFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=CLASS/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=HEADER/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=HEADER/Expression/@EntryValue">fileheader()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=HEADER/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=HEADER/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Field/=NAMESPACE/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Scope/=00D11B084A48B24FAD24B2EC16E68547/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Scope/=00D11B084A48B24FAD24B2EC16E68547/Type/@EntryValue">MustUseAzureFunctionsIsolatedWorker</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Scope/=D80F6BCF8737DE41AD81D0B5AE9CBFA3/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Scope/=D80F6BCF8737DE41AD81D0B5AE9CBFA3/Type/@EntryValue">InAzureFunctionsCSharpProject</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B0F20323E5A6BF4094DD5E1C0322386C/Text/@EntryValue">$HEADER$using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+
+namespace $NAMESPACE$
+{
+    public class $CLASS$
+    {
+        public $CLASS$() {}
+    
+        [Function("$CLASS$")]
+        public string Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData request,
+            FunctionContext executionContext)
+        {
+            return "Hello, world!";
+        }
+    }
+}</s:String></wpf:ResourceDictionary>
