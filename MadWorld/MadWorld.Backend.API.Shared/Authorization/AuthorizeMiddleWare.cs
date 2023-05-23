@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using JetBrains.Annotations;
+using MadWorld.Backend.API.Shared.Functions.Expansions;
 using MadWorld.Backend.Application.Extensions;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -13,6 +14,13 @@ namespace MadWorld.Backend.API.Shared.Authorization;
 [UsedImplicitly]
 public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
 {
+    private readonly IFunctionContextWrapper _functionContextWrapper;
+
+    public AuthorizeMiddleWare(IFunctionContextWrapper functionContextWrapper)
+    {
+        _functionContextWrapper = functionContextWrapper;
+    }
+    
     public async Task Invoke(FunctionContext context, FunctionExecutionDelegate next)
     {
         var bearerToken = GetBearerToken(context);
@@ -31,7 +39,7 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
             }
         }
 
-        var request = await context.GetHttpRequestDataAsync();
+        var request = await _functionContextWrapper.GetHttpRequestDataAsync(context);
         if (context.IsEndpointAnonymous() || (request?.Url.IsLocalHost() ?? false))
         {
             await next(context);
@@ -58,13 +66,13 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
         return principal;
     }
 
-    private static async Task SetUnauthorized(FunctionContext context, HttpRequestData? request)
+    private async Task SetUnauthorized(FunctionContext context, HttpRequestData? request)
     {
         if (request == null) throw new ArgumentNullException(nameof(request));
 
         var res = request.CreateResponse();
         res.StatusCode = HttpStatusCode.Unauthorized;
         await res.WriteStringAsync("401 - Unauthorized!!!");
-        context.GetInvocationResult().Value = res;
+        _functionContextWrapper.GetInvocationResult(context).Value = res;
     }
 }
