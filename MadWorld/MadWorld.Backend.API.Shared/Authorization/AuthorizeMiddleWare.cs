@@ -46,13 +46,13 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
         }
 
         var request = await _functionContextWrapper.GetHttpRequestDataAsync(context);
-        if (context.IsEndpointAnonymous() || (request?.Url.IsLocalHost() ?? false))
+        if (context.IsEndpointAnonymous() || request!.Url.IsLocalHost())
         {
             await next(context);
             return;
         }
 
-        await SetUnauthorized(context, request!);
+        await SetUnauthorized(context, request);
     }
 
     private static string GetBearerToken(FunctionContext context)

@@ -100,7 +100,7 @@ public class AuthorizeMiddleWareTests
         next.Verify(n => n.Invoke(It.IsAny<FunctionContext>()), Times.Once());
     }
     
-       [Fact]
+    [Fact]
     public async Task Invoke_GivenUserHasNotRole_ReturnUnauthorized()
     {
         // Arrange
