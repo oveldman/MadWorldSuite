@@ -18,6 +18,8 @@ public class AuthorizeMiddleWareTests
                             'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHRlbnNpb25fUm9sZXMiOiJub25lO3VzZXIifQ.v6qH7gZb2D-NTicpqYDTnn2-33N_WttBiM-Q0DPKvW8'
                         }";
     
+    private const string AnonymousHeaders = @"{}";
+    
     [Fact]
     public async Task Invoke_GivenBearerRequest_BearerParsedSuccessfully()
     {
@@ -47,14 +49,65 @@ public class AuthorizeMiddleWareTests
     }
     
     [Fact]
+    public async Task Invoke_GivenWithoutBearerRequestAndIsAnonymousEndpoint_ThenExecutedSuccessfully()
+    {
+        // Arrange
+        const string functionName = nameof(GetStatus);
+        
+        var context = new Mock<FunctionContext>();
+        var next = new Mock<FunctionExecutionDelegate>();
+        var contextWrapper = new Mock<IFunctionContextWrapper>();
+        
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
+        context.Setup(c => c.BindingContext.BindingData["Headers"]).Returns(AnonymousHeaders);
+        context.Setup(c => c.FunctionDefinition.Name).Returns(functionName);
+
+        var middleware = new AuthorizeMiddleWare(contextWrapper.Object);
+        // Act
+        await middleware.Invoke(context.Object, next.Object);
+        
+        // Assert
+        next.Verify(n => n.Invoke(It.IsAny<FunctionContext>()), Times.Once());
+    }
+    
+    [Fact]
+    public async Task Invoke_GivenWithoutBearerRequestAndIsLocalhostEndpoint_ThenExecutedSuccessfully()
+    {
+        // Arrange
+        const string functionName = nameof(MockFunction);
+
+        var url = new Uri($"https://localhost:7071/api/{functionName}");
+        
+        var context = new Mock<FunctionContext>();
+        var next = new Mock<FunctionExecutionDelegate>();
+        var httpRequestData = new Mock<HttpRequestData>(context.Object);
+        var contextWrapper = new Mock<IFunctionContextWrapper>();
+        
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
+        context.Setup(c => c.BindingContext.BindingData["Headers"]).Returns(AnonymousHeaders);
+        context.Setup(c => c.FunctionDefinition.Name).Returns(functionName);
+        contextWrapper
+            .Setup(cw => cw.GetHttpRequestDataAsync(It.IsAny<FunctionContext>()))
+            .ReturnsAsync(httpRequestData.Object);
+        httpRequestData.Setup(hrd => hrd.Url).Returns(url);
+        
+        var middleware = new AuthorizeMiddleWare(contextWrapper.Object);
+        // Act
+        await middleware.Invoke(context.Object, next.Object);
+        
+        // Assert
+        next.Verify(n => n.Invoke(It.IsAny<FunctionContext>()), Times.Once());
+    }
+    
+    [Fact]
     public async Task Invoke_GivenWithoutBearerRequest_ReturnUnauthorized()
     {
         // Arrange
-        const string emptyHeaders = @"{}";
         const string functionTypeName = $"MadWorld.Backend.Api.Shared.Unittests.Authorization.Mocks.{nameof(MockFunction)}.Run";
+        var url = new Uri($"https://www.test.nl/api/{nameof(MockFunction)}");
         
         var assemblyLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MadWorld.Backend.API.Shared.dll");
-        
+
         var invocationResult = new Mock<InvocationResult>();
         var context = new Mock<FunctionContext>();
         var next = new Mock<FunctionExecutionDelegate>();
@@ -65,7 +118,7 @@ public class AuthorizeMiddleWareTests
         var contextWrapper = new Mock<IFunctionContextWrapper>();
         
         context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
-        context.Setup(c => c.BindingContext.BindingData["Headers"]).Returns(emptyHeaders);
+        context.Setup(c => c.BindingContext.BindingData["Headers"]).Returns(AnonymousHeaders);
         context.Setup(c => c.Features).Returns(features.Object);
         context.Setup(c => c.FunctionDefinition.EntryPoint).Returns(functionTypeName);
         context.Setup(c => c.FunctionDefinition.PathToAssembly).Returns(assemblyLocation);
@@ -79,6 +132,7 @@ public class AuthorizeMiddleWareTests
         httpRequestData
             .Setup(hrd => hrd.CreateResponse())
             .Returns(httpResponseData.Object);
+        httpRequestData.Setup(hrd => hrd.Url).Returns(url);
         httpResponseData.Setup(hrd => hrd.Body).Returns(stream.Object);
 
         var middleware = new AuthorizeMiddleWare(contextWrapper.Object);

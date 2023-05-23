@@ -52,7 +52,7 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
             return;
         }
 
-        await SetUnauthorized(context, request);
+        await SetUnauthorized(context, request!);
     }
 
     private static string GetBearerToken(FunctionContext context)
@@ -72,10 +72,8 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
         return principal;
     }
 
-    private async Task SetUnauthorized(FunctionContext context, HttpRequestData? request)
+    private async Task SetUnauthorized(FunctionContext context, HttpRequestData request)
     {
-        if (request == null) throw new ArgumentNullException(nameof(request));
-
         var res = request.CreateResponse();
         res.StatusCode = HttpStatusCode.Unauthorized;
         await res.WriteStringAsync("401 - Unauthorized!!!");
