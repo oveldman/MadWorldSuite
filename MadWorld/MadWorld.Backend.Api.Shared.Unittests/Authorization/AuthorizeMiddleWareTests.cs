@@ -14,6 +14,7 @@ public class AuthorizeMiddleWareTests
 {
     private const string HttpTrigger = "HttpTrigger";
     
+    // Has only role: None & User
     private const string Headers = @"{
                             'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHRlbnNpb25fUm9sZXMiOiJub25lO3VzZXIifQ.v6qH7gZb2D-NTicpqYDTnn2-33N_WttBiM-Q0DPKvW8'
                         }";
@@ -99,6 +100,54 @@ public class AuthorizeMiddleWareTests
         next.Verify(n => n.Invoke(It.IsAny<FunctionContext>()), Times.Once());
     }
     
+       [Fact]
+    public async Task Invoke_GivenUserHasNotRole_ReturnUnauthorized()
+    {
+        // Arrange
+        const string functionTypeName = $"MadWorld.Backend.Api.Shared.Unittests.Authorization.Mocks.{nameof(MockFunction)}.Run";
+        var url = new Uri($"https://www.test.nl/api/{nameof(MockFunction)}");
+        
+        var assemblyLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MadWorld.Backend.Api.Shared.Unittests.dll");
+
+        var invocationResult = new Mock<InvocationResult>();
+        var context = new Mock<FunctionContext>();
+        var next = new Mock<FunctionExecutionDelegate>();
+        var features = new Mock<IInvocationFeatures>();
+        var stream = new Mock<Stream>();
+        var httpRequestData = new Mock<HttpRequestData>(context.Object);
+        var httpResponseData = new Mock<HttpResponseData>(context.Object);
+        var contextWrapper = new Mock<IFunctionContextWrapper>();
+        
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
+        context.Setup(c => c.BindingContext.BindingData["Headers"]).Returns(Headers);
+        context.Setup(c => c.Features).Returns(features.Object);
+        context.Setup(c => c.FunctionDefinition.EntryPoint).Returns(functionTypeName);
+        context.Setup(c => c.FunctionDefinition.PathToAssembly).Returns(assemblyLocation);
+        contextWrapper
+            .Setup(cw => cw.GetHttpRequestDataAsync(It.IsAny<FunctionContext>()))
+            .ReturnsAsync(httpRequestData.Object);
+        contextWrapper
+            .Setup(c =>
+                c.GetInvocationResult(It.IsAny<FunctionContext>()))
+            .Returns(invocationResult.Object);
+        httpRequestData
+            .Setup(hrd => hrd.CreateResponse())
+            .Returns(httpResponseData.Object);
+        httpRequestData.Setup(hrd => hrd.Url).Returns(url);
+        httpResponseData.Setup(hrd => hrd.Body).Returns(stream.Object);
+
+        var middleware = new AuthorizeMiddleWare(contextWrapper.Object);
+        // Act
+        await middleware.Invoke(context.Object, next.Object);
+        
+        // Assert
+        invocationResult.VerifySet(x => x.Value = httpResponseData.Object, Times.Once);
+        httpResponseData.VerifySet(x => x.StatusCode = HttpStatusCode.Unauthorized, Times.Once);
+
+        var bytes = "401 - Unauthorized!!!"u8.ToArray();
+        stream.Verify(x => x.WriteAsync(bytes, 0, bytes.Length, CancellationToken.None), Times.Once);
+    }
+    
     [Fact]
     public async Task Invoke_GivenWithoutBearerRequest_ReturnUnauthorized()
     {
@@ -106,7 +155,7 @@ public class AuthorizeMiddleWareTests
         const string functionTypeName = $"MadWorld.Backend.Api.Shared.Unittests.Authorization.Mocks.{nameof(MockFunction)}.Run";
         var url = new Uri($"https://www.test.nl/api/{nameof(MockFunction)}");
         
-        var assemblyLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MadWorld.Backend.API.Shared.dll");
+        var assemblyLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MadWorld.Backend.Api.Shared.Unittests.dll");
 
         var invocationResult = new Mock<InvocationResult>();
         var context = new Mock<FunctionContext>();

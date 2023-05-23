@@ -5,8 +5,12 @@ using MadWorld.Shared.Contracts.Shared.Authorization;
 namespace MadWorld.Backend.Api.Shared.Unittests.Authorization.Mocks;
 
 [UsedImplicitly]
-[Authorize(RoleTypes.Admin)]
 public class MockFunction
 {
-    
+    [UsedImplicitly]
+    [Authorize(RoleTypes.Admin)]
+    public void Run()
+    {
+        
+    }
 }

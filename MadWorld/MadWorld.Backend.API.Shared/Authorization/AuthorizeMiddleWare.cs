@@ -57,9 +57,9 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
 
     private static string GetBearerToken(FunctionContext context)
     {
-        var jsonHeaders = context.BindingContext.BindingData["Headers"] as string ?? string.Empty;
-        var headers = JsonConvert.DeserializeObject<HttpHeaders>(jsonHeaders) ?? new HttpHeaders();
-        return headers.Authorization.Replace("Bearer ", string.Empty);
+        var jsonHeaders = context.BindingContext.BindingData["Headers"] as string;
+        var headers = JsonConvert.DeserializeObject<HttpHeaders>(jsonHeaders!);
+        return headers!.Authorization.Replace("Bearer ", string.Empty);
     }
     
     private static ClaimsPrincipal GetPrincipalFromToken(FunctionContext context, string bearerToken)
