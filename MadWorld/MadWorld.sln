@@ -88,6 +88,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Solution", "_Solution", "{
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
+		Team.DotSettings = Team.DotSettings
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.API.Shared", "MadWorld.Backend.API.Shared\MadWorld.Backend.API.Shared.csproj", "{30EFFBF7-A070-4184-A36E-CB47FDDB5E6E}"
