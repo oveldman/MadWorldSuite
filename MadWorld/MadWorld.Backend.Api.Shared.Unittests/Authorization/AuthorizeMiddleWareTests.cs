@@ -12,6 +12,8 @@ namespace MadWorld.Backend.Api.Shared.Unittests.Authorization;
 
 public class AuthorizeMiddleWareTests
 {
+    private const string HttpTrigger = "HttpTrigger";
+    
     private const string Headers = @"{
                             'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHRlbnNpb25fUm9sZXMiOiJub25lO3VzZXIifQ.v6qH7gZb2D-NTicpqYDTnn2-33N_WttBiM-Q0DPKvW8'
                         }";
@@ -29,6 +31,7 @@ public class AuthorizeMiddleWareTests
         var features = new Mock<IInvocationFeatures>();
         var contextWrapper = new Mock<IFunctionContextWrapper>();
         
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
         context.Setup(c => c.BindingContext.BindingData["Headers"]).Returns(Headers);
         context.Setup(c => c.Features).Returns(features.Object);
         context.Setup(c => c.FunctionDefinition.EntryPoint).Returns(functionTypeName);
@@ -61,6 +64,7 @@ public class AuthorizeMiddleWareTests
         var httpResponseData = new Mock<HttpResponseData>(context.Object);
         var contextWrapper = new Mock<IFunctionContextWrapper>();
         
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
         context.Setup(c => c.BindingContext.BindingData["Headers"]).Returns(emptyHeaders);
         context.Setup(c => c.Features).Returns(features.Object);
         context.Setup(c => c.FunctionDefinition.EntryPoint).Returns(functionTypeName);
@@ -87,5 +91,37 @@ public class AuthorizeMiddleWareTests
 
         var bytes = "401 - Unauthorized!!!"u8.ToArray();
         stream.Verify(x => x.WriteAsync(bytes, 0, bytes.Length, CancellationToken.None), Times.Once);
+    }
+    
+    [Fact]
+    public async Task Invoke_WithBlobTrigger_ShouldContinue()
+    {
+        // Arrange
+        const string trigger = "blobTrigger";
+        
+        var context = new Mock<FunctionContext>();
+        var contextWrapper = new Mock<IFunctionContextWrapper>();
+        var next = new Mock<FunctionExecutionDelegate>();
+        
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData(trigger));
+        
+        var middleware = new AuthorizeMiddleWare(contextWrapper.Object);
+        
+        // Act
+        await middleware.Invoke(context.Object, next.Object);
+        
+        // Assert
+        next.Verify(n => n.Invoke(It.IsAny<FunctionContext>()), Times.Once());
+    }
+    
+    private static IEnumerable<BindingMetadata> GetMetaData(string triggerType = HttpTrigger)
+    {
+        var metaData = new Mock<BindingMetadata>();
+        metaData.Setup(md => md.Type).Returns(triggerType);
+
+        return new List<BindingMetadata>()
+        {
+            metaData.Object
+        };
     }
 }

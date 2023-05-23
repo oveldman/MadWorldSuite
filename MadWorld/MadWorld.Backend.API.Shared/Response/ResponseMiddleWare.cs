@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using LanguageExt;
 using LanguageExt.Common;
 using LanguageExt.UnsafeValueAccess;
+using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.Functions.Expansions;
 using MadWorld.Backend.Domain.Exceptions;
 using MadWorld.Shared.Contracts.Shared.Error;
@@ -27,6 +28,8 @@ public class ResponseMiddleWare : IFunctionsWorkerMiddleware
     public async Task Invoke(FunctionContext context, FunctionExecutionDelegate next)
     {
         await next(context);
+
+        if (!context.IsHttpTrigger()) return;
 
         var resultProcessed = _functionContextWrapper.GetInvocationResult(context).Value;
         

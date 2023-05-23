@@ -26,6 +26,12 @@ public static class FunctionContextExtensions
         return AnonymousEndpoints.Contains(azureFunctionName);
     }
 
+    public static bool IsHttpTrigger(this FunctionContext context)
+    {
+        return context.FunctionDefinition.InputBindings.Values
+            .First(a => a.Type.EndsWith("Trigger")).Type.Equals("httpTrigger", StringComparison.OrdinalIgnoreCase);
+    }
+
     public static RoleTypes GetRequiredRole(this FunctionContext context)
     {
         var method = context.GetTargetFunctionMethod();

@@ -23,6 +23,12 @@ public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
     
     public async Task Invoke(FunctionContext context, FunctionExecutionDelegate next)
     {
+        if (!context.IsHttpTrigger())
+        {
+            await next(context);
+            return;
+        }
+        
         var bearerToken = GetBearerToken(context);
         
         if (!string.IsNullOrEmpty(bearerToken))

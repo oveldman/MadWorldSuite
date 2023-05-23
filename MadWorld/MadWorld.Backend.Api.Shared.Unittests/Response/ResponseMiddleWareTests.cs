@@ -7,11 +7,14 @@ using MadWorld.Backend.API.Shared.Response;
 using MadWorld.Backend.Domain.Exceptions;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Azure.Functions.Worker.Middleware;
 
 namespace MadWorld.Backend.Api.Shared.Unittests.Response;
 
 public class ResponseMiddleWareTests
 {
+    private const string HttpTrigger = "HttpTrigger";
+    
     [Fact]
     public async Task Invoke_WithNormalResponse_ShouldReturnSameObject()
     {
@@ -21,6 +24,7 @@ public class ResponseMiddleWareTests
         var invocationResult = new Mock<InvocationResult>();
         var context = new Mock<FunctionContext>();
         var contextWrapper = new Mock<IFunctionContextWrapper>();
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
         contextWrapper
             .Setup(c =>
                 c.GetInvocationResult(It.IsAny<FunctionContext>()))
@@ -44,6 +48,7 @@ public class ResponseMiddleWareTests
         var invocationResult = new Mock<InvocationResult>();
         var context = new Mock<FunctionContext>();
         var contextWrapper = new Mock<IFunctionContextWrapper>();
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
         contextWrapper
             .Setup(c =>
                 c.GetInvocationResult(It.IsAny<FunctionContext>()))
@@ -69,6 +74,7 @@ public class ResponseMiddleWareTests
         var invocationResult = new Mock<InvocationResult>();
         var context = new Mock<FunctionContext>();
         var contextWrapper = new Mock<IFunctionContextWrapper>();
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
         contextWrapper
             .Setup(c =>
                 c.GetInvocationResult(It.IsAny<FunctionContext>()))
@@ -94,6 +100,7 @@ public class ResponseMiddleWareTests
         var invocationResult = new Mock<InvocationResult>();
         var context = new Mock<FunctionContext>();
         var contextWrapper = new Mock<IFunctionContextWrapper>();
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
         contextWrapper
             .Setup(c =>
                 c.GetInvocationResult(It.IsAny<FunctionContext>()))
@@ -119,6 +126,7 @@ public class ResponseMiddleWareTests
         var invocationResult = new Mock<InvocationResult>();
         var context = new Mock<FunctionContext>();
         var contextWrapper = new Mock<IFunctionContextWrapper>();
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
         contextWrapper
             .Setup(c =>
                 c.GetInvocationResult(It.IsAny<FunctionContext>()))
@@ -147,6 +155,7 @@ public class ResponseMiddleWareTests
         var httpRequestData = new Mock<HttpRequestData>(context.Object);
         var httpResponseData = new Mock<HttpResponseData>(context.Object);
         var contextWrapper = new Mock<IFunctionContextWrapper>();
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
         contextWrapper
             .Setup(c =>
                 c.GetInvocationResult(It.IsAny<FunctionContext>()))
@@ -189,6 +198,7 @@ public class ResponseMiddleWareTests
         var httpRequestData = new Mock<HttpRequestData>(context.Object);
         var httpResponseData = new Mock<HttpResponseData>(context.Object);
         var contextWrapper = new Mock<IFunctionContextWrapper>();
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
         contextWrapper
             .Setup(c =>
                 c.GetInvocationResult(It.IsAny<FunctionContext>()))
@@ -230,6 +240,7 @@ public class ResponseMiddleWareTests
         var httpRequestData = new Mock<HttpRequestData>(context.Object);
         var httpResponseData = new Mock<HttpResponseData>(context.Object);
         var contextWrapper = new Mock<IFunctionContextWrapper>();
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
         contextWrapper
             .Setup(c =>
                 c.GetInvocationResult(It.IsAny<FunctionContext>()))
@@ -243,9 +254,9 @@ public class ResponseMiddleWareTests
                 hrd.CreateResponse())
             .Returns(httpResponseData.Object);
         httpResponseData.Setup(hrd => hrd.Body).Returns(stream.Object);
+        invocationResult.Setup(i => i.Value).Returns(response);
 
         var middleware = new ResponseMiddleWare(contextWrapper.Object);
-        invocationResult.Setup(i => i.Value).Returns(response);
 
         // Act
         await middleware.Invoke(context.Object, _ => Task.CompletedTask);
@@ -256,5 +267,37 @@ public class ResponseMiddleWareTests
 
         var bytes = "{\"Message\":\"Not found\"}"u8.ToArray();
         stream.Verify(x => x.WriteAsync(bytes, 0, bytes.Length, CancellationToken.None), Times.Once);
+    }
+
+    [Fact]
+    public async Task Invoke_WithBlobTrigger_ShouldContinue()
+    {
+        // Arrange
+        const string trigger = "blobsTrigger";
+        
+        var context = new Mock<FunctionContext>();
+        var contextWrapper = new Mock<IFunctionContextWrapper>();
+        var next = new Mock<FunctionExecutionDelegate>();
+        
+        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData(trigger));
+        
+        var middleware = new ResponseMiddleWare(contextWrapper.Object);
+        
+        // Act
+        await middleware.Invoke(context.Object, next.Object);
+        
+        // Assert
+        next.Verify(n => n.Invoke(It.IsAny<FunctionContext>()), Times.Once());
+    }
+
+    private static IEnumerable<BindingMetadata> GetMetaData(string triggerType = HttpTrigger)
+    {
+        var metaData = new Mock<BindingMetadata>();
+        metaData.Setup(md => md.Type).Returns(triggerType);
+
+        return new List<BindingMetadata>()
+        {
+            metaData.Object
+        };
     }
 }
