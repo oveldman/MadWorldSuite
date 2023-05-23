@@ -16,7 +16,7 @@ internal class GraphExplorerFactory
         _scopes = new[] { "https://graph.microsoft.com/.default" };
     }
 
-    internal GraphExplorerClient CreateClient(GraphExplorerConfigurations configurations)
+    public GraphExplorerClient CreateClient(GraphExplorerConfigurations configurations)
     {
         var graphServiceClient = CreateGraphServiceClient(configurations);
         
