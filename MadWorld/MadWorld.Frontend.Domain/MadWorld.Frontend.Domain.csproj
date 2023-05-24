@@ -1,2 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\MadWorld.Shared.Contracts\MadWorld.Shared.Contracts.csproj" />
+  </ItemGroup>
 </Project>

@@ -1,6 +1,28 @@
 @using Microsoft.AspNetCore.Authorization
+@using MadWorld.Shared.Contracts.Authorized.Account
 
 @attribute [Authorize(Roles = "Admin")]
 @page "/Accounts"
 
-<h3>AccountOverview</h3>
+<h3>Account overview</h3>
+@if (IsReady)
+{
+    <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="10" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                    Data="@Accounts" TItem="AccountContract" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" RowClick="OpenAccount">
+        <Columns>
+            <RadzenDataGridColumn TItem="AccountContract" Property="Id" Filterable="false" Title="ID" />
+            <RadzenDataGridColumn TItem="AccountContract" Property="Name" Title="First Name" />
+            <RadzenDataGridColumn TItem="AccountContract" Property="IsResourceOwner" Title="Is Owner" Sortable="false" Filterable="false" >
+                <Template Context="account">
+                    <RadzenCheckBox @bind-value="account.IsResourceOwner" TValue="bool" TriState="true"  Name="Include"  Disabled="true" />
+                </Template>
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
+}
+else
+{
+    <div class="spinner-border text-success" role="status"></div>
+}
+
+

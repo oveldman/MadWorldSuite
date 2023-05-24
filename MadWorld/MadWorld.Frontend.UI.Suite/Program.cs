@@ -1,3 +1,4 @@
+using MadWorld.Frontend.Application.Dependencies;
 using MadWorld.Frontend.Infrastructure.Dependencies;
 using MadWorld.Frontend.UI.Shared.Dependencies;
 using Microsoft.AspNetCore.Components.Web;
@@ -10,6 +11,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.AddHttpClients();
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
 
 builder.Services.AddMsalAuthentication(options =>

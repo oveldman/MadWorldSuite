@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <ProjectReference Include="..\MadWorld.Frontend.Domain\MadWorld.Frontend.Domain.csproj" />
     <ProjectReference Include="..\MadWorld.Shared.Contracts\MadWorld.Shared.Contracts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
 </Project>
