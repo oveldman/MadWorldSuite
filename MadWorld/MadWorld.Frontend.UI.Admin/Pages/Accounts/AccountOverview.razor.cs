@@ -26,6 +26,6 @@ public partial class AccountOverview
 
     private void OpenAccount(DataGridRowMouseEventArgs<AccountContract> args)
     {
-        NavigationManager.NavigateTo($"/account/{args.Data.Id}");
+        NavigationManager.NavigateTo($"/Account/{args.Data.Id}");
     }
 }
