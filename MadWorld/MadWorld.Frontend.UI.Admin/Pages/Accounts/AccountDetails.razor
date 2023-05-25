@@ -1,6 +1,79 @@
 @using Microsoft.AspNetCore.Authorization
+@using MadWorld.Frontend.Domain.Accounts
 
 @attribute [Authorize(Roles = "Admin")]
 @page "/Account/{Id}"
 
-<p>Account ID: @Id</p>
+<PageTitle>Account Settings</PageTitle>
+
+@if (IsReady)
+{
+    @if (AccountOption.IsSome)
+    {
+        <RadzenTemplateForm Data="@Account" Submit="@((Account account) => { SaveChanges(account); })">
+            <RadzenRow>
+                <RadzenColumn Size="12" SizeMD="6">
+                    <RadzenStack>
+                        <RadzenFieldset Text="Account Settings">
+                            <RadzenStack  Gap="1rem">
+                                <RadzenRow AlignItems="AlignItems.Center">
+                                    <RadzenColumn Size="12" SizeMD="4">
+                                        <RadzenLabel Text="Id" />
+                                    </RadzenColumn>
+                                    <RadzenColumn Size="12" SizeMD="8">
+                                        <RadzenTextBox @bind-Value="Account.Id" Style="width: 100%" Disabled="true"></RadzenTextBox>
+                                    </RadzenColumn>
+                                </RadzenRow>
+                                <RadzenRow AlignItems="AlignItems.Center">
+                                    <RadzenColumn Size="12" SizeMD="4">
+                                        <RadzenLabel Text="Name" />
+                                    </RadzenColumn>
+                                    <RadzenColumn Size="12" SizeMD="8">
+                                        <RadzenTextBox @bind-Value="Account.Name" Style="width: 100%" Disabled="true"></RadzenTextBox>
+                                    </RadzenColumn>
+                                </RadzenRow>
+                                <RadzenRow AlignItems="AlignItems.Center">
+                                    <RadzenColumn Size="12" SizeMD="4">
+                                        <RadzenLabel Text="Is user" />
+                                    </RadzenColumn>
+                                    <RadzenColumn Size="12" SizeMD="8">
+                                        <RadzenCheckBox @bind-Value="Account.HasUserRole"></RadzenCheckBox>
+                                    </RadzenColumn>
+                                </RadzenRow>
+                                <RadzenRow AlignItems="AlignItems.Center">
+                                    <RadzenColumn Size="12" SizeMD="4">
+                                        <RadzenLabel Text="Is admin" />
+                                    </RadzenColumn>
+                                    <RadzenColumn Size="12" SizeMD="8">
+                                        <RadzenCheckBox @bind-Value="Account.HasAdminRole"></RadzenCheckBox>
+                                    </RadzenColumn>
+                                </RadzenRow>
+                                <RadzenRow AlignItems="AlignItems.Center">
+                                    <RadzenColumn Size="12" SizeMD="4">
+                                        <RadzenLabel Text="Is resource owner" />
+                                    </RadzenColumn>
+                                    <RadzenColumn Size="12" SizeMD="8">
+                                        <RadzenCheckBox @bind-Value="Account.IsResourceOwner" Disabled="true"></RadzenCheckBox>
+                                    </RadzenColumn>
+                                </RadzenRow>
+                            </RadzenStack>
+                        </RadzenFieldset>
+                    </RadzenStack>
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" Gap="1rem" Class="rz-mt-8 rz-mb-4">
+                <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Save" />
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Large" Icon="cancel" Text="Cancel" Click="@CancelChanges" />
+            </RadzenStack>
+        </RadzenTemplateForm>
+    }
+    else
+    {
+        <p>Account ID with @Id cannot be found at the moment. </p>
+    }   
+}
+else
+{
+    <div class="spinner-border text-success" role="status"></div>
+}
+

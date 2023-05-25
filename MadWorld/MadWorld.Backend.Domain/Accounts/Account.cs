@@ -58,7 +58,7 @@ public class Account
         {
             Id = Id,
             Name = Name,
-            Roles = Roles.Split(RoleSplitValue).ToList().AsReadOnly(),
+            Roles = Roles.Split(RoleSplitValue).ToList(),
             IsResourceOwner = IsResourceOwner
         };
     }

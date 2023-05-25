@@ -13,12 +13,12 @@ public partial class AccountOverview
     
     private IReadOnlyCollection<AccountContract> Accounts { get; set; } = Array.Empty<AccountContract>();
     
-    [Inject] private IAccountManager AccountManager { get; set; } = null!;
+    [Inject] private IGetAccountsUseCase GetAccountsUseCase { get; set; } = null!;
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
 
     protected override async Task OnInitializedAsync()
     {
-        Accounts = await AccountManager.GetAccountsAsync();
+        Accounts = await GetAccountsUseCase.GetAccountsAsync();
         IsReady = true;
         
         await base.OnInitializedAsync();

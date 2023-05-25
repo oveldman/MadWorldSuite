@@ -8,7 +8,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddScoped<IAccountManager, AccountManager>();
+        services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
+        services.AddScoped<IGetAccountsUseCase, GetAccountsUseCase>();
         
         return services;
     }

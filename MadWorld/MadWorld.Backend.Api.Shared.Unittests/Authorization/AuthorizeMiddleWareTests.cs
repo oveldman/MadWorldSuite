@@ -3,7 +3,7 @@ using System.Security.Claims;
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.Functions.Expansions;
 using MadWorld.Backend.API.Shared.Functions.Status;
-using MadWorld.Backend.Api.Shared.Unittests.Authorization.Mocks;
+using MadWorld.Backend.Api.Shared.Unittests.Authorization.TestUtils;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.Functions.Worker.Middleware;

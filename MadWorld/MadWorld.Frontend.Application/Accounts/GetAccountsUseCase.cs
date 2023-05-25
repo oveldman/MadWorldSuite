@@ -3,11 +3,11 @@ using MadWorld.Shared.Contracts.Authorized.Account;
 
 namespace MadWorld.Frontend.Application.Accounts;
 
-public class AccountManager : IAccountManager
+public class GetAccountsUseCase : IGetAccountsUseCase
 {
     private readonly IAccountService _service;
 
-    public AccountManager(IAccountService service)
+    public GetAccountsUseCase(IAccountService service)
     {
         _service = service;
     }
