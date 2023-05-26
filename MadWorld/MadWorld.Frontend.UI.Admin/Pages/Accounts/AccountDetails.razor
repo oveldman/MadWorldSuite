@@ -10,7 +10,19 @@
 {
     @if (AccountOption.IsSome)
     {
-        <RadzenTemplateForm Data="@Account" Submit="@((Account account) => { SaveChanges(account); })">
+        @if (IsSaved)
+        {
+            <div class="alert alert-success" role="alert">
+                Account settings saved successfully.
+            </div>   
+        }
+        @if (HasError)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ErrorMessage
+            </div>   
+        }
+        <RadzenTemplateForm Data="@Account" Submit="@(async (Account account) => { await SaveChanges(account); })">
             <RadzenRow>
                 <RadzenColumn Size="12" SizeMD="6">
                     <RadzenStack>
@@ -37,7 +49,7 @@
                                         <RadzenLabel Text="Is user" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="12" SizeMD="8">
-                                        <RadzenCheckBox @bind-Value="Account.HasUserRole"></RadzenCheckBox>
+                                        <RadzenCheckBox TValue="bool" @bind-Value="Account.HasUserRole" Change="UserCheckBoxChanged"></RadzenCheckBox>
                                     </RadzenColumn>
                                 </RadzenRow>
                                 <RadzenRow AlignItems="AlignItems.Center">
@@ -45,7 +57,7 @@
                                         <RadzenLabel Text="Is admin" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="12" SizeMD="8">
-                                        <RadzenCheckBox @bind-Value="Account.HasAdminRole"></RadzenCheckBox>
+                                        <RadzenCheckBox TValue="bool" @bind-Value="Account.HasAdminRole" Change="AdminCheckBoxChanged"></RadzenCheckBox>
                                     </RadzenColumn>
                                 </RadzenRow>
                                 <RadzenRow AlignItems="AlignItems.Center">

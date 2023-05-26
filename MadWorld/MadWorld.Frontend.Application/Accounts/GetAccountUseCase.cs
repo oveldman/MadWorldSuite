@@ -23,11 +23,11 @@ public class GetAccountUseCase : IGetAccountUseCase
             _ = Option<Account>.None);
     }
 
-    private Account ConvertToAccount(AccountDetailContract contract)
+    private static Account ConvertToAccount(AccountDetailContract contract)
     {
+        var hasUserRole = contract.Roles.Contains(RoleTypes.User.ToString());
         var hasAdminRole = contract.Roles.Contains(RoleTypes.Admin.ToString());
-        var hasUserRole = contract.Roles.Contains(RoleTypes.Admin.ToString());
-        
+
         return new Account(
             contract.Id, 
             contract.Name, 

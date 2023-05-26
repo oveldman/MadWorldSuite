@@ -109,10 +109,7 @@ public class ResponseMiddleWare : IFunctionsWorkerMiddleware
         }
         else
         {
-            var errorResponse = new ErrorResponse
-            {
-                Message = "There went something wrong. Please try again later."
-            };
+            var errorResponse = ErrorResponse.CreateDefault();
             await SetResponse(context, errorResponse, HttpStatusCode.InternalServerError);
         }
     }

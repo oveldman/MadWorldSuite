@@ -28,7 +28,7 @@ public class AccountExtraClaimsPrincipalFactory : AccountClaimsPrincipalFactory<
         return user;
     }
     
-    private void AddRoles(ClaimsIdentity claimsIdentity, string claimRoles)
+    private static void AddRoles(ClaimsIdentity claimsIdentity, string claimRoles)
     {
         var roles = claimRoles.Split(';');
         foreach (var role in roles)

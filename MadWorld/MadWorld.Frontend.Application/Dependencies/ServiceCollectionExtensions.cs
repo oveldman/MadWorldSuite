@@ -10,6 +10,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
         services.AddScoped<IGetAccountsUseCase, GetAccountsUseCase>();
+        services.AddScoped<IPatchAccountUseCase, PatchAccountUseCase>();
         
         return services;
     }
