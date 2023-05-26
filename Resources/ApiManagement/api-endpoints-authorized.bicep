@@ -34,7 +34,7 @@ resource getAccountsPolicy 'Microsoft.ApiManagement/service/apis/operations/poli
   name: 'policy'
   parent: getAccounts
   properties: {
-    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
     format: 'rawxml'
   }
 }
@@ -62,7 +62,7 @@ resource getAccountPolicy 'Microsoft.ApiManagement/service/apis/operations/polic
   name: 'policy'
   parent: getAccount
   properties: {
-    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
     format: 'rawxml'
   }
 }
@@ -273,7 +273,7 @@ resource patchAccountsPolicy 'Microsoft.ApiManagement/service/apis/operations/po
   name: 'policy'
   parent: patchAccounts
   properties: {
-    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
     format: 'rawxml'
   }
 }
