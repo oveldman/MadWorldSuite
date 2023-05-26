@@ -21,6 +21,7 @@
             </allowed-methods>
             <allowed-headers>
                 <header>authorization</header>
+				<header>content-type</header>
             </allowed-headers>
 		</cors>
 	</inbound>

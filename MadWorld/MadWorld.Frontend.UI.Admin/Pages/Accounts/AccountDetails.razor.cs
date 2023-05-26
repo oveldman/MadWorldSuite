@@ -65,7 +65,7 @@ public partial class AccountDetails
         }
     }
 
-    public void UserCheckBoxChanged(bool isChecked)
+    private void UserCheckBoxChanged(bool isChecked)
     {
         if (!isChecked)
         {
