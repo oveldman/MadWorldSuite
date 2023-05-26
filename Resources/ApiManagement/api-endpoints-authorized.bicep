@@ -256,3 +256,24 @@ resource getRenderSwaggerUIPolicy 'Microsoft.ApiManagement/service/apis/operatio
     format: 'rawxml'
   }
 }
+
+resource patchAccounts 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'patch-accounts'
+  parent: authorizedApi
+  properties: {
+    displayName: 'PatchAccounts'
+    method: 'PATCH'
+    urlTemplate: '/Account'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource patchAccountsPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: patchAccounts
+  properties: {
+    value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    format: 'rawxml'
+  }
+}
