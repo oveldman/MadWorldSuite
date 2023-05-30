@@ -28,3 +28,7 @@ module storage './storage.bicep' = {
     location: location
   }
 }
+
+module applicationInsightSmartDetection './application-insights-smart-detection.bicep' = {
+  name: 'applicationInsightSmartDetection'
+}
