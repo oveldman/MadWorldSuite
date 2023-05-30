@@ -12,6 +12,8 @@ module apiAnonymous './azure-function.bicep' = {
     location: location
     azureFunctionName: anonymousApiName
     serverFarmName: 'ASP-MadWorldSuite-8a87'
+    healthCheckName: 'health check-madworld-api-anonymous'
+    healthCheckEndpoint: 'https://api.mad-world.nl/anonymous/healthcheck'
   }
 }
 
@@ -21,6 +23,8 @@ module apiAuthorized './azure-function.bicep' = {
     location: location
     azureFunctionName: authorizedApiName
     serverFarmName: 'ASP-MadWorldSuite-a137'
+    healthCheckName: 'health check-madworld-api-authorized'
+    healthCheckEndpoint: 'https://api.mad-world.nl/authorized/healthcheck'
   }
 }
 
