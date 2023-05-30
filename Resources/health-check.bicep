@@ -3,9 +3,16 @@ param name string = 'health check-madworld-api-authorized'
 param applicationInsightName string = 'madworld-api-authorized'
 param healthEndpoint string = 'https://api.mad-world.nl/authorized/healthcheck'
 
+resource applicationInsight 'Microsoft.Insights/components@2020-02-02' existing = {
+  name: applicationInsightName
+}
+
 resource webTests 'Microsoft.Insights/webtests@2022-06-15' = {
   name: name
   location: location
+  tags: {
+    'hidden-link:${applicationInsight.id}': 'Resource'
+  }
   properties: {
     SyntheticMonitorId: name
     Name: 'Health Check'
@@ -50,13 +57,13 @@ resource webTests 'Microsoft.Insights/webtests@2022-06-15' = {
   }
 }
 
-resource applicationInsight 'Microsoft.Insights/components@2020-02-02' existing = {
-  name: applicationInsightName
-}
-
 resource metricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: name
   location: 'global'
+  tags: {
+    'hidden-link:${applicationInsight.id}': 'Resource'
+    'hidden-link:${webTests.id}': 'Resource'
+  }
   properties: {
     description: 'Automatically created alert rule for availability test ${name}'
     severity: 1
