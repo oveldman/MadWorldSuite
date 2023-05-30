@@ -20,7 +20,7 @@ public class GetAccountUseCase : IGetAccountUseCase
 
         return response.Match(
             r => ConvertToAccount(r.Account),
-            _ = Option<Account>.None);
+            Option<Account>.None);
     }
 
     private static Account ConvertToAccount(AccountDetailContract contract)

@@ -104,7 +104,7 @@ public class AuthorizeMiddleWareTests
     public async Task Invoke_GivenUserHasNotRole_ReturnUnauthorized()
     {
         // Arrange
-        const string functionTypeName = $"MadWorld.Backend.Api.Shared.Unittests.Authorization.Mocks.{nameof(MockFunction)}.Run";
+        const string functionTypeName = $"MadWorld.Backend.Api.Shared.Unittests.Authorization.TestUtils.{nameof(MockFunction)}.Run";
         var url = new Uri($"https://www.test.nl/api/{nameof(MockFunction)}");
         
         var assemblyLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MadWorld.Backend.Api.Shared.Unittests.dll");
