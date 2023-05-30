@@ -2,6 +2,8 @@ param location string = resourceGroup().location
 param insightName string = 'madworld-api-anonymous'
 param healthCheckName string = 'health check-madworld-api-anonymous'
 param healthCheckEndpoint string = 'https://api.mad-world.nl/anonymous/healthcheck'
+param smartDectectionName string = 'Application Insights Smart Detection'
+
 
 resource workspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' existing = {
   name: 'DefaultWorkspace-5ca43083-11a2-4ba3-b1cc-26869661f2e6-WEU'
@@ -281,6 +283,14 @@ resource slowServerResponseTime 'Microsoft.Insights/components/ProactiveDetectio
     Enabled: true
     SendEmailsToSubscriptionOwners: true
     CustomEmails: []
+  }
+}
+
+module failureAnomalies './failure-anomalies.bicep' = {
+  name: 'failureAnomalies'
+  params: {
+    applicationInsightName: insightName
+    smartDectectionName: smartDectectionName
   }
 }
 

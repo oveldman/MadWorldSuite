@@ -1,4 +1,5 @@
 param location string = resourceGroup().location
+param smartDetectionName string = 'Application Insights Smart Detection'
 @secure()
 param anonymousApiKey string 
 @secure()
@@ -19,6 +20,7 @@ module functionsAPIs './suite-apis.bicep' = {
     anonymousApiKey: anonymousApiKey
     authorizedApiName: 'madworld-api-authorized'
     authorizedApiKey: authorizedApiKey
+    smartDectectionName: smartDetectionName
   }
 }
 
@@ -31,4 +33,7 @@ module storage './storage.bicep' = {
 
 module applicationInsightSmartDetection './application-insights-smart-detection.bicep' = {
   name: 'applicationInsightSmartDetection'
+  params: {
+    name: smartDetectionName
+  }
 }

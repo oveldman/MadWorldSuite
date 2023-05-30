@@ -3,6 +3,7 @@ param azureFunctionName string = 'madworld-api-anonymous'
 param serverFarmName string = 'ASP-MadWorldSuite-8a87'
 param healthCheckName string = 'health check-madworld-api-authorized'
 param healthCheckEndpoint string = 'https://api.mad-world.nl/authorized/healthcheck'
+param smartDectectionName string = 'Application Insights Smart Detection'
 
 resource serverFarm 'Microsoft.Web/serverfarms@2022-09-01' = {
   name: serverFarmName
@@ -36,6 +37,7 @@ module applicationInsight './application-insight.bicep' = {
     location: location
     healthCheckName: healthCheckName
     healthCheckEndpoint: healthCheckEndpoint
+    smartDectectionName: smartDectectionName
   }
 }
 

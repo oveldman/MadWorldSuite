@@ -1,5 +1,7 @@
+param name string = 'Application Insights Smart Detection'
+
 resource actionGroup 'Microsoft.Insights/actionGroups@2023-01-01' = {
-  name: 'Application Insights Smart Detection'
+  name: name
   location: 'Global'
   properties: {
     groupShortName: 'SmartDetect'

@@ -17,7 +17,7 @@ resource webTests 'Microsoft.Insights/webtests@2022-06-15' = {
     SyntheticMonitorId: name
     Name: 'Health Check'
     Enabled: false
-    Frequency: 900
+    Frequency: 86400
     Timeout: 120
     Kind: 'standard'
     RetryEnabled: true
