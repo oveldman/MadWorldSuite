@@ -11,7 +11,7 @@ resource actionGroup 'Microsoft.Insights/actionGroups@2023-01-01' existing = {
 
 
 resource smartdetectoralertrules 'microsoft.alertsManagement/smartDetectorAlertRules@2021-04-01' = {
-  name: 'failure anomalies - ${applicationInsight}'
+  name: format('failure anomalies - {0}', applicationInsightName)
   location: 'global'
   properties: {
     description: 'Failure Anomalies notifies you of an unusual rise in the rate of failed HTTP requests or dependency calls.'
