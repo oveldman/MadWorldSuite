@@ -1,18 +1,18 @@
 using System.Net;
+using MadWorld.Backend.Domain.Status;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 
 namespace MadWorld.Backend.API.Shared.Functions.Status;
 
 public class HealthCheck
 {
-    private readonly HealthCheckService _healthCheck;
-    public HealthCheck(HealthCheckService healthCheck)
+    private readonly IGetHealthStatusUseCase _useCase;
+    public HealthCheck(IGetHealthStatusUseCase useCase)
     {
-        _healthCheck = healthCheck;
+        _useCase = useCase;
     }
     
     [Function(nameof(HealthCheck))]
@@ -24,7 +24,6 @@ public class HealthCheck
         var logger = executionContext.GetLogger(nameof(HealthCheck));
         logger.LogInformation("Received heartbeat request");
 
-        var status = await _healthCheck.CheckHealthAsync();
-        return status.Status.ToString();
+        return await _useCase.GetHealthStatus();
     }
 }

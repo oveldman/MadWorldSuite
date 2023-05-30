@@ -4,5 +4,5 @@ namespace MadWorld.Backend.Domain.Status;
 
 public interface IGetStatusUseCase
 {
-    GetStatusResponse GetStatus();
+    Task<GetStatusResponse> GetStatus();
 }

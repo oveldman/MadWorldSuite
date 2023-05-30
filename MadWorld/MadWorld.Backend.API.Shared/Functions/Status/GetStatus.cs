@@ -19,9 +19,9 @@ public class GetStatus
     [Function(nameof(GetStatus))]
     [OpenApiOperation(operationId: nameof(GetStatus), tags: new[] { "Status" })]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetStatusResponse), Description = "Returned all statuses from services")] 
-    public GetStatusResponse Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req,
+    public async Task<GetStatusResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req,
         FunctionContext executionContext)
     {
-        return _useCase.GetStatus();
+        return await _useCase.GetStatus();
     }
 }

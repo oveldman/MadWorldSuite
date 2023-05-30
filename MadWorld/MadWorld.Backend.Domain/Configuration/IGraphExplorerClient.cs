@@ -9,5 +9,6 @@ public interface IGraphExplorerClient
 {
     Task<Option<Account>> GetUserAsync(GuidId id);
     Task<IReadOnlyList<Account>> GetUsersAsync();
+    Task<Result<bool>> TestConnection();
     Task<Result<bool>> UpdateUser(Account account);
 }

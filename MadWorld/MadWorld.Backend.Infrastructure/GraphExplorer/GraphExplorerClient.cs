@@ -26,6 +26,19 @@ public class GraphExplorerClient : IGraphExplorerClient
         _logger = logger;
         _extensionApplicationId = configurations.ApplicationId.Replace("-", "");
     }
+
+    public async Task<Result<bool>> TestConnection()
+    {
+        try
+        {
+            await _graphServiceClient.Privacy.GetAsync();
+            return true;
+        }
+        catch (Exception exception)
+        {
+            return new Result<bool>(exception);
+        }
+    }
     
     public async Task<Option<Account>> GetUserAsync(GuidId id)
     {
