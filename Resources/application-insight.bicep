@@ -286,18 +286,18 @@ resource slowServerResponseTime 'Microsoft.Insights/components/ProactiveDetectio
   }
 }
 
-/*
+
 module failureAnomalies './failure-anomalies.bicep' = {
-  name: 'failureAnomalies'
+  name: 'failureAnomalies-${insightName}'
   params: {
     applicationInsightName: insightName
     smartDectectionName: smartDectectionName
   }
 }
-*/
+
 
 module healthCheck './health-check.bicep' = {
-  name: 'healthCheck'
+  name: 'healthCheck-${insightName}'
   params: {
     name: healthCheckName
     applicationInsightName: insightName
