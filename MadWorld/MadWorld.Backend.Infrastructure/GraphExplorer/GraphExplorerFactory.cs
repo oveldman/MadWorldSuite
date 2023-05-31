@@ -33,6 +33,6 @@ internal class GraphExplorerFactory
         var clientSecretCredential = new ClientSecretCredential(
             configurations.TenantId, configurations.ClientId, configurations.ClientSecret, options);
         
-        return new GraphServiceClient(clientSecretCredential, _scopes);
+        return new GraphServiceClient(clientSecretCredential, _scopes, configurations.BaseUrl);
     }
 }

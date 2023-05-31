@@ -7,6 +7,7 @@
     "AzureAD__TenantId": "<TEMP>",
     "AzureAD__ClientId": "<TEMP>",
     "AzureAD__ClientSecret": "<TEMP>",
+    "GraphExplorer__BaseUrl": null,
     "OpenApi__BaseUrl": "https://api.mad-world.nl/authorized/",
     "OpenApi__GitUrl": "https/www.github.com/oveldman/MadWorldSuite/",
     "OpenApi__DocumentName": "Mad World API Authorized"

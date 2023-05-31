@@ -6,4 +6,5 @@ public class GraphExplorerConfigurations
     public string TenantId { get; init; } = null!;
     public string ClientId { get; init; } = null!;
     public string ClientSecret { get; init; } = null!;
+    public string BaseUrl { get; init; } = null!;
 }
