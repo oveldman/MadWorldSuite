@@ -56,14 +56,6 @@ public class GetAccountsTests : IClassFixture<ApiStartupFactory>, IAsyncLifetime
         response.Accounts.ElementAt(1).IsResourceOwner = true;
     }
 
-    private string GetMappingPath()
-    {
-        var test = _wireMockServer.MappingModels.First()?.Request?.Path as PathModel;
-        var test2 = test?.Matchers.First().Pattern.ToString();
-
-        return test2;
-    }
-
     public Task InitializeAsync()
     {
         return Task.CompletedTask;

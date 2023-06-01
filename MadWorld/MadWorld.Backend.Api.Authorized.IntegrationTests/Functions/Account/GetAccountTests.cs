@@ -29,7 +29,7 @@ public class GetAccountTests: IClassFixture<ApiStartupFactory>, IAsyncLifetime
     }
     
     [Fact]
-    public async Task GetAccount_Regularly_ShouldReturnExpectedResult()
+    public void GetAccount_Regularly_ShouldReturnExpectedResult()
     {
         // Arrange
         const string userId = "4ce4ed46-cd2e-4529-88c0-57ed36e0f91b";
