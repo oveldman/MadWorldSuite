@@ -1,9 +1,12 @@
 using MadWorld.Backend.API.Authorized.Functions.Account;
 using MadWorld.Backend.Domain.Accounts;
+using MadWorld.Backend.Domain.LanguageExt;
+using MadWorld.Shared.Contracts.Authorized.Account;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using Shouldly;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -47,6 +50,15 @@ public class GetAccountTests: IClassFixture<ApiStartupFactory>, IAsyncLifetime
         var response = _function.Run(request.Object, context.Object, userId);
         
         // Assert
+        var result = response
+            .GetValue()
+            .Match(r => r, () => default!);
+        
+        result.Account.Id.ShouldBe("e88faade-0c94-40c7-868d-5fd9d2982089");
+        result.Account.Name.ShouldBe("Gerald Ruben");
+        result.Account.IsResourceOwner.ShouldBe(false);
+        result.Account.Roles.Count.ShouldBe(3);
+        result.Account.Roles.ShouldContain("Admin");
     }
     
     public Task InitializeAsync()

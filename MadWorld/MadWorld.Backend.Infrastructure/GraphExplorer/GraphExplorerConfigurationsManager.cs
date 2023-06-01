@@ -12,7 +12,7 @@ internal static class GraphExplorerConfigurationsManager
             TenantId = Environment.GetEnvironmentVariable("AzureAD__TenantId") ?? string.Empty,
             ClientId = Environment.GetEnvironmentVariable("AzureAD__ClientId") ?? string.Empty,
             ClientSecret = Environment.GetEnvironmentVariable("AzureAD__ClientSecret") ?? string.Empty,
-            BaseUrl = configurationOverrider?.GraphExplorerBaseUrl!
+            BaseUrl = configurationOverrider?.GraphExplorerBaseUrl ?? Environment.GetEnvironmentVariable("GraphExplorer_BaseUrl")!
         };
     }
 }
