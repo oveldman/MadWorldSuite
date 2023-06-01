@@ -4,7 +4,7 @@ namespace MadWorld.Backend.Infrastructure.GraphExplorer;
 
 internal static class GraphExplorerConfigurationsManager
 {
-    internal static GraphExplorerConfigurations Get()
+    internal static GraphExplorerConfigurations Get(ConfigurationOverrider? configurationOverrider = null)
     {
         return new GraphExplorerConfigurations()
         {
@@ -12,7 +12,7 @@ internal static class GraphExplorerConfigurationsManager
             TenantId = Environment.GetEnvironmentVariable("AzureAD__TenantId") ?? string.Empty,
             ClientId = Environment.GetEnvironmentVariable("AzureAD__ClientId") ?? string.Empty,
             ClientSecret = Environment.GetEnvironmentVariable("AzureAD__ClientSecret") ?? string.Empty,
-            BaseUrl = Environment.GetEnvironmentVariable("GraphExplorer__BaseUrl")!
+            BaseUrl = configurationOverrider?.GraphExplorerBaseUrl!
         };
     }
 }

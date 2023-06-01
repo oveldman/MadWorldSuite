@@ -1,12 +1,12 @@
+using LanguageExt.Pretty;
 using MadWorld.Backend.API.Authorized.Functions.Account;
 using MadWorld.Backend.Domain.Accounts;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
-using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Moq;
 using Shouldly;
+using WireMock.Admin.Mappings;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -27,10 +27,11 @@ public class GetAccountsTests : IClassFixture<ApiStartupFactory>, IAsyncLifetime
         var useCase = factory.Host.Services.GetRequiredService<IGetAccountsUseCase>();
         _function = new GetAccounts(useCase);
     }
-    
+
     [Fact]
     public async Task GetAccounts_Regularly_ShouldReturnExpectedResult()
     {
+        // Arrange
         var context = new Mock<FunctionContext>();
         var request = new Mock<HttpRequestData>(context.Object);
 
@@ -39,11 +40,15 @@ public class GetAccountsTests : IClassFixture<ApiStartupFactory>, IAsyncLifetime
         ).RespondWith(
             Response.Create()
                 .WithStatusCode(200)
-                .WithHeader("Content-Type", "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8")
+                .WithHeader("Content-Type",
+                    "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8")
                 .WithBody(GetGraphExplorerResponse())
-            );
-        
+        );
+
+        // Act
         var response = await _function.Run(request.Object, context.Object);
+
+        // Assert
         response.Accounts.Count.ShouldBe(2);
         response.Accounts.ElementAt(0).Id = "e88faade-0c94-40c7-868d-5fd9d2982089";
         response.Accounts.ElementAt(0).Name = "Gerald Ruben";
@@ -51,18 +56,25 @@ public class GetAccountsTests : IClassFixture<ApiStartupFactory>, IAsyncLifetime
         response.Accounts.ElementAt(1).IsResourceOwner = true;
     }
 
+    private string GetMappingPath()
+    {
+        var test = _wireMockServer.MappingModels.First()?.Request?.Path as PathModel;
+        var test2 = test?.Matchers.First().Pattern.ToString();
+
+        return test2;
+    }
+
     public Task InitializeAsync()
     {
         return Task.CompletedTask;
     }
 
-    public Task DisposeAsync()
+    public async Task DisposeAsync()
     {
-        _factory.Host.Dispose();
-        return Task.CompletedTask;
+        await _factory.DisposeAsync();
     }
 
-    private string GetGraphExplorerResponse()
+    private static string GetGraphExplorerResponse()
     {
         return """
         {
