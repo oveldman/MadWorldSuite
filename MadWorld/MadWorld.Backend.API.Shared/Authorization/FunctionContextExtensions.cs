@@ -44,19 +44,7 @@ public static class FunctionContextExtensions
     public static User GetUser(this FunctionContext context)
     {
         var claimsPrincipal = context.Features.Get<ClaimsPrincipal>();
-
-        if (claimsPrincipal == null)
-        {
-            throw new AuthenticationException("User not found.");
-        }
-        
-        return new User()
-        {
-            Id = claimsPrincipal.GetClaimValue("oid"),
-            Name = claimsPrincipal.GetClaimValue("name"),
-            Email = claimsPrincipal.GetClaimValue("emails"),
-            Roles = claimsPrincipal.GetClaimValue(ClaimNames.Role)
-        };
+        return claimsPrincipal.GetUser();
     }
     
     private static MethodInfo? GetTargetFunctionMethod(this FunctionContext context)

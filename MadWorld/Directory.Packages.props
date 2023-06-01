@@ -31,6 +31,8 @@
     <PackageVersion Include="Radzen.Blazor" Version="4.12.0" />
     <PackageVersion Include="Shouldly" Version="4.2.1" />
     <PackageVersion Include="WireMock.Net" Version="1.5.26" />
+    <PackageVersion Include="WireMock.Net.FluentAssertions" Version="1.5.26" />
+    <PackageVersion Include="WireMock.Net.xUnit" Version="1.5.26" />
     <PackageVersion Include="xunit" Version="2.4.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5" />
   </ItemGroup>

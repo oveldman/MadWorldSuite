@@ -14,6 +14,8 @@
         <PackageReference Include="Moq" />
         <PackageReference Include="Shouldly" />
         <PackageReference Include="WireMock.Net" />
+        <PackageReference Include="WireMock.Net.FluentAssertions" />
+        <PackageReference Include="WireMock.Net.xUnit" />
         <PackageReference Include="xunit" />
         <PackageReference Include="xunit.runner.visualstudio">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -27,6 +29,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Backend.API.Authorized\MadWorld.Backend.API.Authorized.csproj" />
+      <ProjectReference Include="..\MadWorld.IntegrationTests\MadWorld.IntegrationTests.csproj" />
     </ItemGroup>
 
 </Project>

@@ -6,12 +6,7 @@ namespace MadWorld.Backend.API.Shared.Authorization;
 
 public static class ClaimsPrincipalExtensions
 {
-    public static string GetClaimValue(this ClaimsPrincipal principal, string name)
-    {
-        return principal.Claims.FirstOrDefault(c => c.Type == name)?.Value ?? string.Empty;
-    }
-    
-    public static User GetUser(this ClaimsPrincipal claimsPrincipal)
+    public static User GetUser(this ClaimsPrincipal? claimsPrincipal)
     {
         if (claimsPrincipal == null)
         {
@@ -25,5 +20,10 @@ public static class ClaimsPrincipalExtensions
             Email = claimsPrincipal.GetClaimValue("emails"),
             Roles = claimsPrincipal.GetClaimValue(ClaimNames.Role)
         };
+    }
+    
+    private static string GetClaimValue(this ClaimsPrincipal principal, string name)
+    {
+        return principal.Claims.FirstOrDefault(c => c.Type == name)?.Value ?? string.Empty;
     }
 }
