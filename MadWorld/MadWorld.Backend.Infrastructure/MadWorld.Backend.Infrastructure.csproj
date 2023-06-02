@@ -10,7 +10,4 @@
   <ItemGroup>
     <ProjectReference Include="..\MadWorld.Backend.Domain\MadWorld.Backend.Domain.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TableStorage\" />
-  </ItemGroup>
 </Project>
