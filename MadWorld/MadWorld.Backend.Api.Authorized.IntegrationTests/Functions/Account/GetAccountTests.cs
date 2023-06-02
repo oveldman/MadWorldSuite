@@ -1,7 +1,6 @@
 using MadWorld.Backend.API.Authorized.Functions.Account;
 using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Backend.Domain.LanguageExt;
-using MadWorld.Shared.Contracts.Authorized.Account;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.DependencyInjection;
