@@ -1,6 +1,6 @@
 namespace MadWorld.Frontend.Domain.Api;
 
-public class ApiUrls
+public sealed class ApiUrls
 {
     public const string SectionName = "ApiUrls";
     

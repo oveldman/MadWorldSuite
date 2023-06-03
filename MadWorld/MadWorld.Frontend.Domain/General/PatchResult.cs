@@ -1,6 +1,6 @@
 namespace MadWorld.Frontend.Domain.General;
 
-public class PatchResult
+public sealed class PatchResult
 {
     public bool IsSuccess { get; set; }
     public string ErrorMessage { get; set; } = string.Empty;

@@ -5,7 +5,7 @@ using MadWorld.Shared.Contracts.Shared.Authorization;
 
 namespace MadWorld.Frontend.Application.Accounts;
 
-public class GetAccountUseCase : IGetAccountUseCase
+public sealed class GetAccountUseCase : IGetAccountUseCase
 {
     private readonly IAccountService _service;
 

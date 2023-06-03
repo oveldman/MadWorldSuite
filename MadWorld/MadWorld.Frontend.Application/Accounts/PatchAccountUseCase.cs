@@ -5,7 +5,7 @@ using MadWorld.Shared.Contracts.Shared.Authorization;
 
 namespace MadWorld.Frontend.Application.Accounts;
 
-public class PatchAccountUseCase : IPatchAccountUseCase
+public sealed class PatchAccountUseCase : IPatchAccountUseCase
 {
     private readonly IAccountService _service;
     

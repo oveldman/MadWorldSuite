@@ -3,7 +3,7 @@ using MadWorld.Frontend.Domain.Api;
 
 namespace MadWorld.Frontend.Infrastructure.Test;
 
-public class PingService : IPingService
+public sealed class PingService : IPingService
 {
     private readonly HttpClient _anonymousClient;
     private readonly HttpClient _authorizedClient;

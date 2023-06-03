@@ -8,7 +8,7 @@ using MadWorld.Shared.Contracts.Shared.Error;
 
 namespace MadWorld.Frontend.Infrastructure.Accounts;
 
-public class AccountService : IAccountService
+public sealed class AccountService : IAccountService
 {
     private const string Endpoint = "Account";
     

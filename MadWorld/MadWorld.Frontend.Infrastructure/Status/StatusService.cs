@@ -5,7 +5,7 @@ using MadWorld.Shared.Contracts.Shared.Status;
 
 namespace MadWorld.Frontend.Infrastructure.Status;
 
-public class StatusService : IStatusService
+public sealed class StatusService : IStatusService
 {
     private const string ApiStatusEndpoint = "GetStatus";
     

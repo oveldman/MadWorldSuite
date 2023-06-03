@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 
 namespace MadWorld.Shared.Contracts.Authorized.Account;
 
-public class AccountDetailContract
+public sealed class AccountDetailContract
 {
     public string Id { get; set; } = null!;
     public string Name { get; set; } = null!;

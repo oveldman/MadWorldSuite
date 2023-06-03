@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace MadWorld.Frontend.UI.Shared.Security;
 
-public class SuiteAuthorizedMessageHandler : AuthorizationMessageHandler
+public sealed class SuiteAuthorizedMessageHandler : AuthorizationMessageHandler
 {
     public SuiteAuthorizedMessageHandler(IAccessTokenProvider provider, 
         NavigationManager navigation,
