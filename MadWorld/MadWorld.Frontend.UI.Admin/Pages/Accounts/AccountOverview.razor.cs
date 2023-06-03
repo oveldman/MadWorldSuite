@@ -7,7 +7,7 @@ using Radzen;
 namespace MadWorld.Frontend.UI.Admin.Pages.Accounts;
 
 [UsedImplicitly]
-public partial class AccountOverview
+public sealed partial class AccountOverview
 {
     private bool IsReady { get; set; }
     

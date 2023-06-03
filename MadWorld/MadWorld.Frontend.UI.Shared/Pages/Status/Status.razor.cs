@@ -1,10 +1,12 @@
+using JetBrains.Annotations;
 using MadWorld.Frontend.Application.Status;
 using MadWorld.Shared.Contracts.Shared.Status;
 using Microsoft.AspNetCore.Components;
 
 namespace MadWorld.Frontend.UI.Shared.Pages.Status;
 
-public partial class Status
+[UsedImplicitly]
+public sealed  partial class Status
 {
     private bool IsReady { get; set; }
     private GetStatusResponse AnonymousStatus { get; set; } = new();

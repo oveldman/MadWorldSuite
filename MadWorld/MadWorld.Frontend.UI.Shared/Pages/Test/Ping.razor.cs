@@ -1,10 +1,12 @@
+using JetBrains.Annotations;
 using MadWorld.Frontend.Application.Test;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace MadWorld.Frontend.UI.Shared.Pages.Test;
 
-public partial class Ping
+[UsedImplicitly]
+public sealed partial class Ping
 {
     private string AnonymousMessage { get; set; } = string.Empty;
     private string AuthorizedMessage { get; set; } = string.Empty;
