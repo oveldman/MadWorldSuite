@@ -4,5 +4,5 @@ namespace MadWorld.Shared.Contracts.Authorized.CurriculumVitae;
 
 public class PatchCurriculumVitaeResponse : IResponse
 {
-    public const bool Succeeded = true;
+    public bool Succeeded { get; private set; } = true;
 }

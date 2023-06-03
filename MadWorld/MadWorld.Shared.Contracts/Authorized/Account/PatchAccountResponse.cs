@@ -4,5 +4,5 @@ namespace MadWorld.Shared.Contracts.Authorized.Account;
 
 public sealed class PatchAccountResponse : IResponse
 {
-    public const bool Succeeded = true;
+    public bool Succeeded { get; private set; } = true;
 }
