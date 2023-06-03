@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace MadWorld.Backend.Api.Anonymous.IntegrationTests;
 
-public class ApiStartupFactory : IAsyncDisposable
+public sealed class ApiStartupFactory : IAsyncDisposable
 {
     public readonly IHost Host;
 

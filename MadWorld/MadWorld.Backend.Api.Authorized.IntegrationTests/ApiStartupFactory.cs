@@ -3,12 +3,11 @@ using MadWorld.Backend.Domain.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Graph.Models.ExternalConnectors;
 using WireMock.Server;
 
 namespace MadWorld.Backend.Api.Authorized.IntegrationTests;
 
-public class ApiStartupFactory : IAsyncDisposable
+public sealed class ApiStartupFactory : IAsyncDisposable
 {
     public readonly IHost Host;
 

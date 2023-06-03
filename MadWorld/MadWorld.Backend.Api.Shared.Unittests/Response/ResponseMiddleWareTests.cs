@@ -11,7 +11,7 @@ using Microsoft.Azure.Functions.Worker.Middleware;
 
 namespace MadWorld.Backend.Api.Shared.Unittests.Response;
 
-public class ResponseMiddleWareTests
+public sealed class ResponseMiddleWareTests
 {
     private const string HttpTrigger = "HttpTrigger";
     

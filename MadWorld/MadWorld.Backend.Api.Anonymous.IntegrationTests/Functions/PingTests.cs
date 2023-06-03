@@ -6,7 +6,7 @@ using Shouldly;
 
 namespace MadWorld.Backend.Api.Anonymous.IntegrationTests.Functions;
 
-public class PingTests
+public sealed class PingTests
 {
     [Fact]
     public void Ping_Regularly_ShouldReturnExpectedResult()

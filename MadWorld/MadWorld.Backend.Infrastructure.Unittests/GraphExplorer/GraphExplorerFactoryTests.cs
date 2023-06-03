@@ -6,7 +6,7 @@ using Shouldly;
 
 namespace MadWorld.Backend.Infrastructure.Unittests.GraphExplorer;
 
-public class GraphExplorerFactoryTests
+public sealed class GraphExplorerFactoryTests
 {
     [Fact]
     public void CreateClient_GivenConfiguration_ThenReturnNewClient()

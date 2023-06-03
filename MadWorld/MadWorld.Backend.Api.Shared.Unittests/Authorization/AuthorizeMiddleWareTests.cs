@@ -10,7 +10,7 @@ using Microsoft.Azure.Functions.Worker.Middleware;
 
 namespace MadWorld.Backend.Api.Shared.Unittests.Authorization;
 
-public class AuthorizeMiddleWareTests
+public sealed class AuthorizeMiddleWareTests
 {
     private const string HttpTrigger = "HttpTrigger";
     
