@@ -1,6 +1,8 @@
+using LanguageExt;
+
 namespace MadWorld.Backend.Domain.CurriculaVitae;
 
 public interface ICurriculumVitaeRepository
 {
-    CurriculumVitae GetCurriculumVitae();
+    Option<CurriculumVitae> GetCurriculumVitae();
 }

@@ -1,4 +1,5 @@
 using System.Net;
+using LanguageExt;
 using MadWorld.Backend.Domain.CurriculaVitae;
 using MadWorld.Shared.Contracts.Anonymous.CurriculumVitae;
 using Microsoft.Azure.Functions.Worker;
@@ -19,7 +20,7 @@ public class GetCurriculumVitae
     [Function("GetCurriculumVitae")]
     [OpenApiOperation(operationId: "GetCurriculumVitae", tags: new[] { "CurriculumVitae" })]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetCurriculumVitaeResponse), Description = "The OK response")] 
-    public GetCurriculumVitaeResponse Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "CurriculumVitae")] HttpRequestData request,
+    public Option<GetCurriculumVitaeResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "CurriculumVitae")] HttpRequestData request,
         FunctionContext executionContext)
     {
         return _useCase.GetCurriculumVitae();

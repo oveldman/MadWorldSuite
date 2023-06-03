@@ -1,3 +1,5 @@
+using LanguageExt;
+using LanguageExt.UnsafeValueAccess;
 using MadWorld.Backend.Domain.CurriculaVitae;
 using MadWorld.Shared.Contracts.Anonymous.CurriculumVitae;
 
@@ -12,15 +14,20 @@ public class GetCurriculumVitaeUseCase : IGetCurriculumVitaeUseCase
         _curriculumVitaeRepository = curriculumVitaeRepository;
     }
 
-    public GetCurriculumVitaeResponse GetCurriculumVitae()
+    public Option<GetCurriculumVitaeResponse> GetCurriculumVitae()
     {
-        var curriculumVitae = _curriculumVitaeRepository.GetCurriculumVitae();
+        var curriculumVitaeOption = _curriculumVitaeRepository.GetCurriculumVitae();
+
+        if (curriculumVitaeOption.IsNone)
+        {
+            return Option<GetCurriculumVitaeResponse>.None;
+        }
         
         return new GetCurriculumVitaeResponse()
         {
             CurriculumVitae = new CurriculumVitaeContract()
             {
-                FullName = curriculumVitae.FullName
+                FullName = curriculumVitaeOption.ValueUnsafe().FullName
             }
         };
     }

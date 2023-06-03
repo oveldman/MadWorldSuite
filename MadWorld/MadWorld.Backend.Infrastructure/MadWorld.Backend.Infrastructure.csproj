@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <PackageReference Include="Azure.Data.Tables" />
     <PackageReference Include="Azure.Identity" />
     <PackageReference Include="LanguageExt.Core" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
