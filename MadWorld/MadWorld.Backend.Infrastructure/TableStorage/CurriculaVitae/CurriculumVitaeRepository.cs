@@ -42,7 +42,7 @@ public class CurriculumVitaeRepository : ICurriculumVitaeRepository
 
         var response = _table.UpsertEntity(entity);
 
-        //if (!response.IsError) return true;
+        if (!response.IsError) return true;
         
         var body = response.Content.ToString();
         var exception = new TableStorageException(body);
