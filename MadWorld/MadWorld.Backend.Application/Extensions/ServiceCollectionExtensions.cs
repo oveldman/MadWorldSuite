@@ -1,5 +1,5 @@
 using MadWorld.Backend.Application.Accounts;
-using MadWorld.Backend.Application.CurriculumVitae;
+using MadWorld.Backend.Application.CurriculaVitae;
 using MadWorld.Backend.Application.Status;
 using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Backend.Domain.CurriculaVitae;

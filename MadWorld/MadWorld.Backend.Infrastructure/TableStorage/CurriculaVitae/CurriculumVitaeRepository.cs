@@ -2,7 +2,9 @@ using static LanguageExt.Prelude;
 
 using Azure.Data.Tables;
 using LanguageExt;
+using LanguageExt.Common;
 using MadWorld.Backend.Domain.CurriculaVitae;
+using MadWorld.Backend.Domain.Exceptions;
 using Microsoft.Extensions.Logging;
 
 namespace MadWorld.Backend.Infrastructure.TableStorage.CurriculaVitae;
@@ -25,20 +27,45 @@ public class CurriculumVitaeRepository : ICurriculumVitaeRepository
     {
         var curriculumVitae = Optional(_table
             .Query<CurriculumVitaeEntity>(c 
-                => c.PartitionKey == CurriculumVitaeEntity.PartitionKeyName)
+                => c.PartitionKey == CurriculumVitaeEntity.PartitionKeyName &&
+                   c.RowKey == CurriculumVitaeEntity.RowKeyName)
             .FirstOrDefault());
 
         return curriculumVitae.Match(
-            cve =>
-            {
-                return CurriculumVitae.Parse(cve.FullName).Match(
-                    cv => cv,
-                    exception =>
-                    {
-                        _logger.LogError(exception, "The curriculum vitae entity has invalid data in the table storage");
-                        return Option<CurriculumVitae>.None;
-                    });
-            },
+            ToCurriculumVitae,
             () => Option<CurriculumVitae>.None);
+    }
+    
+    public Result<bool> UpdateCurriculumVitae(CurriculumVitae curriculumVitae)
+    {
+        var entity = ToCurriculumVitaeEntity(curriculumVitae);
+
+        var response = _table.UpsertEntity(entity);
+
+        if (!response.IsError) return true;
+        
+        var body = response.Content.ToString();
+        var exception = new TableStorageException(body);
+        _logger.LogError(exception, "The table storage has an error");
+        return new Result<bool>(exception);
+    }
+
+    private Option<CurriculumVitae> ToCurriculumVitae(CurriculumVitaeEntity entity)
+    {
+        return CurriculumVitae.Parse(entity.FullName).Match(
+            cv => cv,
+            exception =>
+            {
+                _logger.LogError(exception, "The curriculum vitae entity has invalid data in the table storage");
+                return Option<CurriculumVitae>.None;
+            });
+    }
+    
+    private static CurriculumVitaeEntity ToCurriculumVitaeEntity(CurriculumVitae curriculumVitae)
+    {
+        return new CurriculumVitaeEntity
+        {
+            FullName = curriculumVitae.FullName
+        };
     }
 }
