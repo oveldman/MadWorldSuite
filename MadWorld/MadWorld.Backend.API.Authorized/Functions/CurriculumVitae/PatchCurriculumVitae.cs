@@ -26,10 +26,10 @@ public class PatchCurriculumVitae
     [Authorize(RoleTypes.Admin)]
     [Function("PatchCurriculumVitae")]
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
-    [OpenApiOperation(operationId: "PatchAccount", tags: new[] { "Account" })]
+    [OpenApiOperation(operationId: "PatchCurriculumVitae", tags: new[] { "CurriculumVitae" })]
     [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(PatchCurriculumVitaeRequest), Required = true)]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(PatchCurriculumVitaeResponse), Description = "The OK response")]
-    public async Task<Result<PatchCurriculumVitaeResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData request,
+    public async Task<Result<PatchCurriculumVitaeResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "patch")] HttpRequestData request,
         FunctionContext executionContext)
     {
         var patchAccountRequest = await request.ReadFromJsonAsync<PatchCurriculumVitaeRequest>();
