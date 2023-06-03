@@ -14,6 +14,7 @@
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Frontend.Application\MadWorld.Frontend.Application.csproj" />
       <ProjectReference Include="..\MadWorld.Frontend.Domain\MadWorld.Frontend.Domain.csproj" />
+      <ProjectReference Include="..\MadWorld.Frontend.Infrastructure\MadWorld.Frontend.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
