@@ -28,7 +28,7 @@ public sealed class PatchAccount
     [Function("PatchAccount")]
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "PatchAccount", tags: new[] { "Account" })]
-    [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(PatchAccountRequest), Required = true)]
+    [OpenApiRequestBody(contentType: "application/json; charset=utf-8", bodyType: typeof(PatchAccountRequest), Required = true)]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(PatchAccountResponse), Description = "The OK response")]
     public async Task<Result<PatchAccountResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route="Account")] HttpRequestData req,
         FunctionContext executionContext)

@@ -27,7 +27,7 @@ public class PatchCurriculumVitae
     [Function("PatchCurriculumVitae")]
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "PatchCurriculumVitae", tags: new[] { "CurriculumVitae" })]
-    [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(PatchCurriculumVitaeRequest), Required = true)]
+    [OpenApiRequestBody(contentType: "application/json; charset=utf-8", bodyType: typeof(PatchCurriculumVitaeRequest), Required = true)]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(PatchCurriculumVitaeResponse), Description = "The OK response")]
     public async Task<Result<PatchCurriculumVitaeResponse>> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = "CurriculumVitae")] HttpRequestData request,
