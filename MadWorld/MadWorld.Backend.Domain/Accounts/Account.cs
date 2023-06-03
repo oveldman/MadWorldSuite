@@ -8,7 +8,7 @@ using MadWorld.Shared.Contracts.Shared.Authorization;
 
 namespace MadWorld.Backend.Domain.Accounts;
 
-public class Account
+public sealed class Account
 {
     private const string RoleSplitValue = ";";
     

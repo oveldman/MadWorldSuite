@@ -16,7 +16,7 @@ using Microsoft.Azure.Functions.Worker.Middleware;
 namespace MadWorld.Backend.API.Shared.Response;
 
 [UsedImplicitly]
-public class ResponseMiddleWare : IFunctionsWorkerMiddleware
+public sealed class ResponseMiddleWare : IFunctionsWorkerMiddleware
 {
     private readonly IFunctionContextWrapper _functionContextWrapper;
 

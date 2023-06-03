@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MadWorld.Backend.API.Shared.Functions.Status;
 
-public class HealthCheck
+public sealed class HealthCheck
 {
     private readonly IGetHealthStatusUseCase _useCase;
     public HealthCheck(IGetHealthStatusUseCase useCase)

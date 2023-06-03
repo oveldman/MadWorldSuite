@@ -9,7 +9,7 @@ using MadWorld.Shared.Contracts.Authorized.Account;
 
 namespace MadWorld.Backend.Application.Accounts;
 
-public class GetAccountUseCase : IGetAccountUseCase
+public sealed class GetAccountUseCase : IGetAccountUseCase
 {
     private readonly IGraphExplorerClient _client;
 

@@ -5,7 +5,7 @@ using MadWorld.Shared.Contracts.Anonymous.CurriculumVitae;
 
 namespace MadWorld.Backend.Application.CurriculumVitae;
 
-public class GetCurriculumVitaeUseCase : IGetCurriculumVitaeUseCase
+public sealed class GetCurriculumVitaeUseCase : IGetCurriculumVitaeUseCase
 {
     private readonly ICurriculumVitaeRepository _curriculumVitaeRepository;
 

@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace MadWorld.Backend.API.Shared.Authorization;
 
 [UsedImplicitly]
-public class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
+public sealed class AuthorizeMiddleWare : IFunctionsWorkerMiddleware
 {
     private readonly IFunctionContextWrapper _functionContextWrapper;
 

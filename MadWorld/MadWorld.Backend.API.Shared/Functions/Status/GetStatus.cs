@@ -7,7 +7,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 
 namespace MadWorld.Backend.API.Shared.Functions.Status;
 
-public class GetStatus
+public sealed class GetStatus
 {
     private readonly IGetStatusUseCase _useCase;
     

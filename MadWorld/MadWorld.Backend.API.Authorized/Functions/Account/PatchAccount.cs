@@ -15,7 +15,7 @@ using Microsoft.OpenApi.Models;
 
 namespace MadWorld.Backend.API.Authorized.Functions.Account;
 
-public class PatchAccount
+public sealed class PatchAccount
 {
     private readonly IPatchAccountUseCase _useCase;
     

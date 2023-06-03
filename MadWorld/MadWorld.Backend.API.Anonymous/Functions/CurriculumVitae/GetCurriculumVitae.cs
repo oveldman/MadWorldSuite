@@ -8,7 +8,7 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 
 namespace MadWorld.Backend.API.Anonymous.Functions.CurriculumVitae;
 
-public class GetCurriculumVitae
+public sealed class GetCurriculumVitae
 {
     private readonly IGetCurriculumVitaeUseCase _useCase;
 

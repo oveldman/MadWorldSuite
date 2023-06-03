@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MadWorld.Backend.Application.Status;
 
-public class GetHealthStatusUseCase : IGetHealthStatusUseCase
+public sealed class GetHealthStatusUseCase : IGetHealthStatusUseCase
 {
     private readonly ILogger<GetHealthStatusUseCase> _logger;
     private readonly HealthCheckService _healthCheck;

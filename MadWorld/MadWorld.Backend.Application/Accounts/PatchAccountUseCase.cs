@@ -7,7 +7,7 @@ using MadWorld.Shared.Contracts.Authorized.Account;
 
 namespace MadWorld.Backend.Application.Accounts;
 
-public class PatchAccountUseCase : IPatchAccountUseCase
+public sealed class PatchAccountUseCase : IPatchAccountUseCase
 {
     private readonly IGraphExplorerClient _client;
 

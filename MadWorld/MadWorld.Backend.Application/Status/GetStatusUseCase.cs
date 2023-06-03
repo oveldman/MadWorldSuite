@@ -5,7 +5,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace MadWorld.Backend.Application.Status;
 
-public class GetStatusUseCase : IGetStatusUseCase
+public sealed class GetStatusUseCase : IGetStatusUseCase
 {
     private readonly HealthCheckService _healthCheck;
 

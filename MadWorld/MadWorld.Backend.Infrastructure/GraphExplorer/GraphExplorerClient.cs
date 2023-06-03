@@ -12,7 +12,7 @@ using Microsoft.Graph.Models.ODataErrors;
 
 namespace MadWorld.Backend.Infrastructure.GraphExplorer;
 
-public class GraphExplorerClient : IGraphExplorerClient
+public sealed class GraphExplorerClient : IGraphExplorerClient
 {
     private readonly GraphServiceClient _graphServiceClient;
     private readonly string _extensionApplicationId;

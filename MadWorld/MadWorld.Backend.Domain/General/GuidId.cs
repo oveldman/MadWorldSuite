@@ -3,7 +3,7 @@ using MadWorld.Backend.Domain.Exceptions;
 
 namespace MadWorld.Backend.Domain.General;
 
-public class GuidId
+public sealed class GuidId
 {
     private readonly Guid _id;
 

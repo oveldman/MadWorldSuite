@@ -2,7 +2,7 @@ using LanguageExt.Common;
 
 namespace MadWorld.Backend.Domain.CurriculaVitae;
 
-public class CurriculumVitae
+public sealed class CurriculumVitae
 {
     public string FullName { get; set; } = string.Empty;
 

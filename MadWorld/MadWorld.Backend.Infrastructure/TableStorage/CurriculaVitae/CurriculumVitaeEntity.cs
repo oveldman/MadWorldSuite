@@ -1,10 +1,9 @@
 using Azure;
 using Azure.Data.Tables;
-using MadWorld.Backend.Domain.CurriculaVitae;
 
 namespace MadWorld.Backend.Infrastructure.TableStorage.CurriculaVitae;
 
-public class CurriculumVitaeEntity : ITableEntity
+public sealed class CurriculumVitaeEntity : ITableEntity
 {
     public const string PartitionKeyName = "CurriculumVitae";
     

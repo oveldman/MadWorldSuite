@@ -4,7 +4,7 @@ using MadWorld.Shared.Contracts.Authorized.Account;
 
 namespace MadWorld.Backend.Application.Accounts;
 
-public class GetAccountsUseCase : IGetAccountsUseCase
+public sealed class GetAccountsUseCase : IGetAccountsUseCase
 {
     private readonly IGraphExplorerClient _graphExplorerClient;
 

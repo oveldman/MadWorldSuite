@@ -1,6 +1,6 @@
 namespace MadWorld.Backend.Domain.Configuration;
 
-public class GraphExplorerConfigurations
+public sealed class GraphExplorerConfigurations
 {
     public string ApplicationId { get; init; } = null!;
     public string TenantId { get; init; } = null!;

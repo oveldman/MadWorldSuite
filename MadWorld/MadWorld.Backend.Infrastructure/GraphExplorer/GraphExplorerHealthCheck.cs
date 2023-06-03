@@ -3,7 +3,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace MadWorld.Backend.Infrastructure.GraphExplorer;
 
-public class GraphExplorerHealthCheck : IHealthCheck
+public sealed class GraphExplorerHealthCheck : IHealthCheck
 {
     private readonly IGraphExplorerClient _client;
 

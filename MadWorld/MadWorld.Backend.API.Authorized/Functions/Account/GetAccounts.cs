@@ -12,7 +12,7 @@ using Microsoft.OpenApi.Models;
 
 namespace MadWorld.Backend.API.Authorized.Functions.Account;
 
-public class GetAccounts
+public sealed class GetAccounts
 {
     private readonly IGetAccountsUseCase _useCase;
 

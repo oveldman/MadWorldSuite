@@ -2,7 +2,7 @@ using MadWorld.Shared.Contracts.Shared.Authorization;
 
 namespace MadWorld.Backend.API.Shared.Authorization;
 
-public class User
+public sealed class User
 {
     public string Id { get; init; } = string.Empty;
     public string Name { get; init; } = string.Empty;

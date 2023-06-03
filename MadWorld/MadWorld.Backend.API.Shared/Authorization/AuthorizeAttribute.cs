@@ -5,7 +5,7 @@ using Microsoft.Azure.WebJobs.Host;
 namespace MadWorld.Backend.API.Shared.Authorization;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public class AuthorizeAttribute : Attribute
+public sealed class AuthorizeAttribute : Attribute
 {
     public readonly RoleTypes Role;
     

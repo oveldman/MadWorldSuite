@@ -3,7 +3,7 @@ using Microsoft.Azure.Functions.Worker.Http;
 
 namespace MadWorld.Backend.API.Shared.Functions.Expansions;
 
-public class FunctionContextWrapper : IFunctionContextWrapper
+public sealed class FunctionContextWrapper : IFunctionContextWrapper
 {
     public async Task<HttpRequestData?> GetHttpRequestDataAsync(FunctionContext context)
     {

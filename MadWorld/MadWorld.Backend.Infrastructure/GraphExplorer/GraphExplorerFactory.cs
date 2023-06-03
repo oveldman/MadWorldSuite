@@ -5,7 +5,7 @@ using Microsoft.Graph;
 
 namespace MadWorld.Backend.Infrastructure.GraphExplorer;
 
-internal class GraphExplorerFactory
+internal sealed class GraphExplorerFactory
 {
     private readonly string[] _scopes;
     private readonly ILoggerFactory _loggerFactory;

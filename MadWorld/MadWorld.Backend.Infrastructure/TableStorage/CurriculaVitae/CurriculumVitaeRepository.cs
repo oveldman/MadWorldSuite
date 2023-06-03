@@ -2,8 +2,6 @@ using static LanguageExt.Prelude;
 
 using Azure.Data.Tables;
 using LanguageExt;
-using LanguageExt.Common;
-using LanguageExt.SomeHelp;
 using MadWorld.Backend.Domain.CurriculaVitae;
 using Microsoft.Extensions.Logging;
 

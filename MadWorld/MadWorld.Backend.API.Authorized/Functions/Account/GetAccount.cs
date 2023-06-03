@@ -14,7 +14,7 @@ using Microsoft.OpenApi.Models;
 
 namespace MadWorld.Backend.API.Authorized.Functions.Account;
 
-public class GetAccount
+public sealed class GetAccount
 {
     private readonly IGetAccountUseCase _useCase;
 
