@@ -16,6 +16,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
         services.AddScoped<IPatchAccountUseCase, PatchAccountUseCase>();
         services.AddScoped<IGetCurriculumVitaeUseCase, GetCurriculumVitaeUseCase>();
+        services.AddScoped<IPatchCurriculumVitaeUseCase, PatchCurriculumVitaeUseCase>();
         services.AddScoped<IGetHealthStatusUseCase, GetHealthStatusUseCase>();
         services.AddScoped<IGetStatusUseCase, GetStatusUseCase>();
     }

@@ -67,6 +67,27 @@ resource getAccountPolicy 'Microsoft.ApiManagement/service/apis/operations/polic
   }
 }
 
+resource getCurriculumVitae 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-curriculum-vitae'
+  parent: authorizedApi
+  properties: {
+    displayName: 'GetCurriculumVitae'
+    method: 'GET'
+    urlTemplate: '/CurriculumVitae'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getCurriculumVitaePolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getCurriculumVitae
+  properties: {
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
 resource getHealthCheckOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'get-health-check'
   parent: authorizedApi
@@ -148,6 +169,48 @@ resource getStatusPolicy 'Microsoft.ApiManagement/service/apis/operations/polici
   parent: getStatusOperation
   properties: {
     value: loadTextContent('./Policy/Authorized/AnonymousEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
+resource patchCurriculumVitae 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'patch-curriculum-vitae'
+  parent: authorizedApi
+  properties: {
+    displayName: 'PatchCurriculumVitae'
+    method: 'PATCH'
+    urlTemplate: '/CurriculumVitae'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource patchCurriculumVitaePolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: patchCurriculumVitae
+  properties: {
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
+resource patchAccounts 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'patch-accounts'
+  parent: authorizedApi
+  properties: {
+    displayName: 'PatchAccounts'
+    method: 'PATCH'
+    urlTemplate: '/Account'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource patchAccountsPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: patchAccounts
+  properties: {
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
     format: 'rawxml'
   }
 }
@@ -257,23 +320,3 @@ resource getRenderSwaggerUIPolicy 'Microsoft.ApiManagement/service/apis/operatio
   }
 }
 
-resource patchAccounts 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
-  name: 'patch-accounts'
-  parent: authorizedApi
-  properties: {
-    displayName: 'PatchAccounts'
-    method: 'PATCH'
-    urlTemplate: '/Account'
-    templateParameters: []
-    responses: []
-  }
-}
-
-resource patchAccountsPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
-  name: 'policy'
-  parent: patchAccounts
-  properties: {
-    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
-    format: 'rawxml'
-  }
-}

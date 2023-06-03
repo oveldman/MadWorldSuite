@@ -9,6 +9,27 @@ resource anonymousApi 'Microsoft.ApiManagement/service/apis@2022-08-01' existing
   parent: service
 }
 
+resource getCurriculumVitae 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-curriculum-vitae'
+  parent: anonymousApi
+  properties: {
+    displayName: 'GetCurriculumVitae'
+    method: 'GET'
+    urlTemplate: '/CurriculumVitae'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getCurriculumVitaePolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getCurriculumVitae
+  properties: {
+    value: loadTextContent('./Policy/Anonymous/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
 resource getHealthCheckOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'get-heatlh-check'
   parent: anonymousApi

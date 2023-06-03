@@ -8,16 +8,16 @@ namespace MadWorld.Backend.Application.CurriculaVitae;
 
 public sealed class GetCurriculumVitaeUseCase : IGetCurriculumVitaeUseCase
 {
-    private readonly ICurriculumVitaeRepository _curriculumVitaeRepository;
+    private readonly ICurriculumVitaeRepository _repository;
 
-    public GetCurriculumVitaeUseCase(ICurriculumVitaeRepository curriculumVitaeRepository)
+    public GetCurriculumVitaeUseCase(ICurriculumVitaeRepository repository)
     {
-        _curriculumVitaeRepository = curriculumVitaeRepository;
+        _repository = repository;
     }
 
     public Option<GetCurriculumVitaeResponse> GetCurriculumVitae()
     {
-        var curriculumVitaeOption = _curriculumVitaeRepository.GetCurriculumVitae();
+        var curriculumVitaeOption = _repository.GetCurriculumVitae();
 
         if (curriculumVitaeOption.IsNone)
         {
