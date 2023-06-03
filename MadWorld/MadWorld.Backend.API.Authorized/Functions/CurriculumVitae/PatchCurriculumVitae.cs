@@ -29,7 +29,7 @@ public class PatchCurriculumVitae
     [OpenApiOperation(operationId: "PatchCurriculumVitae", tags: new[] { "CurriculumVitae" })]
     [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(PatchCurriculumVitaeRequest), Required = true)]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(PatchCurriculumVitaeResponse), Description = "The OK response")]
-    public async Task<Result<PatchCurriculumVitaeResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "patch")] HttpRequestData request,
+    public async Task<Result<PatchCurriculumVitaeResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = "CurriculumVitae")] HttpRequestData request,
         FunctionContext executionContext)
     {
         var patchAccountRequest = await request.ReadFromJsonAsync<PatchCurriculumVitaeRequest>();
