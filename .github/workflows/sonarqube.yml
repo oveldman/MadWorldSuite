@@ -15,7 +15,6 @@ jobs:
         timeout-minutes: 12
       - name: Set up Docker
         run: |
-         set -x
          docker version
          docker run --rm hello-world
       - name: Set up JDK 11
