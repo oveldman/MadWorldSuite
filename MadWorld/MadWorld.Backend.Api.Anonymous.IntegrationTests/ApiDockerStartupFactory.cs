@@ -31,7 +31,6 @@ public sealed class ApiDockerStartupFactory : ApiStartupFactory
         await _dockerClient.Images.CreateImageAsync(
             new ImagesCreateParameters()
             {
-                FromSrc = "https://hub.docker.com",
                 FromImage = ImageId,
                 Tag = "latest"
             }, 
