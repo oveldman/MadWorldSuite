@@ -1,4 +1,5 @@
 using LanguageExt.Common;
+using MadWorld.Shared.Contracts.Anonymous.CurriculumVitae;
 
 namespace MadWorld.Backend.Domain.CurriculaVitae;
 
@@ -13,6 +14,14 @@ public sealed class CurriculumVitae
         return new CurriculumVitae()
         {
             FullName = fullName
+        };
+    }
+
+    public CurriculumVitaeContract ToContract()
+    {
+        return new CurriculumVitaeContract()
+        {
+            FullName = FullName
         };
     }
 }

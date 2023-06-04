@@ -26,10 +26,9 @@ public sealed class GetCurriculumVitaeUseCase : IGetCurriculumVitaeUseCase
         
         return new GetCurriculumVitaeResponse()
         {
-            CurriculumVitae = new CurriculumVitaeContract()
-            {
-                FullName = curriculumVitaeOption.ValueUnsafe().FullName
-            }
+            CurriculumVitae = curriculumVitaeOption
+                                .ValueUnsafe()
+                                .ToContract()
         };
     }
 }
