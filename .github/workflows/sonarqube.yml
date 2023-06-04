@@ -21,7 +21,6 @@ jobs:
           distribution: 'zulu' # Alternative distribution options are available.
       - uses: actions/checkout@v3
         with:
-          path: ./PR-Repo
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Verify Git installation
         run: git --version
@@ -46,7 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        working-directory: ./PR-Repo/MadWorld
+        working-directory: ./MadWorld
         run: |
           dotnet-sonarscanner begin /k:"oveldman_MadWorldSuite" /o:"oveldman" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs" /d:sonar.exclusions="**/MadWorld.Frontend.UI.Suite/wwwroot/lib/ **, **/MadWorld.Frontend.UI.Admin/wwwroot/lib/ **, **/MadWorld.Frontend.UI.Suite/wwwroot/css/bootstrap **, **/MadWorld.Frontend.UI.Admin/wwwroot/css/bootstrap **, **/MadWorld.Frontend.UI.Suite/wwwroot/css/open-iconic **, **/MadWorld.Frontend.UI.Admin/wwwroot/css/open-iconic **"
           dotnet restore MadWorld.sln; 
