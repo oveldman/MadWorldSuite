@@ -23,6 +23,7 @@ public sealed class ApiStartupFactory : IAsyncDisposable
         Host = new HostBuilder()
             .ConfigureAppConfiguration(builder =>
             {
+                Environment.SetEnvironmentVariable("AzureWebJobsStorage", "UseDevelopmentStorage=true");
                 Environment.SetEnvironmentVariable("AzureAD__ApplicationId", "ApplicationId");
                 Environment.SetEnvironmentVariable("AzureAD__TenantId", "TenantId");
                 Environment.SetEnvironmentVariable("AzureAD__ClientId", "ClientId");

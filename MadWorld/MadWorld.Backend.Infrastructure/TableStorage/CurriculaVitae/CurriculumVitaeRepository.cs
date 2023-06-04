@@ -11,7 +11,7 @@ namespace MadWorld.Backend.Infrastructure.TableStorage.CurriculaVitae;
 
 public class CurriculumVitaeRepository : ICurriculumVitaeRepository
 {
-    private const string TableName = "CurriculaVitae";
+    public const string TableName = "CurriculaVitae";
     
     private readonly ILogger<CurriculumVitaeRepository> _logger;
     private readonly TableClient _table;

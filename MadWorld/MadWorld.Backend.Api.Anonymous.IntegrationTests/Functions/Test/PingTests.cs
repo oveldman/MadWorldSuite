@@ -4,7 +4,7 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Moq;
 using Shouldly;
 
-namespace MadWorld.Backend.Api.Anonymous.IntegrationTests.Functions;
+namespace MadWorld.Backend.Api.Anonymous.IntegrationTests.Functions.Test;
 
 public sealed class PingTests
 {
