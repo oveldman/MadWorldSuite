@@ -48,7 +48,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         working-directory: ./PR-Repo/MadWorld
         run: |
-          dotnet-sonarscanner begin /k:"oveldman_MadWorldSuite" /o:"oveldman" /d:sonar.login="${{ secrets .SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs" /d:sonar.exclusions="**/MadWorld.Frontend.UI.Suite/wwwroot/lib/ **, **/MadWorld.Frontend.UI.Admin/wwwroot/lib/ **, **/MadWorld.Frontend.UI.Suite/wwwroot/css/bootstrap **, **/MadWorld.Frontend.UI.Admin/wwwroot/css/bootstrap **, **/MadWorld.Frontend.UI.Suite/wwwroot/css/open-iconic **, **/MadWorld.Frontend.UI.Admin/wwwroot/css/open-iconic **"
+          dotnet-sonarscanner begin /k:"oveldman_MadWorldSuite" /o:"oveldman" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs" /d:sonar.exclusions="**/MadWorld.Frontend.UI.Suite/wwwroot/lib/ **, **/MadWorld.Frontend.UI.Admin/wwwroot/lib/ **, **/MadWorld.Frontend.UI.Suite/wwwroot/css/bootstrap **, **/MadWorld.Frontend.UI.Admin/wwwroot/css/bootstrap **, **/MadWorld.Frontend.UI.Suite/wwwroot/css/open-iconic **, **/MadWorld.Frontend.UI.Admin/wwwroot/css/open-iconic **"
           dotnet restore MadWorld.sln; 
           dotnet build MadWorld.sln;
           dotnet test MadWorld.sln --no-build --no-restore --collect:"XPlat Code Coverage" --results-directory TestResults/ -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover;
