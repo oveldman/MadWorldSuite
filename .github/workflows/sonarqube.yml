@@ -21,7 +21,7 @@ jobs:
           distribution: 'zulu' # Alternative distribution options are available.
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: ''  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Verify Git installation
         run: |
           git --version
