@@ -31,7 +31,7 @@ public class PatchCurriculumVitaeTests : IClassFixture<ApiDockerStartupFactory>,
         _tableServiceClient = factory.Host.Services.GetRequiredService<TableServiceClient>();
     }
 
-    [Fact (Skip = "specific reason")]
+    [Fact]
     public async Task GetCurriculumVitae_Regularly_ShouldReturnExpectedResult()
     {
         // Arrange
