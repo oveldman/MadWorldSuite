@@ -1,5 +1,4 @@
 using Azure.Data.Tables;
-using FluentAssertions;
 using MadWorld.Backend.API.Authorized.Functions.CurriculumVitae;
 using MadWorld.Backend.Domain.CurriculaVitae;
 using MadWorld.Backend.Domain.LanguageExt;
