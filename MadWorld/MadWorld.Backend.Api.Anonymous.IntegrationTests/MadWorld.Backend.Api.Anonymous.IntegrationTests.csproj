@@ -27,6 +27,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MadWorld.Backend.API.Anonymous\MadWorld.Backend.API.Anonymous.csproj" />
+      <ProjectReference Include="..\MadWorld.IntegrationTests\MadWorld.IntegrationTests.csproj" />
     </ItemGroup>
 
 </Project>

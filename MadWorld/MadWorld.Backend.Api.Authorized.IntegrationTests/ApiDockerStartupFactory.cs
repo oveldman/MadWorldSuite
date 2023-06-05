@@ -1,9 +1,7 @@
-using Docker.DotNet;
-using Docker.DotNet.Models;
 using JetBrains.Annotations;
 using MadWorld.IntegrationTests.Docker;
 
-namespace MadWorld.Backend.Api.Anonymous.IntegrationTests;
+namespace MadWorld.Backend.Api.Authorized.IntegrationTests;
 
 [UsedImplicitly]
 public sealed class ApiDockerStartupFactory : ApiStartupFactory

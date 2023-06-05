@@ -7,7 +7,7 @@ using WireMock.Server;
 
 namespace MadWorld.Backend.Api.Authorized.IntegrationTests;
 
-public sealed class ApiStartupFactory : IAsyncDisposable
+public class ApiStartupFactory : IAsyncDisposable
 {
     public readonly IHost Host;
 
@@ -37,7 +37,7 @@ public sealed class ApiStartupFactory : IAsyncDisposable
             .BuildHost(configurationOverrider);
     }
 
-    public ValueTask DisposeAsync()
+    public virtual ValueTask DisposeAsync()
     {
         var server = Host.Services.GetService<IWireMockServer>();
         server?.Stop();
