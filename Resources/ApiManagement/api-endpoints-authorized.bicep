@@ -173,27 +173,6 @@ resource getStatusPolicy 'Microsoft.ApiManagement/service/apis/operations/polici
   }
 }
 
-resource patchCurriculumVitae 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
-  name: 'patch-curriculum-vitae'
-  parent: authorizedApi
-  properties: {
-    displayName: 'PatchCurriculumVitae'
-    method: 'PATCH'
-    urlTemplate: '/CurriculumVitae'
-    templateParameters: []
-    responses: []
-  }
-}
-
-resource patchCurriculumVitaePolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
-  name: 'policy'
-  parent: patchCurriculumVitae
-  properties: {
-    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
-    format: 'rawxml'
-  }
-}
-
 resource patchAccounts 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'patch-accounts'
   parent: authorizedApi
@@ -209,6 +188,27 @@ resource patchAccounts 'Microsoft.ApiManagement/service/apis/operations@2022-08-
 resource patchAccountsPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
   name: 'policy'
   parent: patchAccounts
+  properties: {
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
+resource patchCurriculumVitae 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'patch-curriculum-vitae'
+  parent: authorizedApi
+  properties: {
+    displayName: 'PatchCurriculumVitae'
+    method: 'PATCH'
+    urlTemplate: '/CurriculumVitae'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource patchCurriculumVitaePolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: patchCurriculumVitae
   properties: {
     value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
     format: 'rawxml'
