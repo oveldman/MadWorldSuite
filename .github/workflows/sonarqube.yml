@@ -42,6 +42,6 @@ jobs:
         run: |
           dotnet-sonarscanner begin /k:"oveldman_MadWorldSuite" /o:"oveldman" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.projectBaseDir="/home/runner/work/MadWorldSuite/MadWorldSuite" /d:sonar.cs.opencover.reportsPaths=TestResults/*/coverage.opencover.xml /d:sonar.coverage.exclusions="**Test*.cs" /d:sonar.exclusions="**/MadWorld.Frontend.UI.Suite/wwwroot/lib/ **, **/MadWorld.Frontend.UI.Admin/wwwroot/lib/ **, **/MadWorld.Frontend.UI.Suite/wwwroot/css/bootstrap **, **/MadWorld.Frontend.UI.Admin/wwwroot/css/bootstrap **, **/MadWorld.Frontend.UI.Suite/wwwroot/css/open-iconic **, **/MadWorld.Frontend.UI.Admin/wwwroot/css/open-iconic **"
           dotnet restore ./MadWorld/MadWorld.sln; 
-          dotnet build ./MadWorld/MadWorld.sln;
+          dotnet build ./MadWorld/MadWorld.sln --no-restore;
           dotnet test ./MadWorld/MadWorld.sln --no-build --no-restore --collect:"XPlat Code Coverage" --results-directory TestResults/ -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover;
           dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
