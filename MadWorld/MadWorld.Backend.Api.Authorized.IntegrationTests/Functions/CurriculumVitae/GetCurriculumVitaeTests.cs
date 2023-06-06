@@ -1,5 +1,5 @@
 using Azure.Data.Tables;
-using MadWorld.Backend.API.Anonymous.Functions.CurriculumVitae;
+using MadWorld.Backend.API.Authorized.Functions.CurriculumVitae;
 using MadWorld.Backend.Domain.CurriculaVitae;
 using MadWorld.Backend.Infrastructure.TableStorage.CurriculaVitae;
 using Microsoft.Azure.Functions.Worker;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Shouldly;
 
-namespace MadWorld.Backend.Api.Anonymous.IntegrationTests.Functions.CurriculumVitae;
+namespace MadWorld.Backend.Api.Authorized.IntegrationTests.Functions.CurriculumVitae;
 
 [Collection("AzuriteDocker")]
 public class GetCurriculumVitaeTests : IClassFixture<ApiDockerStartupFactory>, IAsyncLifetime

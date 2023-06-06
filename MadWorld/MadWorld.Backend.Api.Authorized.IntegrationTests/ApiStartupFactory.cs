@@ -9,42 +9,51 @@ namespace MadWorld.Backend.Api.Authorized.IntegrationTests;
 
 public class ApiStartupFactory : IAsyncDisposable
 {
-    public readonly IHost Host;
+    public IHost Host => _host ??= CreateHost();
 
-    public ApiStartupFactory()
-    {
-        var wireMockServer = WireMockServer.Start();
-        
-        var configurationOverrider = new ConfigurationOverrider()
-        {
-            GraphExplorerBaseUrl = wireMockServer.Urls[0]
-        };
+    protected string AzureConnectionString = "UseDevelopmentStorage=true";
 
-        Host = new HostBuilder()
-            .ConfigureAppConfiguration(builder =>
-            {
-                Environment.SetEnvironmentVariable("AzureWebJobsStorage", "UseDevelopmentStorage=true");
-                Environment.SetEnvironmentVariable("AzureAD__ApplicationId", "ApplicationId");
-                Environment.SetEnvironmentVariable("AzureAD__TenantId", "TenantId");
-                Environment.SetEnvironmentVariable("AzureAD__ClientId", "ClientId");
-                Environment.SetEnvironmentVariable("AzureAD__ClientSecret", "ClientSecret");
-                builder.AddEnvironmentVariables();
-            })
-            .ConfigureServices(collection =>
-            {
-                collection.AddSingleton(wireMockServer);
-            })
-            .BuildHost(configurationOverrider);
-    }
+    private IHost? _host;
 
     public virtual ValueTask DisposeAsync()
     {
         var server = Host.Services.GetService<IWireMockServer>();
         server?.Stop();
         server?.Dispose();
-        
+
         Host.Dispose();
         GC.SuppressFinalize(this);
         return ValueTask.CompletedTask;
+    }
+
+    protected virtual void PreRun()
+    {
+    }
+
+    private IHost CreateHost()
+    {
+        PreRun();
+
+        var wireMockServer = WireMockServer.Start();
+
+        var configurationOverrider = new ConfigurationOverrider()
+        {
+            GraphExplorerBaseUrl = wireMockServer.Urls[0]
+        };
+
+        var host = new HostBuilder()
+            .ConfigureAppConfiguration(builder =>
+            {
+                Environment.SetEnvironmentVariable("AzureWebJobsStorage", AzureConnectionString);
+                Environment.SetEnvironmentVariable("AzureAD__ApplicationId", "ApplicationId");
+                Environment.SetEnvironmentVariable("AzureAD__TenantId", "TenantId");
+                Environment.SetEnvironmentVariable("AzureAD__ClientId", "ClientId");
+                Environment.SetEnvironmentVariable("AzureAD__ClientSecret", "ClientSecret");
+                builder.AddEnvironmentVariables();
+            })
+            .ConfigureServices(collection => { collection.AddSingleton(wireMockServer); })
+            .BuildHost(configurationOverrider);
+        
+        return host;
     }
 }

@@ -6,14 +6,31 @@ namespace MadWorld.Backend.Api.Anonymous.IntegrationTests;
 
 public class ApiStartupFactory : IAsyncDisposable
 {
-    public readonly IHost Host;
+    public IHost Host => _host ??= CreateHost();
 
-    public ApiStartupFactory()
+    protected string AzureConnectionString = "UseDevelopmentStorage=true";
+
+    private IHost? _host;
+
+    public virtual ValueTask DisposeAsync()
     {
-        Host = new HostBuilder()
+        Host.Dispose();
+        GC.SuppressFinalize(this);
+        return ValueTask.CompletedTask;
+    }
+
+    protected virtual void PreRun()
+    {
+    }
+
+    private IHost CreateHost()
+    {
+        PreRun();
+        
+        var host = new HostBuilder()
             .ConfigureAppConfiguration(builder =>
             {
-                Environment.SetEnvironmentVariable("AzureWebJobsStorage", "UseDevelopmentStorage=true");
+                Environment.SetEnvironmentVariable("AzureWebJobsStorage", AzureConnectionString);
                 Environment.SetEnvironmentVariable("AzureAD__ApplicationId", "ApplicationId");
                 Environment.SetEnvironmentVariable("AzureAD__TenantId", "TenantId");
                 Environment.SetEnvironmentVariable("AzureAD__ClientId", "ClientId");
@@ -21,12 +38,7 @@ public class ApiStartupFactory : IAsyncDisposable
                 builder.AddEnvironmentVariables();
             })
             .BuildHost();
-    }
 
-    public virtual ValueTask DisposeAsync()
-    {
-        Host.Dispose();
-        GC.SuppressFinalize(this);
-        return ValueTask.CompletedTask;
+        return host;
     }
 }
