@@ -1,31 +1,15 @@
 using MadWorld.Backend.API.Anonymous.Extensions;
+using MadWorld.IntegrationTests.Startups;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace MadWorld.Backend.Api.Anonymous.IntegrationTests;
 
-public class ApiStartupFactory : IAsyncDisposable
+public class AnonymousApiStartupFactory : ApiStartupFactory
 {
-    public IHost Host => _host ??= CreateHost();
-
-    protected string AzureConnectionString = "UseDevelopmentStorage=true";
-
-    private IHost? _host;
-
-    public virtual ValueTask DisposeAsync()
+    protected override IHost CreateHost()
     {
-        Host.Dispose();
-        GC.SuppressFinalize(this);
-        return ValueTask.CompletedTask;
-    }
-
-    protected virtual void PreRun()
-    {
-    }
-
-    private IHost CreateHost()
-    {
-        PreRun();
+        PrepareHost();
         
         var host = new HostBuilder()
             .ConfigureAppConfiguration(builder =>

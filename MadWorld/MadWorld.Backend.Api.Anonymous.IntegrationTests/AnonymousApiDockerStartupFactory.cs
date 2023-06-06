@@ -1,10 +1,12 @@
+using Docker.DotNet;
+using Docker.DotNet.Models;
 using JetBrains.Annotations;
 using MadWorld.IntegrationTests.Docker;
 
-namespace MadWorld.Backend.Api.Authorized.IntegrationTests;
+namespace MadWorld.Backend.Api.Anonymous.IntegrationTests;
 
 [UsedImplicitly]
-public sealed class ApiDockerStartupFactory : ApiStartupFactory
+public sealed class AnonymousApiDockerStartupFactory : AnonymousApiStartupFactory
 {
     private DockerRunner _dockerRunner = null!;
 
@@ -14,9 +16,9 @@ public sealed class ApiDockerStartupFactory : ApiStartupFactory
         await base.DisposeAsync();
     }
     
-    protected override void PreRun()
+    protected override void PrepareHost()
     {
-        _dockerRunner = new DockerRunner(2);
+        _dockerRunner = new DockerRunner(1);
         _dockerRunner.Start().GetAwaiter().GetResult();
         AzureConnectionString = _dockerRunner.GetConnectionString();
     }

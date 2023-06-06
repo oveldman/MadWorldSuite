@@ -14,15 +14,15 @@ using Shouldly;
 namespace MadWorld.Backend.Api.Authorized.IntegrationTests.Functions.CurriculumVitae;
 
 [Collection(CollectionTypes.IntegrationTests)]
-public class PatchCurriculumVitaeTests : IClassFixture<ApiDockerStartupFactory>, IAsyncLifetime
+public class PatchCurriculumVitaeTests : IClassFixture<AuthorizedApiDockerStartupFactory>, IAsyncLifetime
 {
-    private readonly ApiStartupFactory _factory;
+    private readonly AuthorizedApiStartupFactory _factory;
     private readonly TableServiceClient _tableServiceClient;
     private TableClient _tableClient = null!;
     
     private readonly PatchCurriculumVitae _function;
 
-    public PatchCurriculumVitaeTests(ApiDockerStartupFactory factory)
+    public PatchCurriculumVitaeTests(AuthorizedApiDockerStartupFactory factory)
     {
         _factory = factory;
 

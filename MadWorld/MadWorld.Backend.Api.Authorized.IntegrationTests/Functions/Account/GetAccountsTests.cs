@@ -12,13 +12,13 @@ using WireMock.Server;
 namespace MadWorld.Backend.Api.Authorized.IntegrationTests.Functions.Account;
 
 [Collection(CollectionTypes.IntegrationTests)]
-public sealed class GetAccountsTests : IClassFixture<ApiStartupFactory>, IAsyncLifetime
+public sealed class GetAccountsTests : IClassFixture<AuthorizedApiStartupFactory>, IAsyncLifetime
 {
-    private readonly ApiStartupFactory _factory;
+    private readonly AuthorizedApiStartupFactory _factory;
     private readonly WireMockServer _wireMockServer;
     private readonly GetAccounts _function;
 
-    public GetAccountsTests(ApiStartupFactory factory)
+    public GetAccountsTests(AuthorizedApiStartupFactory factory)
     {
         _factory = factory;
         _wireMockServer = factory.Host.Services.GetRequiredService<WireMockServer>();

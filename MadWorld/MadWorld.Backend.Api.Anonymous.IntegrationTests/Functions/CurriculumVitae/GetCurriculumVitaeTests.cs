@@ -11,14 +11,14 @@ using Shouldly;
 namespace MadWorld.Backend.Api.Anonymous.IntegrationTests.Functions.CurriculumVitae;
 
 [Collection(CollectionTypes.IntegrationTests)]
-public class GetCurriculumVitaeTests : IClassFixture<ApiDockerStartupFactory>, IAsyncLifetime
+public class GetCurriculumVitaeTests : IClassFixture<AnonymousApiDockerStartupFactory>, IAsyncLifetime
 {
-    private readonly ApiStartupFactory _factory;
+    private readonly AnonymousApiStartupFactory _factory;
     private readonly TableServiceClient _tableServiceClient;
     
     private readonly GetCurriculumVitae _function;
 
-    public GetCurriculumVitaeTests(ApiDockerStartupFactory factory)
+    public GetCurriculumVitaeTests(AnonymousApiDockerStartupFactory factory)
     {
         _factory = factory;
 

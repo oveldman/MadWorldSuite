@@ -1,5 +1,6 @@
 using MadWorld.Backend.API.Authorized.Extensions;
 using MadWorld.Backend.Domain.Configuration;
+using MadWorld.IntegrationTests.Startups;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,32 +8,11 @@ using WireMock.Server;
 
 namespace MadWorld.Backend.Api.Authorized.IntegrationTests;
 
-public class ApiStartupFactory : IAsyncDisposable
+public class AuthorizedApiStartupFactory : ApiStartupFactory
 {
-    public IHost Host => _host ??= CreateHost();
-
-    protected string AzureConnectionString = "UseDevelopmentStorage=true";
-
-    private IHost? _host;
-
-    public virtual ValueTask DisposeAsync()
+    protected override IHost CreateHost()
     {
-        var server = Host.Services.GetService<IWireMockServer>();
-        server?.Stop();
-        server?.Dispose();
-
-        Host.Dispose();
-        GC.SuppressFinalize(this);
-        return ValueTask.CompletedTask;
-    }
-
-    protected virtual void PreRun()
-    {
-    }
-
-    private IHost CreateHost()
-    {
-        PreRun();
+        PrepareHost();
 
         var wireMockServer = WireMockServer.Start();
 
