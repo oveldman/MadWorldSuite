@@ -10,7 +10,7 @@ using Shouldly;
 
 namespace MadWorld.Backend.Api.Anonymous.IntegrationTests.Functions.CurriculumVitae;
 
-[Collection("AzuriteDocker")]
+[Collection(CollectionTypes.IntegrationTests)]
 public class GetCurriculumVitaeTests : IClassFixture<ApiDockerStartupFactory>, IAsyncLifetime
 {
     private readonly ApiStartupFactory _factory;

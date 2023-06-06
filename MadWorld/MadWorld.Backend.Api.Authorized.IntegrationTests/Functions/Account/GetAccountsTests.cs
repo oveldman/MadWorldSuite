@@ -1,4 +1,3 @@
-using LanguageExt.Pretty;
 using MadWorld.Backend.API.Authorized.Functions.Account;
 using MadWorld.Backend.Domain.Accounts;
 using Microsoft.Azure.Functions.Worker;
@@ -6,13 +5,13 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using Shouldly;
-using WireMock.Admin.Mappings;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
 
 namespace MadWorld.Backend.Api.Authorized.IntegrationTests.Functions.Account;
 
+[Collection(CollectionTypes.IntegrationTests)]
 public sealed class GetAccountsTests : IClassFixture<ApiStartupFactory>, IAsyncLifetime
 {
     private readonly ApiStartupFactory _factory;

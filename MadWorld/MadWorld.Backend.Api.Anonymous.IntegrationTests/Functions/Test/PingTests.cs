@@ -6,6 +6,7 @@ using Shouldly;
 
 namespace MadWorld.Backend.Api.Anonymous.IntegrationTests.Functions.Test;
 
+[Collection(CollectionTypes.IntegrationTests)]
 public sealed class PingTests
 {
     [Fact]

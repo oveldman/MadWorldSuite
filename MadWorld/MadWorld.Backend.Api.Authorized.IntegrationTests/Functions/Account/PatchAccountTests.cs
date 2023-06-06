@@ -14,6 +14,7 @@ using WireMock.Server;
 
 namespace MadWorld.Backend.Api.Authorized.IntegrationTests.Functions.Account;
 
+[Collection(CollectionTypes.IntegrationTests)]
 public sealed class PatchAccountTests : IClassFixture<ApiStartupFactory>, IAsyncLifetime
 {
     private readonly ApiStartupFactory _factory;
