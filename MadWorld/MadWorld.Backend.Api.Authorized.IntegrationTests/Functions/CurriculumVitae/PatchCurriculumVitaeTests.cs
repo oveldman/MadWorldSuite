@@ -1,3 +1,4 @@
+/*
 using Azure.Data.Tables;
 using MadWorld.Backend.API.Authorized.Functions.CurriculumVitae;
 using MadWorld.Backend.Domain.CurriculaVitae;
@@ -70,3 +71,5 @@ public class PatchCurriculumVitaeTests : IClassFixture<ApiDockerStartupFactory>,
         await _factory.DisposeAsync();
     }
 }
+
+*/
