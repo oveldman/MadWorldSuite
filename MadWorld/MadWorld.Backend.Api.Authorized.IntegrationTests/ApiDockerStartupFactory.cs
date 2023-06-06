@@ -8,7 +8,7 @@ public sealed class ApiDockerStartupFactory : ApiStartupFactory
 {
     private readonly DockerRunner _dockerRunner;
 
-    public ApiDockerStartupFactory() : base()
+    public ApiDockerStartupFactory()
     {
         _dockerRunner = new DockerRunner();
         _dockerRunner.Start().GetAwaiter().GetResult();

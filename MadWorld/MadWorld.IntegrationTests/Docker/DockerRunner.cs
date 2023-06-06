@@ -32,6 +32,7 @@ public class DockerRunner
             Image = ImageId,
             HostConfig = new HostConfig()
             {
+                AutoRemove = true,
                 PortBindings = GetAzuritePorts()
             }
         });
@@ -50,13 +51,8 @@ public class DockerRunner
             _containerId,
             new ContainerStopParameters
             {
-                WaitBeforeKillSeconds = 30
+                WaitBeforeKillSeconds = 0
             },
-            CancellationToken.None);
-        
-        await _dockerClient.Containers.RemoveContainerAsync(
-            _containerId,
-            new ContainerRemoveParameters(),
             CancellationToken.None);
     }
     
