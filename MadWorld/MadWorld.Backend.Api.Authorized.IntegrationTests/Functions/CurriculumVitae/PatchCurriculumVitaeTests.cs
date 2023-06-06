@@ -31,7 +31,7 @@ public class PatchCurriculumVitaeTests : IClassFixture<ApiDockerStartupFactory>,
     }
 
     [Fact]
-    public async Task GetCurriculumVitae_Regularly_ShouldReturnExpectedResult()
+    public async Task PatchCurriculum_Regularly_ShouldReturnExpectedResult()
     {
         // Arrange
         var request = new PatchCurriculumVitaeRequest()
