@@ -55,7 +55,7 @@ public class AccountDetailsTests : IClassFixture<UiStartupFactory>, IAsyncLifeti
         ctx.Services.AddSingleton(accessTokenProvider.Object);
         var authContext = ctx.AddTestAuthorization();
         authContext.SetAuthorized("test@test.nl");
-        authContext.SetRoles("Admin");
+        authContext.SetRoles("None", "User","Admin");
 
         // Act
         var accountDetailsComponent = ctx.RenderComponent<AccountDetails>(
