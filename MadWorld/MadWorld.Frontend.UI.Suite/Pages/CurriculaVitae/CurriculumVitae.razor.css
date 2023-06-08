@@ -1,0 +1,168 @@
+.cv-adress-label {
+    display: inline-block;
+    line-height: 18px;
+    position: relative;
+    top: 10px;
+}
+
+.cv-adress-second-row {
+    display: block;
+}
+
+
+.cv-header {
+    background: #434E5E;
+    color: white;
+}
+
+.cv-header-subtitle {
+    position: relative;
+    top: -7px;
+    font-size: 0.875rem;
+}
+
+.cv-header a {
+    color: #aab4c3;
+    text-decoration: none;
+}
+
+.cv-header a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.cv-header-main {
+    position: relative;
+    top: 15px;
+}
+
+.cv-body {
+    background: #F8F8F8;
+}
+
+.cv-profile {
+    max-width: 800px;
+}
+
+.cv-title {
+    font-size: 1.25rem;
+    color: #434E5E;
+}
+
+.cv-subtitle {
+    font-size: 1.15rem;
+    color: #434E5E;
+}
+
+.cv-job-description {
+    max-width: 800px;
+}
+
+.cv-job-company {
+    color: #434E5E;
+}
+
+.cv-job-time {
+    position: relative;
+    top: -7px;
+    color: #aab4c3;
+    font-size: 0.875rem;
+}
+
+.cv-skills {
+    max-width: 380px;
+}
+
+.degree-type {
+    color: #434E5E;
+}
+
+.degree-school {
+    font-size: 0.875rem;
+}
+
+.degree-time {
+    color: #aab4c3;
+    font-size: 0.875rem;
+}
+
+.language-level {
+    color: #aab4c3;
+    font-size: 0.875rem;
+}
+
+.cv-timeline {
+    padding-left: 2rem;
+}
+
+.cv-timeline:before {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 100%;
+    background: #aab4c3;
+    left: 10px;
+    top: 10px;
+    position: absolute;
+}
+
+.cv-timeline-item:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: -20px;
+    top: 4px;
+    width: 15px;
+    height: 15px;
+    border: 4px solid #58677c;
+    background: white;
+    border-radius: 50%;
+}
+
+.position-relative {
+    position: relative !important;
+}
+
+.list-item-image {
+    vertical-align: middle;
+}
+
+.list-item {
+    line-height: 40px;
+}
+
+.unstyled-link {
+    color: #434E5E;
+    text-decoration: none;
+}
+
+.unstyled-list {
+    list-style-type: none;
+}
+
+.white-icon {
+    color: white;
+}
+
+@media only screen and (max-width: 1200px) {
+    .cv-timeline:before {
+        left: 6px !important;
+    }
+
+    .cv-header-image {
+        margin: auto;
+        width: 50%;
+        padding-top: 20px;
+    }
+
+    .cv-header-main {
+        margin: auto;
+        width: 75%;
+        padding-bottom: 20px;
+    }
+
+    .mobile-row {
+        position: relative;
+        top: 20px;
+    }
+}

@@ -55,7 +55,7 @@ public class AccountDetailsTests : IClassFixture<UiStartupFactory>, IAsyncLifeti
         ctx.Services.AddSingleton(accessTokenProvider.Object);
         var authContext = ctx.AddTestAuthorization();
         authContext.SetAuthorized("test@test.nl");
-        authContext.SetRoles("None", "User","Admin");
+        authContext.SetRoles("Admin");
 
         // Act
         var accountDetailsComponent = ctx.RenderComponent<AccountDetails>(
@@ -70,7 +70,7 @@ public class AccountDetailsTests : IClassFixture<UiStartupFactory>, IAsyncLifeti
         
         accountDetailsComponent
             .FindComponent<AccountDetails, RadzenTextBox>("account-name")
-            .Instance.Value.ShouldBe("Gerald Ruben");
+            .Instance.Value.ShouldBe(accountName);
     }
 
     public Task InitializeAsync()
