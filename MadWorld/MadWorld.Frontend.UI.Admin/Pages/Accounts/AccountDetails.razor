@@ -33,7 +33,7 @@
                                         <RadzenLabel Text="Id" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="12" SizeMD="8">
-                                        <RadzenTextBox @bind-Value="Account.Id" Style="width: 100%" Disabled="true"></RadzenTextBox>
+                                        <RadzenTextBox @id="account-id" @bind-Value="Account.Id" Style="width: 100%" Disabled="true"></RadzenTextBox>
                                     </RadzenColumn>
                                 </RadzenRow>
                                 <RadzenRow AlignItems="AlignItems.Center">
@@ -41,7 +41,7 @@
                                         <RadzenLabel Text="Name" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="12" SizeMD="8">
-                                        <RadzenTextBox @bind-Value="Account.Name" Style="width: 100%" Disabled="true"></RadzenTextBox>
+                                        <RadzenTextBox @Name="account-name" @bind-Value="Account.Name" Style="width: 100%" Disabled="true"></RadzenTextBox>
                                     </RadzenColumn>
                                 </RadzenRow>
                                 <RadzenRow AlignItems="AlignItems.Center">
@@ -49,7 +49,7 @@
                                         <RadzenLabel Text="Is user" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="12" SizeMD="8">
-                                        <RadzenCheckBox TValue="bool" @bind-Value="Account.HasUserRole" Change="UserCheckBoxChanged"></RadzenCheckBox>
+                                        <RadzenCheckBox @Name="account-hasUserRole" TValue="bool" @bind-Value="Account.HasUserRole" Change="UserCheckBoxChanged"></RadzenCheckBox>
                                     </RadzenColumn>
                                 </RadzenRow>
                                 <RadzenRow AlignItems="AlignItems.Center">
@@ -57,7 +57,7 @@
                                         <RadzenLabel Text="Is admin" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="12" SizeMD="8">
-                                        <RadzenCheckBox TValue="bool" @bind-Value="Account.HasAdminRole" Change="AdminCheckBoxChanged"></RadzenCheckBox>
+                                        <RadzenCheckBox @Name="account-hasAdminRole" TValue="bool" @bind-Value="Account.HasAdminRole" Change="AdminCheckBoxChanged"></RadzenCheckBox>
                                     </RadzenColumn>
                                 </RadzenRow>
                                 <RadzenRow AlignItems="AlignItems.Center">
@@ -65,7 +65,7 @@
                                         <RadzenLabel Text="Is resource owner" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="12" SizeMD="8">
-                                        <RadzenCheckBox @bind-Value="Account.IsResourceOwner" Disabled="true"></RadzenCheckBox>
+                                        <RadzenCheckBox @Name="account-isResourceOwner" @bind-Value="Account.IsResourceOwner" Disabled="true"></RadzenCheckBox>
                                     </RadzenColumn>
                                 </RadzenRow>
                             </RadzenStack>

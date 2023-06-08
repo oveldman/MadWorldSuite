@@ -12,35 +12,41 @@ namespace MadWorld.Frontend.UI.Shared.Dependencies;
 
 public static class WebAssemblyHostBuilderExtensions
 {
-    public static WebAssemblyHostBuilder AddSuiteApp(this WebAssemblyHostBuilder builder)
+    public static IServiceCollection AddSuiteApp(
+        this IServiceCollection services, 
+        WebAssemblyHostConfiguration configuration, 
+        IWebAssemblyHostEnvironment hostEnvironment)
     {
-        builder.AddHttpClients();
-        builder.Services.AddApplication();
-        builder.Services.AddInfrastructure();
+        services.AddHttpClients(configuration, hostEnvironment);
+        services.AddApplication();
+        services.AddInfrastructure();
 
-        builder.Services.AddMsalAuthentication(options =>
+        services.AddMsalAuthentication(options =>
         {
-            builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
+            configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
             options.ProviderOptions.DefaultAccessTokenScopes.Add("openid");
             options.ProviderOptions.DefaultAccessTokenScopes.Add("offline_access");
             options.ProviderOptions.DefaultAccessTokenScopes.Add("https://nlMadWorld.onmicrosoft.com/4605ec9b-98b5-411b-b98b-d0a784221487/API.Access");
         }).AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, RemoteUserAccount, AccountExtraClaimsPrincipalFactory>();
 
-        return builder;
+        return services;
     }
     
-    private static void AddHttpClients(this WebAssemblyHostBuilder builder)
+    private static void AddHttpClients(
+        this IServiceCollection services, 
+        WebAssemblyHostConfiguration configuration, 
+        IWebAssemblyHostEnvironment hostEnvironment)
     {
-        builder.Services.AddScoped(sp => new HttpClient {BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)});
-        builder.AddConfigurationSettings();
-        builder.AddAnonymousHttpClient();
-        builder.AddAuthorizedHttpClient();
-        builder.AddAuthorizedHttpClientWithoutToken();
+        services.AddScoped(sp => new HttpClient {BaseAddress = new Uri(hostEnvironment.BaseAddress)});
+        services.AddConfigurationSettings(configuration);
+        services.AddAnonymousHttpClient();
+        services.AddAuthorizedHttpClient();
+        services.AddAuthorizedHttpClientWithoutToken();
     }
 
-    private static void AddAnonymousHttpClient(this WebAssemblyHostBuilder builder)
+    private static void AddAnonymousHttpClient(this IServiceCollection services)
     {
-        builder.Services.AddHttpClient(ApiTypes.MadWorldApiAnonymous, (serviceProvider, client) =>
+        services.AddHttpClient(ApiTypes.MadWorldApiAnonymous, (serviceProvider, client) =>
             {
                 var apiUrlsOption = serviceProvider.GetService<IOptions<ApiUrls>>()!;
                 client.BaseAddress = new Uri(apiUrlsOption.Value.Anonymous);
@@ -48,10 +54,10 @@ public static class WebAssemblyHostBuilderExtensions
             .AddPolicyHandler(RetryPolicies.GetBadGateWayPolicy());
     }
     
-    private static void AddAuthorizedHttpClient(this WebAssemblyHostBuilder builder)
+    private static void AddAuthorizedHttpClient(this IServiceCollection services)
     {
-        builder.Services.AddScoped<SuiteAuthorizedMessageHandler>();
-        builder.Services.AddHttpClient(ApiTypes.MadWorldApiAuthorized, (serviceProvider, client) =>
+        services.AddScoped<SuiteAuthorizedMessageHandler>();
+        services.AddHttpClient(ApiTypes.MadWorldApiAuthorized, (serviceProvider, client) =>
             {
                 var apiUrlsOption = serviceProvider.GetService<IOptions<ApiUrls>>()!;
                 client.BaseAddress = new Uri(apiUrlsOption.Value.Authorized);
@@ -59,9 +65,9 @@ public static class WebAssemblyHostBuilderExtensions
             .AddPolicyHandler(RetryPolicies.GetBadGateWayPolicy());
     }
     
-    private static void AddAuthorizedHttpClientWithoutToken(this WebAssemblyHostBuilder builder)
+    private static void AddAuthorizedHttpClientWithoutToken(this IServiceCollection services)
     {
-        builder.Services.AddHttpClient(ApiTypes.MadWorldApiAuthorizedWithoutToken, (serviceProvider, client) =>
+        services.AddHttpClient(ApiTypes.MadWorldApiAuthorizedWithoutToken, (serviceProvider, client) =>
             {
                 var apiUrlsOption = serviceProvider.GetService<IOptions<ApiUrls>>()!;
                 client.BaseAddress = new Uri(apiUrlsOption.Value.Authorized);
@@ -69,10 +75,10 @@ public static class WebAssemblyHostBuilderExtensions
             .AddPolicyHandler(RetryPolicies.GetBadGateWayPolicy());
     }
     
-    private static void AddConfigurationSettings(this WebAssemblyHostBuilder builder)
+    private static void AddConfigurationSettings(this IServiceCollection services, WebAssemblyHostConfiguration configuration)
     {
-        builder.Services
+        services
             .AddOptions<ApiUrls>()
-            .Configure(builder.Configuration.GetSection(ApiUrls.SectionName).Bind);
+            .Configure(configuration.GetSection(ApiUrls.SectionName).Bind);
     }
 }

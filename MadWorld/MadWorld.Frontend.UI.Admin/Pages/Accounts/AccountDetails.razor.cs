@@ -11,7 +11,7 @@ public sealed partial class AccountDetails
     [Parameter]
     public string Id { get; set; } = string.Empty;
 
-    private bool IsReady { get; set; }
+    public bool IsReady { get; set; }
     private bool IsSaved { get; set; }
     private bool HasError { get; set; }
     private string ErrorMessage { get; set; } = string.Empty;
