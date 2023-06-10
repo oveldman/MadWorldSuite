@@ -1,7 +1,9 @@
 @using Microsoft.AspNetCore.Authorization
 @using MadWorld.Shared.Contracts.Authorized.Account
+@using MadWorld.Shared.Contracts.Shared.Authorization
+@using MadWorld.Frontend.UI.Shared.Components
 
-@attribute [Authorize(Roles = "Admin")]
+@attribute [Authorize(Roles = nameof(RoleTypes.Admin))]
 @page "/Accounts"
 
 <PageTitle>Account Overview</PageTitle>
@@ -24,7 +26,7 @@
 }
 else
 {
-    <div class="spinner-border text-success" role="status"></div>
+    <LoadingSpinner />
 }
 
 

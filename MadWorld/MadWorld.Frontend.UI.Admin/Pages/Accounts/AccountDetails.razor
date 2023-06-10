@@ -1,7 +1,9 @@
 @using Microsoft.AspNetCore.Authorization
 @using MadWorld.Frontend.Domain.Accounts
+@using MadWorld.Shared.Contracts.Shared.Authorization
+@using MadWorld.Frontend.UI.Shared.Components
 
-@attribute [Authorize(Roles = "Admin")]
+@attribute [Authorize(Roles = nameof(RoleTypes.Admin))]
 @page "/Account/{Id}"
 
 <PageTitle>Account Settings</PageTitle>
@@ -33,7 +35,7 @@
                                         <RadzenLabel Text="Id" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="12" SizeMD="8">
-                                        <RadzenTextBox @id="account-id" @bind-Value="Account.Id" Style="width: 100%" Disabled="true"></RadzenTextBox>
+                                        <RadzenTextBox @Name="account-id" @bind-Value="Account.Id" Style="width: 100%" Disabled="true"></RadzenTextBox>
                                     </RadzenColumn>
                                 </RadzenRow>
                                 <RadzenRow AlignItems="AlignItems.Center">
@@ -86,6 +88,6 @@
 }
 else
 {
-    <div class="spinner-border text-success" role="status"></div>
+    <LoadingSpinner />
 }
 

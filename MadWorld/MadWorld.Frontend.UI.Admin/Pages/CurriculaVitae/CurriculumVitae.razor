@@ -1,0 +1,53 @@
+@using Microsoft.AspNetCore.Authorization
+@using MadWorld.Shared.Contracts.Shared.Authorization
+@using MadWorld.Shared.Contracts.Anonymous.CurriculumVitae
+@using MadWorld.Frontend.UI.Shared.Components
+
+@attribute [Authorize(Roles = nameof(RoleTypes.Admin))]
+@page "/CurriculumVitae"
+
+<PageTitle>Curriculum Vitae Settings</PageTitle>
+
+@if (IsReady)
+{
+    @if (IsSaved)
+    {
+        <div class="alert alert-success" role="alert">
+            Curriculum Vitae settings saved successfully.
+        </div>   
+    }
+    @if (HasError)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ErrorMessage
+        </div>   
+    }
+    <RadzenTemplateForm Data="@CurriculumVitaeContract" Submit="@(async (CurriculumVitaeContract curriculumVitae) => { await SaveChanges(curriculumVitae); })">
+        <RadzenRow>
+            <RadzenColumn Size="12" SizeMD="6">
+                <RadzenStack>
+                    <RadzenFieldset Text="Curriculum Vitae Settings">
+                        <RadzenStack  Gap="1rem">
+                            <RadzenRow AlignItems="AlignItems.Center">
+                                <RadzenColumn Size="12" SizeMD="4">
+                                    <RadzenLabel Text="Full Name" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeMD="8">
+                                    <RadzenTextBox @bind-Value="CurriculumVitaeContract.FullName" Style="width: 100%"></RadzenTextBox>
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenStack>
+                    </RadzenFieldset>
+                </RadzenStack>
+            </RadzenColumn>
+        </RadzenRow>
+        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" Gap="1rem" Class="rz-mt-8 rz-mb-4">
+            <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Save" />
+            <RadzenButton ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Large" Icon="cancel" Text="Cancel" Click="@CancelChanges" />
+        </RadzenStack>
+    </RadzenTemplateForm>
+}
+else
+{
+    <LoadingSpinner/>
+}
