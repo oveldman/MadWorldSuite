@@ -6,12 +6,12 @@ namespace MadWorld.IntegrationTests.BUnit;
 
 public static class RenderedComponentExtensions
 {
-    public static IRenderedComponent<TY> FindComponent<T, TY>(this IRenderedComponent<T> component, string name) 
-        where T : IComponent
-        where TY : RadzenComponent
+    public static IRenderedComponent<TComponentToFind> FindComponent<TCurrentComponent, TComponentToFind, TInnerType>(this IRenderedComponent<TCurrentComponent> component, string name) 
+        where TCurrentComponent : IComponent
+        where TComponentToFind : FormComponent<TInnerType>
     {
-        var inputFields = component.FindComponents<TY>();
+        var inputFields = component.FindComponents<TComponentToFind>();
         return inputFields
-            .First(c => c.Instance.Attributes.TryGetValue("@Name", out var nameObject) && nameObject.Equals(name));
+            .First(c => c.Instance.Name.Equals(name));
     }
 }

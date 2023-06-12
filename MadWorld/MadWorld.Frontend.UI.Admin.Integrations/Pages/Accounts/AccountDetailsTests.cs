@@ -65,11 +65,11 @@ public class AccountDetailsTests : IClassFixture<UiStartupFactory>, IAsyncLifeti
 
         // Assert
         accountDetailsComponent
-            .FindComponent<AccountDetails, RadzenCheckBox<bool>>("account-hasAdminRole")
+            .FindComponent<AccountDetails, RadzenCheckBox<bool>, bool>("account-hasAdminRole")
             .Instance.Value.ShouldBe(true);
         
         accountDetailsComponent
-            .FindComponent<AccountDetails, RadzenTextBox>("account-name")
+            .FindComponent<AccountDetails, RadzenTextBox, string>("account-name")
             .Instance.Value.ShouldBe(accountName);
     }
 
