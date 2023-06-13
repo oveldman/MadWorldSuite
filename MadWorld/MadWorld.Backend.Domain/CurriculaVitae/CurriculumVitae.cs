@@ -1,20 +1,28 @@
+using System.Net.Mime;
+using LanguageExt;
 using LanguageExt.Common;
+using MadWorld.Backend.Domain.General;
+using MadWorld.Backend.Domain.LanguageExt;
 using MadWorld.Shared.Contracts.Anonymous.CurriculumVitae;
 
 namespace MadWorld.Backend.Domain.CurriculaVitae;
 
 public sealed class CurriculumVitae
 {
-    public string FullName { get; set; } = string.Empty;
+    public readonly Text FullName;
 
-    private CurriculumVitae() {}
+    private CurriculumVitae(Text fullName)
+    {
+        FullName = fullName;
+    }
     
     public static Result<CurriculumVitae> Parse(string fullName)
     {
-        return new CurriculumVitae()
-        {
-            FullName = fullName
-        };
+        var nameResult = Text.Parse(fullName);
+        
+        if (nameResult.IsFaulted) return new Result<CurriculumVitae>(nameResult.GetException());
+        
+        return new CurriculumVitae(nameResult.GetValue());
     }
 
     public CurriculumVitaeContract ToContract()
