@@ -52,7 +52,10 @@ public class CurriculumVitaeRepository : ICurriculumVitaeRepository
 
     private Option<CurriculumVitae> ToCurriculumVitae(CurriculumVitaeEntity entity)
     {
-        return CurriculumVitae.Parse(entity.FullName).Match(
+        return CurriculumVitae.Parse(
+            entity.FullName, 
+            entity.BirthDate
+            ).Match(
             cv => cv,
             exception =>
             {
@@ -65,7 +68,8 @@ public class CurriculumVitaeRepository : ICurriculumVitaeRepository
     {
         return new CurriculumVitaeEntity
         {
-            FullName = curriculumVitae.FullName
+            FullName = curriculumVitae.FullName,
+            BirthDate = curriculumVitae.BirthDate
         };
     }
 }

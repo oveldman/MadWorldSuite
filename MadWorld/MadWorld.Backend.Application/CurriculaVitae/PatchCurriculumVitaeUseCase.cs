@@ -16,11 +16,14 @@ public class PatchCurriculumVitaeUseCase : IPatchCurriculumVitaeUseCase
     
     public Result<PatchCurriculumVitaeResponse> PatchCurriculumVitae(PatchCurriculumVitaeRequest request)
     {
-        var curriculumVitaeResult = CurriculumVitae.Parse(request.FullName);
+        var curriculumVitaeResult = CurriculumVitae.Parse(
+            request.FullName, 
+            request.BirthDate
+            );
 
         if (curriculumVitaeResult.IsFaulted) 
             return new Result<PatchCurriculumVitaeResponse>(curriculumVitaeResult.GetException());
-        
+
         var result = _repository.UpdateCurriculumVitae(curriculumVitaeResult.GetValue());
         
         if (result.IsFaulted) 

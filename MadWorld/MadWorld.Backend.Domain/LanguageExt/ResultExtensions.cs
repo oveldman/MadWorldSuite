@@ -19,4 +19,12 @@ public static class ResultExtensions
             Fail: _ => default!
         );
     }
+    
+    public static Result<ValueObject> GetValueObjectResult<T>(this Result<T> result) 
+        where T : ValueObject
+    {
+        return result.IsFaulted 
+            ? new Result<ValueObject>(result.GetException()) 
+            : result.GetValue();
+    }
 }

@@ -1,9 +1,10 @@
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.Exceptions;
+using MadWorld.Backend.Domain.LanguageExt;
 
 namespace MadWorld.Backend.Domain.General;
 
-public sealed class Text
+public sealed class Text : ValueObject
 {
     private readonly string _text;
     

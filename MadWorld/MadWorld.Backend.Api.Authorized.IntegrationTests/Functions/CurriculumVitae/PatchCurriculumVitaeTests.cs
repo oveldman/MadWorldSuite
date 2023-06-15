@@ -37,7 +37,8 @@ public class PatchCurriculumVitaeTests : IClassFixture<AuthorizedApiDockerStartu
         // Arrange
         var request = new PatchCurriculumVitaeRequest()
         {
-            FullName = "Katsuo Mariko"
+            FullName = "Katsuo Mariko",
+            BirthDate = new DateTime(2000, 1, 1)
         };
 
         var context = new Mock<FunctionContext>();

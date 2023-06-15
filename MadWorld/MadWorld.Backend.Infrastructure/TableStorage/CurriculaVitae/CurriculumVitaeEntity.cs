@@ -14,4 +14,5 @@ public sealed class CurriculumVitaeEntity : ITableEntity
     public ETag ETag { get; set; }
     
     public string FullName { get; set; } = string.Empty;
+    public DateTime BirthDate { get; set; }
 }

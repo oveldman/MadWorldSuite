@@ -1,9 +1,10 @@
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.Exceptions;
+using MadWorld.Backend.Domain.LanguageExt;
 
 namespace MadWorld.Backend.Domain.General;
 
-public sealed class GuidId
+public sealed class GuidId : ValueObject
 {
     private readonly Guid _id;
 

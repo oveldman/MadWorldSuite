@@ -50,7 +50,8 @@ public class GetCurriculumVitaeTests : IClassFixture<AnonymousApiDockerStartupFa
         var client = _tableServiceClient.GetTableClient(CurriculumVitaeRepository.TableName);
         client.AddEntity(new CurriculumVitaeEntity()
         {
-            FullName = "Hedwig Constanze"
+            FullName = "Hedwig Constanze",
+            BirthDate = new DateTime(2000, 1, 1, 0, 0, 0, DateTimeKind.Utc)
         });
         
         return Task.CompletedTask;
