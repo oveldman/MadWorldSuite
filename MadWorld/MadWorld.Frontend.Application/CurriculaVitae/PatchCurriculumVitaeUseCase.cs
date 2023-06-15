@@ -29,7 +29,8 @@ public class PatchCurriculumVitaeUseCase : IPatchCurriculumVitaeUseCase
     {
         return new PatchCurriculumVitaeRequest()
         {
-            FullName = curriculumVitae.FullName
+            FullName = curriculumVitae.FullName,
+            BirthDate = curriculumVitae.BirthDate
         };
     }
 }

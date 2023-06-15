@@ -36,6 +36,14 @@
                                     <RadzenTextBox Name="cv-full-name" @bind-Value="CurriculumVitaeContract.FullName" Style="width: 100%"></RadzenTextBox>
                                 </RadzenColumn>
                             </RadzenRow>
+                            <RadzenRow AlignItems="AlignItems.Center">
+                                <RadzenColumn Size="12" SizeMD="4">
+                                    <RadzenLabel Text="Birth date" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeMD="8">
+                                    <RadzenTextBox Name="cv-birth-date" @bind-Value="CurriculumVitaeContract.BirthDate" Style="width: 100%"></RadzenTextBox>
+                                </RadzenColumn>
+                            </RadzenRow>
                         </RadzenStack>
                     </RadzenFieldset>
                 </RadzenStack>
