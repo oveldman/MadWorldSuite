@@ -41,7 +41,7 @@
                                     <RadzenLabel Text="Birth date" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeMD="8">
-                                    <RadzenTextBox Name="cv-birth-date" @bind-Value="CurriculumVitaeContract.BirthDate" Style="width: 100%"></RadzenTextBox>
+                                    <RadzenDatePicker Name="cv-birth-date" DateFormat="dd-MM-yyyy" ShowTime="false" @bind-Value="CurriculumVitaeContract.BirthDate" Style="width: 100%"></RadzenDatePicker>
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenStack>
