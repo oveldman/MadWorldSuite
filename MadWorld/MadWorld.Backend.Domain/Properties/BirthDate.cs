@@ -1,8 +1,9 @@
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.Exceptions;
 using MadWorld.Backend.Domain.LanguageExt;
+using MadWorld.Backend.Domain.System;
 
-namespace MadWorld.Backend.Domain.General;
+namespace MadWorld.Backend.Domain.Properties;
 
 public class BirthDate : ValueObject
 {
@@ -37,13 +38,15 @@ public class BirthDate : ValueObject
 
     private static bool IsDateInTheFuture(DateTime birthDate)
     {
-        return birthDate > DateTime.Now;
+        return birthDate >= SystemTime.Now();
     }
     
     private static bool IsDateOlderThan150Years(DateTime birthDate)
     {
         const int maxAge = 150;
         
-        return birthDate < DateTime.Now.AddYears(-maxAge);
+        return birthDate < SystemTime
+                                .Now()
+                                .AddYears(-maxAge);
     }
 }

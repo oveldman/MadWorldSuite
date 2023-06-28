@@ -1,8 +1,7 @@
-using System.Runtime.CompilerServices;
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.Exceptions;
-using MadWorld.Backend.Domain.General;
 using MadWorld.Backend.Domain.LanguageExt;
+using MadWorld.Backend.Domain.Properties;
 using MadWorld.Shared.Contracts.Authorized.Account;
 using MadWorld.Shared.Contracts.Shared.Authorization;
 

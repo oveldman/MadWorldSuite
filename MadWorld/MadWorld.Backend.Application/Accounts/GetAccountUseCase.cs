@@ -3,8 +3,8 @@ using LanguageExt.Common;
 using LanguageExt.UnsafeValueAccess;
 using MadWorld.Backend.Domain.Accounts;
 using MadWorld.Backend.Domain.Configuration;
-using MadWorld.Backend.Domain.General;
 using MadWorld.Backend.Domain.LanguageExt;
+using MadWorld.Backend.Domain.Properties;
 using MadWorld.Shared.Contracts.Authorized.Account;
 
 namespace MadWorld.Backend.Application.Accounts;

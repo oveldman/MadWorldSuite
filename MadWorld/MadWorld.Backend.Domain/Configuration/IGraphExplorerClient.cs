@@ -1,7 +1,7 @@
 using LanguageExt;
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.Accounts;
-using MadWorld.Backend.Domain.General;
+using MadWorld.Backend.Domain.Properties;
 
 namespace MadWorld.Backend.Domain.Configuration;
 

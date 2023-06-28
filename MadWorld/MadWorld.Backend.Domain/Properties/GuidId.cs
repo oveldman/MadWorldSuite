@@ -2,7 +2,7 @@ using LanguageExt.Common;
 using MadWorld.Backend.Domain.Exceptions;
 using MadWorld.Backend.Domain.LanguageExt;
 
-namespace MadWorld.Backend.Domain.General;
+namespace MadWorld.Backend.Domain.Properties;
 
 public sealed class GuidId : ValueObject
 {
