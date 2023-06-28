@@ -5,6 +5,14 @@ param anonymousApiKey string
 @secure()
 param authorizedApiKey string
 
+module identity './managed-identity.bicep' = {
+  name: 'identity'
+  params: {
+    name: 'MadWorldIdentity'
+    location: location
+  }
+}
+
 module blazorUIs './suite-uis.bicep' = {
   name: 'blazorUIs'
   params: {
