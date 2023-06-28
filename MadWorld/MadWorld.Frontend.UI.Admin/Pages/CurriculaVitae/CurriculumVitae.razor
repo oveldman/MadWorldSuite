@@ -33,7 +33,7 @@
                                     <RadzenLabel Text="Full Name" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeMD="8">
-                                    <RadzenTextBox Name="cv-full-name" @bind-Value="CurriculumVitaeContract.FullName" Style="width: 100%"></RadzenTextBox>
+                                    <RadzenTextBox Name="cv-full-name" @bind-Value="CurriculumVitaeContract.FullName" class="col-width-100"></RadzenTextBox>
                                 </RadzenColumn>
                             </RadzenRow>
                             <RadzenRow AlignItems="AlignItems.Center">
@@ -41,7 +41,7 @@
                                     <RadzenLabel Text="Birth date" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeMD="8">
-                                    <RadzenDatePicker Name="cv-birth-date" DateFormat="dd-MM-yyyy" ShowTime="false" @bind-Value="CurriculumVitaeContract.BirthDate" Style="width: 100%"></RadzenDatePicker>
+                                    <RadzenDatePicker Name="cv-birth-date" DateFormat="dd-MM-yyyy" ShowTime="false" @bind-Value="CurriculumVitaeContract.BirthDate" class="col-width-100"></RadzenDatePicker>
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenStack>
