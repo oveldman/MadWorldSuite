@@ -24,4 +24,7 @@ public sealed class Text : ValueObject
     }
 
     public static implicit operator string(Text text) => text._text;
+    
+    public static explicit operator Text(string text) 
+        => new(text);
 }

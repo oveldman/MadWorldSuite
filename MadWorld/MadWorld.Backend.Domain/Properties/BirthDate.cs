@@ -36,6 +36,8 @@ public class BirthDate : ValueObject
     
     public static implicit operator DateTime(BirthDate birthDate) => birthDate._birthDate;
 
+    public static explicit operator BirthDate(DateTime birthDate) => new(birthDate);
+
     private static bool IsDateInTheFuture(DateTime birthDate)
     {
         return birthDate >= SystemTime.Now();

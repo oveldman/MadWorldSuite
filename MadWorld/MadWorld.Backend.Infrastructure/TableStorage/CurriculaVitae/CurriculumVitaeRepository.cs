@@ -5,6 +5,7 @@ using LanguageExt;
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.CurriculaVitae;
 using MadWorld.Backend.Domain.Exceptions;
+using MadWorld.Backend.Domain.Properties;
 using Microsoft.Extensions.Logging;
 
 namespace MadWorld.Backend.Infrastructure.TableStorage.CurriculaVitae;
@@ -50,18 +51,12 @@ public class CurriculumVitaeRepository : ICurriculumVitaeRepository
         return new Result<bool>(exception);
     }
 
-    private Option<CurriculumVitae> ToCurriculumVitae(CurriculumVitaeEntity entity)
+    private static Option<CurriculumVitae> ToCurriculumVitae(CurriculumVitaeEntity entity)
     {
-        return CurriculumVitae.Parse(
-            entity.FullName, 
-            entity.BirthDate
-            ).Match(
-            cv => cv,
-            exception =>
-            {
-                _logger.LogError(exception, "The curriculum vitae entity has invalid data in the table storage");
-                return Option<CurriculumVitae>.None;
-            });
+        var fullName = (Text)entity.FullName;
+        var birthDate = (BirthDate)entity.BirthDate;
+        
+        return new CurriculumVitae(fullName, birthDate);
     }
     
     private static CurriculumVitaeEntity ToCurriculumVitaeEntity(CurriculumVitae curriculumVitae)

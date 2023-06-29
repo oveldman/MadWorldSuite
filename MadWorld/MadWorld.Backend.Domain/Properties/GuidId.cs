@@ -24,4 +24,10 @@ public sealed class GuidId : ValueObject
     }
     
     public static implicit operator string(GuidId id) => id._id.ToString();
+
+    public static explicit operator GuidId(string id)
+    {
+        var guid = Guid.Parse(id);
+        return new GuidId(guid);
+    }
 }

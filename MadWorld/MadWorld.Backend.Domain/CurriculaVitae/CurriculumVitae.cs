@@ -10,7 +10,7 @@ public sealed class CurriculumVitae : ValueObject
     public readonly Text FullName;
     public readonly BirthDate BirthDate;
 
-    private CurriculumVitae(Text fullName, BirthDate birthDate)
+    public CurriculumVitae(Text fullName, BirthDate birthDate)
     {
         FullName = fullName;
         BirthDate = birthDate;
