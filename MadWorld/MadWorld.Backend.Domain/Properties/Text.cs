@@ -15,12 +15,9 @@ public sealed class Text : ValueObject
     
     public static Result<Text> Parse(string text)
     {
-        if (!string.IsNullOrWhiteSpace(text))
-        {
-            return new Text(text);
-        }
-
-        return new Result<Text>(new ValidationException($"{nameof(text)} is not valid"));
+        return !string.IsNullOrWhiteSpace(text) 
+            ? new Text(text) 
+            : new Result<Text>(new ValidationException($"{nameof(text)} is not valid"));
     }
 
     public static implicit operator string(Text text) => text._text;

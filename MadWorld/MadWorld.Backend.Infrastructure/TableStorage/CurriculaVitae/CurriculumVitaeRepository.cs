@@ -53,10 +53,11 @@ public class CurriculumVitaeRepository : ICurriculumVitaeRepository
 
     private static Option<CurriculumVitae> ToCurriculumVitae(CurriculumVitaeEntity entity)
     {
-        var fullName = (Text)entity.FullName;
         var birthDate = (BirthDate)entity.BirthDate;
+        var fullName = (Text)entity.FullName;
+        var title = (Text)entity.Title;
         
-        return new CurriculumVitae(fullName, birthDate);
+        return new CurriculumVitae(birthDate, fullName, title);
     }
     
     private static CurriculumVitaeEntity ToCurriculumVitaeEntity(CurriculumVitae curriculumVitae)
@@ -64,7 +65,8 @@ public class CurriculumVitaeRepository : ICurriculumVitaeRepository
         return new CurriculumVitaeEntity
         {
             FullName = curriculumVitae.FullName,
-            BirthDate = curriculumVitae.BirthDate
+            BirthDate = curriculumVitae.BirthDate,
+            Title = curriculumVitae.Title
         };
     }
 }

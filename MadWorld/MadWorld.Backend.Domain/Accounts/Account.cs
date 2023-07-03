@@ -66,7 +66,8 @@ public sealed class Account : ValueObject
     {
         roles = roles.Distinct().ToArray();
         var rolesValid = roles.All(r => Enum.TryParse(r, true, out RoleTypes _));
-        if (!rolesValid) return new Result<string>(new ValidationException($"One of the {nameof(roles)} doesn't exist"));
-        return string.Join(RoleSplitValue, roles);
+        return !rolesValid 
+            ? new Result<string>(new ValidationException($"One of the {nameof(roles)} doesn't exist")) 
+            : string.Join(RoleSplitValue, roles);
     }
 }

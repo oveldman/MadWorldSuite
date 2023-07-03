@@ -13,6 +13,7 @@ public sealed class CurriculumVitaeEntity : ITableEntity
     public DateTimeOffset? Timestamp { get; set; }
     public ETag ETag { get; set; }
     
-    public string FullName { get; set; } = string.Empty;
     public DateTime BirthDate { get; set; }
+    public string FullName { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
 }

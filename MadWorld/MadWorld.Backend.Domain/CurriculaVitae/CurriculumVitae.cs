@@ -7,33 +7,39 @@ namespace MadWorld.Backend.Domain.CurriculaVitae;
 
 public sealed class CurriculumVitae : ValueObject
 {
-    public readonly Text FullName;
     public readonly BirthDate BirthDate;
+    public readonly Text FullName;
+    public readonly Text Title;
 
-    public CurriculumVitae(Text fullName, BirthDate birthDate)
+    public CurriculumVitae(BirthDate birthDate, Text fullName, Text title)
     {
         FullName = fullName;
         BirthDate = birthDate;
+        Title = title;
     }
 
-    public static Result<CurriculumVitae> Parse(string fullName, DateTime birthDate)
+    public static Result<CurriculumVitae> Parse(DateTime birthDate, string fullName, string title)
     {
-        var nameResult = Text.Parse(fullName);
         var birthDateResult = BirthDate.Parse(birthDate);
+        var nameResult = Text.Parse(fullName);
+        var titleResult = Text.Parse(title);
+
         
         if (Result.HasFaultyState(
                 out var exception,
-                nameResult.GetValueObjectResult(), 
-                birthDateResult.GetValueObjectResult()
+                birthDateResult.GetValueObjectResult(),
+                nameResult.GetValueObjectResult(),
+                titleResult.GetValueObjectResult()
             ))
         {
             return new Result<CurriculumVitae>(exception);
         }
-        
+
         return new CurriculumVitae(
+            birthDateResult.GetValue(),
             nameResult.GetValue(),
-            birthDateResult.GetValue()
-            );
+            titleResult.GetValue()
+        );
     }
 
     public CurriculumVitaeContract ToContract()
@@ -41,7 +47,8 @@ public sealed class CurriculumVitae : ValueObject
         return new CurriculumVitaeContract()
         {
             FullName = FullName,
-            BirthDate = BirthDate
+            BirthDate = BirthDate,
+            Title = Title
         };
     }
 }

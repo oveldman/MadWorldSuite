@@ -17,9 +17,10 @@ public class PatchCurriculumVitaeUseCase : IPatchCurriculumVitaeUseCase
     public Result<PatchCurriculumVitaeResponse> PatchCurriculumVitae(PatchCurriculumVitaeRequest request)
     {
         var curriculumVitaeResult = CurriculumVitae.Parse(
-            request.FullName, 
-            request.BirthDate
-            );
+            request.BirthDate,
+            request.FullName,
+            request.Title
+        );
 
         if (curriculumVitaeResult.IsFaulted) 
             return new Result<PatchCurriculumVitaeResponse>(curriculumVitaeResult.GetException());
