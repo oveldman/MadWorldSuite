@@ -45,7 +45,7 @@ Configure your AzureAd B2C in your MadWorld.Backend.API.Anonymous configurations
 Configure your AzureAd B2C in your MadWorld.Backend.API.Authorized configurations by:
 * Copy `local.settings.example.json`, change the `<TEMP>` values and name the file `local.settings.json`
 
-Happy run your project!
+Run happily your project!
 
 ## How to Run the Tests
 First make sure that Docker Desktop is running:
