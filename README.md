@@ -17,6 +17,17 @@ cutting-edge technologies while building a collection of diverse tools, a person
 [4. How to Run the Tests](#How-to-Run-the-Tests)\
 [5. Currently maintained by](#Currently-maintained-by)
 
+## Running Environments
+The following environments are currently running in Azure:
+
+Frontend:
+* [MadWorld.Frontend.UI.Admin -> admin.mad-world.nl](https://admin.mad-world.nl/)
+* [MadWorld.Frontend.UI.Suite -> www.mad-world.nl](https://www.mad-world.nl/)
+
+Backend:
+* [MadWorld.Backend.API.Anonymous -> api.mad-world.nl/anonymous](https://api.mad-world.nl/anonymous/swagger/ui)
+* [MadWorld.Backend.API.Authorized -> api.mad-world.nl/authorized](https://api.mad-world.nl/authorized/swagger/ui)
+
 ## Pre-requisites
 Make sure you have installed all of the following prerequisites on your development machine:
 * Rider - [Download & Install Rider](https://www.jetbrains.com/rider/download/#section=windows) or another IDE of your choice.
