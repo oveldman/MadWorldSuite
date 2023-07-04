@@ -6,8 +6,10 @@
 [![Azure API Anonymous CI/CD](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-api-anonymous.yml/badge.svg)](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-api-anonymous.yml)
 [![Azure API Authorized CI/CD](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-api-authorized.yml/badge.svg)](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-api-authorized.yml)
 # MadWorldSuite
-
-TODO: Description
+MadWorldSuite is a captivating hobby project that serves as a powerful platform for me to delve into the realms of Azure,
+Blazor, and Azure Functions. As a passionate learner, I have embarked on this exciting journey to explore and master these 
+cutting-edge technologies while building a collection of diverse tools, a personalized CV, and a host of other thrilling 
+features that will be unveiled soon.
 
 ## Pre-requisites
 Make sure you have installed all of the following prerequisites on your development machine:
