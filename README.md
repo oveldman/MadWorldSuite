@@ -12,10 +12,11 @@ cutting-edge technologies while building a collection of diverse tools, a person
 
 ## Table of Contents
 [1. MadWorldSuite](#MadWorldSuite)\
-[2. Pre-requisites](#Pre-requisites)\
-[3. How to Install and Run the Project](#How-to-Install-and-Run-the-Project)\
-[4. How to Run the Tests](#How-to-Run-the-Tests)\
-[5. Currently maintained by](#Currently-maintained-by)
+[2. Running Environments](#Running-Environments)\
+[3. Pre-requisites](#Pre-requisites)\
+[4. How to Install and Run the Project](#How-to-Install-and-Run-the-Project)\
+[5. How to Run the Tests](#How-to-Run-the-Tests)\
+[6. Currently maintained by](#Currently-maintained-by)
 
 ## Running Environments
 The following environments are currently running in Azure:
