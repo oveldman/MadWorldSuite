@@ -18,8 +18,34 @@ Make sure you have installed all of the following prerequisites on your developm
 * Azurite - [Download & Install Azurite](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azurite?tabs=visual-studio)
 
 ## How to Install and Run the Project
+First make sure that azurite is running:
+``` shell
+azurite -l /tmp/azurite # Use a temporary folder for storage
+```
 
-TODO
+Set multiple startup projects:
+* MadWorld.Backend.Api.Anonymous
+* MadWorld.Backend.Api.Authorized
+* MadWorld.Frontend.Admin.UI
+* MadWorld.Frontend.Suite.UI
+
+Set functions host arguments:
+* MadWorld.Backend.Api.Anonymous
+  * `host start --pause-on-error --cors * --port 7071`
+* MadWorld.Backend.Api.Authorized
+  * `host start --pause-on-error --cors * --port 7072`
+
+Configure your AzureAd B2C your MadWorld.Frontend.UI.Suite configurations in `appsettings.Development.json`
+
+Configure your AzureAd B2C your MadWorld.Frontend.UI.Admin configurations in `appsettings.Development.json`
+
+Configure your AzureAd B2C in your MadWorld.Backend.API.Anonymous configurations by:
+* Copy `local.settings.example.json` and name the file `local.settings.json`
+
+Configure your AzureAd B2C in your MadWorld.Backend.API.Authorized configurations by:
+* Copy `local.settings.example.json`, change the `<TEMP>` values and name the file `local.settings.json`
+
+Happy run your project!
 
 ## How to Run the Tests
 First make sure that Docker Desktop is running:
