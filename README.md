@@ -9,7 +9,13 @@
 MadWorldSuite is a captivating hobby project that serves as a powerful platform for me to delve into the realms of Azure,
 Blazor, and Azure Functions. As a passionate learner, I have embarked on this exciting journey to explore and master these 
 cutting-edge technologies while building a collection of diverse tools, a personalized CV, and a host of other thrilling 
-features that will be unveiled soon.
+
+## Table of Contents
+[1. MadWorldSuite](#MadWorldSuite)\
+[2. Pre-requisites](#Pre-requisites)\
+[3. How to Install and Run the Project](#How-to-Install-and-Run-the-Project)\
+[4. How to Run the Tests](#How-to-Run-the-Tests)\
+[5. Currently maintained by](#Currently-maintained-by)
 
 ## Pre-requisites
 Make sure you have installed all of the following prerequisites on your development machine:
