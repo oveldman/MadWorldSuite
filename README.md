@@ -21,6 +21,28 @@ Make sure you have installed all of the following prerequisites on your developm
 
 TODO
 
-## Credits
+## How to Run the Tests
+First make sure that Docker Desktop is running:
+``` shell
+# Windows
+C:\Program Files\Docker\Docker\Docker Desktop.exe
 
-TODO
+# Linux
+systemctl --user start docker-desktop
+
+# MacOS
+open -a Docker
+```
+Then run the following command to run all tests:
+``` shell
+cd MadWorld
+dotnet test
+```
+When all unit and integration tests pass, you should observe the following output for each test project:
+``` shell
+Passed!  - Failed:     0, Passed:     2, Skipped:     0, Total:     2, 
+Duration: 6 s - MadWorld.Backend.Api.Anonymous.IntegrationTests.dll (net7.0)
+```
+
+## Currently maintained by
+* [Oscar Veldman](https://www.github.com/oveldman)
