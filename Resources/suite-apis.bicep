@@ -1,4 +1,5 @@
 param location string = resourceGroup().location
+param keyvaultName string
 param smartDectectionName string = 'Application Insights Smart Detection'
 param anonymousApiName string
 @secure()
@@ -16,6 +17,7 @@ module apiAnonymous './azure-function.bicep' = {
     healthCheckName: 'health check-madworld-api-anonymous'
     healthCheckEndpoint: 'https://api.mad-world.nl/anonymous/healthcheck'
     smartDectectionName: smartDectectionName
+    keyvaultName: keyvaultName
   }
 }
 
@@ -28,6 +30,7 @@ module apiAuthorized './azure-function.bicep' = {
     healthCheckName: 'health check-madworld-api-authorized'
     healthCheckEndpoint: 'https://api.mad-world.nl/authorized/healthcheck'
     smartDectectionName: smartDectectionName
+    keyvaultName: keyvaultName
   }
 }
 

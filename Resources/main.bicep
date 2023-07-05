@@ -1,4 +1,5 @@
 param location string = resourceGroup().location
+param keyvaultName string = 'MadWorld-KeyVault'
 param smartDetectionName string = 'Application Insights Smart Detection'
 @secure()
 param anonymousApiKey string 
@@ -20,6 +21,14 @@ module blazorUIs './suite-uis.bicep' = {
   }
 }
 
+module keyVault './key-vault.bicep' = {
+  name: 'keyVault'
+  params: {
+    location: location
+    name: keyvaultName
+  }
+}
+
 module functionsAPIs './suite-apis.bicep' = {
   name: 'functionsAPIs'
   params: {
@@ -29,6 +38,7 @@ module functionsAPIs './suite-apis.bicep' = {
     authorizedApiName: 'madworld-api-authorized'
     authorizedApiKey: authorizedApiKey
     smartDectectionName: smartDetectionName
+    keyvaultName: keyvaultName
   }
 }
 

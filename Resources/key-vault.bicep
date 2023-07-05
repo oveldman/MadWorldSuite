@@ -1,7 +1,8 @@
 param location string
+param name string
 
 resource vault 'Microsoft.KeyVault/vaults@2023-02-01' = {
-  name: 'MadWorld-KeyVault'
+  name: name
   location: location
   properties: {
     sku: {
