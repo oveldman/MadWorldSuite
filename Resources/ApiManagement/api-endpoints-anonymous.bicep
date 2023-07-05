@@ -1,4 +1,4 @@
-param apiManagementName string = 'madworld-api-management'
+param apiManagementName string
 
 resource service 'Microsoft.ApiManagement/service@2022-08-01' existing = {
   name: apiManagementName

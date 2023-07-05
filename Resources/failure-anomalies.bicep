@@ -1,5 +1,5 @@
-param applicationInsightName string = 'madworld-api-anonymous'
-param smartDectectionName string = 'Application Insights Smart Detection'
+param applicationInsightName string
+param smartDectectionName string
 
 resource applicationInsight 'Microsoft.Insights/components@2020-02-02' existing = {
   name: applicationInsightName

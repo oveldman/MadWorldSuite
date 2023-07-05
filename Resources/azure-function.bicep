@@ -1,10 +1,11 @@
 param location string = resourceGroup().location
-param azureFunctionName string = 'madworld-api-anonymous'
-param serverFarmName string = 'ASP-MadWorldSuite-8a87'
-param healthCheckName string = 'health check-madworld-api-authorized'
-param healthCheckEndpoint string = 'https://api.mad-world.nl/authorized/healthcheck'
-param smartDectectionName string = 'Application Insights Smart Detection'
+param azureFunctionName string
+param serverFarmName string
+param healthCheckName string
+param healthCheckEndpoint string
+param smartDectectionName string
 param identityName string
+param workspaceName string
 
 resource identity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' existing = {
   name: identityName
@@ -40,6 +41,7 @@ module applicationInsight './application-insight.bicep' = {
   params: {
     insightName: azureFunctionName
     location: location
+    workspaceName: workspaceName
     healthCheckName: healthCheckName
     healthCheckEndpoint: healthCheckEndpoint
     smartDectectionName: smartDectectionName

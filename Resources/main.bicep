@@ -1,10 +1,19 @@
 param location string = resourceGroup().location
 param identityName string = 'MadWorldIdentity'
+param workspaceName string = 'DefaultWorkspaceMadWorld'
 param smartDetectionName string = 'Application Insights Smart Detection'
 @secure()
 param anonymousApiKey string 
 @secure()
 param authorizedApiKey string
+
+module workspace './workspace.bicep' = {
+  name: 'workspace'
+  params: {
+    workspaces_DefaultWorkspaceMadWorld_name: workspaceName
+    location: location
+  }
+}
 
 module identity './managed-identity.bicep' = {
   name: 'identity'
@@ -37,6 +46,7 @@ module functionsAPIs './suite-apis.bicep' = {
     anonymousApiKey: anonymousApiKey
     authorizedApiName: 'madworld-api-authorized'
     authorizedApiKey: authorizedApiKey
+    workspaceName: workspaceName
     smartDectectionName: smartDetectionName
     identityName: identityName
   }

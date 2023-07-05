@@ -1,6 +1,6 @@
 param location string = resourceGroup().location
-param name string = 'SuiteUI'
-param domainName string = 'www.mad-world.nl'
+param name string
+param domainName string
 
 resource staticWeb 'Microsoft.Web/staticSites@2022-03-01'= {
   name: name

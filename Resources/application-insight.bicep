@@ -1,13 +1,13 @@
 param location string = resourceGroup().location
-param insightName string = 'madworld-api-anonymous'
-param healthCheckName string = 'health check-madworld-api-anonymous'
-param healthCheckEndpoint string = 'https://api.mad-world.nl/anonymous/healthcheck'
-param smartDectectionName string = 'Application Insights Smart Detection'
+param insightName string
+param workspaceName string
+param healthCheckName string
+param healthCheckEndpoint string
+param smartDectectionName string
 
 
 resource workspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' existing = {
-  name: 'DefaultWorkspace-5ca43083-11a2-4ba3-b1cc-26869661f2e6-WEU'
-  scope: resourceGroup('DefaultResourceGroup-WEU')
+  name: workspaceName
 }
 
 resource applicationInsight 'Microsoft.Insights/components@2020-02-02' = {

@@ -1,6 +1,6 @@
-param location string = resourceGroup().location
-param resourceManager string = environment().resourceManager
-param apiManagementName string = 'madworld-api-management'
+param location string
+param resourceManager string
+param apiManagementName string
 param anonymousApiName string
 @secure()
 param anonymousApiKey string

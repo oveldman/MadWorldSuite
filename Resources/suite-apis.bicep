@@ -1,6 +1,7 @@
 param location string = resourceGroup().location
 param identityName string
-param smartDectectionName string = 'Application Insights Smart Detection'
+param workspaceName string
+param smartDectectionName string
 param anonymousApiName string
 @secure()
 param anonymousApiKey string
@@ -14,6 +15,7 @@ module apiAnonymous './azure-function.bicep' = {
     location: location
     azureFunctionName: anonymousApiName
     serverFarmName: 'ASP-MadWorldSuite-8a87'
+    workspaceName: workspaceName
     healthCheckName: 'health check-madworld-api-anonymous'
     healthCheckEndpoint: 'https://api.mad-world.nl/anonymous/healthcheck'
     smartDectectionName: smartDectectionName
@@ -27,6 +29,7 @@ module apiAuthorized './azure-function.bicep' = {
     location: location
     azureFunctionName: authorizedApiName
     serverFarmName: 'ASP-MadWorldSuite-a137'
+    workspaceName: workspaceName
     healthCheckName: 'health check-madworld-api-authorized'
     healthCheckEndpoint: 'https://api.mad-world.nl/authorized/healthcheck'
     smartDectectionName: smartDectectionName
@@ -43,5 +46,6 @@ module apiManagement './ApiManagement/azure-api-management.bicep' =  {
     anonymousApiKey: anonymousApiKey
     authorizedApiName: authorizedApiName
     authorizedApiKey: authorizedApiKey
+    resourceManager: environment().resourceManager
   }
 }

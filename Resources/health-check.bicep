@@ -1,7 +1,7 @@
-param location string = resourceGroup().location
-param name string = 'health check-madworld-api-authorized'
-param applicationInsightName string = 'madworld-api-authorized'
-param healthEndpoint string = 'https://api.mad-world.nl/authorized/healthcheck'
+param location string
+param name string
+param applicationInsightName string
+param healthEndpoint string
 
 resource applicationInsight 'Microsoft.Insights/components@2020-02-02' existing = {
   name: applicationInsightName

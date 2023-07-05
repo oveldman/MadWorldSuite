@@ -1,4 +1,4 @@
-param name string = 'Application Insights Smart Detection'
+param name string
 
 resource actionGroup 'Microsoft.Insights/actionGroups@2023-01-01' = {
   name: name
