@@ -16,7 +16,8 @@ cutting-edge technologies while building a collection of diverse tools, a person
 [3. Pre-requisites](#Pre-requisites)\
 [4. How to Install and Run the Project](#How-to-Install-and-Run-the-Project)\
 [5. How to Run the Tests](#How-to-Run-the-Tests)\
-[6. Currently maintained by](#Currently-maintained-by)
+[6. Azure Resources](#Azure-Resources)\
+[7. Currently maintained by](#Currently-maintained-by)
 
 ## Running Environments
 The following environments are currently running in Azure:
