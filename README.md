@@ -90,5 +90,17 @@ Passed!  - Failed:     0, Passed:     2, Skipped:     0, Total:     2,
 Duration: 6 s - MadWorld.Backend.Api.Anonymous.IntegrationTests.dll (net7.0)
 ```
 
+## Azure Resources
+The following Azure resources are currently running in my Azure environment:
+* Azure Static Web App (2x)
+* Azure Functions (2x)
+* Azure API Management
+* Azure Storage
+* Azure Key Vault
+* Azure Application Insights (2x)
+* Azure App Service Plan (2x)
+* Azure Log Analytics Workspace
+* Azure B2C
+
 ## Currently maintained by
 * [Oscar Veldman](https://www.github.com/oveldman)
