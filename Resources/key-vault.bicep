@@ -22,13 +22,3 @@ resource vault 'Microsoft.KeyVault/vaults@2023-02-01' = {
     publicNetworkAccess: 'Enabled'
   }
 }
-
-resource azureAdClientSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
-  name: 'AzureAD-ClientSecret'
-  parent: vault
-  properties: {
-    attributes: {
-      enabled: true
-    }
-  }
-}

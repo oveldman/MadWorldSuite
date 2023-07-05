@@ -4,10 +4,10 @@ param serverFarmName string = 'ASP-MadWorldSuite-8a87'
 param healthCheckName string = 'health check-madworld-api-authorized'
 param healthCheckEndpoint string = 'https://api.mad-world.nl/authorized/healthcheck'
 param smartDectectionName string = 'Application Insights Smart Detection'
-param keyvaultName string
+param identityName string
 
-resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' existing = {
-  name: keyvaultName
+resource identity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' existing = {
+  name: identityName
 }
 
 resource serverFarm 'Microsoft.Web/serverfarms@2022-09-01' = {
@@ -99,7 +99,7 @@ resource api 'Microsoft.Web/sites@2022-09-01' = {
     redundancyMode: 'None'
     publicNetworkAccess: 'Enabled'
     storageAccountRequired: false
-    keyVaultReferenceIdentity: keyVault.id
+    keyVaultReferenceIdentity: identity.id
   }
 }
 
