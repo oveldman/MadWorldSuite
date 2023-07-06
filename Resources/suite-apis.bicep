@@ -37,7 +37,7 @@ module apiAuthorized './azure-function.bicep' = {
   }
 }
 
-module apiManagement './ApiManagement/azure-api-management.bicep' =  {
+module apiManagement './ApiManagement/azure-api-management.bicep' = {
   name: 'apiManagement'
   params: {
     location: location

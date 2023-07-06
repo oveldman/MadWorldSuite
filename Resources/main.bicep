@@ -3,7 +3,7 @@ param identityName string = 'MadWorldIdentity'
 param workspaceName string = 'DefaultWorkspaceMadWorld'
 param smartDetectionName string = 'Application Insights Smart Detection'
 @secure()
-param anonymousApiKey string 
+param anonymousApiKey string
 @secure()
 param authorizedApiKey string
 

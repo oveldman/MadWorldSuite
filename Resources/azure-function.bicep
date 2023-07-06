@@ -221,7 +221,7 @@ resource webConfig 'Microsoft.Web/sites/config@2022-09-01' = {
     minimumElasticInstanceCount: 0
     azureStorageAccounts: {}
   }
-} 
+}
 
 resource hostBindings 'Microsoft.Web/sites/hostNameBindings@2022-09-01' = {
   name: '${azureFunctionName}.azurewebsites.net'

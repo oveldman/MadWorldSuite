@@ -9,7 +9,6 @@ resource actionGroup 'Microsoft.Insights/actionGroups@2023-01-01' existing = {
   name: smartDectectionName
 }
 
-
 resource smartdetectoralertrules 'microsoft.alertsManagement/smartDetectorAlertRules@2021-04-01' = {
   name: format('failure anomalies - {0}', applicationInsightName)
   location: 'global'
@@ -31,4 +30,3 @@ resource smartdetectoralertrules 'microsoft.alertsManagement/smartDetectorAlertR
     }
   }
 }
-

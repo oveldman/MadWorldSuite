@@ -39,12 +39,12 @@ resource apiManagement 'Microsoft.ApiManagement/service@2019-01-01' = {
       }
     ]
     customProperties: {
-        'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11': 'false'
-        'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10': 'false'
-        'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11': 'false'
-        'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10': 'false'
-        'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30': 'false'
-        'Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2': 'false'
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11': 'false'
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10': 'false'
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11': 'false'
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10': 'false'
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30': 'false'
+      'Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2': 'false'
     }
     virtualNetworkType: 'None'
   }
@@ -170,7 +170,7 @@ resource anonumousProperty 'Microsoft.ApiManagement/service/properties@2019-01-0
     displayName: 'madworld-api-anonymous-key'
     value: anonymousApiKey
     tags: [
-      'key', 'function', 'auto' 
+      'key', 'function', 'auto'
     ]
     secret: true
   }
@@ -183,7 +183,7 @@ resource authorizedProperty 'Microsoft.ApiManagement/service/properties@2019-01-
     displayName: 'madworld-api-authorized-key'
     value: authorizedApiKey
     tags: [
-      'key', 'function', 'auto' 
+      'key', 'function', 'auto'
     ]
     secret: true
   }

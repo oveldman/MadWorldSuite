@@ -1,4 +1,4 @@
-param apiManagementName string = 'madworld-api-management'
+param apiManagementName string
 
 resource service 'Microsoft.ApiManagement/service@2022-08-01' existing = {
   name: apiManagementName
@@ -150,7 +150,6 @@ resource getPingWithUsernamePolicy 'Microsoft.ApiManagement/service/apis/operati
     format: 'rawxml'
   }
 }
-
 
 resource getStatusOperation 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'get-status'
@@ -319,4 +318,3 @@ resource getRenderSwaggerUIPolicy 'Microsoft.ApiManagement/service/apis/operatio
     format: 'rawxml'
   }
 }
-

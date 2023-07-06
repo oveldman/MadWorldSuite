@@ -5,7 +5,6 @@ param healthCheckName string
 param healthCheckEndpoint string
 param smartDectectionName string
 
-
 resource workspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' existing = {
   name: workspaceName
 }
@@ -286,7 +285,6 @@ resource slowServerResponseTime 'Microsoft.Insights/components/ProactiveDetectio
   }
 }
 
-
 module failureAnomalies './failure-anomalies.bicep' = {
   name: 'failureAnomalies-${insightName}'
   params: {
@@ -294,7 +292,6 @@ module failureAnomalies './failure-anomalies.bicep' = {
     smartDectectionName: smartDectectionName
   }
 }
-
 
 module healthCheck './health-check.bicep' = {
   name: 'healthCheck-${insightName}'
