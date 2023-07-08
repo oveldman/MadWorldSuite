@@ -1,0 +1,42 @@
+@page "/Learn/DesignPatterns/DecoratorPattern"
+
+@if (_character.IsSome)
+{
+    <div class="row">
+        <div class="col-4">
+            <div class="card" style="width: 30rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@Character.GetName()</h5>
+                    <p class="card-text">Class: @Character.GetClass()</p>
+                    <p class="card-text">Magic Spells: @string.Join(",", Character.GetMagicSpells())</p>
+                    <button class="btn btn-danger" @onclick="() => Reset()">Reset @Character.GetName()</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <button class="btn btn-success" @onclick="AddCleric">Add Cleric</button>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-warning" @onclick="AddPaladin">Add Paladin</button>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-danger" @onclick="AddWizard">Add Wizard</button>
+        </div>
+    </div>
+}
+else
+{
+    <RadzenTemplateForm Data="@_name" Submit="(string name) => CreateCharacter(name)">
+        <RadzenColumn Size="12" SizeMD="4">
+            <RadzenLabel Text="Character name" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="8">
+            <RadzenTextBox @bind-Value="_name" class="col-width-100"></RadzenTextBox>
+        </RadzenColumn>
+        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" Gap="1rem" Class="rz-mt-8 rz-mb-4">
+            <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Save" />
+        </RadzenStack>
+    </RadzenTemplateForm>
+}
