@@ -17,20 +17,20 @@ namespace MadWorld.Architecture.Tests;
 public class DependencyTests
 {
     private static readonly ArchUnitNET.Domain.Architecture Architecture = new ArchLoader().LoadAssemblies(
-            typeof(DomainMarker).Assembly,
-            typeof(AnonymousMarker).Assembly,
-            typeof(AuthorizedMarker).Assembly,
-            typeof(SharedMarker).Assembly,
-            typeof(ApplicationMarker).Assembly,
-            typeof(InfrastructureMarker).Assembly)
+            typeof(IDomainMarker).Assembly,
+            typeof(IAnonymousMarker).Assembly,
+            typeof(IAuthorizedMarker).Assembly,
+            typeof(ISharedMarker).Assembly,
+            typeof(IApplicationMarker).Assembly,
+            typeof(IInfrastructureMarker).Assembly)
         .Build();
 
-    private static readonly string DomainNamespace = typeof(DomainMarker).Namespace!;
-    private static readonly string AnonymousNamespace = typeof(AnonymousMarker).Namespace!;
-    private static readonly string AuthorizedNamespace = typeof(AuthorizedMarker).Namespace!; 
-    private static readonly string SharedNamespace = typeof(SharedMarker).Namespace!;
-    private static readonly string ApplicationNamespace = typeof(ApplicationMarker).Namespace!;
-    private static readonly string InfrastructureNamespace = typeof(InfrastructureMarker).Namespace!;
+    private static readonly string DomainNamespace = typeof(IDomainMarker).Namespace!;
+    private static readonly string AnonymousNamespace = typeof(IAnonymousMarker).Namespace!;
+    private static readonly string AuthorizedNamespace = typeof(IAuthorizedMarker).Namespace!; 
+    private static readonly string SharedNamespace = typeof(ISharedMarker).Namespace!;
+    private static readonly string ApplicationNamespace = typeof(IApplicationMarker).Namespace!;
+    private static readonly string InfrastructureNamespace = typeof(IInfrastructureMarker).Namespace!;
 
     [Fact]
     public void ApplicationDependsNotOnInfrastructure()

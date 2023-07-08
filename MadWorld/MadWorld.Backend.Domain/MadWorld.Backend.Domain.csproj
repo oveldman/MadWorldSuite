@@ -3,6 +3,7 @@
     <ProjectReference Include="..\MadWorld.Shared.Contracts\MadWorld.Shared.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" />
     <PackageReference Include="LanguageExt.Core" />
   </ItemGroup>
 </Project>
