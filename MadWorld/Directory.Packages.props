@@ -36,6 +36,8 @@
     <PackageVersion Include="Moq" Version="4.18.4" />
     <PackageVersion Include="Radzen.Blazor" Version="4.12.0" />
     <PackageVersion Include="Shouldly" Version="4.2.1" />
+    <PackageVersion Include="TngTech.ArchUnitNET" Version="0.10.5" />
+    <PackageVersion Include="TngTech.ArchUnitNET.xUnit" Version="0.10.5" />
     <PackageVersion Include="WireMock.Net" Version="1.5.26" />
     <PackageVersion Include="WireMock.Net.Abstractions" Version="1.5.26" />
     <PackageVersion Include="WireMock.Net.FluentAssertions" Version="1.5.26" />

@@ -124,6 +124,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI.Admin.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Domain.Unittests", "MadWorld.Backend.Domain.Unittests\MadWorld.Backend.Domain.Unittests.csproj", "{F28F0DEE-738E-499B-8234-6034C891B155}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArchitectureTest", "ArchitectureTest", "{67EF329C-BD74-4980-854A-624B3CC41864}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Architecture.Tests", "MadWorld.Architecture.Tests\MadWorld.Architecture.Tests.csproj", "{9F93E72F-BB54-4779-8C70-805704302C46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +165,8 @@ Global
 		{C3BA6B58-C4C3-411C-95A2-A66B1EA682AF} = {8BBC9D54-C485-4FD7-99C4-0747D2837C71}
 		{00E588A9-3052-4DB5-8742-D673D397760C} = {C3BA6B58-C4C3-411C-95A2-A66B1EA682AF}
 		{F28F0DEE-738E-499B-8234-6034C891B155} = {DF837823-254A-44E6-9F46-133C31114CE5}
+		{67EF329C-BD74-4980-854A-624B3CC41864} = {5470C4F1-9CEA-4F86-8041-64C444941FDA}
+		{9F93E72F-BB54-4779-8C70-805704302C46} = {67EF329C-BD74-4980-854A-624B3CC41864}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -247,5 +253,9 @@ Global
 		{F28F0DEE-738E-499B-8234-6034C891B155}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F28F0DEE-738E-499B-8234-6034C891B155}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F28F0DEE-738E-499B-8234-6034C891B155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F93E72F-BB54-4779-8C70-805704302C46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F93E72F-BB54-4779-8C70-805704302C46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F93E72F-BB54-4779-8C70-805704302C46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F93E72F-BB54-4779-8C70-805704302C46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
