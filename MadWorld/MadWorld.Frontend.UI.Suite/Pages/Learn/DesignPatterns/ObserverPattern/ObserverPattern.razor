@@ -1,0 +1,40 @@
+@page "/Learn/DesignPatterns/ObserverPattern"
+
+@using MadWorld.Frontend.Application.DesignPatterns.ObserverPattern
+
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <button class="btn btn-success" @onclick="() => ChangeFlag(RacingFlag.Green)">Show green flag</button>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-warning" @onclick="() => ChangeFlag(RacingFlag.Yellow)">Show yellow flag</button>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-danger" @onclick="() => ChangeFlag(RacingFlag.Red)">Show red flag</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <button class="btn btn-primary" @onclick="AddRedBull">Add Red Bull</button>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-primary" @onclick="AddMercedes">Add Mercedes</button>
+    </div>
+  </div>
+  <div class="row">
+    @foreach (var car in _formulaOneCars)
+    {
+      <div class="col-4">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">@car.Name</h5>
+            <p class="card-text">Speed: @car.GetRacingPace()</p>
+            <button class="btn btn-danger" @onclick="() => RemoveCar(car)">Remove @car.Name</button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
