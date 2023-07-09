@@ -126,7 +126,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Domain.Uni
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArchitectureTest", "ArchitectureTest", "{67EF329C-BD74-4980-854A-624B3CC41864}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Architecture.Tests", "MadWorld.Architecture.Tests\MadWorld.Architecture.Tests.csproj", "{9F93E72F-BB54-4779-8C70-805704302C46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Architecture.Tests", "MadWorld.Backend.Architecture.Tests\MadWorld.Backend.Architecture.Tests.csproj", "{9F93E72F-BB54-4779-8C70-805704302C46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

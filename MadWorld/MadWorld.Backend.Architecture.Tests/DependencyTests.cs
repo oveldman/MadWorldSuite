@@ -1,5 +1,3 @@
-using ArchUnitNET.Domain.Extensions;
-using ArchUnitNET.Fluent;
 using ArchUnitNET.Loader;
 using ArchUnitNET.xUnit;
 using MadWorld.Backend.API.Anonymous;
@@ -12,7 +10,7 @@ using MadWorld.Backend.Infrastructure;
 //add a using directive to ArchUnitNET.Fluent.ArchRuleDefinition to easily define ArchRules
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
-namespace MadWorld.Architecture.Tests;
+namespace MadWorld.Backend.Architecture.Tests;
 
 public class DependencyTests
 {
