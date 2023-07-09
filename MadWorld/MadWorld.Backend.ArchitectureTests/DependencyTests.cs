@@ -10,7 +10,7 @@ using MadWorld.Backend.Infrastructure;
 //add a using directive to ArchUnitNET.Fluent.ArchRuleDefinition to easily define ArchRules
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
-namespace MadWorld.Backend.Architecture.Tests;
+namespace MadWorld.Backend.ArchitectureTests;
 
 public class DependencyTests
 {
