@@ -30,8 +30,4 @@
       <ProjectReference Include="..\MadWorld.Backend.API.Shared\MadWorld.Backend.API.Shared.csproj" />
       <ProjectReference Include="..\MadWorld.Backend.Infrastructure\MadWorld.Backend.Infrastructure.csproj" />
     </ItemGroup>
-    <ItemGroup>
-      <PackageVersion Update="Microsoft.Azure.Functions.Worker" Version="1.14.1" />
-      <PackageVersion Update="Microsoft.Azure.Functions.Worker.Sdk" Version="1.10.0" />
-    </ItemGroup>
 </Project>
