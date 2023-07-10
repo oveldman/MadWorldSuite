@@ -40,7 +40,7 @@ public class DependencyTests
     }
     
     [Fact]
-    public void DomainDependsNotOnBackendProject()
+    public void DomainDependsNotOnBackendProjects()
     {
         var backendProjects = new List<string>()
         {
