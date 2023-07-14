@@ -30,14 +30,9 @@ public sealed class GetAccountUseCase : IGetAccountUseCase
         var account = Option<Account>.None;
         userIdResult.IfSucc(userId => account = _client.GetUserAsync(userId).GetAwaiter().GetResult());
 
-        if (account.IsNone)
-        {
-            return Option<GetAccountResponse>.None;
-        }
-
-        return Option<GetAccountResponse>.Some(new GetAccountResponse()
-        {
-            Account = account.ValueUnsafe().ToDetailContract()
-        });
+        return account.Select(a => new GetAccountResponse()
+                        {
+                            Account = a.ToDetailContract()
+                        });
     }
 }

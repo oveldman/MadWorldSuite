@@ -19,16 +19,9 @@ public sealed class GetCurriculumVitaeUseCase : IGetCurriculumVitaeUseCase
     {
         var curriculumVitaeOption = _repository.GetCurriculumVitae();
 
-        if (curriculumVitaeOption.IsNone)
+        return curriculumVitaeOption.Select(cv => new GetCurriculumVitaeResponse()
         {
-            return Option<GetCurriculumVitaeResponse>.None;
-        }
-        
-        return new GetCurriculumVitaeResponse()
-        {
-            CurriculumVitae = curriculumVitaeOption
-                                .ValueUnsafe()
-                                .ToContract()
-        };
+            CurriculumVitae = cv.ToContract()
+        });
     }
 }
