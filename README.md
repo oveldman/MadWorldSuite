@@ -104,4 +104,4 @@ The following Azure resources are currently running in my Azure environment:
 * Azure B2C
 
 ## Currently maintained by
-* [Oscar Veldman](https://www.github.com/oveldman)
+* [Oscar Veldman](https://www.github.com/oveldman) 
