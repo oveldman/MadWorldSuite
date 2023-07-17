@@ -34,6 +34,6 @@ public sealed class PatchAccount
         FunctionContext executionContext)
     {
         var request = await req.ReadFromJsonAsync<PatchAccountRequest>();
-        return await _useCase.PatchAccount(request);
+        return _useCase.PatchAccount(request);
     }
 }

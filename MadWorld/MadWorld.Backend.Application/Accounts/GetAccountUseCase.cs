@@ -22,17 +22,18 @@ public sealed class GetAccountUseCase : IGetAccountUseCase
     {
         var userIdResult = GuidId.Parse(request.Id);
 
-        if (userIdResult.IsFaulted)
-        {
-            return new Result<Option<GetAccountResponse>>(userIdResult.GetException());
-        }
-
-        var account = Option<Account>.None;
-        userIdResult.IfSucc(userId => account = _client.GetUserAsync(userId).GetAwaiter().GetResult());
-
+        return userIdResult.Match(
+            GetAccount,
+            _ => new Result<Option<GetAccountResponse>>(userIdResult.GetException())
+        );
+    }
+    
+    private Result<Option<GetAccountResponse>> GetAccount(GuidId userId)
+    {
+        var account = _client.GetUserAsync(userId).GetAwaiter().GetResult();
         return account.Select(a => new GetAccountResponse()
-                        {
-                            Account = a.ToDetailContract()
-                        });
+        {
+            Account = a.ToDetailContract()
+        });
     }
 }

@@ -5,5 +5,5 @@ namespace MadWorld.Backend.Domain.Accounts;
 
 public interface IPatchAccountUseCase
 {
-    Task<Result<PatchAccountResponse>> PatchAccount(PatchAccountRequest? request);
+    Result<PatchAccountResponse> PatchAccount(PatchAccountRequest? request);
 }

@@ -22,14 +22,19 @@ public class PatchCurriculumVitaeUseCase : IPatchCurriculumVitaeUseCase
             request.Title
         );
 
-        if (curriculumVitaeResult.IsFaulted) 
-            return new Result<PatchCurriculumVitaeResponse>(curriculumVitaeResult.GetException());
+        return curriculumVitaeResult.Match(
+            PatchCurriculumVitae,
+            _ => new Result<PatchCurriculumVitaeResponse>(curriculumVitaeResult.GetException())
+        );
+    }
+    
+    private Result<PatchCurriculumVitaeResponse> PatchCurriculumVitae(CurriculumVitae curriculumVitae)
+    {
+        var result = _repository.UpdateCurriculumVitae(curriculumVitae);
 
-        var result = _repository.UpdateCurriculumVitae(curriculumVitaeResult.GetValue());
-        
-        if (result.IsFaulted) 
-            return new Result<PatchCurriculumVitaeResponse>(result.GetException());
-
-        return new PatchCurriculumVitaeResponse();
+        return result.Match(
+            _ => new PatchCurriculumVitaeResponse(),
+            _ => new Result<PatchCurriculumVitaeResponse>(result.GetException())
+        );
     }
 }

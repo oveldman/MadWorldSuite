@@ -16,15 +16,23 @@ public sealed class PatchAccountUseCase : IPatchAccountUseCase
         _client = client;
     }
     
-    public async Task<Result<PatchAccountResponse>> PatchAccount(PatchAccountRequest? request)
+    public Result<PatchAccountResponse> PatchAccount(PatchAccountRequest? request)
     {
         if (request == null) return new Result<PatchAccountResponse>(new ValidationException("Request cannot be null"));
         var accountResult = Account.Parse(request.Id, request.Roles);
-        if (accountResult.IsFaulted) return new Result<PatchAccountResponse>(accountResult.GetException());
 
-        var succeeded = await _client.UpdateUser(accountResult.GetValue());
-        if (succeeded.IsFaulted) return new Result<PatchAccountResponse>(accountResult.GetException());
-        
-        return new PatchAccountResponse();
+        return accountResult.Match(
+            account => PatchAccount(account).GetAwaiter().GetResult(),
+            _ => new Result<PatchAccountResponse>(accountResult.GetException())
+        );
+    }
+    
+    private async Task<Result<PatchAccountResponse>> PatchAccount(Account account)
+    {
+        var result = await _client.UpdateUser(account);
+        return result.Match(
+            _ => new PatchAccountResponse(),
+            _ => new Result<PatchAccountResponse>(result.GetException())
+        );
     }
 }
