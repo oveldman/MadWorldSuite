@@ -17,6 +17,12 @@ public class MonacoManager : IAsyncDisposable
         var module = await moduleTask.Value;
         await module.InvokeVoidAsync("init", editorId);
     }
+
+    public async ValueTask SetValue(string value)
+    {
+        var module = await moduleTask.Value;
+        await module.InvokeVoidAsync("setValue", value);
+    }
     
     public async ValueTask DisposeAsync()
     {

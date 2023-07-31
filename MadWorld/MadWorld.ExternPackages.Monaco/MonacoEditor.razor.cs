@@ -14,6 +14,11 @@ public partial class MonacoEditor
     
     [Inject]
     public MonacoManager MonacoManager { get; set; } = default!;
+    
+    public async Task SetValue(string value)
+    {
+        await MonacoManager.SetValue(value);
+    }
 
     protected override async void OnAfterRender(bool firstRender)
     {
