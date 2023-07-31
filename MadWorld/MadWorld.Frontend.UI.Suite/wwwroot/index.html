@@ -14,6 +14,8 @@
     <link rel="icon" type="image/png" href="image/RieMasudaIconSmall.png" />
     <link href="MadWorld.Frontend.UI.Suite.styles.css" rel="stylesheet" />
 
+    <link href="_content/MadWorld.ExternPackages.Monaco/lib/monaco-editor/min/vs/editor/editor.main.css" rel="stylesheet" />
+    
     <script type='text/javascript'>
         window.smartlook||(function(d) {
             var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
@@ -41,6 +43,10 @@
     <script src="_content/Microsoft.Authentication.WebAssembly.Msal/AuthenticationService.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
+
+    <script src="_content/MadWorld.ExternPackages.Monaco/lib/monaco-editor/min/vs/loader.js"></script>
+    <script>require.config({ paths: { 'vs': '_content/MadWorld.ExternPackages.Monaco/lib/monaco-editor/min/vs' } });</script>
+    <script src="_content/MadWorld.ExternPackages.Monaco/lib/monaco-editor/min/vs/editor/editor.main.js"></script>
 </body>
 
 </html>

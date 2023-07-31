@@ -354,3 +354,6 @@ MigrationBackup/
 
 # MacOS
 .DS_Store
+
+# Project
+lib/

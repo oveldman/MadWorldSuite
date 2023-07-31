@@ -128,6 +128,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArchitectureTest", "Archite
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.ArchitectureTests", "MadWorld.Backend.ArchitectureTests\MadWorld.Backend.ArchitectureTests.csproj", "{9F93E72F-BB54-4779-8C70-805704302C46}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternPackages", "ExternPackages", "{914838E3-9108-474A-919F-413D7874CC55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.ExternPackages.Monaco", "MadWorld.ExternPackages.Monaco\MadWorld.ExternPackages.Monaco.csproj", "{6EB3DD90-EBAE-4793-A11C-9F0427F7650F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,6 +171,8 @@ Global
 		{F28F0DEE-738E-499B-8234-6034C891B155} = {DF837823-254A-44E6-9F46-133C31114CE5}
 		{67EF329C-BD74-4980-854A-624B3CC41864} = {5470C4F1-9CEA-4F86-8041-64C444941FDA}
 		{9F93E72F-BB54-4779-8C70-805704302C46} = {67EF329C-BD74-4980-854A-624B3CC41864}
+		{914838E3-9108-474A-919F-413D7874CC55} = {BD60157B-62B3-467F-991D-E7718A7D78E8}
+		{6EB3DD90-EBAE-4793-A11C-9F0427F7650F} = {914838E3-9108-474A-919F-413D7874CC55}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -257,5 +263,9 @@ Global
 		{9F93E72F-BB54-4779-8C70-805704302C46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F93E72F-BB54-4779-8C70-805704302C46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F93E72F-BB54-4779-8C70-805704302C46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EB3DD90-EBAE-4793-A11C-9F0427F7650F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EB3DD90-EBAE-4793-A11C-9F0427F7650F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB3DD90-EBAE-4793-A11C-9F0427F7650F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EB3DD90-EBAE-4793-A11C-9F0427F7650F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
