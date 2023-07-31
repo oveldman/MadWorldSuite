@@ -17,7 +17,8 @@ cutting-edge technologies while building a collection of diverse tools, a person
 [4. How to Install and Run the Project](#How-to-Install-and-Run-the-Project)\
 [5. How to Run the Tests](#How-to-Run-the-Tests)\
 [6. Azure Resources](#Azure-Resources)\
-[7. Currently maintained by](#Currently-maintained-by)
+[7. Other Readme's](#Other-Readmes)\
+[8. Currently maintained by](#Currently-maintained-by)
 
 ## Running Environments
 The following environments are currently running in Azure:
@@ -102,6 +103,9 @@ The following Azure resources are currently running in my Azure environment:
 * Azure App Service Plan (2x)
 * Azure Log Analytics Workspace
 * Azure B2C
+
+## Other Readme's
+* [Use Microsoft Monaco](MadWorld/MadWorld.ExternPackages.Monaco/README.md)
 
 ## Currently maintained by
 * [Oscar Veldman](https://www.github.com/oveldman) 

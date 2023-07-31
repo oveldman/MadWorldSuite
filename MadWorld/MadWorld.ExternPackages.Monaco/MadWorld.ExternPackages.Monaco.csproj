@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Remove="Libman.json"/>
+        <Content Remove="Libman.json" />
         <None Include="Libman.json">
             <CopyToPublishDirectory>Never</CopyToPublishDirectory>
         </None>
