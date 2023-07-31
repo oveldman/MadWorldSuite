@@ -16,4 +16,11 @@
         <PackageReference Include="Microsoft.Web.LibraryManager.Build" />
     </ItemGroup>
 
+    <ItemGroup>
+        <Content Remove="Libman.json"/>
+        <None Include="Libman.json">
+            <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+        </None>
+    </ItemGroup>
+
 </Project>
