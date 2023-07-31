@@ -1,1 +1,0 @@
-[Solve bad gateway timeout](https://github.com/Azure/azure-functions-host/issues/309)
