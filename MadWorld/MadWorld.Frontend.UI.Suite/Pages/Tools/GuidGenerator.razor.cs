@@ -1,11 +1,13 @@
+using JetBrains.Annotations;
 using MadWorld.ExternPackages.Monaco;
 
 namespace MadWorld.Frontend.UI.Suite.Pages.Tools;
 
+[UsedImplicitly]
 public partial class GuidGenerator
 {
     private const int MinGuidAmount = 0;
-    private const int MaxGuidAmount = 10000;
+    private const int MaxGuidAmount = 10_000;
     
     private MonacoEditor _monacoEditor = default!;
 
