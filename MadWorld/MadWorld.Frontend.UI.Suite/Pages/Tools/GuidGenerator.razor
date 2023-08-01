@@ -2,8 +2,35 @@
 
 @page "/Tools/GuidGenerator"
 
-<h3>GuidGenerator</h3>
-
-<MonacoEditor @ref="_monacoEditor"></MonacoEditor>
-
-<button class="btn btn-primary" @onclick="GenerateGuid">Generate Guid</button>
+<div class="row">
+  <div class="col">
+    <h3>Guid Generator</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <p>Generating GUIDs (Globally Unique Identifiers) is a reliable method to create unique identifiers. This
+      limited-capacity application efficiently generates up to 10,000 GUIDs, providing a sufficient number of unique 
+      identifiers for various use cases. Remember that GUIDs offer an exceedingly low probability of collision, making
+      them ideal for diverse applications.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-3">
+    <div class="mb-3">
+      <label for="amount-guids" class="form-label"><strong>Amount of guids</strong></label>
+      <input type="number" class="form-control" id="amount-guids" min="@MinGuidAmount" max="@MaxGuidAmount" @bind="_guidAmountSelected">
+    </div>
+  </div>
+    <div class="col-2">
+      <div class="mb-3">
+        <label for="generate" class="form-label"><strong>Let's go</strong></label>
+        <button class="btn btn-primary form-control" id="generate" @onclick="GenerateGuids">Generate Guid</button>
+      </div>
+    </div>
+</div>
+<div class="row">
+  <div class="col">
+    <MonacoEditor @ref="_monacoEditor" />
+  </div>
+</div>
