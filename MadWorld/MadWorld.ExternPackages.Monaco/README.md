@@ -16,5 +16,6 @@ Add the following html code in the script section of your index.html file:
 ## Using
 Add the following code in your razor component:
 ```html
+@using MadWorld.ExternPackages.Monaco;
 <MonacoEditor />
 ```
