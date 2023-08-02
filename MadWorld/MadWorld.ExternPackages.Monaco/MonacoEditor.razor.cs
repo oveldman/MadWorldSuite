@@ -7,6 +7,9 @@ public partial class MonacoEditor
 {
     [Parameter]
     public int Height { get; set; } = 500;
+    
+    [Parameter]
+    public MonacoSettings Settings { get; set; } = new();
 
     private readonly EditorId _editorId = new();
     
@@ -24,7 +27,7 @@ public partial class MonacoEditor
     {
         if (firstRender)
         {
-            await MonacoManager.Init(_editorId);
+            await MonacoManager.Init(_editorId, Settings);
         }
 
         await base.OnAfterRenderAsync(firstRender);

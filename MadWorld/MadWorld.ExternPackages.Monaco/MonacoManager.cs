@@ -1,3 +1,7 @@
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
+using MadWorld.ExternPackages.Monaco.Models;
 using Microsoft.JSInterop;
 
 namespace MadWorld.ExternPackages.Monaco;
@@ -12,10 +16,12 @@ public class MonacoManager : IAsyncDisposable
             "import", "./_content/MadWorld.ExternPackages.Monaco/monacoEditorInterop.js").AsTask());
     }
     
-    public async ValueTask Init(string editorId)
+    public async ValueTask Init(string editorId, MonacoSettings settings)
     {
         var module = await moduleTask.Value;
-        await module.InvokeVoidAsync("init", editorId);
+
+        var monacoSettings = JsonSerializer.Serialize(settings);
+        await module.InvokeVoidAsync("init", editorId, monacoSettings);
     }
 
     public async ValueTask SetValue(string value)
