@@ -1,0 +1,19 @@
+@page "/Tools/DefaultEditor"
+@using MadWorld.ExternPackages.Monaco.Models
+
+<h3>Default Editor</h3>
+
+@if (_isReady)
+{
+    <button class="btn btn-primary form-control" id="load" @onclick="UnloadEditor">Unload</button>
+    <MonacoEditor @ref="_monacoEditor" Settings="_monacoSettings" />   
+}
+else
+{
+    <select class="form-select" @bind="_monacoSettings.Language">
+        <option value="@Languages.PlainText">@Languages.PlainText</option>
+        <option value="@Languages.Json">@Languages.Json</option>
+        <option value="@Languages.Xml">@Languages.Xml</option>
+    </select>
+    <button class="btn btn-primary form-control" id="load" @onclick="LoadEditor">Load</button>
+}
