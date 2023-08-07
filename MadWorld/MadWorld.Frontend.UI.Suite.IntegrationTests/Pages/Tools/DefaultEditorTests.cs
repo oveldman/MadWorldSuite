@@ -36,6 +36,9 @@ public class DefaultEditorTests : IClassFixture<UiStartupFactory>, IAsyncLifetim
         editor.ShouldNotBeNull();
         editor.EditorId.ShouldNotBeNull();
         defaultEditorComponent.Find("#" + editor.EditorId).ShouldNotBeNull();
+        ctx.JSInterop.VerifyInvoke("init")
+            .Arguments[0]
+            .ShouldBe("" + editor.EditorId);
     }
 
     public Task InitializeAsync()
