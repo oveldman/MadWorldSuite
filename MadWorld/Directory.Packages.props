@@ -43,6 +43,7 @@
     <PackageVersion Include="WireMock.Net.FluentAssertions" Version="1.5.31" />
     <PackageVersion Include="WireMock.Net.xUnit" Version="1.5.31" />
     <PackageVersion Include="xunit" Version="2.5.0" />
+    <PackageVersion Include="xunit.extensibility.core" Version="2.5.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

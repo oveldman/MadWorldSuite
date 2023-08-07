@@ -120,7 +120,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Api.Anonym
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{C3BA6B58-C4C3-411C-95A2-A66B1EA682AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI.Admin.Integrations", "MadWorld.Frontend.UI.Admin.Integrations\MadWorld.Frontend.UI.Admin.Integrations.csproj", "{00E588A9-3052-4DB5-8742-D673D397760C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI.Admin.IntegrationTests", "MadWorld.Frontend.UI.Admin.IntegrationTests\MadWorld.Frontend.UI.Admin.IntegrationTests.csproj", "{00E588A9-3052-4DB5-8742-D673D397760C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.Domain.Unittests", "MadWorld.Backend.Domain.Unittests\MadWorld.Backend.Domain.Unittests.csproj", "{F28F0DEE-738E-499B-8234-6034C891B155}"
 EndProject
@@ -131,6 +131,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternPackages", "ExternPackages", "{914838E3-9108-474A-919F-413D7874CC55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.ExternPackages.Monaco", "MadWorld.ExternPackages.Monaco\MadWorld.ExternPackages.Monaco.csproj", "{6EB3DD90-EBAE-4793-A11C-9F0427F7650F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI.Suite.IntegrationTests", "MadWorld.Frontend.UI.Suite.IntegrationTests\MadWorld.Frontend.UI.Suite.IntegrationTests.csproj", "{CDD8797B-79D8-48F6-B22E-2DA390E8B68E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -173,6 +175,7 @@ Global
 		{9F93E72F-BB54-4779-8C70-805704302C46} = {67EF329C-BD74-4980-854A-624B3CC41864}
 		{914838E3-9108-474A-919F-413D7874CC55} = {BD60157B-62B3-467F-991D-E7718A7D78E8}
 		{6EB3DD90-EBAE-4793-A11C-9F0427F7650F} = {914838E3-9108-474A-919F-413D7874CC55}
+		{CDD8797B-79D8-48F6-B22E-2DA390E8B68E} = {C3BA6B58-C4C3-411C-95A2-A66B1EA682AF}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -267,5 +270,9 @@ Global
 		{6EB3DD90-EBAE-4793-A11C-9F0427F7650F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EB3DD90-EBAE-4793-A11C-9F0427F7650F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EB3DD90-EBAE-4793-A11C-9F0427F7650F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDD8797B-79D8-48F6-B22E-2DA390E8B68E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDD8797B-79D8-48F6-B22E-2DA390E8B68E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDD8797B-79D8-48F6-B22E-2DA390E8B68E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDD8797B-79D8-48F6-B22E-2DA390E8B68E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

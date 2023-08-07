@@ -14,7 +14,7 @@ using Shouldly;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 
-namespace MadWorld.Frontend.UI.Admin.Integrations.Pages.Accounts;
+namespace MadWorld.Frontend.UI.Admin.IntegrationTests.Pages.Accounts;
 
 public class AccountDetailsTests : IClassFixture<UiStartupFactory>, IAsyncLifetime
 {

@@ -24,6 +24,11 @@ public class MonacoManager : IAsyncDisposable
         await module.InvokeVoidAsync("init", editorId, monacoSettings);
     }
 
+    public async ValueTask Reload(string editorId, MonacoSettings settings)
+    {
+        await Init(editorId, settings);
+    }
+
     public async ValueTask SetValue(string value)
     {
         var module = await moduleTask.Value;

@@ -6,14 +6,14 @@ public class EditorId
     
     public EditorId()
     {
-        _id = new Guid();
+        _id = Guid.NewGuid();
     }
 
     public static implicit operator string(EditorId id)
     {
         var guidId = id._id
             .ToString()
-            .Replace("_", "");
+            .Replace("-", "");
 
         return $"monaco-editor-{guidId}";
     }

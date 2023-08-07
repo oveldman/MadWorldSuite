@@ -11,13 +11,13 @@ public partial class MonacoEditor
     [Parameter]
     public MonacoSettings Settings { get; set; } = new();
 
-    private readonly EditorId _editorId = new();
+    internal readonly EditorId EditorId = new();
     
     private string HeightPixels => Height + "px";
     
     [Inject]
     public MonacoManager MonacoManager { get; set; } = default!;
-    
+
     public async Task SetValue(string value)
     {
         await MonacoManager.SetValue(value);
@@ -27,7 +27,7 @@ public partial class MonacoEditor
     {
         if (firstRender)
         {
-            await MonacoManager.Init(_editorId, Settings);
+            await MonacoManager.Init(EditorId, Settings);
         }
 
         await base.OnAfterRenderAsync(firstRender);

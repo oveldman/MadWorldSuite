@@ -3,10 +3,10 @@
 
 <h3>Default Editor - @_monacoSettings.Language</h3>
 
-@if (_isReady)
+@if (IsReady)
 {
-    <button class="btn btn-primary form-control" id="load" @onclick="UnloadEditor">Unload</button>
-    <MonacoEditor @ref="_monacoEditor" Settings="_monacoSettings" />   
+    <button class="btn btn-primary form-control" id="unload" @onclick="UnloadEditor">Unload</button>
+    <MonacoEditor @ref="MonacoEditor" Settings="_monacoSettings" />   
 }
 else
 {
