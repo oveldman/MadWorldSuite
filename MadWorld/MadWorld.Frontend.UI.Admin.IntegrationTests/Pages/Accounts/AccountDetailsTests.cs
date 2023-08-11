@@ -8,9 +8,7 @@ using MadWorld.IntegrationTests.Startups;
 using MadWorld.Shared.Contracts.Authorized.Account;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 using Radzen.Blazor;
-using Shouldly;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 
@@ -31,15 +29,15 @@ public class AccountDetailsTests : IClassFixture<UiStartupFactory>, IAsyncLifeti
         // Arrange
         const string userId = "4ce4ed46-cd2e-4529-88c0-57ed36e0f91b";
         const string accountName = "Gerald Ruben";
-        
-        var accessTokenProvider = new Mock<IAccessTokenProvider>();
+
+        var accessTokenProvider = Substitute.For<IAccessTokenProvider>();
+
         accessTokenProvider
-            .Setup(x => x.RequestAccessToken())
-            .ReturnsAsync(UiStartupFactory.GetFakeAccessTokenResult());
-        
+            .RequestAccessToken()
+            .Returns(UiStartupFactory.GetFakeAccessTokenResult());
         accessTokenProvider
-            .Setup(x => x.RequestAccessToken(It.IsAny<AccessTokenRequestOptions>()))
-            .ReturnsAsync(UiStartupFactory.GetFakeAccessTokenResult());
+            .RequestAccessToken(Arg.Any<AccessTokenRequestOptions>())
+            .Returns(UiStartupFactory.GetFakeAccessTokenResult());
 
         _factory.MockServer.Given(
             Request.Create().WithPath($"/authorized/Account/{userId}").UsingGet()
@@ -52,7 +50,7 @@ public class AccountDetailsTests : IClassFixture<UiStartupFactory>, IAsyncLifeti
 
         using var ctx = new TestContext();
         ctx.Services.AddSuiteApp(_factory.GetConfiguration(), UiStartupFactory.GetHostEnvironment());
-        ctx.Services.AddSingleton(accessTokenProvider.Object);
+        ctx.Services.AddSingleton(accessTokenProvider);
         var authContext = ctx.AddTestAuthorization();
         authContext.SetAuthorized("test@test.nl");
         authContext.SetRoles("Admin");

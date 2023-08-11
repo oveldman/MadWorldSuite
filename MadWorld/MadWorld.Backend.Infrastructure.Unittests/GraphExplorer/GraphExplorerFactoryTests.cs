@@ -1,8 +1,6 @@
 using MadWorld.Backend.Domain.Configuration;
 using MadWorld.Backend.Infrastructure.GraphExplorer;
 using Microsoft.Extensions.Logging;
-using Moq;
-using Shouldly;
 
 namespace MadWorld.Backend.Infrastructure.Unittests.GraphExplorer;
 
@@ -20,8 +18,8 @@ public sealed class GraphExplorerFactoryTests
             TenantId = "test-tenant-id",
         };
         
-        var loggerFactory = new Mock<ILoggerFactory>();
-        var factory = new GraphExplorerFactory(loggerFactory.Object);
+        var loggerFactory = Substitute.For<ILoggerFactory>();
+        var factory = new GraphExplorerFactory(loggerFactory);
         
         // Act
         var client = factory.CreateClient(configuration);

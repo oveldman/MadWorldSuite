@@ -3,8 +3,6 @@ using MadWorld.Backend.Domain.Accounts;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
-using Shouldly;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -31,8 +29,8 @@ public sealed class GetAccountsTests : IClassFixture<AuthorizedApiStartupFactory
     public async Task GetAccounts_Regularly_ShouldReturnExpectedResult()
     {
         // Arrange
-        var context = new Mock<FunctionContext>();
-        var request = new Mock<HttpRequestData>(context.Object);
+        var context = Substitute.For<FunctionContext>();
+        var request = Substitute.For<HttpRequestData>(context);
 
         _wireMockServer.Given(
             Request.Create().WithPath("/users").UsingGet()
@@ -45,7 +43,7 @@ public sealed class GetAccountsTests : IClassFixture<AuthorizedApiStartupFactory
         );
 
         // Act
-        var response = await _function.Run(request.Object, context.Object);
+        var response = await _function.Run(request, context);
 
         // Assert
         response.Accounts.Count.ShouldBe(2);

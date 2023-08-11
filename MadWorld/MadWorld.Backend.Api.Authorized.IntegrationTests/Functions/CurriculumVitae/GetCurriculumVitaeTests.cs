@@ -5,8 +5,6 @@ using MadWorld.Backend.Infrastructure.TableStorage.CurriculaVitae;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
-using Shouldly;
 
 namespace MadWorld.Backend.Api.Authorized.IntegrationTests.Functions.CurriculumVitae;
 
@@ -31,11 +29,11 @@ public class GetCurriculumVitaeTests : IClassFixture<AuthorizedApiDockerStartupF
     public void GetCurriculumVitae_Regularly_ShouldReturnExpectedResult()
     {
         // Arrange
-        var context = new Mock<FunctionContext>();
-        var request = new Mock<HttpRequestData>(context.Object);
+        var context = Substitute.For<FunctionContext>();
+        var request = Substitute.For<HttpRequestData>(context);
         
         // Act
-        var response = _function.Run(request.Object, context.Object);
+        var response = _function.Run(request, context);
         
         // Assert
         var contract = response

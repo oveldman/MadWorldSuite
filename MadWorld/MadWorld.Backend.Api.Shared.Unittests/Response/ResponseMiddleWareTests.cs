@@ -4,10 +4,12 @@ using LanguageExt;
 using LanguageExt.Common;
 using MadWorld.Backend.API.Shared.Functions.Expansions;
 using MadWorld.Backend.API.Shared.Response;
+using MadWorld.Backend.Api.Shared.Unittests._Mocks;
 using MadWorld.Backend.Domain.Exceptions;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.Functions.Worker.Middleware;
+using Shouldly;
 
 namespace MadWorld.Backend.Api.Shared.Unittests.Response;
 
@@ -20,23 +22,24 @@ public sealed class ResponseMiddleWareTests
     {
         // Arrange
         const string response = "test";
-
-        var invocationResult = new Mock<InvocationResult>();
-        var context = new Mock<FunctionContext>();
-        var contextWrapper = new Mock<IFunctionContextWrapper>();
-        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
+        var metaData = GetMetaData();
+        
+        var context = FunctionContextMock.Create(metaData);
+        var invocationResult = Substitute.For<InvocationResult>();
+        var contextWrapper = Substitute.For<IFunctionContextWrapper>();
+        
         contextWrapper
-            .Setup(c =>
-                c.GetInvocationResult(It.IsAny<FunctionContext>()))
-            .Returns(invocationResult.Object);
-        invocationResult.Setup(i => i.Value).Returns(response);
-        var middleware = new ResponseMiddleWare(contextWrapper.Object);
+            .GetInvocationResult(Arg.Any<FunctionContext>())
+            .Returns(invocationResult);
+        invocationResult.Value.Returns(response);
+
+        var middleware = new ResponseMiddleWare(contextWrapper);
 
         // Act
-        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+        await middleware.Invoke(context, _ => Task.CompletedTask);
 
         // Assert
-        invocationResult.VerifySet(x => x.Value = It.IsAny<object>(), Times.Never());
+        invocationResult.Value.ShouldBe(response);
     }
     
     [Fact]
@@ -44,24 +47,24 @@ public sealed class ResponseMiddleWareTests
     {
         // Arrange
         const string response = null!;
-
-        var invocationResult = new Mock<InvocationResult>();
-        var context = new Mock<FunctionContext>();
-        var contextWrapper = new Mock<IFunctionContextWrapper>();
-        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
-        contextWrapper
-            .Setup(c =>
-                c.GetInvocationResult(It.IsAny<FunctionContext>()))
-            .Returns(invocationResult.Object);
+        var metaData = GetMetaData();
         
-        var middleware = new ResponseMiddleWare(contextWrapper.Object);
-        invocationResult.Setup(i => i.Value).Returns(response);
+        var context = FunctionContextMock.Create(metaData);
+        var invocationResult = Substitute.For<InvocationResult>();
+        var contextWrapper = Substitute.For<IFunctionContextWrapper>();
+        
+        contextWrapper
+            .GetInvocationResult(Arg.Any<FunctionContext>())
+            .Returns(invocationResult);
+        invocationResult.Value.Returns(response);
+
+        var middleware = new ResponseMiddleWare(contextWrapper);
 
         // Act
-        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+        await middleware.Invoke(context, _ => Task.CompletedTask);
 
         // Assert
-        invocationResult.VerifySet(x => x.Value = It.IsAny<object>(), Times.Never());
+        invocationResult.Value.ShouldBe(response);
     }
     
     [Fact]
@@ -70,24 +73,24 @@ public sealed class ResponseMiddleWareTests
         // Arrange
         const string finalResponse = "test";
         var response = Option<string>.Some(finalResponse);
+        var metaData = GetMetaData();
 
-        var invocationResult = new Mock<InvocationResult>();
-        var context = new Mock<FunctionContext>();
-        var contextWrapper = new Mock<IFunctionContextWrapper>();
-        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
-        contextWrapper
-            .Setup(c =>
-                c.GetInvocationResult(It.IsAny<FunctionContext>()))
-            .Returns(invocationResult.Object);
+        var invocationResult = Substitute.For<InvocationResult>();
+        var context = FunctionContextMock.Create(metaData);
+        var contextWrapper = Substitute.For<IFunctionContextWrapper>();
         
-        var middleware = new ResponseMiddleWare(contextWrapper.Object);
-        invocationResult.Setup(i => i.Value).Returns(response);
+        contextWrapper
+            .GetInvocationResult(Arg.Any<FunctionContext>())
+            .Returns(invocationResult);
+        invocationResult.Value.Returns(response);
+        
+        var middleware = new ResponseMiddleWare(contextWrapper);
 
         // Act
-        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+        await middleware.Invoke(context, _ => Task.CompletedTask);
 
         // Assert
-        invocationResult.VerifySet(x => x.Value = finalResponse, Times.Once);
+        invocationResult.Value.ShouldBe(finalResponse);
     }
     
     [Fact]
@@ -96,24 +99,24 @@ public sealed class ResponseMiddleWareTests
         // Arrange
         const string finalResponse = "test";
         var response = new Result<Option<string>>(Option<string>.Some(finalResponse));
+        var metaData = GetMetaData();
 
-        var invocationResult = new Mock<InvocationResult>();
-        var context = new Mock<FunctionContext>();
-        var contextWrapper = new Mock<IFunctionContextWrapper>();
-        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
-        contextWrapper
-            .Setup(c =>
-                c.GetInvocationResult(It.IsAny<FunctionContext>()))
-            .Returns(invocationResult.Object);
+        var invocationResult = Substitute.For<InvocationResult>();
+        var context = FunctionContextMock.Create(metaData);
+        var contextWrapper = Substitute.For<IFunctionContextWrapper>();
         
-        var middleware = new ResponseMiddleWare(contextWrapper.Object);
-        invocationResult.Setup(i => i.Value).Returns(response);
+        contextWrapper
+            .GetInvocationResult(Arg.Any<FunctionContext>())
+            .Returns(invocationResult);
+        invocationResult.Value.Returns(response);
+
+        var middleware = new ResponseMiddleWare(contextWrapper);
 
         // Act
-        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+        await middleware.Invoke(context, _ => Task.CompletedTask);
 
         // Assert
-        invocationResult.VerifySet(x => x.Value = finalResponse, Times.Once);
+        invocationResult.Value.ShouldBe(finalResponse);
     }
     
     [Fact]
@@ -122,24 +125,24 @@ public sealed class ResponseMiddleWareTests
         // Arrange
         const string finalResponse = "test";
         var response = new Result<string>(finalResponse);
+        var metaData = GetMetaData();
 
-        var invocationResult = new Mock<InvocationResult>();
-        var context = new Mock<FunctionContext>();
-        var contextWrapper = new Mock<IFunctionContextWrapper>();
-        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
-        contextWrapper
-            .Setup(c =>
-                c.GetInvocationResult(It.IsAny<FunctionContext>()))
-            .Returns(invocationResult.Object);
+        var invocationResult = Substitute.For<InvocationResult>();
+        var context = FunctionContextMock.Create(metaData);
+        var contextWrapper = Substitute.For<IFunctionContextWrapper>();
         
-        var middleware = new ResponseMiddleWare(contextWrapper.Object);
-        invocationResult.Setup(i => i.Value).Returns(response);
+        contextWrapper
+            .GetInvocationResult(Arg.Any<FunctionContext>())
+            .Returns(invocationResult);
+        invocationResult.Value.Returns(response);
+
+        var middleware = new ResponseMiddleWare(contextWrapper);
 
         // Act
-        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+        await middleware.Invoke(context, _ => Task.CompletedTask);
 
         // Assert
-        invocationResult.VerifySet(x => x.Value = finalResponse, Times.Once);
+        invocationResult.Value.ShouldBe(finalResponse);
     }
     
     [Fact]
@@ -149,39 +152,40 @@ public sealed class ResponseMiddleWareTests
         var exception = new ArgumentException("Test");
         var response = new Result<string>(exception);
 
-        var invocationResult = new Mock<InvocationResult>();
-        var context = new Mock<FunctionContext>();
-        var stream = new Mock<Stream>();
-        var httpRequestData = new Mock<HttpRequestData>(context.Object);
-        var httpResponseData = new Mock<HttpResponseData>(context.Object);
-        var contextWrapper = new Mock<IFunctionContextWrapper>();
-        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
+        var invocationResult = Substitute.For<InvocationResult>();
+        var context = FunctionContextMock.Create(GetMetaData());
+        var contextWrapper = Substitute.For<IFunctionContextWrapper>();
+        var stream = Substitute.For<Stream>();
+        var httpRequestData = Substitute.For<HttpRequestData>(context);
+        var httpResponseData = Substitute.For<HttpResponseData>(context); 
+        ;
         contextWrapper
-            .Setup(c =>
-                c.GetInvocationResult(It.IsAny<FunctionContext>()))
-            .Returns(invocationResult.Object);
+            .GetInvocationResult(Arg.Any<FunctionContext>())
+            .Returns(invocationResult);
         contextWrapper
-            .Setup(c =>
-                c.GetHttpRequestDataAsync(It.IsAny<FunctionContext>()))
-            .ReturnsAsync(httpRequestData.Object);
+            .GetHttpRequestDataAsync(Arg.Any<FunctionContext>())
+            .Returns(httpRequestData);
         httpRequestData
-            .Setup(hrd =>
-                hrd.CreateResponse())
-            .Returns(httpResponseData.Object);
-        httpResponseData.Setup(hrd => hrd.Body).Returns(stream.Object);
+            .CreateResponse()
+            .Returns(httpResponseData);
+        httpResponseData.Body.Returns(stream);
+        invocationResult.Value.Returns(response);
 
-        var middleware = new ResponseMiddleWare(contextWrapper.Object);
-        invocationResult.Setup(i => i.Value).Returns(response);
+        var middleware = new ResponseMiddleWare(contextWrapper);
 
         // Act
-        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+        await middleware.Invoke(context, _ => Task.CompletedTask);
 
         // Assert
-        invocationResult.VerifySet(x => x.Value = httpResponseData.Object, Times.Once);
-        httpResponseData.VerifySet(x => x.StatusCode = HttpStatusCode.InternalServerError, Times.Once);
+        invocationResult.Value.ShouldBe(httpResponseData);
+        httpResponseData.StatusCode.ShouldBe(HttpStatusCode.InternalServerError);
 
         var bytes = "{\"Message\":\"There went something wrong. Please try again later.\"}"u8.ToArray();
-        stream.Verify(x => x.WriteAsync(bytes, 0, bytes.Length, CancellationToken.None), Times.Once);
+        await stream.Received(1).WriteAsync(
+            Arg.Is<byte[]>(buffer => buffer.SequenceEqual(bytes)),
+            Arg.Is<int>(offset => offset == 0),
+            Arg.Is<int>(length => length == bytes.Length),
+            Arg.Any<CancellationToken>());
     }
     
     [Fact]
@@ -191,41 +195,43 @@ public sealed class ResponseMiddleWareTests
         const string errorMessage = "test";
         var exception = new ValidationException(errorMessage);
         var response = new Result<string>(exception);
-
-        var invocationResult = new Mock<InvocationResult>();
-        var context = new Mock<FunctionContext>();
-        var stream = new Mock<Stream>();
-        var httpRequestData = new Mock<HttpRequestData>(context.Object);
-        var httpResponseData = new Mock<HttpResponseData>(context.Object);
-        var contextWrapper = new Mock<IFunctionContextWrapper>();
-        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
+        var metaData = GetMetaData();
+        
+        var context = FunctionContextMock.Create(metaData);
+        var invocationResult = Substitute.For<InvocationResult>();
+        var contextWrapper = Substitute.For<IFunctionContextWrapper>();
+        var stream = Substitute.For<Stream>();
+        var httpRequestData = Substitute.For<HttpRequestData>(context);
+        var httpResponseData = Substitute.For<HttpResponseData>(context);
+        
         contextWrapper
-            .Setup(c =>
-                c.GetInvocationResult(It.IsAny<FunctionContext>()))
-            .Returns(invocationResult.Object);
+            .GetInvocationResult(Arg.Any<FunctionContext>())
+            .Returns(invocationResult);
         contextWrapper
-            .Setup(c =>
-                c.GetHttpRequestDataAsync(It.IsAny<FunctionContext>()))
-            .ReturnsAsync(httpRequestData.Object);
+            .GetHttpRequestDataAsync(Arg.Any<FunctionContext>())
+            .Returns(httpRequestData);
         httpRequestData
-            .Setup(hrd =>
-                hrd.CreateResponse())
-            .Returns(httpResponseData.Object);
-        httpResponseData.Setup(hrd => hrd.Body).Returns(stream.Object);
+            .CreateResponse()
+            .Returns(httpResponseData);
+        httpResponseData.Body.Returns(stream);
+        invocationResult.Value.Returns(response);
 
-        var middleware = new ResponseMiddleWare(contextWrapper.Object);
-        invocationResult.Setup(i => i.Value).Returns(response);
+        var middleware = new ResponseMiddleWare(contextWrapper);
 
         // Act
-        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+        await middleware.Invoke(context, _ => Task.CompletedTask);
 
         // Assert
-        invocationResult.VerifySet(x => x.Value = httpResponseData.Object, Times.Once);
-        httpResponseData.VerifySet(x => x.StatusCode = HttpStatusCode.BadRequest, Times.Once);
+        invocationResult.Value.ShouldBe(httpResponseData);
+        httpResponseData.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
 
         const string errorResponse = "{\"Message\":\"" + errorMessage + "\"}";
         var bytes = Encoding.UTF8.GetBytes(errorResponse);
-        stream.Verify(x => x.WriteAsync(bytes, 0, bytes.Length, CancellationToken.None), Times.Once);
+        await stream.Received(1).WriteAsync(
+            Arg.Is<byte[]>(buffer => buffer.SequenceEqual(bytes)),
+            Arg.Is<int>(offset => offset == 0),
+            Arg.Is<int>(length => length == bytes.Length),
+            Arg.Any<CancellationToken>());
     }
     
     [Fact]
@@ -233,40 +239,42 @@ public sealed class ResponseMiddleWareTests
     {
         // Arrange
         var response = Option<string>.None;
-
-        var invocationResult = new Mock<InvocationResult>();
-        var context = new Mock<FunctionContext>();
-        var stream = new Mock<Stream>();
-        var httpRequestData = new Mock<HttpRequestData>(context.Object);
-        var httpResponseData = new Mock<HttpResponseData>(context.Object);
-        var contextWrapper = new Mock<IFunctionContextWrapper>();
-        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData());
+        var metaData = GetMetaData();
+        
+        var context = FunctionContextMock.Create(metaData);
+        var invocationResult = Substitute.For<InvocationResult>();
+        var contextWrapper = Substitute.For<IFunctionContextWrapper>();
+        var stream = Substitute.For<Stream>();
+        var httpRequestData = Substitute.For<HttpRequestData>(context);
+        var httpResponseData = Substitute.For<HttpResponseData>(context);
+        
         contextWrapper
-            .Setup(c =>
-                c.GetInvocationResult(It.IsAny<FunctionContext>()))
-            .Returns(invocationResult.Object);
+            .GetInvocationResult(Arg.Any<FunctionContext>())
+            .Returns(invocationResult);
         contextWrapper
-            .Setup(c =>
-                c.GetHttpRequestDataAsync(It.IsAny<FunctionContext>()))
-            .ReturnsAsync(httpRequestData.Object);
+            .GetHttpRequestDataAsync(Arg.Any<FunctionContext>())
+            .Returns(httpRequestData);
         httpRequestData
-            .Setup(hrd =>
-                hrd.CreateResponse())
-            .Returns(httpResponseData.Object);
-        httpResponseData.Setup(hrd => hrd.Body).Returns(stream.Object);
-        invocationResult.Setup(i => i.Value).Returns(response);
+            .CreateResponse()
+            .Returns(httpResponseData);
+        httpResponseData.Body.Returns(stream);
+        invocationResult.Value.Returns(response);
 
-        var middleware = new ResponseMiddleWare(contextWrapper.Object);
+        var middleware = new ResponseMiddleWare(contextWrapper);
 
         // Act
-        await middleware.Invoke(context.Object, _ => Task.CompletedTask);
+        await middleware.Invoke(context, _ => Task.CompletedTask);
 
         // Assert
-        invocationResult.VerifySet(x => x.Value = httpResponseData.Object, Times.Once);
-        httpResponseData.VerifySet(x => x.StatusCode = HttpStatusCode.NotFound, Times.Once);
+        invocationResult.Value.ShouldBe(httpResponseData);
+        httpResponseData.StatusCode.ShouldBe(HttpStatusCode.NotFound);
 
         var bytes = "{\"Message\":\"Not found\"}"u8.ToArray();
-        stream.Verify(x => x.WriteAsync(bytes, 0, bytes.Length, CancellationToken.None), Times.Once);
+        await stream.Received(1).WriteAsync(
+            Arg.Is<byte[]>(buffer => buffer.SequenceEqual(bytes)),
+            Arg.Is<int>(offset => offset == 0),
+            Arg.Is<int>(length => length == bytes.Length),
+            Arg.Any<CancellationToken>());
     }
 
     [Fact]
@@ -274,30 +282,29 @@ public sealed class ResponseMiddleWareTests
     {
         // Arrange
         const string trigger = "blobsTrigger";
+        var metaData = GetMetaData(trigger);
+
+        var context = FunctionContextMock.Create(metaData);
+        var contextWrapper = Substitute.For<IFunctionContextWrapper>();
+        var next = Substitute.For<FunctionExecutionDelegate>();
         
-        var context = new Mock<FunctionContext>();
-        var contextWrapper = new Mock<IFunctionContextWrapper>();
-        var next = new Mock<FunctionExecutionDelegate>();
-        
-        context.Setup(c => c.FunctionDefinition.InputBindings.Values).Returns(GetMetaData(trigger));
-        
-        var middleware = new ResponseMiddleWare(contextWrapper.Object);
+        var middleware = new ResponseMiddleWare(contextWrapper);
         
         // Act
-        await middleware.Invoke(context.Object, next.Object);
+        await middleware.Invoke(context, next);
         
         // Assert
-        next.Verify(n => n.Invoke(It.IsAny<FunctionContext>()), Times.Once());
+        await next.Received(1).Invoke(Arg.Any<FunctionContext>());
     }
 
     private static IEnumerable<BindingMetadata> GetMetaData(string triggerType = HttpTrigger)
     {
-        var metaData = new Mock<BindingMetadata>();
-        metaData.Setup(md => md.Type).Returns(triggerType);
+        var metaData = Substitute.For<BindingMetadata>();
+        metaData.Type.Returns(triggerType);
 
         return new List<BindingMetadata>()
         {
-            metaData.Object
+            metaData
         };
     }
 }

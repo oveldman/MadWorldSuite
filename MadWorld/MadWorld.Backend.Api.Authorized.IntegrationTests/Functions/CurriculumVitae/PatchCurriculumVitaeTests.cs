@@ -8,8 +8,6 @@ using MadWorld.Shared.Contracts.Authorized.CurriculumVitae;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
-using Shouldly;
 
 namespace MadWorld.Backend.Api.Authorized.IntegrationTests.Functions.CurriculumVitae;
 
@@ -42,16 +40,14 @@ public class PatchCurriculumVitaeTests : IClassFixture<AuthorizedApiDockerStartu
             Title = "Backend Developer"
         };
 
-        var context = new Mock<FunctionContext>();
-        var httpRequest = new Mock<HttpRequestData>(context.Object);
+        var context = Substitute.For<FunctionContext>();
+        var httpRequest = Substitute.For<HttpRequestData>(context);
         
-        context.Setup(c => c.InstanceServices)
-            .Returns(_factory.Host.Services);
-        
-        httpRequest.Setup(hr => hr.Body).Returns(request.ToMemoryStream());
+        context.InstanceServices.Returns(_factory.Host.Services);
+        httpRequest.Body.Returns(request.ToMemoryStream());
         
         // Act
-        var response = await _function.Run(httpRequest.Object, context.Object);
+        var response = await _function.Run(httpRequest, context);
         
         // Assert
         var contract = response.GetValue();

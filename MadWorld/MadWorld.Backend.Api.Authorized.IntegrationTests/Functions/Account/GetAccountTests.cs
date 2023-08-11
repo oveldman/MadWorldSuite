@@ -4,8 +4,6 @@ using MadWorld.Backend.Domain.LanguageExt;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
-using Shouldly;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
@@ -34,8 +32,8 @@ public sealed class GetAccountTests : IClassFixture<AuthorizedApiStartupFactory>
         // Arrange
         const string userId = "4ce4ed46-cd2e-4529-88c0-57ed36e0f91b";
         
-        var context = new Mock<FunctionContext>();
-        var request = new Mock<HttpRequestData>(context.Object);
+        var context = Substitute.For<FunctionContext>();
+        var request = Substitute.For<HttpRequestData>(context);
 
         _wireMockServer.Given(
             Request.Create().WithPath($"/users/{userId}").UsingGet()
@@ -47,7 +45,7 @@ public sealed class GetAccountTests : IClassFixture<AuthorizedApiStartupFactory>
         );
 
         // Act
-        var response = _function.Run(request.Object, context.Object, userId);
+        var response = _function.Run(request, context, userId);
         
         // Assert
         var result = response
