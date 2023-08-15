@@ -1,43 +1,39 @@
 using System.Net;
-using LanguageExt;
-using LanguageExt.Common;
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.OpenAPI;
-using MadWorld.Backend.Domain.Accounts;
+using MadWorld.Shared.Contracts.Anonymous.Blog;
 using MadWorld.Shared.Contracts.Authorized.Account;
 using MadWorld.Shared.Contracts.Shared.Authorization;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
+using Microsoft.Graph.Models.IdentityGovernance;
 using Microsoft.OpenApi.Models;
 
-namespace MadWorld.Backend.API.Authorized.Functions.Account;
+namespace MadWorld.Backend.API.Authorized.Functions.Blog;
 
-public sealed class GetAccount
+public class GetBlogs
 {
-    private readonly IGetAccountUseCase _useCase;
-
-    public GetAccount(IGetAccountUseCase useCase)
+    public GetBlogs()
     {
-        _useCase = useCase;
     }
     
     [Authorize(RoleTypes.Admin)]
-    [Function("GetAccount")]
+    [Function("GetBlogs")]
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
-    [OpenApiOperation(operationId: "GetAccount", tags: new[] { "Account" })]
-    [OpenApiParameter("id", Required = true)]
+    [OpenApiOperation(operationId: "GetBlogs", tags: new[] { "Blog" })]
+    [OpenApiParameter("page", Type = typeof(int))]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountResponse), Description = "The OK response")]
-    public Result<Option<GetAccountResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Account/{id}")] HttpRequestData req,
-        FunctionContext executionContext, 
-        string id)
+    public GetBlogsResponse Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Blog/page/{page}")] HttpRequestData request,
+        FunctionContext executionContext,
+        string page)
     {
-        var request = new GetAccountRequest()
+        var getBlogsRequest = new GetBlogsRequest()
         {
-            Id = id
+            Page = page 
         };
-
-        return _useCase.GetAccount(request);
+        
+        return new GetBlogsResponse(Array.Empty<BlogContract>());
     }
 }
