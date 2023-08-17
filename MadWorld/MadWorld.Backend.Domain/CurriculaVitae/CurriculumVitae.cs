@@ -1,6 +1,7 @@
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.LanguageExt;
 using MadWorld.Backend.Domain.Properties;
+using MadWorld.Backend.Domain.System;
 using MadWorld.Shared.Contracts.Anonymous.CurriculumVitae;
 
 namespace MadWorld.Backend.Domain.CurriculaVitae;
@@ -10,7 +11,7 @@ public sealed class CurriculumVitae : ValueObject
     public readonly BirthDate BirthDate;
     public readonly Text FullName;
     public readonly Text Title;
-
+    
     public CurriculumVitae(BirthDate birthDate, Text fullName, Text title)
     {
         FullName = fullName;
