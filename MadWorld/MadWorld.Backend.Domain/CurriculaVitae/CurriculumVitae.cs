@@ -12,6 +12,7 @@ public sealed class CurriculumVitae : ValueObject
     public readonly Text FullName;
     public readonly Text Title;
     
+    [RepositoryPublicOnly]
     public CurriculumVitae(BirthDate birthDate, Text fullName, Text title)
     {
         FullName = fullName;

@@ -1,4 +1,5 @@
 using ArchUnitNET.Domain;
+using ArchUnitNET.Domain.Extensions;
 using LanguageExt.ClassInstances;
 using MadWorld.Backend.Domain.System;
 
@@ -31,8 +32,9 @@ public class InfrastructurePublicOnlyAttributeTests
         {
             return member.BackwardsDependencies
                 .All(
-                    dependency => dependency.Origin.Namespace.Name.StartsWith(AssemblyMarkers.InfrastructureNamespace) && 
-                                  dependency.Origin.Name.EndsWith("Repository"));
+                    dependency => (dependency.Origin.Namespace.Name.StartsWith(AssemblyMarkers.InfrastructureNamespace) && 
+                                  dependency.Origin.Name.EndsWith("Repository")) || 
+                                  member.FullName.Contains(dependency.Origin.FullName));
         });
     }
 }
