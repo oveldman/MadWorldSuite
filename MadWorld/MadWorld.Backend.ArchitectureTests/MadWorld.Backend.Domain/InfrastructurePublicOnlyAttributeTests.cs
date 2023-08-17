@@ -32,9 +32,10 @@ public class InfrastructurePublicOnlyAttributeTests
         {
             return member.BackwardsDependencies
                 .All(
-                    dependency => (dependency.Origin.Namespace.Name.StartsWith(AssemblyMarkers.InfrastructureNamespace) && 
-                                  dependency.Origin.Name.EndsWith("Repository")) || 
-                                  member.FullName.Contains(dependency.Origin.FullName));
+                    dependency => (
+                        dependency.Origin.Namespace.Name.StartsWith(AssemblyMarkers.InfrastructureNamespace) && 
+                        dependency.Origin.Name.EndsWith("Repository")) || 
+                        member.FullName.Contains(dependency.Origin.FullName));
         });
     }
 }
