@@ -1,4 +1,3 @@
-using System.Net.Mime;
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.LanguageExt;
 using MadWorld.Backend.Domain.Properties;
@@ -6,13 +5,13 @@ using MadWorld.Backend.Domain.System;
 
 namespace MadWorld.Backend.Domain.Blogs;
 
-public class Blog
+public class Blog : ValueObject
 {
     public readonly GuidId Id;
     public readonly DateTime Created;
     
-    public Text Title { get; private set; } = null!;
-    public Text Writer  { get; private set; } = null!;
+    public Text Title { get; private set; }
+    public Text Writer  { get; private set; }
     public DateTime Updated { get; private set; }
 
     [RepositoryPublicOnly]
