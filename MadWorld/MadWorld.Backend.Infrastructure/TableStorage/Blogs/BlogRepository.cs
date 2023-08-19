@@ -1,9 +1,9 @@
+using static LanguageExt.Prelude;
 using Azure.Data.Tables;
 using LanguageExt;
 using MadWorld.Backend.Domain.Blogs;
-using MadWorld.Backend.Domain.CurriculaVitae;
 using MadWorld.Backend.Domain.Properties;
-using MadWorld.Backend.Infrastructure.TableStorage.CurriculaVitae;
+using MadWorld.Backend.Infrastructure.TableStorage.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace MadWorld.Backend.Infrastructure.TableStorage.Blogs;
@@ -22,9 +22,36 @@ public class BlogRepository : IBlogRepository
         _table = client.GetTableClient(TableName);
     }
     
-    private static Option<Blog> ToBlog(BlogEntity entity)
+    public IReadOnlyList<Blog> GetBlogs(int page)
     {
-        var id = (GuidId)entity.RowKey;
+        var blogs = _table
+            .Query<BlogEntity>(c
+                => c.PartitionKey == BlogEntity.PartitionKeyName)
+            .AsPages(pageSizeHint: TableStorageConfigurationsManager.DefaultPageSize)
+            .Skip(page)
+            .FirstOrDefault()?
+            .Values
+            .Select(ToBlog)
+            .ToList() ?? new List<Blog>();
+
+        return blogs;
+    }
+    
+    public Option<Blog> GetBlog(GuidId id)
+    {
+        var blog = Optional(_table
+            .Query<BlogEntity>(c
+                => c.PartitionKey == BlogEntity.PartitionKeyName && c.Identifier == id)
+            .FirstOrDefault());
+
+        return blog.Match(b => 
+                ToBlog(b), 
+                () => Option<Blog>.None);
+    }
+    
+    private static Blog ToBlog(BlogEntity entity)
+    {
+        var id = (GuidId)entity.Identifier;
         var title = (Text)entity.Title;
         var writer = (Text)entity.Writer;
         
@@ -35,7 +62,8 @@ public class BlogRepository : IBlogRepository
     {
         return new BlogEntity
         {
-            RowKey = blog.Id.ToString(),
+            RowKey = blog.Created.ToRowKeyDesc(),
+            Identifier = blog.Id,
             Title = blog.Title,
             Writer = blog.Writer,
             Created = blog.Created,

@@ -4,6 +4,8 @@ namespace MadWorld.Backend.Infrastructure.TableStorage;
 
 public static class TableStorageConfigurationsManager
 {
+    public const int DefaultPageSize = 20;
+    
     public static TableStorageConfigurations Get()
     {
         return new TableStorageConfigurations()

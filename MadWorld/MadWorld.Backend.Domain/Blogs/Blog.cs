@@ -1,7 +1,9 @@
+using System.Reflection.Metadata;
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.LanguageExt;
 using MadWorld.Backend.Domain.Properties;
 using MadWorld.Backend.Domain.System;
+using MadWorld.Shared.Contracts.Anonymous.Blog;
 
 namespace MadWorld.Backend.Domain.Blogs;
 
@@ -61,5 +63,29 @@ public class Blog : ValueObject
         Title = title;
         Writer = writer;
         Updated = SystemTime.Now();
+    }
+    
+    public BlogContract ToContract()
+    {
+        return new BlogContract()
+        {
+            Id = Id,
+            Title = Title,
+            Writer = Writer,
+            Created = Created,
+            Updated = Updated
+        };
+    }
+    
+    public BlogDetailContract ToDetailContract()
+    {
+        return new BlogDetailContract()
+        {
+            Id = Id,
+            Title = Title,
+            Writer = Writer,
+            Created = Created,
+            Updated = Updated
+        };
     }
 }

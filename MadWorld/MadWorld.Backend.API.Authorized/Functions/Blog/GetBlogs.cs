@@ -1,6 +1,8 @@
 using System.Net;
+using LanguageExt.Common;
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.OpenAPI;
+using MadWorld.Backend.Domain.Blogs;
 using MadWorld.Shared.Contracts.Anonymous.Blog;
 using MadWorld.Shared.Contracts.Authorized.Account;
 using MadWorld.Shared.Contracts.Shared.Authorization;
@@ -15,8 +17,11 @@ namespace MadWorld.Backend.API.Authorized.Functions.Blog;
 
 public class GetBlogs
 {
-    public GetBlogs()
+    private readonly IGetBlogsUseCase _useCase;
+
+    public GetBlogs(IGetBlogsUseCase useCase)
     {
+        _useCase = useCase;
     }
     
     [Authorize(RoleTypes.Admin)]
@@ -25,7 +30,7 @@ public class GetBlogs
     [OpenApiOperation(operationId: "GetBlogs", tags: new[] { "Blog" })]
     [OpenApiParameter("page", Type = typeof(int))]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountResponse), Description = "The OK response")]
-    public GetBlogsResponse Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Blog/page/{page}")] HttpRequestData request,
+    public Result<GetBlogsResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Blog/page/{page}")] HttpRequestData request,
         FunctionContext executionContext,
         string page)
     {
@@ -33,7 +38,7 @@ public class GetBlogs
         {
             Page = page 
         };
-        
-        return new GetBlogsResponse(Array.Empty<BlogContract>());
+
+        return _useCase.GetBlogs(getBlogsRequest);
     }
 }
