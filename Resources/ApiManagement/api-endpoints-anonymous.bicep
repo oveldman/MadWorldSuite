@@ -9,6 +9,48 @@ resource anonymousApi 'Microsoft.ApiManagement/service/apis@2022-08-01' existing
   parent: service
 }
 
+resource getBlog 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-blog'
+  parent: anonymousApi
+  properties: {
+    displayName: 'GetBlog'
+    method: 'GET'
+    urlTemplate: '/GetBlog'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getBlogPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getBlog
+  properties: {
+    value: loadTextContent('./Policy/Anonymous/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
+resource getBlogs 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-blogs'
+  parent: anonymousApi
+  properties: {
+    displayName: 'GetBlogs'
+    method: 'GET'
+    urlTemplate: '/GetBlogs'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getBlogsPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getBlogs
+  properties: {
+    value: loadTextContent('./Policy/Anonymous/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
 resource getCurriculumVitae 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'get-curriculum-vitae'
   parent: anonymousApi

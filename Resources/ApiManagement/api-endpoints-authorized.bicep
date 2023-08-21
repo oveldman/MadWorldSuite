@@ -67,6 +67,48 @@ resource getAccountPolicy 'Microsoft.ApiManagement/service/apis/operations/polic
   }
 }
 
+resource getBlog 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-blog'
+  parent: authorizedApi
+  properties: {
+    displayName: 'GetBlog'
+    method: 'GET'
+    urlTemplate: '/GetBlog'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getBlogPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getBlog
+  properties: {
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
+resource getBlogs 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'get-blogs'
+  parent: authorizedApi
+  properties: {
+    displayName: 'GetBlogs'
+    method: 'GET'
+    urlTemplate: '/GetBlogs'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource getBlogsPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: getBlogs
+  properties: {
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
 resource getCurriculumVitae 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'get-curriculum-vitae'
   parent: authorizedApi
