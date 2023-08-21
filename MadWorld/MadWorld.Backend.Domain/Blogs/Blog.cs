@@ -85,7 +85,7 @@ public class Blog : ValueObject
             Title = Title,
             Writer = Writer,
             Created = Created,
-            Updated = Updated
+            Updated = Updated,
         };
     }
 }

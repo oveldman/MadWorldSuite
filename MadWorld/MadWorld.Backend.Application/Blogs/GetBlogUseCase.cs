@@ -10,10 +10,12 @@ namespace MadWorld.Backend.Application.Blogs;
 public class GetBlogUseCase : IGetBlogUseCase
 {
     private readonly IBlogRepository _repository;
+    private readonly IBlogStorageClient _storageClient;
 
-    public GetBlogUseCase(IBlogRepository repository)
+    public GetBlogUseCase(IBlogRepository repository, IBlogStorageClient storageClient)
     {
         _repository = repository;
+        _storageClient = storageClient;
     }
     
     public Result<GetBlogResponse> GetBlog(GetBlogRequest request)
@@ -33,9 +35,15 @@ public class GetBlogUseCase : IGetBlogUseCase
         );
     }
     
-    private static Result<GetBlogResponse> ToResponse(Blog blog)
+    private Result<GetBlogResponse> ToResponse(Blog blog)
     {
+        var body = _storageClient.GetPageAsBase64(blog.Id);
+        
         var contract = blog.ToDetailContract();
+        
+        contract.Body = body.Match(
+            b => b, 
+            () => string.Empty);
         
         return new GetBlogResponse()
         {

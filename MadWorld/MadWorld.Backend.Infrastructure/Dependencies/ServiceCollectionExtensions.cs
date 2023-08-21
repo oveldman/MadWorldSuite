@@ -1,7 +1,11 @@
 using Azure.Data.Tables;
+using Azure.Storage.Blobs;
 using MadWorld.Backend.Domain.Blogs;
 using MadWorld.Backend.Domain.Configuration;
 using MadWorld.Backend.Domain.CurriculaVitae;
+using MadWorld.Backend.Domain.Storage;
+using MadWorld.Backend.Infrastructure.BlobStorage;
+using MadWorld.Backend.Infrastructure.BlobStorage.Blog;
 using MadWorld.Backend.Infrastructure.GraphExplorer;
 using MadWorld.Backend.Infrastructure.TableStorage;
 using MadWorld.Backend.Infrastructure.TableStorage.Blogs;
@@ -14,13 +18,21 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationOverrider? configurationOverrider = null)
     {
-        services.AddScoped<IBlogRepository, BlogRepository>();
-        services.AddScoped<ICurriculumVitaeRepository, CurriculumVitaeRepository>();
-        
+        services.AddBlobStorage();
         services.AddGraphExplorer(configurationOverrider);
         services.AddTableStorage();
 
         return services;
+    }
+    
+    private static void AddBlobStorage(this IServiceCollection services)
+    {
+        var configuration = BlobStorageConfigurationsManager.Get();
+        
+        services.AddSingleton<BlobServiceClient>(s => new BlobServiceClient(configuration.AzureWebJobsStorage));
+        
+        services.AddScoped<IStorageClient, BlobStorageClient>();
+        services.AddScoped<IBlogStorageClient, BlogStorageClient>();
     }
     
     private static void AddGraphExplorer(this IServiceCollection services, ConfigurationOverrider? configurationOverrider)
@@ -36,5 +48,8 @@ public static class ServiceCollectionExtensions
         var configuration = TableStorageConfigurationsManager.Get();
         
         services.AddSingleton<TableServiceClient>(s => new TableServiceClient(configuration.AzureWebJobsStorage));
+        
+        services.AddScoped<IBlogRepository, BlogRepository>();
+        services.AddScoped<ICurriculumVitaeRepository, CurriculumVitaeRepository>();
     }
 }
