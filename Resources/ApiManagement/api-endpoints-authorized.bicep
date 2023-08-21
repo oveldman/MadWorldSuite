@@ -73,8 +73,15 @@ resource getBlog 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = 
   properties: {
     displayName: 'GetBlog'
     method: 'GET'
-    urlTemplate: '/GetBlog'
-    templateParameters: []
+    urlTemplate: '/GetBlog/{id}'
+    templateParameters: [
+      {
+        name: 'id'
+        required: true
+        values: []
+        type: 'SecureString'
+      }
+    ]
     responses: []
   }
 }
@@ -94,8 +101,15 @@ resource getBlogs 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' =
   properties: {
     displayName: 'GetBlogs'
     method: 'GET'
-    urlTemplate: '/GetBlogs'
-    templateParameters: []
+    urlTemplate: '/GetBlogs/page/{page}'
+    templateParameters: [
+      {
+        name: 'page'
+        required: true
+        values: []
+        type: 'SecureString'
+      }
+    ]
     responses: []
   }
 }
