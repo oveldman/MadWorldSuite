@@ -8,7 +8,7 @@ public class DockerRunner
     private const string ImageId = "mcr.microsoft.com/azure-storage/azurite";
     private const string AzuriteAccountName = "devstoreaccount1";
     private const string AzuriteAccountKey = "Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==";
-    private readonly int _azuritePortRange = 0;
+    private readonly int _azuritePortRange;
     private string _containerId = string.Empty;
     
     private readonly DockerClient _dockerClient;
