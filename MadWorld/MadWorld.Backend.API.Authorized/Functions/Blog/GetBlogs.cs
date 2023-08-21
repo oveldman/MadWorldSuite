@@ -29,7 +29,7 @@ public class GetBlogs
     [OpenApiOperation(operationId: "GetBlogs", tags: new[] { "Blog" })]
     [OpenApiParameter("page", Type = typeof(int))]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountResponse), Description = "The OK response")]
-    public Result<GetBlogsResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Blog/page/{page}")] HttpRequestData request,
+    public Result<GetBlogsResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Blogs/page/{page}")] HttpRequestData request,
         FunctionContext executionContext,
         string page)
     {
