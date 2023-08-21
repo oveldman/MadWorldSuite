@@ -1,5 +1,6 @@
 using LanguageExt;
 using MadWorld.Backend.Domain.Blogs;
+using MadWorld.Backend.Domain.Storage;
 
 namespace MadWorld.Backend.Infrastructure.BlobStorage.Blog;
 
@@ -7,9 +8,9 @@ public class BlogStorageClient : IBlogStorageClient
 {
     private const string BlogPagePath = "Blog/Pages";
     
-    private readonly BlobStorageClient _client;
+    private readonly IStorageClient _client;
 
-    public BlogStorageClient(BlobStorageClient client)
+    public BlogStorageClient(IStorageClient client)
     {
         _client = client;
     }
