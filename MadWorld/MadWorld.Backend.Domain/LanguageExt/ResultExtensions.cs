@@ -20,11 +20,11 @@ public static class ResultExtensions
         );
     }
     
-    public static Result<ValueObject> GetValueObjectResult<T>(this Result<T> result) 
-        where T : ValueObject
+    public static Result<IValueObject> GetValueObjectResult<T>(this Result<T> result) 
+        where T : IValueObject
     {
         return result.IsFaulted 
-            ? new Result<ValueObject>(result.GetException()) 
+            ? new Result<IValueObject>(result.GetException()) 
             : result.GetValue();
     }
 }

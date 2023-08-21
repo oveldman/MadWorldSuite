@@ -4,7 +4,7 @@ using MadWorld.Backend.Domain.LanguageExt;
 
 namespace MadWorld.Backend.Domain.Properties;
 
-public sealed class Text : ValueObject
+public sealed class Text : IValueObject
 {
     private readonly string _text;
     

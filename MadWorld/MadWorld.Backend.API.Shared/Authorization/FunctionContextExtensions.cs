@@ -36,7 +36,7 @@ public static class FunctionContextExtensions
     {
         var method = context.GetTargetFunctionMethod();
         var authorizeAttribute = method?.GetCustomAttributes()
-            .FirstOrDefault(a => a.GetType() == typeof(AuthorizeAttribute)) as AuthorizeAttribute;
+            .FirstOrDefault(a => a is AuthorizeAttribute) as AuthorizeAttribute;
 
         return authorizeAttribute?.Role ?? RoleTypes.None;
     }

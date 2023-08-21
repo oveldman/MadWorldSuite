@@ -4,7 +4,7 @@ using MadWorld.Backend.Domain.LanguageExt;
 
 namespace MadWorld.Backend.Domain.Properties;
 
-public sealed class GuidId : ValueObject
+public sealed class GuidId : IValueObject
 {
     private readonly Guid _id;
 

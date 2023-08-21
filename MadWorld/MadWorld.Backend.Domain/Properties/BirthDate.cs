@@ -5,7 +5,7 @@ using MadWorld.Backend.Domain.System;
 
 namespace MadWorld.Backend.Domain.Properties;
 
-public class BirthDate : ValueObject
+public class BirthDate : IValueObject
 {
     private readonly DateTime _birthDate;
     

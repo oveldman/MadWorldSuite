@@ -7,7 +7,7 @@ using MadWorld.Shared.Contracts.Shared.Authorization;
 
 namespace MadWorld.Backend.Domain.Accounts;
 
-public sealed class Account : ValueObject
+public sealed class Account : IValueObject
 {
     private const string RoleSplitValue = ";";
     
@@ -65,7 +65,7 @@ public sealed class Account : ValueObject
     private static Result<string> ParseRoles(string[] roles)
     {
         roles = roles.Distinct().ToArray();
-        var rolesValid = roles.All(r => Enum.TryParse(r, true, out RoleTypes _));
+        var rolesValid = Array.TrueForAll(roles, r => Enum.TryParse(r, true, out RoleTypes _));
         return !rolesValid 
             ? new Result<string>(new ValidationException($"One of the {nameof(roles)} doesn't exist")) 
             : string.Join(RoleSplitValue, roles);

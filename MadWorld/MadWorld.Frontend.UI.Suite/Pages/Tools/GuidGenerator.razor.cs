@@ -1,3 +1,4 @@
+using System.Text;
 using JetBrains.Annotations;
 using MadWorld.ExternPackages.Monaco;
 using MadWorld.ExternPackages.Monaco.Models;
@@ -25,14 +26,14 @@ public partial class GuidGenerator
 
     private string GenerateGuidsToString()
     {
-        var guids = string.Empty;
+        var guidBuilder = new StringBuilder(string.Empty, SelectedGuidAmountOfCharacters);
         
         for (var i = 0; i < _guidAmountSelected; i++)
         {
-            guids += Guid.NewGuid() + "\n";
+            guidBuilder.AppendLine($"{Guid.NewGuid()}");
         }
 
-        return guids;
+        return guidBuilder.ToString();
     }
 
     private void ValidateAmountOfGuids()
@@ -47,4 +48,7 @@ public partial class GuidGenerator
             _guidAmountSelected = MaxGuidAmount;
         }
     }
+
+    private const int GuidAmountOfCharacters = 36;
+    private int SelectedGuidAmountOfCharacters => GuidAmountOfCharacters * _guidAmountSelected;
 }

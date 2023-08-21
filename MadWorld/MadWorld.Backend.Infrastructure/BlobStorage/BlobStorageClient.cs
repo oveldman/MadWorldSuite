@@ -36,7 +36,7 @@ public class BlobStorageClient : IStorageClient
     {
         var fullName = Path.Combine(path, blobName);
         
-        var blobClient = _client.GetBlobClient(blobName);
+        var blobClient = _client.GetBlobClient(fullName);
         return blobClient.Download();
     }
 }

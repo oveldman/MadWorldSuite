@@ -12,12 +12,10 @@ public class BlogRepository : IBlogRepository
 {
     public const string TableName = "Blog";
     
-    private readonly ILogger<BlogRepository> _logger;
     private readonly TableClient _table;
     
-    public BlogRepository(TableServiceClient client, ILogger<BlogRepository> logger)
+    public BlogRepository(TableServiceClient client)
     {
-        _logger = logger;
         client.CreateTableIfNotExists(TableName);
         _table = client.GetTableClient(TableName);
     }

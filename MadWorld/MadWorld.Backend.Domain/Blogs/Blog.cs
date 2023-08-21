@@ -1,4 +1,3 @@
-using System.Reflection.Metadata;
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.LanguageExt;
 using MadWorld.Backend.Domain.Properties;
@@ -7,7 +6,7 @@ using MadWorld.Shared.Contracts.Anonymous.Blog;
 
 namespace MadWorld.Backend.Domain.Blogs;
 
-public class Blog : ValueObject
+public class Blog : IValueObject
 {
     public readonly GuidId Id;
     public readonly DateTime Created;

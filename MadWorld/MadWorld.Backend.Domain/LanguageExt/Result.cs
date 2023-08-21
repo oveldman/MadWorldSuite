@@ -4,11 +4,11 @@ namespace MadWorld.Backend.Domain.LanguageExt;
 
 public static class Result
 {
-    public static bool HasFaultyState(out Exception exception, params Result<ValueObject>[] results)
+    public static bool HasFaultyState(out Exception exception, params Result<IValueObject>[] results)
     {
         exception = null!;
 
-        if (!results.Any(r => r.IsFaulted)) return false;
+        if (!results.Exists(r => r.IsFaulted)) return false;
         
         exception = results
             .First(r => r.IsFaulted)

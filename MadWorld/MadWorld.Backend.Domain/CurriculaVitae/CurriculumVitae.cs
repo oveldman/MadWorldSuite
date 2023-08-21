@@ -6,7 +6,7 @@ using MadWorld.Shared.Contracts.Anonymous.CurriculumVitae;
 
 namespace MadWorld.Backend.Domain.CurriculaVitae;
 
-public sealed class CurriculumVitae : ValueObject
+public sealed class CurriculumVitae : IValueObject
 {
     public readonly BirthDate BirthDate;
     public readonly Text FullName;
