@@ -1,4 +1,5 @@
 using System.Net;
+using LanguageExt;
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.Blogs;
 using MadWorld.Shared.Contracts.Anonymous.Blog;
@@ -23,7 +24,7 @@ public class GetBlog
     [OpenApiOperation(operationId: "GetBlog", tags: new[] { "Blog" })]
     [OpenApiParameter("id", Required = true)]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountResponse), Description = "The OK response")]
-    public Result<GetBlogResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Blog/{id}")] HttpRequestData request,
+    public Result<Option<GetBlogResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Blog/{id}")] HttpRequestData request,
         FunctionContext executionContext,
         string id)
     {

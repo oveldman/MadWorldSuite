@@ -16,7 +16,7 @@ using Microsoft.Azure.Functions.Worker.Middleware;
 namespace MadWorld.Backend.API.Shared.Response;
 
 [UsedImplicitly]
-public sealed class ResponseMiddleWare : IFunctionsWorkerMiddleware
+public sealed class  ResponseMiddleWare : IFunctionsWorkerMiddleware
 {
     private readonly IFunctionContextWrapper _functionContextWrapper;
 
@@ -48,7 +48,7 @@ public sealed class ResponseMiddleWare : IFunctionsWorkerMiddleware
     {
         var valueType = value?.GetType();
         return valueType is { IsGenericType: true } &&
-               valueType.GetGenericTypeDefinition().IsAssignableFrom(parentType);
+            valueType.GetGenericTypeDefinition().IsAssignableFrom(parentType);
     }
 
     private void UnwrapResultProcessed<T>(FunctionContext context, string unwrapMethodName, T resultProcessed)

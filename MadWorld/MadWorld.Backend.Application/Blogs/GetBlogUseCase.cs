@@ -1,6 +1,7 @@
-using System.ComponentModel.DataAnnotations;
+using LanguageExt;
 using LanguageExt.Common;
 using MadWorld.Backend.Domain.Blogs;
+using MadWorld.Backend.Domain.Exceptions;
 using MadWorld.Backend.Domain.LanguageExt;
 using MadWorld.Backend.Domain.Properties;
 using MadWorld.Shared.Contracts.Anonymous.Blog;
@@ -18,24 +19,24 @@ public class GetBlogUseCase : IGetBlogUseCase
         _storageClient = storageClient;
     }
     
-    public Result<GetBlogResponse> GetBlog(GetBlogRequest request)
+    public Result<Option<GetBlogResponse>> GetBlog(GetBlogRequest request)
     {
         var id = GuidId.Parse(request.Id);
 
         if (id.IsFaulted)
         {
-            return new Result<GetBlogResponse>(new ValidationException($"{nameof(request.Id)} must be a valid guid"));
+            return new Result<Option<GetBlogResponse>>(new ValidationException($"{nameof(request.Id)} must be a valid guid"));
         }
         
         var blog = _repository.GetBlog(id.GetValue());
 
         return blog.Match(
             ToResponse,
-            () => new Result<GetBlogResponse>(new ValidationException($"Blog with id {id} not found"))
+            () => Option<GetBlogResponse>.None
         );
     }
     
-    private Result<GetBlogResponse> ToResponse(Blog blog)
+    private Result<Option<GetBlogResponse>> ToResponse(Blog blog)
     {
         var body = _storageClient.GetPageAsBase64(blog.Id);
         
@@ -44,10 +45,11 @@ public class GetBlogUseCase : IGetBlogUseCase
         contract.Body = body.Match(
             b => b, 
             () => string.Empty);
-        
-        return new GetBlogResponse()
-        {
-            Blog = contract
-        };
+
+        return Option<GetBlogResponse>.Some(
+            new GetBlogResponse()
+            {
+                Blog = contract
+            });
     }
 }
