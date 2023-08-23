@@ -67,6 +67,34 @@ resource getAccountPolicy 'Microsoft.ApiManagement/service/apis/operations/polic
   }
 }
 
+resource deleteBlog 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'delete-blog'
+  parent: authorizedApi
+  properties: {
+    displayName: 'DeleteBlog'
+    method: 'DELETE'
+    urlTemplate: '/Blog/{id}'
+    templateParameters: [
+      {
+        name: 'id'
+        required: true
+        values: []
+        type: 'SecureString'
+      }
+    ]
+    responses: []
+  }
+}
+
+resource deleteBlogPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: deleteBlog
+  properties: {
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
 resource getBlog 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'get-blog'
   parent: authorizedApi
