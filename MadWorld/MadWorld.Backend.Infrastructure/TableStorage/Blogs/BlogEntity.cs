@@ -17,4 +17,5 @@ public class BlogEntity : ITableEntity
     public string Writer { get; set; } = null!;
     public DateTime Created { get; set; } = DateTime.MinValue;
     public DateTime Updated { get; set; } = DateTime.MinValue;
+    public bool IsDeleted { get; set; }
 }

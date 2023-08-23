@@ -14,15 +14,17 @@ public class Blog : IValueObject
     public Text Title { get; private set; }
     public Text Writer  { get; private set; }
     public DateTime Updated { get; private set; }
+    public bool IsDeleted { get; private set; }
 
     [RepositoryPublicOnly]
-    public Blog(GuidId id, Text title, Text writer, DateTime created, DateTime updated)
+    public Blog(GuidId id, Text title, Text writer, DateTime created, DateTime updated, bool isDeleted)
     {
         Id = id;
         Title = title;
         Writer = writer;
         Created = created;
         Updated = updated;
+        IsDeleted = isDeleted;
     }
     
     private Blog(GuidId id, Text title, Text writer)
@@ -32,6 +34,7 @@ public class Blog : IValueObject
         Writer = writer;
         Created = SystemTime.Now();
         Updated = Created;
+        IsDeleted = false;
     }
     
     public static Result<Blog> Parse(string id, string title, string writer)
@@ -61,6 +64,12 @@ public class Blog : IValueObject
     {
         Title = title;
         Writer = writer;
+        Updated = SystemTime.Now();
+    }
+
+    public void SoftDelete()
+    {
+        IsDeleted = true;
         Updated = SystemTime.Now();
     }
     

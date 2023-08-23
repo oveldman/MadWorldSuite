@@ -24,7 +24,7 @@ public class BlogRepository : IBlogRepository
     {
         var blogs = _table
             .Query<BlogEntity>(c
-                => c.PartitionKey == BlogEntity.PartitionKeyName)
+                => c.PartitionKey == BlogEntity.PartitionKeyName && !c.IsDeleted)
             .AsPages(pageSizeHint: TableStorageConfigurationsManager.DefaultPageSize)
             .Skip(page)
             .FirstOrDefault()?
@@ -39,7 +39,9 @@ public class BlogRepository : IBlogRepository
     {
         var blog = Optional(_table
             .Query<BlogEntity>(c
-                => c.PartitionKey == BlogEntity.PartitionKeyName && c.Identifier == id)
+                => c.PartitionKey == BlogEntity.PartitionKeyName &&
+                   c.Identifier == id &&
+                   !c.IsDeleted)
             .FirstOrDefault());
 
         return blog.Match(b => 
@@ -53,7 +55,7 @@ public class BlogRepository : IBlogRepository
         var title = (Text)entity.Title;
         var writer = (Text)entity.Writer;
         
-        return new Blog(id, title, writer, entity.Created, entity.Updated);
+        return new Blog(id, title, writer, entity.Created, entity.Updated, entity.IsDeleted);
     }
     
     private static BlogEntity ToBlobEntity(Blog blog)

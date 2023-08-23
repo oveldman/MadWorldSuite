@@ -18,6 +18,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
         services.AddScoped<IPatchAccountUseCase, PatchAccountUseCase>();
 
+        services.AddScoped<IDeleteBlogUseCase, DeleteBlogUseCase>();
         services.AddScoped<IGetBlogsUseCase, GetBlogsUseCase>();
         services.AddScoped<IGetBlogUseCase, GetBlogUseCase>();
         
