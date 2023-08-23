@@ -1,10 +1,10 @@
 using static LanguageExt.Prelude;
 using Azure.Data.Tables;
 using LanguageExt;
+using LanguageExt.Common;
 using MadWorld.Backend.Domain.Blogs;
 using MadWorld.Backend.Domain.Properties;
 using MadWorld.Backend.Infrastructure.TableStorage.Extensions;
-using Microsoft.Extensions.Logging;
 
 namespace MadWorld.Backend.Infrastructure.TableStorage.Blogs;
 
@@ -40,13 +40,20 @@ public class BlogRepository : IBlogRepository
         var blog = Optional(_table
             .Query<BlogEntity>(c
                 => c.PartitionKey == BlogEntity.PartitionKeyName &&
-                   c.Identifier == id &&
-                   !c.IsDeleted)
+                    c.Identifier == id &&
+                    !c.IsDeleted)
             .FirstOrDefault());
 
         return blog.Match(b => 
                 ToBlog(b), 
                 () => Option<Blog>.None);
+    }
+    
+    public Result<Unit> UpsertBlog(Blog blog)
+    {
+        var entity = ToBlobEntity(blog);
+        _table.UpsertEntity(entity);
+        return Unit.Default;
     }
     
     private static Blog ToBlog(BlogEntity entity)
@@ -67,7 +74,8 @@ public class BlogRepository : IBlogRepository
             Title = blog.Title,
             Writer = blog.Writer,
             Created = blog.Created,
-            Updated = blog.Updated
+            Updated = blog.Updated,
+            IsDeleted = blog.IsDeleted
         };
     }
 }

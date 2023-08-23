@@ -31,12 +31,12 @@ public class GetBlogUseCase : IGetBlogUseCase
         var blog = _repository.GetBlog(id.GetValue());
 
         return blog.Match(
-            ToResponse,
+            AddBodyAndCreateResponse,
             () => Option<GetBlogResponse>.None
         );
     }
     
-    private Result<Option<GetBlogResponse>> ToResponse(Blog blog)
+    private Result<Option<GetBlogResponse>> AddBodyAndCreateResponse(Blog blog)
     {
         var body = _storageClient.GetPageAsBase64(blog.Id);
         
