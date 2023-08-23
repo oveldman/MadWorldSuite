@@ -30,7 +30,7 @@ public class GetBlog
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
     [OpenApiOperation(operationId: "GetBlog", tags: new[] { "Blog" })]
     [OpenApiParameter("id", Required = true)]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountResponse), Description = "The OK response")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetBlogResponse), Description = "The OK response")]
     public Result<Option<GetBlogResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Blog/{id}")] HttpRequestData request,
         FunctionContext executionContext,
         string id)

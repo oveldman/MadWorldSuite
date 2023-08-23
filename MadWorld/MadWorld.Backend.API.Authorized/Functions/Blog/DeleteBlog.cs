@@ -1,11 +1,13 @@
 using System.Net;
+using LanguageExt;
 using LanguageExt.Common;
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.OpenAPI;
-using MadWorld.Backend.Domain.Blogs;
 using MadWorld.Shared.Contracts.Anonymous.Blog;
 using MadWorld.Shared.Contracts.Authorized.Account;
+using MadWorld.Shared.Contracts.Authorized.Blog;
 using MadWorld.Shared.Contracts.Shared.Authorization;
+using MadWorld.Shared.Contracts.Shared.Functions;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
@@ -14,30 +16,31 @@ using Microsoft.OpenApi.Models;
 
 namespace MadWorld.Backend.API.Authorized.Functions.Blog;
 
-public class GetBlogs
+public class DeleteBlog
 {
-    private readonly IGetBlogsUseCase _useCase;
-
-    public GetBlogs(IGetBlogsUseCase useCase)
+    public DeleteBlog()
     {
-        _useCase = useCase;
     }
+
     
     [Authorize(RoleTypes.Admin)]
-    [Function("GetBlogs")]
+    [Function("DeleteBlog")]
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
-    [OpenApiOperation(operationId: "GetBlogs", tags: new[] { "Blog" })]
-    [OpenApiParameter("page", Type = typeof(int))]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetBlogsResponse), Description = "The OK response")]
-    public Result<GetBlogsResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Blogs/page/{page}")] HttpRequestData request,
+    [OpenApiOperation(operationId: "DeleteBlog", tags: new[] { "Blog" })]
+    [OpenApiParameter("id", Required = true)]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(OkResponse), Description = "The OK response")]
+    public Result<OkResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "Blog/{id}")] HttpRequestData request,
         FunctionContext executionContext,
-        string page)
+        string id)
     {
-        var getBlogsRequest = new GetBlogsRequest()
+        var deleteBlogRequest = new DeleteBlogRequest()
         {
-            Page = page 
+            Id = id
         };
 
-        return _useCase.GetBlogs(getBlogsRequest);
+        return new OkResponse()
+        {
+            Message = $"Blog {deleteBlogRequest.Id} has been deleted"
+        };
     }
 }
