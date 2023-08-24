@@ -59,7 +59,7 @@
 }
 
 .cv-job-company {
-    color: #434E5E;
+    text-decoration: none !important;
 }
 
 .cv-job-time {

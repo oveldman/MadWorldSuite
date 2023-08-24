@@ -275,9 +275,6 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\monaco-editor\min\vs\loader.js" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\monaco-editor\min\vs\loader.min.js" />
     </ItemGroup>
-    <ItemGroup>
-      <Folder Include="wwwroot\image\curriculum-vitae\" />
-    </ItemGroup>
     <Target Name="CopyLinkedFiles" BeforeTargets="Build">
         <Copy SourceFiles="%(None.Identity)" DestinationFiles="wwwroot/.well-known/%(Filename)%(Extension)" Condition="'%(None.Link)' != ''" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" />
     </Target>
