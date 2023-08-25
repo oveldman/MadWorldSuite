@@ -4,6 +4,7 @@ using MadWorld.Backend.Domain.Configuration;
 using MadWorld.Backend.Domain.Exceptions;
 using MadWorld.Backend.Domain.LanguageExt;
 using MadWorld.Shared.Contracts.Authorized.Account;
+using MadWorld.Shared.Contracts.Shared.Functions;
 
 namespace MadWorld.Backend.Application.Accounts;
 
@@ -16,23 +17,23 @@ public sealed class PatchAccountUseCase : IPatchAccountUseCase
         _client = client;
     }
     
-    public Result<PatchAccountResponse> PatchAccount(PatchAccountRequest? request)
+    public Result<OkResponse> PatchAccount(PatchAccountRequest? request)
     {
-        if (request == null) return new Result<PatchAccountResponse>(new ValidationException("Request cannot be null"));
+        if (request == null) return new Result<OkResponse>(new ValidationException("Request cannot be null"));
         var accountResult = Account.Parse(request.Id, request.Roles);
 
         return accountResult.Match(
             account => PatchAccount(account).GetAwaiter().GetResult(),
-            _ => new Result<PatchAccountResponse>(accountResult.GetException())
+            _ => new Result<OkResponse>(accountResult.GetException())
         );
     }
     
-    private async Task<Result<PatchAccountResponse>> PatchAccount(Account account)
+    private async Task<Result<OkResponse>> PatchAccount(Account account)
     {
         var result = await _client.UpdateUser(account);
         return result.Match(
-            _ => new PatchAccountResponse(),
-            _ => new Result<PatchAccountResponse>(result.GetException())
+            _ => new OkResponse(),
+            _ => new Result<OkResponse>(result.GetException())
         );
     }
 }

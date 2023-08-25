@@ -5,6 +5,7 @@ using MadWorld.Frontend.Domain.Accounts;
 using MadWorld.Frontend.Domain.Api;
 using MadWorld.Shared.Contracts.Authorized.Account;
 using MadWorld.Shared.Contracts.Shared.Error;
+using MadWorld.Shared.Contracts.Shared.Functions;
 
 namespace MadWorld.Frontend.Infrastructure.Accounts;
 
@@ -36,16 +37,16 @@ public sealed class AccountService : IAccountService
         return await response.Content.ReadFromJsonAsync<GetAccountResponse>();
     }
     
-    public async Task<Result<PatchAccountResponse>> PatchAccountAsync(PatchAccountRequest request)
+    public async Task<Result<OkResponse>> PatchAccountAsync(PatchAccountRequest request)
     {
         var response = await _client.PatchAsJsonAsync($"{Endpoint}", request);
 
         if (response.IsSuccessStatusCode)
         {
-            return await response.Content.ReadFromJsonAsync<PatchAccountResponse>() ?? new();   
+            return await response.Content.ReadFromJsonAsync<OkResponse>() ?? new();   
         }
 
         var errorResponse = await response.Content.ReadFromJsonAsync<ErrorResponse>() ?? ErrorResponse.CreateDefault();
-        return new Result<PatchAccountResponse>(new ApiResponseException(errorResponse.Message));
+        return new Result<OkResponse>(new ApiResponseException(errorResponse.Message));
     }
 }

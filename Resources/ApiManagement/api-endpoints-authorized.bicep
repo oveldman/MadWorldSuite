@@ -67,6 +67,27 @@ resource getAccountPolicy 'Microsoft.ApiManagement/service/apis/operations/polic
   }
 }
 
+resource addBlog 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'add-blog'
+  parent: authorizedApi
+  properties: {
+    displayName: 'AddBlog'
+    method: 'POST'
+    urlTemplate: '/Blog'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource addBlogPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: addBlog
+  properties: {
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
 resource deleteBlog 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
   name: 'delete-blog'
   parent: authorizedApi
@@ -145,6 +166,27 @@ resource getBlogs 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' =
 resource getBlogsPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
   name: 'policy'
   parent: getBlogs
+  properties: {
+    value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
+    format: 'rawxml'
+  }
+}
+
+resource patchBlog 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' = {
+  name: 'patch-blog'
+  parent: authorizedApi
+  properties: {
+    displayName: 'PatchBlog'
+    method: 'PATCH'
+    urlTemplate: '/Blog'
+    templateParameters: []
+    responses: []
+  }
+}
+
+resource patchBlogPolicy 'Microsoft.ApiManagement/service/apis/operations/policies@2022-08-01' = {
+  name: 'policy'
+  parent: patchBlog
   properties: {
     value: loadTextContent('./Policy/Authorized/StandardEndpoint.xml')
     format: 'rawxml'
