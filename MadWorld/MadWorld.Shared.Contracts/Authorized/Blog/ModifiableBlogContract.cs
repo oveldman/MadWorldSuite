@@ -1,6 +1,6 @@
 namespace MadWorld.Shared.Contracts.Authorized.Blog;
 
-public class EditBlogContract
+public class ModifiableBlogContract
 {
     public string Title { get; set; } = null!;
     public string Writer { get; set; } = null!;

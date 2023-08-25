@@ -25,7 +25,7 @@ public class AddBlog
     [OpenApiOperation(operationId: "AddBlog", tags: new[] { "Blog" })]
     [OpenApiRequestBody(contentType: "application/json; charset=utf-8", bodyType: typeof(AddBlogRequest))]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(OkResponse), Description = "The OK response")]
-    public async Task<OkResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData request,
+    public async Task<OkResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Blog")] HttpRequestData request,
         FunctionContext executionContext)
     {
         var addBlogRequest = await request.ReadFromJsonAsync<AddBlogRequest>();
