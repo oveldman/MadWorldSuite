@@ -13,16 +13,19 @@ using Microsoft.OpenApi.Models;
 
 namespace MadWorld.Backend.API.Authorized.Functions.Blog;
 
+/// <summary>
+/// Create a new blog post
+/// </summary>
 public class AddBlog
 {
     public AddBlog()
     {
     }
-
+    
     [Authorize(RoleTypes.Admin)]
     [Function("AddBlog")]
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
-    [OpenApiOperation(operationId: "AddBlog", tags: new[] { "Blog" })]
+    [OpenApiOperation(operationId: "AddBlog", tags: new[] { "Blog" }, Summary = "Create a new blog post")]
     [OpenApiRequestBody(contentType: "application/json; charset=utf-8", bodyType: typeof(AddBlogRequest))]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(OkResponse), Description = "The OK response")]
     public async Task<OkResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Blog")] HttpRequestData request,

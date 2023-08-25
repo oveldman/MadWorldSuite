@@ -22,7 +22,7 @@ public class UpdateBlog
     [Authorize(RoleTypes.Admin)]
     [Function("UpdateBlog")]
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
-    [OpenApiOperation(operationId: "UpdateBlog", tags: new[] { "Blog" })]
+    [OpenApiOperation(operationId: "UpdateBlog", tags: new[] { "Blog" }, Summary = "Update an existing blog post")]
     [OpenApiRequestBody(contentType: "application/json; charset=utf-8", bodyType: typeof(UpdateBlogRequest))]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(OkResponse), Description = "The OK response")]
     public async Task<OkResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = "Blog")] HttpRequestData request,

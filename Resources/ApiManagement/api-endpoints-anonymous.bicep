@@ -43,7 +43,7 @@ resource getBlogs 'Microsoft.ApiManagement/service/apis/operations@2022-08-01' =
   properties: {
     displayName: 'GetBlogs'
     method: 'GET'
-    urlTemplate: '/Blogs/page/{page}'
+    urlTemplate: '/Blogs/{page}'
     templateParameters: [
       {
         name: 'page'

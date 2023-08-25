@@ -30,7 +30,7 @@ public class DeleteBlog
     [Authorize(RoleTypes.Admin)]
     [Function("DeleteBlog")]
     [OpenApiSecurity(Security.SchemeName, SecuritySchemeType.ApiKey, Name = Security.HeaderName, In = OpenApiSecurityLocationType.Header)]
-    [OpenApiOperation(operationId: "DeleteBlog", tags: new[] { "Blog" })]
+    [OpenApiOperation(operationId: "DeleteBlog", tags: new[] { "Blog" }, Summary = "Delete an existing blog post")]
     [OpenApiParameter("id", Required = true)]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(OkResponse), Description = "The OK response")]
     public Result<Option<OkResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "Blog/{id}")] HttpRequestData request,
