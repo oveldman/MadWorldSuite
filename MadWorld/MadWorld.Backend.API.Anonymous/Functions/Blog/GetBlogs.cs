@@ -19,7 +19,7 @@ public class GetBlogs
     }
     
     [Function("GetBlogs")]
-    [OpenApiOperation(operationId: "GetBlogs", tags: new[] { "Blog" })]
+    [OpenApiOperation(operationId: "GetBlogs", tags: new[] { "Blog" }, Summary = "List all blog posts")]
     [OpenApiParameter("page", Type = typeof(int))]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetAccountResponse), Description = "The OK response")]
     public Result<GetBlogsResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Blogs/{page}")] HttpRequestData request,

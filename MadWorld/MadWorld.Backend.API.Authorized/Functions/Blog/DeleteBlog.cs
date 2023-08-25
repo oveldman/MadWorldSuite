@@ -4,8 +4,6 @@ using LanguageExt.Common;
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.OpenAPI;
 using MadWorld.Backend.Domain.Blogs;
-using MadWorld.Shared.Contracts.Anonymous.Blog;
-using MadWorld.Shared.Contracts.Authorized.Account;
 using MadWorld.Shared.Contracts.Authorized.Blog;
 using MadWorld.Shared.Contracts.Shared.Authorization;
 using MadWorld.Shared.Contracts.Shared.Functions;

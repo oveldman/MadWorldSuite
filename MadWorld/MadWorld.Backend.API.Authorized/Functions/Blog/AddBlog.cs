@@ -1,7 +1,6 @@
 using System.Net;
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.OpenAPI;
-using MadWorld.Shared.Contracts.Anonymous.Blog;
 using MadWorld.Shared.Contracts.Authorized.Blog;
 using MadWorld.Shared.Contracts.Shared.Authorization;
 using MadWorld.Shared.Contracts.Shared.Functions;
@@ -13,9 +12,6 @@ using Microsoft.OpenApi.Models;
 
 namespace MadWorld.Backend.API.Authorized.Functions.Blog;
 
-/// <summary>
-/// Create a new blog post
-/// </summary>
 public class AddBlog
 {
     public AddBlog()
