@@ -19,10 +19,10 @@ public class GetCurriculumVitaeTests : IClassFixture<AuthorizedApiDockerStartupF
     public GetCurriculumVitaeTests(AuthorizedApiDockerStartupFactory factory)
     {
         _factory = factory;
+        _tableServiceClient = factory.Host.Services.GetRequiredService<TableServiceClient>();
 
         var useCase = factory.Host.Services.GetRequiredService<IGetCurriculumVitaeUseCase>();
         _function = new GetCurriculumVitae(useCase);
-        _tableServiceClient = factory.Host.Services.GetRequiredService<TableServiceClient>();
     }
 
     [Fact]
