@@ -56,6 +56,8 @@ Set functions host arguments:
   * `host start --pause-on-error --cors * --port 7071`
 * MadWorld.Backend.Api.Authorized
   * `host start --pause-on-error --cors * --port 7072`
+* MadWorld.Backend.JobRunner
+  * `host start --pause-on-error --cors * --port 7073`
 
 Configure your AzureAd B2C your MadWorld.Frontend.UI.Suite configurations in `appsettings.Development.json`
 
