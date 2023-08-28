@@ -4,5 +4,5 @@ public class UpdateBlogRequest
 {
     public string Id { get; set; } = string.Empty;
     
-    public ModifiableBlogContract Blog { get; set; } = new();
+    public ModifiableBlogContract? Blog { get; set; } = new();
 }
