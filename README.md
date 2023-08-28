@@ -3,6 +3,7 @@
 [![Deploy_Azure_ARM](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-resources.yml/badge.svg?branch=main)](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-resources.yml)
 [![Azure Suite UI CI/CD](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-frontend-suite-ui.yml/badge.svg)](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-frontend-suite-ui.yml)
 [![Azure Admin UI CI/CD](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-frontend-admin-ui.yml/badge.svg)](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-frontend-admin-ui.yml)
+[![Azure JobRunner CI/CD](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-jobrunner.yml/badge.svg?branch=main)](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-jobrunner.yml)
 [![Azure API Anonymous CI/CD](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-api-anonymous.yml/badge.svg)](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-api-anonymous.yml)
 [![Azure API Authorized CI/CD](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-api-authorized.yml/badge.svg)](https://github.com/oveldman/MadWorldSuite/actions/workflows/azure-api-authorized.yml)
 # MadWorldSuite
@@ -48,6 +49,7 @@ azurite -l /tmp/azurite # Use a temporary folder for storage
 Set multiple startup projects:
 * MadWorld.Backend.Api.Anonymous
 * MadWorld.Backend.Api.Authorized
+* MadWorld.Backend.JobRunner
 * MadWorld.Frontend.Admin.UI
 * MadWorld.Frontend.Suite.UI
 
@@ -97,11 +99,11 @@ Duration: 6 s - MadWorld.Backend.Api.Anonymous.IntegrationTests.dll (net7.0)
 ## Azure Resources
 The following Azure resources are currently running in my Azure environment:
 * Azure Static Web App (2x)
-* Azure Functions (2x)
+* Azure Functions (3x)
 * Azure API Management
 * Azure Storage
 * Azure Key Vault
-* Azure Application Insights (2x)
+* Azure Application Insights (3x)
 * Azure App Service Plan (2x)
 * Azure Log Analytics Workspace
 * Azure B2C
