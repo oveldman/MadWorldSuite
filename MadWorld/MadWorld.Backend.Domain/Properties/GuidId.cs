@@ -30,4 +30,9 @@ public sealed class GuidId : IValueObject
         var guid = Guid.Parse(id);
         return new GuidId(guid);
     }
+
+    public override string ToString()
+    {
+        return _id.ToString();
+    }
 }

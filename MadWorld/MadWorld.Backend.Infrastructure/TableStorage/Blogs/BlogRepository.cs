@@ -1,3 +1,4 @@
+using Azure;
 using static LanguageExt.Prelude;
 using Azure.Data.Tables;
 using LanguageExt;

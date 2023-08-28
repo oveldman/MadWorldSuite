@@ -73,7 +73,7 @@ public class Blog : IValueObject
         
         var updated = (DateTime)Updated;
 
-        return updated > thirtyDaysAgo;
+        return updated < thirtyDaysAgo;
     }
 
     public void Update(Text title, Text writer)

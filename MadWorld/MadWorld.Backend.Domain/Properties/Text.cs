@@ -24,4 +24,9 @@ public sealed class Text : IValueObject
     
     public static explicit operator Text(string text) 
         => new(text);
+    
+    public override string ToString()
+    {
+        return _text;
+    }
 }
