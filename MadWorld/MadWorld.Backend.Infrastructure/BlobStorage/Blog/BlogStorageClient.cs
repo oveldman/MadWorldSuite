@@ -7,7 +7,7 @@ namespace MadWorld.Backend.Infrastructure.BlobStorage.Blog;
 
 public class BlogStorageClient : IBlogStorageClient
 {
-    private const string BlogPagePath = "Blog/Pages";
+    public const string BlogPagePath = "Blog/Pages";
     
     private static string BlogPageName(string id) => $"{id}.html";
     

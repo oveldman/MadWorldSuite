@@ -9,7 +9,7 @@ namespace MadWorld.Backend.Infrastructure.BlobStorage;
 
 public class BlobStorageClient : IStorageClient
 {
-    private const string ContainerName = "madworld-storage";
+    public const string ContainerName = "madworld-storage";
     
     private readonly BlobContainerClient _client;
 
