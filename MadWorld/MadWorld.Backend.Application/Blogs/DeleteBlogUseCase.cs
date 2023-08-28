@@ -4,7 +4,6 @@ using MadWorld.Backend.Domain.Blogs;
 using MadWorld.Backend.Domain.Exceptions;
 using MadWorld.Backend.Domain.LanguageExt;
 using MadWorld.Backend.Domain.Properties;
-using MadWorld.Shared.Contracts.Anonymous.Blog;
 using MadWorld.Shared.Contracts.Authorized.Blog;
 using MadWorld.Shared.Contracts.Shared.Functions;
 
