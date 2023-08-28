@@ -1,6 +1,7 @@
 using System.Net;
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.OpenAPI;
+using MadWorld.Backend.Application.Blogs;
 using MadWorld.Shared.Contracts.Authorized.Blog;
 using MadWorld.Shared.Contracts.Shared.Authorization;
 using MadWorld.Shared.Contracts.Shared.Functions;
@@ -14,8 +15,11 @@ namespace MadWorld.Backend.API.Authorized.Functions.Blog;
 
 public class AddBlog
 {
-    public AddBlog()
+    private readonly AddBlogUseCase _useCase;
+
+    public AddBlog(AddBlogUseCase useCase)
     {
+        _useCase = useCase;
     }
     
     [Authorize(RoleTypes.Admin)]
@@ -28,6 +32,6 @@ public class AddBlog
         FunctionContext executionContext)
     {
         var addBlogRequest = await request.ReadFromJsonAsync<AddBlogRequest>();
-        return new OkResponse();
+        return _useCase.AddBlob(addBlogRequest!);
     }
 }
