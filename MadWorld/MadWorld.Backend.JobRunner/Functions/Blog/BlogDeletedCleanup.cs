@@ -15,7 +15,7 @@ public class BlogDeletedCleanup
     }
     
     [Function("BlogDeletedCleanup")]
-    public void Run([TimerTrigger("0 */1 * * * *")] FunctionContext context)
+    public void Run([TimerTrigger("0 0 4 * * SAT")] FunctionContext context)
     {
         _useCase.StartCleanUp();
     }
