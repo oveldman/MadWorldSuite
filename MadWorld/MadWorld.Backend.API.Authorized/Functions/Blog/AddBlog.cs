@@ -1,7 +1,9 @@
 using System.Net;
+using LanguageExt.Common;
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.OpenAPI;
 using MadWorld.Backend.Application.Blogs;
+using MadWorld.Backend.Domain.Blogs;
 using MadWorld.Shared.Contracts.Authorized.Blog;
 using MadWorld.Shared.Contracts.Shared.Authorization;
 using MadWorld.Shared.Contracts.Shared.Functions;
@@ -15,9 +17,9 @@ namespace MadWorld.Backend.API.Authorized.Functions.Blog;
 
 public class AddBlog
 {
-    private readonly AddBlogUseCase _useCase;
+    private readonly IAddBlogUseCase _useCase;
 
-    public AddBlog(AddBlogUseCase useCase)
+    public AddBlog(IAddBlogUseCase useCase)
     {
         _useCase = useCase;
     }
@@ -28,10 +30,10 @@ public class AddBlog
     [OpenApiOperation(operationId: "AddBlog", tags: new[] { "Blog" }, Summary = "Create a new blog post")]
     [OpenApiRequestBody(contentType: "application/json; charset=utf-8", bodyType: typeof(AddBlogRequest))]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(OkResponse), Description = "The OK response")]
-    public async Task<OkResponse> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Blog")] HttpRequestData request,
+    public async Task<Result<OkResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Blog")] HttpRequestData request,
         FunctionContext executionContext)
     {
         var addBlogRequest = await request.ReadFromJsonAsync<AddBlogRequest>();
-        return _useCase.AddBlob(addBlogRequest!);
+        return _useCase.AddBlob(addBlogRequest);
     }
 }

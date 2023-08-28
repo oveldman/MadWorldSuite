@@ -62,7 +62,10 @@ public class BlogRepository : IBlogRepository
         var title = (Text)entity.Title;
         var writer = (Text)entity.Writer;
         
-        return new Blog(id, title, writer, entity.Created, entity.Updated, entity.IsDeleted);
+        var created = (DateTimeUtc)entity.Created;
+        var updated = (DateTimeUtc)entity.Updated;
+        
+        return new Blog(id, title, writer, created, updated, entity.IsDeleted);
     }
     
     private static BlogEntity ToBlobEntity(Blog blog)

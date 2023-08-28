@@ -2,6 +2,7 @@ using System.Net;
 using MadWorld.Backend.API.Shared.Authorization;
 using MadWorld.Backend.API.Shared.OpenAPI;
 using MadWorld.Backend.Application.Blogs;
+using MadWorld.Backend.Domain.Blogs;
 using MadWorld.Shared.Contracts.Authorized.Blog;
 using MadWorld.Shared.Contracts.Shared.Authorization;
 using MadWorld.Shared.Contracts.Shared.Functions;
@@ -15,9 +16,9 @@ namespace MadWorld.Backend.API.Authorized.Functions.Blog;
 
 public class UpdateBlog
 {
-    private readonly UpdateBlobUseCase _useCase;
+    private readonly IUpdateBlobUseCase _useCase;
 
-    public UpdateBlog(UpdateBlobUseCase useCase)
+    public UpdateBlog(IUpdateBlobUseCase useCase)
     {
         _useCase = useCase;
     }

@@ -9,15 +9,15 @@ namespace MadWorld.Backend.Domain.Blogs;
 public class Blog : IValueObject
 {
     public readonly GuidId Id;
-    public readonly DateTime Created;
+    public readonly DateTimeUtc Created;
     
     public Text Title { get; private set; }
     public Text Writer  { get; private set; }
-    public DateTime Updated { get; private set; }
+    public DateTimeUtc Updated { get; private set; }
     public bool IsDeleted { get; private set; }
 
     [RepositoryPublicOnly]
-    public Blog(GuidId id, Text title, Text writer, DateTime created, DateTime updated, bool isDeleted)
+    public Blog(GuidId id, Text title, Text writer, DateTimeUtc created, DateTimeUtc updated, bool isDeleted)
     {
         Id = id;
         Title = title;
@@ -32,9 +32,15 @@ public class Blog : IValueObject
         Id = id;
         Title = title;
         Writer = writer;
-        Created = SystemTime.Now();
+        Created = DateTimeUtc.Now();
         Updated = Created;
         IsDeleted = false;
+    }
+
+    public static Result<Blog> Parse(string title, string writer)
+    {
+        var id = Guid.NewGuid().ToString();
+        return Parse(id, title, writer);
     }
     
     public static Result<Blog> Parse(string id, string title, string writer)
@@ -64,13 +70,13 @@ public class Blog : IValueObject
     {
         Title = title;
         Writer = writer;
-        Updated = SystemTime.Now();
+        Updated = DateTimeUtc.Now();
     }
 
     public void SoftDelete()
     {
         IsDeleted = true;
-        Updated = SystemTime.Now();
+        Updated = DateTimeUtc.Now();
     }
     
     public BlogContract ToContract()
