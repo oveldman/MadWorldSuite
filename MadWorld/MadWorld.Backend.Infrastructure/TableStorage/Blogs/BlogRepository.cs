@@ -19,6 +19,13 @@ public class BlogRepository : IBlogRepository
         client.CreateTableIfNotExists(TableName);
         _table = client.GetTableClient(TableName);
     }
+
+    public Result<Unit> DeleteBlog(Blog blog)
+    {
+        var entity = ToBlobEntity(blog);
+        _table.DeleteEntity(entity.PartitionKey, entity.RowKey);
+        return Unit.Default;
+    }
     
     public IReadOnlyList<Blog> GetBlogs(int page)
     {
@@ -47,6 +54,15 @@ public class BlogRepository : IBlogRepository
         return blog.Match(b => 
                 ToBlog(b), 
                 () => Option<Blog>.None);
+    }
+    
+    public IReadOnlyList<Blog> GetDeletedBlogs()
+    {
+        return _table
+            .Query<BlogEntity>(c
+                => c.PartitionKey == BlogEntity.PartitionKeyName && c.IsDeleted)
+            .Select(ToBlog)
+            .ToList();
     }
     
     public Result<Unit> UpsertBlog(Blog blog)

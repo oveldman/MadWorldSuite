@@ -6,7 +6,9 @@ namespace MadWorld.Backend.Domain.Blogs;
 
 public interface IBlogRepository
 {
+    Result<Unit> DeleteBlog(Blog blog);
     IReadOnlyList<Blog> GetBlogs(int page);
     Option<Blog> GetBlog(GuidId id);
+    IReadOnlyList<Blog> GetDeletedBlogs();
     Result<Unit> UpsertBlog(Blog blog);
 }

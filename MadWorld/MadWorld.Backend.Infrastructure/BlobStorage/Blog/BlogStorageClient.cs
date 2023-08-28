@@ -18,11 +18,11 @@ public class BlogStorageClient : IBlogStorageClient
         _client = client;
     }
 
-    public async Task<Result<bool>> UpsertPageAsBase64Async(string id, string body)
+    public Task<Result<Unit>> DeletePageAsync(string id)
     {
         var name = BlogPageName(id);
-        
-        return await _client.UpsertBase64Body(name, BlogPagePath, body);
+
+        return _client.DeleteAsync(name, BlogPagePath);
     }
 
     public Option<string> GetPageAsBase64(string id)
@@ -30,5 +30,12 @@ public class BlogStorageClient : IBlogStorageClient
         var name = BlogPageName(id);
         
         return _client.GetBase64Body(name, BlogPagePath);
+    }
+    
+    public async Task<Result<Unit>> UpsertPageAsBase64Async(string id, string body)
+    {
+        var name = BlogPageName(id);
+        
+        return await _client.UpsertBase64Body(name, BlogPagePath, body);
     }
 }

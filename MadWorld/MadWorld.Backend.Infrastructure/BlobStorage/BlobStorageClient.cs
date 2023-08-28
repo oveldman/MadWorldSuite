@@ -18,17 +18,15 @@ public class BlobStorageClient : IStorageClient
         _client = serviceClient.GetBlobContainerClient(ContainerName);
         _client.CreateIfNotExists();
     }
-
-    public async Task<Result<bool>> UpsertBase64Body(string blobName, string path, string body)
+    
+    public async Task<Result<Unit>> DeleteAsync(string blobName, string path)
     {
         var blobClient = GetBlobClient(blobName, path);
-        
-        var bytes = Convert.FromBase64String(body);
-        await blobClient.UploadAsync(BinaryData.FromBytes(bytes), overwrite: true);
+        await blobClient.DeleteIfExistsAsync();
 
-        return true;
+        return Unit.Default;
     }
-
+    
     public Option<string> GetBase64Body(string name, string path)
     {
         var blobDownloadInfo = DownloadBlob(name, path);
@@ -41,6 +39,16 @@ public class BlobStorageClient : IStorageClient
         var bytes = new byte[blobDownloadInfo.Value.ContentLength];
         var readTotal = blobDownloadInfo.Value.Content.Read(bytes, 0, (int)blobDownloadInfo.Value.ContentLength);
         return readTotal != blobDownloadInfo.Value.ContentLength ? Option<string>.None : Convert.ToBase64String(bytes);
+    }
+
+    public async Task<Result<Unit>> UpsertBase64Body(string blobName, string path, string body)
+    {
+        var blobClient = GetBlobClient(blobName, path);
+        
+        var bytes = Convert.FromBase64String(body);
+        await blobClient.UploadAsync(BinaryData.FromBytes(bytes), overwrite: true);
+
+        return Unit.Default;
     }
 
     private Response<BlobDownloadInfo>? DownloadBlob(string blobName, string path)

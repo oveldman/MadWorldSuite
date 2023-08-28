@@ -66,6 +66,16 @@ public class Blog : IValueObject
         );
     }
 
+    public bool IsThirtyDaysOld()
+    {
+        var now = (DateTime)DateTimeUtc.Now();
+        var thirtyDaysAgo = now.AddDays(-30);
+        
+        var updated = (DateTime)Updated;
+
+        return updated > thirtyDaysAgo;
+    }
+
     public void Update(Text title, Text writer)
     {
         Title = title;
