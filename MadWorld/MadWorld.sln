@@ -134,6 +134,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.ExternPackages.Mon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Frontend.UI.Suite.IntegrationTests", "MadWorld.Frontend.UI.Suite.IntegrationTests\MadWorld.Frontend.UI.Suite.IntegrationTests.csproj", "{CDD8797B-79D8-48F6-B22E-2DA390E8B68E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MadWorld.Backend.JobRunner", "MadWorld.Backend.JobRunner\MadWorld.Backend.JobRunner.csproj", "{52D046FE-A8F8-47EB-BF74-59495B94484F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -176,6 +178,7 @@ Global
 		{914838E3-9108-474A-919F-413D7874CC55} = {BD60157B-62B3-467F-991D-E7718A7D78E8}
 		{6EB3DD90-EBAE-4793-A11C-9F0427F7650F} = {914838E3-9108-474A-919F-413D7874CC55}
 		{CDD8797B-79D8-48F6-B22E-2DA390E8B68E} = {C3BA6B58-C4C3-411C-95A2-A66B1EA682AF}
+		{52D046FE-A8F8-47EB-BF74-59495B94484F} = {8A0A692F-5E52-4E58-AC90-CDEDF44220DE}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ED8A1D3F-49F6-43AF-A8F7-AADAC4D7E84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -274,5 +277,9 @@ Global
 		{CDD8797B-79D8-48F6-B22E-2DA390E8B68E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDD8797B-79D8-48F6-B22E-2DA390E8B68E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDD8797B-79D8-48F6-B22E-2DA390E8B68E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52D046FE-A8F8-47EB-BF74-59495B94484F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52D046FE-A8F8-47EB-BF74-59495B94484F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52D046FE-A8F8-47EB-BF74-59495B94484F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52D046FE-A8F8-47EB-BF74-59495B94484F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
