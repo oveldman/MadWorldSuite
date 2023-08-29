@@ -18,8 +18,8 @@ public class BlogDeletedCleanup
     }
     
     [Function("BlogDeletedCleanup")]
-    public void Run([TimerTrigger(Schedule)] FunctionContext context)
+    public async Task Run([TimerTrigger(Schedule)] FunctionContext context)
     {
-        _useCase.StartCleanUp();
+        await _useCase.StartCleanUp();
     }
 }

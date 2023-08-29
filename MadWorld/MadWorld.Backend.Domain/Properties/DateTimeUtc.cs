@@ -1,3 +1,5 @@
+using MadWorld.Backend.Domain.System;
+
 namespace MadWorld.Backend.Domain.Properties;
 
 public class DateTimeUtc
@@ -17,7 +19,7 @@ public class DateTimeUtc
 
     public static DateTimeUtc Now()
     {
-        var now = DateTime.Now;
+        var now = SystemTime.Now();
         return new DateTimeUtc(now);
     }
     
