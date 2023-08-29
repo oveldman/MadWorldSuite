@@ -1,7 +1,6 @@
 using System.Text;
 using Azure.Data.Tables;
 using Azure.Storage.Blobs;
-using FluentAssertions;
 using MadWorld.Backend.API.Authorized.Functions.Blog;
 using MadWorld.Backend.Domain.Blogs;
 using MadWorld.Backend.Domain.Properties;
@@ -12,7 +11,6 @@ using MadWorld.Backend.Infrastructure.TableStorage.Extensions;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Graph;
 
 namespace MadWorld.Backend.Api.Authorized.IntegrationTests.Functions.Blog;
 
