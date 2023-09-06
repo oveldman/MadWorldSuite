@@ -9,6 +9,9 @@ public sealed class CurriculumVitaeFiller
     
     public string DrivingLicense { get; init; } = string.Empty;
     public string Gender { get; init; } = string.Empty;
+    public string[] Interests { get; init; } = Array.Empty<string>();
+    public LanguageFiller[] Languages { get; init; } = Array.Empty<LanguageFiller>();
     public LivingLocationFiller? LivingLocation { get; init; }
     public string Nationality { get; init; } = string.Empty;
+    public string ProfileDescription { get; init; } = string.Empty;
 }

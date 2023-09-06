@@ -92,11 +92,7 @@
                 </div>
                 <div class="col-xl cv-profile">
                     <p>
-                        Mijn naam is Oscar, een flexibele, oplossingsgerichte, doorzettende developer met 5 jaar
-                        werkervaring in de ICT-branche. Daarnaast ben ik een teamspeler en help ik graag collega's. 
-                        Ik zoek naar een baan waar ik werk aan innovatieve en nieuwe technieken in backend applicaties
-                        met nieuwe uitdagingen. Ik doe graag aan het beveiligen van applicaties en blijf graag leren. 
-                        Ook vind ik een gezellige werksfeer erg belangrijk.
+                        @CurriculumVitaeFiller.ProfileDescription
                     </p>
                 </div>
             </div>
@@ -477,18 +473,20 @@
                 <h2 class="cv-title">Language</h2>
                 <hr>
                 <ul class="unstyled-list">
-                    <li>Nederlands <span class="language-level">(Moedertaal)</span></li>
-                    <li>Engels <span class="language-level">(Professioneel)</span></li>
+                    @foreach(var language in CurriculumVitaeFiller.Languages)
+                    {
+                        <li>@language.Name <span class="language-level">(@language.Level)</span></li>
+                    }
                 </ul>
             </div>
             <div class="row">
                 <h2 class="cv-title">Interests</h2>
                 <hr>
                 <ul class="unstyled-list">
-                    <li>Programmeren</li>
-                    <li>Snowboarden</li>
-                    <li>Boeken lezen</li>
-                    <li>Wandelen</li>
+                    @foreach(var interest in CurriculumVitaeFiller.Interests)
+                    {
+                        <li>@interest</li>
+                    }
                 </ul>
             </div>
         </div>
