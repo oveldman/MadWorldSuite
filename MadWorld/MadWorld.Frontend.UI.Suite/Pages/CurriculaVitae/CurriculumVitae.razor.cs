@@ -9,6 +9,8 @@ namespace MadWorld.Frontend.UI.Suite.Pages.CurriculaVitae;
 [UsedImplicitly]
 public partial class CurriculumVitae
 {
+    private const string DefaultLanguage = "nl";
+    
     [Parameter]
     public string? Language { get; set; }
     
@@ -22,12 +24,21 @@ public partial class CurriculumVitae
 
     protected override async Task OnInitializedAsync()
     {
-        Language ??= "nl";
+        Language ??= DefaultLanguage;
         
         CurriculumVitaeContract = await UseCase.GetCurriculumVitaeAsync();
         CurriculumVitaeFiller = CurriculumVitaeFillerFactory.Create(Language);
         IsReady = true;
         
         await base.OnInitializedAsync();
+    }
+
+    protected override void OnParametersSet()
+    {
+        Language ??= DefaultLanguage;
+        
+        CurriculumVitaeFiller = CurriculumVitaeFillerFactory.Create(Language);
+        
+        base.OnParametersSet();
     }
 }

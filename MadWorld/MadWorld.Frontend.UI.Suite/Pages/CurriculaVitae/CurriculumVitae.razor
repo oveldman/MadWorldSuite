@@ -497,7 +497,17 @@
 }
 else if (IsReady && CurriculumVitaeFiller.NotSupported)
 {
-    <div><p>The language <strong>"@Language"</strong> is not supported</p></div>
+    <div>
+        <p>The language <strong>"@Language"</strong> is not supported</p>
+        <p>Try the following languages: 
+                <NavLink class="nav-link" href="/CurriculumVitae/nl">
+                    Dutch Curriculum Vitae
+                </NavLink>
+                <NavLink class="nav-link" href="/CurriculumVitae/en">
+                    English Curriculum Vitae
+                </NavLink>
+        </p>
+    </div>
 }
 else
 {
