@@ -2,10 +2,11 @@
 @using MadWorld.Frontend.Domain.General
 
 @page "/CurriculumVitae"
+@page "/CurriculumVitae/{language?}"
 
 <PageTitle>Curriculum Vitae</PageTitle>
 
-@if (IsReady)
+@if (IsReady && !CurriculumVitaeFiller.NotSupported)
 {
     <article>
     <div>
@@ -57,35 +58,35 @@
                                 <i class="fa-solid fa-circle fa-stack-2x"></i>
                                 <i class="fa-solid fa-cake-candles fa-stack-1x white-icon"></i>
                             </span>
-                            <span>@CurriculumVitaeContract.BirthDate.ToString("dd MMMM yyyy", DefaultCulture.Dutch)</span>
+                            <span>@CurriculumVitaeContract.BirthDate.ToString("dd MMMM yyyy", CurriculumVitaeFiller.DefaultCulture)</span>
                         </li>
                         <li class="list-item">
                             <span class="fa-stack" title="Gender">
                                 <i class="fa-solid fa-circle fa-stack-2x"></i>
                                 <i class="fa-solid fa-person fa-stack-1x white-icon"></i>
                             </span>
-                            <span>Man</span>
+                            <span>@CurriculumVitaeFiller.Gender</span>
                         </li>
                         <li class="list-item">
                             <span class="fa-stack" title="Nationality">
                                 <i class="fa-solid fa-circle fa-stack-2x"></i>
                                 <i class="fa-solid fa-flag fa-stack-1x white-icon"></i>
                             </span>
-                            <span>Nederlands</span>
+                            <span>@CurriculumVitaeFiller.Nationality</span>
                         </li>
                         <li class="list-item">
                             <span class="fa-stack" title="Adress">
                                 <i class="fa-solid fa-circle fa-stack-2x"></i>
                                 <i class="fa-solid fa-location-dot fa-stack-1x white-icon"></i>
                             </span>
-                            <div class="cv-adress-label"><span>Adres 1</span><span class="cv-adress-second-row">Postcode, Plaats</span></div>
+                            <div class="cv-adress-label"><span>@CurriculumVitaeFiller.LivingLocation.Address</span><span class="cv-adress-second-row">@CurriculumVitaeFiller.LivingLocation.PostalCode, @CurriculumVitaeFiller.LivingLocation.City</span></div>
                         </li>
                         <li class="list-item">
                             <span class="fa-stack" title="Driving Licence">
                                 <i class="fa-solid fa-circle fa-stack-2x"></i>
                                 <i class="fa-solid fa-car fa-stack-1x white-icon"></i>
                             </span>
-                            <span>Rijbewijs B</span>
+                            <span>@CurriculumVitaeFiller.DrivingLicense</span>
                         </li>
                     </ul>
                 </div>
@@ -495,6 +496,10 @@
     </div>
     </div>
 </article>
+}
+else if (IsReady && CurriculumVitaeFiller.NotSupported)
+{
+    <div></div>
 }
 else
 {
