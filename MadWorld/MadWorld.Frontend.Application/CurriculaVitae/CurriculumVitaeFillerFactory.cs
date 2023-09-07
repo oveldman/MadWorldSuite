@@ -22,7 +22,7 @@ public static class CurriculumVitaeFillerFactory
             DefaultCulture = DefaultCulture.Dutch,
             DrivingLicense = "Rijbewijs B",
             Gender = "Man",
-            Interests = new []{ "Programmeren", "Snowboarden", "Boeken lezen", "Wandelen", "Dungeons & Dragon" },
+            Interests = new []{ "Programmeren", "Snowboarden", "Boeken lezen", "Wandelen", "Dungeons & Dragons" },
             Languages = new []
             {
                 new LanguageFiller { Name = "Nederlands", Level = "Moedertaal" },
@@ -50,7 +50,7 @@ public static class CurriculumVitaeFillerFactory
             DefaultCulture = DefaultCulture.English,
             DrivingLicense = "Driving License B",
             Gender = "Male",
-            Interests = new []{ "Programming", "Snowboarding", "Reading Books", "Walking", "Dungeons & Dragon" },
+            Interests = new []{ "Programming", "Snowboarding", "Reading Books", "Walking", "Dungeons & Dragons" },
             Languages = new []
             {
                 new LanguageFiller { Name = "Dutch", Level = "Native" }, 
