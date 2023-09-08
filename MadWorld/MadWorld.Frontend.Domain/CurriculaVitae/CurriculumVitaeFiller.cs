@@ -14,4 +14,5 @@ public sealed class CurriculumVitaeFiller
     public LivingLocationFiller? LivingLocation { get; init; }
     public string Nationality { get; init; } = string.Empty;
     public string ProfileDescription { get; init; } = string.Empty;
+    public WorkExperienceFiller[] WorkExperiences { get; init; } = Array.Empty<WorkExperienceFiller>();
 }
