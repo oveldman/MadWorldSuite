@@ -1,3 +1,8 @@
+.cv-chosen-language {
+    position: relative; 
+    top: -10px;
+}
+
 .cv-adress-label {
     display: inline-block;
     line-height: 18px;
