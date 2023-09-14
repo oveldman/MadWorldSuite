@@ -1,11 +1,13 @@
 # C4 Models
-C4 models, short for "Context, Containers, Components, and Code," provide a structured and scalable approach to visualizing and documenting software architecture, making them an invaluable tool for project teams aiming to improve system understanding and communication.
+C4 models, short for "Context, Containers, Components, and Code," provide a structured and scalable approach to visualizing 
+and documenting software architecture, making them an invaluable tool for project teams aiming to improve system understanding 
+and communication.
 
 ## System Context
 <img alt="SystemContext" src="Result/SystemContext.png" height="600px">
 
 ## Container Context
-Coming soon
+<img alt="SystemContext" src="Result/ContainerContext.png" height="600px">
 
 ## Use Structurizr to generate the diagrams
 Start the Structurizr lite docker container:
