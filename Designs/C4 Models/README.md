@@ -7,8 +7,8 @@ C4 models, short for "Context, Containers, Components, and Code," provide a stru
 ## Container Context
 Coming soon
 
-## Use structurizr to generate the diagrams
-Start the structurizr lite docker container:
+## Use Structurizr to generate the diagrams
+Start the Structurizr lite docker container:
 ``` shell
 docker pull structurizr/lite
 docker run -it --rm -p 8080:8080 -v PATH:/usr/local/structurizr structurizr/lite
