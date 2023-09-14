@@ -144,6 +144,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C4 Models", "C4 Models", "{5AC26E39-A57D-4787-B05D-348AFC2E3640}"
 	ProjectSection(SolutionItems) = preProject
 		..\Designs\C4 Models\README.md = ..\Designs\C4 Models\README.md
+		..\Designs\C4 Models\Result\ContainerContext.png = ..\Designs\C4 Models\Result\ContainerContext.png
+		..\Designs\C4 Models\Result\SystemContext.png = ..\Designs\C4 Models\Result\SystemContext.png
+		..\Designs\C4 Models\Workspace\workspace.dsl = ..\Designs\C4 Models\Workspace\workspace.dsl
+		..\Designs\C4 Models\Workspace\workspace.json = ..\Designs\C4 Models\Workspace\workspace.json
 	EndProjectSection
 EndProject
 Global
