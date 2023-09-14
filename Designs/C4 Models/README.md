@@ -1,5 +1,5 @@
 ## System Context
-![A test image](Result/SystemContext.png =500x)
+<img alt="SystemContext" src="Result/SystemContext.png" height="600px">
 
 ## Container Context
 Coming soon
