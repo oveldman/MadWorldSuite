@@ -1,0 +1,132 @@
+{
+  "id" : 1,
+  "name" : "Name",
+  "description" : "Description",
+  "lastModifiedDate" : "2023-09-14T09:17:32Z",
+  "lastModifiedAgent" : "structurizr-javascript",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlIHsKCiAgICBtb2RlbCB7CiAgICAgICAgdXNlciA9IHBlcnNvbiAiVXNlciIKICAgICAgICBhZG1pbiA9IHBlcnNvbiAiQWRtaW4iCiAgICAgICAgc29mdHdhcmVTeXN0ZW1NYWRXb3JkU3VpdGUgPSBzb2Z0d2FyZVN5c3RlbSAiTWFkV29ybGQgU3VpdGUiCiAgICAgICAgc29mdHdhcmVTeXN0ZW1HcmFwaEV4cGxvcmVyID0gc29mdHdhcmVTeXN0ZW0gIk1pY3Jvc29mdCBHcmFwaCBFeHBsb3JlciIKCiAgICAgICAgdXNlciAtPiBzb2Z0d2FyZVN5c3RlbU1hZFdvcmRTdWl0ZSAiVXNlcyIKICAgICAgICBhZG1pbiAtPiBzb2Z0d2FyZVN5c3RlbU1hZFdvcmRTdWl0ZSAiVXNlcyIKICAgICAgICBzb2Z0d2FyZVN5c3RlbU1hZFdvcmRTdWl0ZSAtPiBzb2Z0d2FyZVN5c3RlbUdyYXBoRXhwbG9yZXIgIkdldHMgJiBNb2RpZnkgQXp1cmUgQUQgYWNjb3VudHMiCiAgICB9CgogICAgdmlld3MgewogICAgICAgIHN5c3RlbUNvbnRleHQgc29mdHdhcmVTeXN0ZW1NYWRXb3JkU3VpdGUgIk1hZFdvcmxkU3VpdGUiIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9MYXlvdXQKICAgICAgICB9CgogICAgICAgIHRoZW1lIGRlZmF1bHQKICAgIH0KCn0K"
+  },
+  "configuration" : { },
+  "model" : {
+    "people" : [ {
+      "id" : "2",
+      "tags" : "Element,Person",
+      "properties" : {
+        "structurizr.dsl.identifier" : "admin"
+      },
+      "name" : "Admin",
+      "relationships" : [ {
+        "id" : "6",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "13d7c100-71cd-4008-aecb-a89ec4a05b52"
+        },
+        "sourceId" : "2",
+        "destinationId" : "3",
+        "description" : "Uses"
+      } ],
+      "location" : "Unspecified"
+    }, {
+      "id" : "1",
+      "tags" : "Element,Person",
+      "properties" : {
+        "structurizr.dsl.identifier" : "user"
+      },
+      "name" : "User",
+      "relationships" : [ {
+        "id" : "5",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "6848ff4c-a34e-4e21-a14a-2c189a6447d2"
+        },
+        "sourceId" : "1",
+        "destinationId" : "3",
+        "description" : "Uses"
+      } ],
+      "location" : "Unspecified"
+    } ],
+    "softwareSystems" : [ {
+      "id" : "3",
+      "tags" : "Element,Software System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "softwaresystemmadwordsuite"
+      },
+      "name" : "MadWorld Suite",
+      "relationships" : [ {
+        "id" : "7",
+        "tags" : "Relationship",
+        "properties" : {
+          "structurizr.dsl.identifier" : "7631ca71-a438-4729-9c5e-7e7528c5f76c"
+        },
+        "sourceId" : "3",
+        "destinationId" : "4",
+        "description" : "Gets & Modify Azure AD accounts"
+      } ],
+      "location" : "Unspecified",
+      "documentation" : { }
+    }, {
+      "id" : "4",
+      "tags" : "Element,Software System",
+      "properties" : {
+        "structurizr.dsl.identifier" : "softwaresystemgraphexplorer"
+      },
+      "name" : "Microsoft Graph Explorer",
+      "location" : "Unspecified",
+      "documentation" : { }
+    } ]
+  },
+  "documentation" : { },
+  "views" : {
+    "systemContextViews" : [ {
+      "key" : "MadWorldSuite",
+      "order" : 1,
+      "softwareSystemId" : "3",
+      "dimensions" : {
+        "width" : 1500,
+        "height" : 2000
+      },
+      "automaticLayout" : {
+        "implementation" : "Graphviz",
+        "rankDirection" : "TopBottom",
+        "rankSeparation" : 300,
+        "nodeSeparation" : 300,
+        "edgeSeparation" : 0,
+        "vertices" : false
+      },
+      "enterpriseBoundaryVisible" : true,
+      "elements" : [ {
+        "id" : "1",
+        "x" : 199,
+        "y" : 199
+      }, {
+        "id" : "2",
+        "x" : 899,
+        "y" : 199
+      }, {
+        "id" : "3",
+        "x" : 524,
+        "y" : 899
+      }, {
+        "id" : "4",
+        "x" : 524,
+        "y" : 1499
+      } ],
+      "relationships" : [ {
+        "id" : "5"
+      }, {
+        "id" : "6"
+      }, {
+        "id" : "7"
+      } ]
+    } ],
+    "configuration" : {
+      "branding" : { },
+      "styles" : { },
+      "themes" : [ "https://static.structurizr.com/themes/default/theme.json" ],
+      "terminology" : { },
+      "metadataSymbols" : "SquareBrackets",
+      "lastSavedView" : "MadWorldSuite"
+    }
+  }
+}

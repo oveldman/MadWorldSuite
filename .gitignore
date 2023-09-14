@@ -352,5 +352,8 @@ MigrationBackup/
 # Rider
 .idea/
 
+# C4 Model
+Designs/C4 Models/Workspace/.structurizr/
+
 # MacOS
 .DS_Store
