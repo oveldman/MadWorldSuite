@@ -1,5 +1,5 @@
 ## System Context
-![A test image](Result/SystemContext.png)
+![A test image](Result/SystemContext.png =500x)
 
 ## Container Context
 Coming soon
