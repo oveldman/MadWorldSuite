@@ -1,0 +1,15 @@
+.spinner-border-extra {
+    width: 100px;
+    height: 100px;
+    border-width: 25px;
+}
+
+.funny-explanation {
+    font-size: 16px;
+}
+
+.spinner-explanation {
+    font-size: 11px;
+    position: relative;
+    top: 60px;
+}
