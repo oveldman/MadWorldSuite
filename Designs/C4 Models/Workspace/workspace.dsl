@@ -28,9 +28,18 @@ workspace {
 
             storageAccount = container "Storage Account" {
                 tags "StorageAccount"
-                apiAuthorized -> this "Uses"
-                apiAnonymous -> this "Uses"
-                jobRunner -> this "Uses"
+                
+                blobsStorage = component "Blobs Storage" {
+                    apiAnonymous -> this "Uses"
+                    apiAuthorized -> this "Uses"
+                    jobRunner -> this "Get blogs & Removes expired blogs"
+                }
+
+                tableStorage = component "Table Storage" {
+                    apiAnonymous -> this "Uses"
+                    apiAuthorized -> this "Uses"
+                    jobRunner -> this "Removes expired blogs"
+                }
             }
         }
     }
@@ -44,6 +53,10 @@ workspace {
         container softwareSystemMadWordSuite "ContainerMadWorldSuite" {
             include *
             autoLayout
+        }
+
+        component storageAccount "ComponentStorageAccount" {
+            include *
         }
 
         styles {

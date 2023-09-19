@@ -9,6 +9,10 @@ and communication.
 ## Container Context
 <img alt="SystemContext" src="Result/ContainerContext.png" height="600px">
 
+## Component Contexts
+### Storage Account
+<img alt="SystemContext" src="Result/ComponentContextStorageAccount.png" height="600px">
+
 ## Use Structurizr to generate the diagrams
 Start the Structurizr lite docker container:
 ``` shell

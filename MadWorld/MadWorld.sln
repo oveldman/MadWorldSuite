@@ -148,6 +148,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C4 Models", "C4 Models", "{
 		..\Designs\C4 Models\Result\SystemContext.png = ..\Designs\C4 Models\Result\SystemContext.png
 		..\Designs\C4 Models\Workspace\workspace.dsl = ..\Designs\C4 Models\Workspace\workspace.dsl
 		..\Designs\C4 Models\Workspace\workspace.json = ..\Designs\C4 Models\Workspace\workspace.json
+		..\Designs\C4 Models\Result\ComponentContextStorageAccount.png = ..\Designs\C4 Models\Result\ComponentContextStorageAccount.png
 	EndProjectSection
 EndProject
 Global
