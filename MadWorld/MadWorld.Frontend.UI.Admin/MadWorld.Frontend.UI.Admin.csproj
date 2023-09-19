@@ -1,4 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <RunAOTCompilation>false</RunAOTCompilation>
+    </PropertyGroup>
     <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" />
