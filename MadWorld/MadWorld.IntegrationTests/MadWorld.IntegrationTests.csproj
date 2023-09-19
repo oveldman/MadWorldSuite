@@ -1,9 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <IsPackable>false</IsPackable>
-        <IsTestProject>true</IsTestProject>
-    </PropertyGroup>
-    
     <ItemGroup>
         <PackageReference Include="bunit.web" />
         <PackageReference Include="Docker.DotNet" />
