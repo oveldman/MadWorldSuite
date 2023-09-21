@@ -57,7 +57,7 @@ public static class CurriculumVitaeFillerFactory
                         "Nieuwe functionaliteiten ontwikkeld met de domain-driven development methode.",
                         "Dotnet-upgrades uitgevoerd van dotnet core 3.1 naar dotnet 6.0."
                     },
-                    TechnologyUsed = new []{ "C#", "Kubernetes", "Azure Functions", "API's", "Devops Engineering", "MSSQL", "Bicep" },
+                    TechnologyUsed = new []{ "C#", "Kubernetes", "Azure Functions", "Rest APIs", "Devops Engineering", "MSSQL", "Bicep" },
                     Logo = new LogoFiller()
                     {
                         Title = "VI Company logo",
@@ -81,7 +81,7 @@ public static class CurriculumVitaeFillerFactory
                         "Ik heb een aantal functionaliteiten geanalyseerd en geoptimaliseerd, waardoor de applicatie sneller is geworden.",
                         "Ik heb beveiligingsbeleid opgezet, zoals voor ISO 27001."
                     },
-                    TechnologyUsed = new []{ "C#", "MVC", "Azure Functions", "API's", "Entity Framework", "MSSQL" },
+                    TechnologyUsed = new []{ "C#", "MVC", "Azure Functions", "Rest APIs", "Entity Framework", "MSSQL" },
                     Logo = new LogoFiller()
                     {
                         Title = "Bugs Business logo",
@@ -235,7 +235,7 @@ public static class CurriculumVitaeFillerFactory
                         "I developed new functionalities using the domain-driven development method.",
                         "I performed Dotnet upgrades from dotnet core 3.1 to dotnet 6.0."
                     },
-                    TechnologyUsed = new []{ "C#", "Kubernetes", "Azure Functions", "API's", "Devops Engineering", "MSSQL", "Bicep" },
+                    TechnologyUsed = new []{ "C#", "Kubernetes", "Azure Functions", "Rest APIs", "Devops Engineering", "MSSQL", "Bicep" },
                     Logo = new LogoFiller()
                     {
                         Title = "VI Company logo",
@@ -259,7 +259,7 @@ public static class CurriculumVitaeFillerFactory
                         "I analyzed and optimized several functionalities, resulting in improved application performance. ",
                         "I established security policies, such as those for ISO 27001 compliance. "
                     },
-                    TechnologyUsed = new []{ "C#", "MVC", "Azure Functions", "API's", "Entity Framework", "MSSQL" },
+                    TechnologyUsed = new []{ "C#", "MVC", "Azure Functions", "Rest APIs", "Entity Framework", "MSSQL" },
                     Logo = new LogoFiller()
                     {
                         Title = "Bugs Business logo",
