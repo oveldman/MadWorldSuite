@@ -1,0 +1,48 @@
+{
+	"folders": [
+		{
+			"path": "../MadWorld/MadWorld.Backend.API.Anonymous"
+		},
+		{
+			"path": "../MadWorld/MadWorld.Backend.API.Authorized"
+		},
+		{
+			"path": "../MadWorld/MadWorld.Frontend.UI.Admin"
+		},
+		{
+			"path": "../MadWorld/MadWorld.Frontend.UI.Suite"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {},
+	"launch": {
+        "configurations": [],
+        "compounds": [
+			{
+                "name": "MadWorld Backend only",
+                "configurations": [
+					"Attach to API Anonymous",
+					"Attach to API Authorized"
+                ]
+            },
+            {
+                "name": "MadWorld Admin",
+                "configurations": [
+					"Attach to API Anonymous",
+					"Attach to API Authorized",
+					"Launch and Debug Standalone Admin"
+                ]
+            },
+			{
+                "name": "MadWorld Suite",
+                "configurations": [
+					"Attach to API Anonymous",
+					"Attach to API Authorized",
+					"Launch and Debug Standalone Suite"
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "clean",
+        "command": "dotnet clean",
+        "type": "shell",
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "label": "build",
+        "command": "dotnet build",
+        "type": "shell",
+        "dependsOn": "clean",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": "$msCompile",
+        "presentation": {
+          "reveal": "silent",
+          "clear": true
+        }
+      },
+      {
+        "label": "clean release",
+        "command": "dotnet clean --configuration Release",
+        "type": "shell",
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "label": "publish",
+        "command": "dotnet publish --configuration Release",
+        "type": "shell",
+        "dependsOn": "clean release",
+        "problemMatcher": "$msCompile"
+      },
+      {
+        "label": "run",
+        "dependsOn": "build",
+        "type": "shell",
+        "command": "dotnet run",
+        "options": {
+          "cwd": "${workspaceFolder}/bin/Debug/net7.0"
+        },
+        "isBackground": true,
+        "presentation": {
+          "reveal": "silent",
+          "clear": false
+        }
+      }
+    ]
+  }
