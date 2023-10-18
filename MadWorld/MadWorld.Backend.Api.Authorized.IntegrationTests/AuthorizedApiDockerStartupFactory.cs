@@ -16,7 +16,7 @@ public sealed class AuthorizedApiDockerStartupFactory : AuthorizedApiStartupFact
     
     protected override void PrepareHost()
     {
-        _dockerRunner = new DockerRunner(2);
+        _dockerRunner = new DockerRunner(5);
         _dockerRunner.Start().GetAwaiter().GetResult();
         AzureConnectionString = _dockerRunner.GetConnectionString();
     }
