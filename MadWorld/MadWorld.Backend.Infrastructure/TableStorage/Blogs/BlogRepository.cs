@@ -21,6 +21,14 @@ public class BlogRepository : IBlogRepository
         _table = client.GetTableClient(TableName);
     }
 
+    public async Task<int> CountBlogs()
+    {
+            var results = _table.QueryAsync<BlogEntity>(b
+                    => b.PartitionKey == BlogEntity.PartitionKeyName && !b.IsDeleted,
+                select: new[] { "PartitionKey" });
+            return await results.CountAsync();
+    }
+
     public Result<Unit> DeleteBlog(Blog blog)
     {
         var entity = ToBlobEntity(blog);
@@ -31,8 +39,8 @@ public class BlogRepository : IBlogRepository
     public IReadOnlyList<Blog> GetBlogs(int page)
     {
         var blogs = _table
-            .Query<BlogEntity>(c
-                => c.PartitionKey == BlogEntity.PartitionKeyName && !c.IsDeleted)
+            .Query<BlogEntity>(b
+                => b.PartitionKey == BlogEntity.PartitionKeyName && !b.IsDeleted)
             .AsPages(pageSizeHint: TableStorageConfigurationsManager.DefaultPageSize)
             .Skip(page)
             .FirstOrDefault()?

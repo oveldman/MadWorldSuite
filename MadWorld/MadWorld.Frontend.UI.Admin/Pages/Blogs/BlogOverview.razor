@@ -1,2 +1,23 @@
+@using MadWorld.Frontend.UI.Shared.Components
+@using MadWorld.Shared.Contracts.Anonymous.Blog
+
 @page "/Blogs"
-<h3>BlogOverview</h3>
+
+<PageTitle>Blog Overview</PageTitle>
+
+<h3>Blog Overview</h3>
+@if (_isReady)
+{
+    <RadzenDataGrid @ref="dataGrid" IsLoading=@_isLoading Count="_totalRecords" Data="@_blogs"
+                    LoadData="@LoadData" AllowSorting="false" AllowFiltering="false" 
+                    AllowPaging="true" PageSize="20" PagerHorizontalAlign="HorizontalAlign.Center"
+                    TItem="BlogContract" ShowPagingSummary="true" PagingSummaryFormat="@pagingSummaryFormat">
+        <Columns>
+            <RadzenDataGridColumn TItem="BlogContract" Property="Title" Title="Title" />
+        </Columns>
+    </RadzenDataGrid>
+}
+else
+{
+    <LoadingSpinner />
+}

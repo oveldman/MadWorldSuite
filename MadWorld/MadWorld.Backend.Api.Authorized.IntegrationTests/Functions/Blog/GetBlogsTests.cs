@@ -27,7 +27,7 @@ public class GetBlogsTests : IClassFixture<AuthorizedApiDockerStartupFactory>, I
     }
     
     [Fact]
-    public void GetBlogs_Regularly_ShouldReturnExpectedResult()
+    public async Task GetBlogs_Regularly_ShouldReturnExpectedResult()
     {
         // Arrange
         const string page = "0";
@@ -36,13 +36,14 @@ public class GetBlogsTests : IClassFixture<AuthorizedApiDockerStartupFactory>, I
         var request = Substitute.For<HttpRequestData>(context);
         
         // Act
-        var response = _function.Run(request, context, page);
+        var response = await _function.Run(request, context, page);
         
         // Assert
         var contract = response.Match(
             b => b, 
             _ => default!);
         
+        contract.Count.ShouldBe(2);
         contract.Blogs.Count.ShouldBe(2);
         contract.Blogs.First().Id.ShouldBe("935eedd2-be0e-4308-aaa5-bd5bc7d5dceb");
         contract.Blogs.First().Title.ShouldBe("How to create unittest");

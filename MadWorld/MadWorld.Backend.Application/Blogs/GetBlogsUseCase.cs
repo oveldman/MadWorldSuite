@@ -16,7 +16,7 @@ public class GetBlogsUseCase : IGetBlogsUseCase
         _repository = repository;
     }
 
-    public Result<GetBlogsResponse> GetBlogs(GetBlogsRequest request)
+    public async Task<Result<GetBlogsResponse>> GetBlogsAsync(GetBlogsRequest request)
     {
         if (!int.TryParse(request.Page, out var pageNumber))
         {
@@ -28,8 +28,9 @@ public class GetBlogsUseCase : IGetBlogsUseCase
             return new Result<GetBlogsResponse>(new ValidationException($"{nameof(request.Page)} must be a higher than {MinimumPageNumber}"));
         }
         
+        var blogCount = await _repository.CountBlogs();
         var blogs = _repository.GetBlogs(pageNumber);
         var blogContracts = blogs.Select(b => b.ToContract()).ToList();
-        return new GetBlogsResponse(blogContracts);
+        return new GetBlogsResponse(blogCount, blogContracts);
     }
 }

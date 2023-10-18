@@ -5,5 +5,5 @@ namespace MadWorld.Backend.Domain.Blogs;
 
 public interface IGetBlogsUseCase
 {
-    Result<GetBlogsResponse> GetBlogs(GetBlogsRequest request);
+    Task<Result<GetBlogsResponse>> GetBlogsAsync(GetBlogsRequest request);
 }

@@ -1,6 +1,8 @@
 using MadWorld.Frontend.Application.Accounts;
+using MadWorld.Frontend.Application.Blogs;
 using MadWorld.Frontend.Application.CurriculaVitae;
 using MadWorld.Frontend.Domain.Accounts;
+using MadWorld.Frontend.Domain.Blogs;
 using MadWorld.Frontend.Domain.CurriculaVitae;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +14,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
         services.AddScoped<IGetAccountsUseCase, GetAccountsUseCase>();
+        services.AddScoped<IGetBlogsUseCase, GetBlogsUseCase>();
         services.AddScoped<IGetCurriculumVitaeUseCase, GetCurriculumVitaeUseCase>();
         services.AddScoped<IPatchAccountUseCase, PatchAccountUseCase>();
         services.AddScoped<IPatchCurriculumVitaeUseCase, PatchCurriculumVitaeUseCase>();
