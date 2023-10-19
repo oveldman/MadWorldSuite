@@ -23,6 +23,9 @@ public partial class BlogOverview
 
    [Inject]
    private IGetBlogsUseCase GetBlogsUseCase { get; set; } = null!;
+   
+   [Inject] 
+   private NavigationManager NavigationManager { get; set; } = null!;
 
    protected override async Task OnInitializedAsync()
    {
@@ -48,5 +51,10 @@ public partial class BlogOverview
       
       _blogs = result.Blogs;
       _totalRecords = result.Count;
+   }
+   
+   private void OpenBlogDetails(DataGridRowMouseEventArgs<BlogContract> blog)
+   {
+      NavigationManager.NavigateTo($"/Blog/{blog.Data.Id}");
    }
 }

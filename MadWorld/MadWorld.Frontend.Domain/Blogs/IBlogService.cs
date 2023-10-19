@@ -5,4 +5,5 @@ namespace MadWorld.Frontend.Domain.Blogs;
 public interface IBlogService
 {
     Task<GetBlogsResponse> GetBlogs(int pageNumber);
+    Task<GetBlogResponse> GetBlog(string id);
 }

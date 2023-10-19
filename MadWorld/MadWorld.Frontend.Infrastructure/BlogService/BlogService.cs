@@ -7,7 +7,8 @@ namespace MadWorld.Frontend.Infrastructure.BlogService;
 
 public class BlogService : IBlogService
 {
-    private const string Endpoint = "Blogs";
+    private const string EndpointPlural = "Blogs";
+    private const string EndpointSingular = "Blog";
     
     private readonly HttpClient _client;
     
@@ -17,6 +18,11 @@ public class BlogService : IBlogService
     }
     public async Task<GetBlogsResponse> GetBlogs(int pageNumber)
     {
-        return await _client.GetFromJsonAsync<GetBlogsResponse>($"{Endpoint}/{pageNumber}") ?? new GetBlogsResponse(0, Array.Empty<BlogContract>());
+        return await _client.GetFromJsonAsync<GetBlogsResponse>($"{EndpointPlural}/{pageNumber}") ?? new GetBlogsResponse(0, Array.Empty<BlogContract>());
+    }
+    
+    public async Task<GetBlogResponse> GetBlog(string id)
+    {
+        return await _client.GetFromJsonAsync<GetBlogResponse>($"{EndpointSingular}/{id}") ?? new GetBlogResponse();
     }
 }

@@ -11,9 +11,11 @@
     <RadzenDataGrid @ref="dataGrid" IsLoading=@_isLoading Count="_totalRecords" Data="@_blogs"
                     LoadData="@LoadData" AllowSorting="false" AllowFiltering="false" 
                     AllowPaging="true" PageSize="20" PagerHorizontalAlign="HorizontalAlign.Center"
-                    TItem="BlogContract" ShowPagingSummary="true" PagingSummaryFormat="@pagingSummaryFormat">
+                    TItem="BlogContract" ShowPagingSummary="true" PagingSummaryFormat="@pagingSummaryFormat"
+                    RowClick="OpenBlogDetails">
         <Columns>
             <RadzenDataGridColumn TItem="BlogContract" Property="Title" Title="Title" />
+            <RadzenDataGridColumn TItem="BlogContract" Property="Created" Title="Created" />
         </Columns>
     </RadzenDataGrid>
 }
