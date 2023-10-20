@@ -18,14 +18,14 @@ public class AddBlogUseCase : IAddBlogUseCase
         _storageClient = storageClient;
     }
 
-    public Result<OkResponse> AddBlob(AddBlogRequest? request)
+    public Result<OkResponse> AddBlob(AddBlogRequest? request, string username)
     {
         if (request == null) return new Result<OkResponse>(new ValidationException("Request cannot be null"));
         if (request.Blog == null) return new Result<OkResponse>(new ValidationException("Blog cannot be null"));
         
         var blog = Blog.Parse(
             request.Blog.Title,
-            request.Blog.Writer);
+            username);
 
         return blog.Match(
             b => AddBlob(b, request.Blog.Body).GetAwaiter().GetResult(),

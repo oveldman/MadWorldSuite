@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using MadWorld.Frontend.Domain.Blogs;
 using MadWorld.Frontend.Domain.Blogs.Extensions;
 using MadWorld.Shared.Contracts.Anonymous.Blog;
+using MadWorld.Shared.Contracts.Shared.Functions;
 using Microsoft.AspNetCore.Components;
 
 namespace MadWorld.Frontend.UI.Admin.Pages.Blogs;
@@ -15,10 +16,21 @@ public partial class BlogDetails
     private string BodyUtf8 { get; set; } = string.Empty;
 
     private bool IsNewBlog => string.IsNullOrWhiteSpace(Id);
+    private bool HasError { get; set; }
     private bool IsReady { get; set; }
+    private bool IsSaved { get; set; }
 
     [Inject]
+    private IAddBlogUseCase AddBlogUseCase { get; set; } = null!;
+    
+    [Inject]
     private IGetBlogUseCase GetBlogUseCase { get; set; } = null!;
+    
+    [Inject]
+    private IUpdateBlogUseCase UpdateBlogUseCase { get; set; } = null!;
+    
+    [Inject] 
+    private NavigationManager NavigationManager { get; set; } = null!;
     
     protected override async Task OnInitializedAsync()
     {
@@ -34,11 +46,44 @@ public partial class BlogDetails
 
     private async Task SaveChanges(BlogDetailContract blog)
     {
-        
+        ResetMessages();
+
+        if (IsNewBlog)
+        {
+            await AddBlog(blog);
+        }
+        else
+        {
+            await UpdateBlog(blog);
+        }
+    }
+
+    private async Task AddBlog(BlogDetailContract blog)
+    {
+        var response = await AddBlogUseCase.AddBlog(blog, BodyUtf8);
+        SetMessages(response);
     }
     
-    private async Task CancelChanges()
+    private async Task UpdateBlog(BlogDetailContract blog)
     {
-        
+        var response = await UpdateBlogUseCase.UpdateBlog(blog, BodyUtf8);
+        SetMessages(response);
+    }
+    
+    private void CancelChanges()
+    {
+        NavigationManager.NavigateTo($"/Blogs");
+    }
+
+    private void SetMessages(OkResponse okResponse)
+    {
+        IsSaved = okResponse.IsSuccess;
+        HasError = !IsSaved;
+    }
+
+    private void ResetMessages()
+    {
+        IsSaved = false;
+        HasError = false;
     }
 }

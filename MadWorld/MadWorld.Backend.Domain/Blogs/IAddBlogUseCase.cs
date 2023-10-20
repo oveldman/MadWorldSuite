@@ -6,5 +6,5 @@ namespace MadWorld.Backend.Domain.Blogs;
 
 public interface IAddBlogUseCase
 {
-    Result<OkResponse> AddBlob(AddBlogRequest? request);
+    Result<OkResponse> AddBlob(AddBlogRequest? request, string username);
 }

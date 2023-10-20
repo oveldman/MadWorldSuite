@@ -1,11 +1,24 @@
 @using MadWorld.Frontend.UI.Shared.Components
 @using MadWorld.Shared.Contracts.Anonymous.Blog
-@using LanguageExt.SomeHelp
 
 @page "/Blog/{Id?}"
 
 @if (IsReady)
 {
+    @if (IsSaved)
+    {
+        <div class="alert alert-success" role="alert">
+            Blog saved successfully.
+        </div>   
+    }
+    
+    @if (HasError)
+    {
+        <div class="alert alert-success" role="alert">
+            Something went wrong with saving the blog.
+        </div>
+    }
+    
     <RadzenTemplateForm Data="@Blog" Submit="@(async (BlogDetailContract blog) => { await SaveChanges(blog); })">
     <RadzenRow>
         <RadzenColumn Size="12">

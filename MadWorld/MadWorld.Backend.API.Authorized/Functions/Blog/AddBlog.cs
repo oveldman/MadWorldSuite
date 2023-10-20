@@ -33,7 +33,9 @@ public class AddBlog
     public async Task<Result<OkResponse>> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "Blog")] HttpRequestData request,
         FunctionContext executionContext)
     {
+        var user = executionContext.GetUser();
+        
         var addBlogRequest = await request.ReadFromJsonAsync<AddBlogRequest>();
-        return _useCase.AddBlob(addBlogRequest);
+        return _useCase.AddBlob(addBlogRequest, user.Name);
     }
 }

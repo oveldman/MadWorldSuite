@@ -12,6 +12,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
+        services.AddScoped<IAddBlogUseCase, AddBlogUseCase>();
         services.AddScoped<IGetAccountUseCase, GetAccountUseCase>();
         services.AddScoped<IGetAccountsUseCase, GetAccountsUseCase>();
         services.AddScoped<IGetBlogsUseCase, GetBlogsUseCase>();
@@ -19,6 +20,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IGetCurriculumVitaeUseCase, GetCurriculumVitaeUseCase>();
         services.AddScoped<IPatchAccountUseCase, PatchAccountUseCase>();
         services.AddScoped<IPatchCurriculumVitaeUseCase, PatchCurriculumVitaeUseCase>();
+        services.AddScoped<IUpdateBlogUseCase, UpdateBlogUseCase>();
         
         return services;
     }
