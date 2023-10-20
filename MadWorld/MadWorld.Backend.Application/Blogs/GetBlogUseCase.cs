@@ -42,7 +42,7 @@ public class GetBlogUseCase : IGetBlogUseCase
         
         var contract = blog.ToDetailContract();
         
-        contract.Body = body.Match(
+        contract.BodyBase64 = body.Match(
             b => b, 
             () => string.Empty);
 

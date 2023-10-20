@@ -53,7 +53,7 @@ public class GetBlogTests : IClassFixture<AuthorizedApiDockerStartupFactory>, IA
         );
 
         contract.Blog.Id.ShouldBe(id);
-        contract.Blog.Body.ShouldBe("VGVzdEJvZHk=");
+        contract.Blog.BodyBase64.ShouldBe("VGVzdEJvZHk=");
     }
 
     public async Task InitializeAsync()

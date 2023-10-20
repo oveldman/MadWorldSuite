@@ -57,4 +57,9 @@ public partial class BlogOverview
    {
       NavigationManager.NavigateTo($"/Blog/{blog.Data.Id}");
    }
+   
+   private void OpenNewBlog()
+   {
+      NavigationManager.NavigateTo($"/Blog");
+   }
 }

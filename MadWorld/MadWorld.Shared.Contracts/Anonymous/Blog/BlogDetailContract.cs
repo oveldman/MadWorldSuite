@@ -8,5 +8,5 @@ public class BlogDetailContract
     public DateTime Created { get; set; } = DateTime.MinValue;
     public DateTime Updated { get; set; } = DateTime.MinValue;
 
-    public string Body { get; set; } = string.Empty;
+    public string BodyBase64 { get; set; } = string.Empty;
 }

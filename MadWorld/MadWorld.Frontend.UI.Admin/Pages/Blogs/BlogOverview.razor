@@ -5,19 +5,34 @@
 
 <PageTitle>Blog Overview</PageTitle>
 
-<h3>Blog Overview</h3>
 @if (_isReady)
 {
-    <RadzenDataGrid @ref="dataGrid" IsLoading=@_isLoading Count="_totalRecords" Data="@_blogs"
-                    LoadData="@LoadData" AllowSorting="false" AllowFiltering="false" 
-                    AllowPaging="true" PageSize="20" PagerHorizontalAlign="HorizontalAlign.Center"
-                    TItem="BlogContract" ShowPagingSummary="true" PagingSummaryFormat="@pagingSummaryFormat"
-                    RowClick="OpenBlogDetails">
-        <Columns>
-            <RadzenDataGridColumn TItem="BlogContract" Property="Title" Title="Title" />
-            <RadzenDataGridColumn TItem="BlogContract" Property="Created" Title="Created" />
-        </Columns>
-    </RadzenDataGrid>
+    
+    <div class="row">
+        <div class="col">
+            <h3>Blog Overview</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <RadzenButton Click=@(OpenNewBlog) Text="New" ButtonStyle="ButtonStyle.Primary"/>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col">
+            <RadzenDataGrid @ref="dataGrid" IsLoading=@_isLoading Count="_totalRecords" Data="@_blogs"
+                            LoadData="@LoadData" AllowSorting="false" AllowFiltering="false"
+                            AllowPaging="true" PageSize="15" PagerHorizontalAlign="HorizontalAlign.Center"
+                            TItem="BlogContract" ShowPagingSummary="true" PagingSummaryFormat="@pagingSummaryFormat"
+                            RowClick="OpenBlogDetails">
+                <Columns>
+                    <RadzenDataGridColumn TItem="BlogContract" Property="Title" Title="Title"/>
+                    <RadzenDataGridColumn TItem="BlogContract" Property="Created" Title="Created"/>
+                </Columns>
+            </RadzenDataGrid>
+        </div>
+    </div>
 }
 else
 {
