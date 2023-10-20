@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Azure.Data.Tables;
 using Azure.Storage.Blobs;
 using MadWorld.Backend.API.Authorized.Functions.Blog;
@@ -49,10 +50,21 @@ public class AddBlogTests : IClassFixture<AuthorizedApiDockerStartupFactory>, IA
             }
         };
 
+        var claims = new List<Claim>() 
+        { 
+            new (ClaimTypes.Name, "mien@gmail.com"),
+            new (ClaimTypes.NameIdentifier, "12345"),
+            new ("name", "Mien Hieronymus"),
+        };
+        var identity = new ClaimsIdentity(claims, "TestAuthType");
+        var claimsPrincipal = new ClaimsPrincipal(identity);
+
         var context = Substitute.For<FunctionContext>();
         var httpRequest = Substitute.For<HttpRequestData>(context);
         
         context.InstanceServices.Returns(_factory.Host.Services);
+        context.Features.Get<ClaimsPrincipal>().Returns(claimsPrincipal);
+        
         httpRequest.Body.Returns(request.ToMemoryStream());
         
         // Act
