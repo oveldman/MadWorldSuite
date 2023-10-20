@@ -4,6 +4,7 @@ using MadWorld.Frontend.Domain.Blogs.Extensions;
 using MadWorld.Shared.Contracts.Anonymous.Blog;
 using MadWorld.Shared.Contracts.Shared.Functions;
 using Microsoft.AspNetCore.Components;
+using Radzen;
 
 namespace MadWorld.Frontend.UI.Admin.Pages.Blogs;
 
@@ -21,7 +22,13 @@ public partial class BlogDetails
     private bool IsSaved { get; set; }
 
     [Inject]
+    private DialogService DialogService { get; set; } = null!;
+    
+    [Inject]
     private IAddBlogUseCase AddBlogUseCase { get; set; } = null!;
+    
+    [Inject]
+    private IDeleteBlogUseCase DeleteBlogUseCase { get; set; } = null!;
     
     [Inject]
     private IGetBlogUseCase GetBlogUseCase { get; set; } = null!;
@@ -62,6 +69,38 @@ public partial class BlogDetails
     {
         var response = await AddBlogUseCase.AddBlog(blog, BodyUtf8);
         SetMessages(response);
+    }
+    
+    public async Task ConfirmDelete(string id)
+    {
+        ResetMessages();
+        
+        var confirmationResult = await DialogService.Confirm($"Are you sure to delete blog {id}?", "Delete Blog", new ConfirmOptions
+        {
+            OkButtonText = "Yes", 
+            CancelButtonText = "Cancel",
+            CloseDialogOnEsc = true,
+            CloseDialogOnOverlayClick = true
+        });
+        
+        if (confirmationResult ?? false)
+        {
+            await DeleteBlog(id);
+        }
+    }
+
+    private async Task DeleteBlog(string id)
+    {
+        var succeed = await DeleteBlogUseCase.DeleteBlog(id);
+
+        if (succeed)
+        {
+            NavigationManager.NavigateTo($"/Blogs");
+        }
+        else
+        {
+            HasError = true;
+        }
     }
     
     private async Task UpdateBlog(BlogDetailContract blog)
